@@ -98,6 +98,8 @@ export function Gallery({ photos, labels }: { photos: GalleryPhoto[]; labels: { 
               }}
               onClick={(e) => e.stopPropagation()}
             >
+              {/* The grid thumbnail is already cached: show it at once, the sharp version fades in over it. */}
+              <Image src={open.src} alt="" aria-hidden fill sizes="(min-width: 768px) 33vw, 50vw" className="pointer-events-none object-contain" />
               <Image src={open.full} alt={open.alt} fill sizes="92vw" className="pointer-events-none object-contain" priority />
             </motion.div>
 
