@@ -12,6 +12,21 @@ type Nav = Dictionary["nav"];
 export function SiteHeader({ lang, nav }: { lang: Locale; nav: Nav }) {
   const pathname = usePathname() ?? `/${lang}`;
   const [open, setOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Hide while scrolling down, show again on the way up.
+  useEffect(() => {
+    let last = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 24);
+      setHidden(y > 200 && y > last);
+      last = y;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // Close the menu when the route changes (adjusting state during render, per React docs).
   const [lastPath, setLastPath] = useState(pathname);
@@ -43,7 +58,11 @@ export function SiteHeader({ lang, nav }: { lang: Locale; nav: Nav }) {
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line/70 bg-night/90 backdrop-blur-md">
+    <header
+      className={`sticky top-0 z-50 transition-[translate,background-color,border-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        hidden && !open ? "-translate-y-full" : ""
+      } ${scrolled || open ? "border-b border-line/70 bg-night/85 backdrop-blur-md" : "border-b border-transparent bg-transparent"}`}
+    >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 md:h-20 lg:px-10">
         <Link href={`/${lang}`} className="shrink-0" aria-label="Sayd Social Club">
           <Image src="/brand/logo-ivory.png" alt="Sayd Social Club" width={319} height={134} priority className="h-9 w-auto md:h-11" />
@@ -55,7 +74,7 @@ export function SiteHeader({ lang, nav }: { lang: Locale; nav: Nav }) {
               key={l.href}
               href={l.href}
               aria-current={isActive(l.href) ? "page" : undefined}
-              className="text-[0.95rem] text-muted transition-colors hover:text-ink aria-[current=page]:text-ink aria-[current=page]:underline aria-[current=page]:decoration-sable aria-[current=page]:underline-offset-8"
+              className="link-draw pb-1 text-[0.95rem] text-muted transition-colors hover:text-ink aria-[current=page]:text-ink"
             >
               {l.label}
             </Link>

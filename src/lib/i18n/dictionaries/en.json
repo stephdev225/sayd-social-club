@@ -22,15 +22,18 @@
     "seasonTitle": "The season",
     "seasonEmpty": "No other dates announced yet.",
     "from": "from",
-    "manifesto": "Since 2019 we've been throwing the parties we wished Québec City had: Afro-Caribbean music, well-dressed people and a venue chosen with care.",
+    "manifesto": "We throw the parties we wished Québec City had: Afro-Caribbean music, well-dressed people and a venue chosen with care.",
     "radioTitle": "Sayd Social Radio",
     "radioText": "The music from our nights, in a playlist updated all season.",
     "radioCta": "Listen on Spotify",
     "ambassadorsTitle": "Become an ambassador",
     "ambassadorsText": "Know people, love our parties? Represent Sayd in your circle and get perks at every event.",
     "ambassadorsCta": "Apply",
-    "galleryTitle": "Our nights in pictures",
-    "galleryEmpty": "Photos from the season are coming after the next party."
+    "galleryTitle": "The vibe",
+    "galleryEmpty": "Photos from the season are coming after the next party.",
+    "galleryNote": "Music, elegance and good company: the spirit of our nights.",
+    "countdownLabel": "Doors open in",
+    "manifestoKicker": "Since 2019"
   },
   "events": {
     "title": "Events",
@@ -50,7 +53,7 @@
   },
   "tickets": {
     "title": "Tickets",
-    "pricesNote": "Prices before tax. GST and QST are added at checkout.",
+    "pricesNote": "Prices include GST and QST. Secure payment by Stripe.",
     "available": "left",
     "soldOut": "Sold out",
     "notOnSale": "Not on sale yet",
@@ -92,7 +95,8 @@
       "phone": "Invalid phone number.",
       "terms": "You need to accept the terms."
     },
-    "readTerms": "Read the terms"
+    "readTerms": "Read the terms",
+    "taxesIncluded": "taxes included"
   },
   "confirmation": {
     "pendingTitle": "Confirming your payment",
@@ -155,7 +159,8 @@
     "privacy": "Privacy",
     "terms": "Terms of sale",
     "credits": "Site by Stéphane Kouamé",
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "photoCredit": "Ambiance photos: Pexels"
   },
   "legal": {
     "privacyTitle": "Privacy policy",

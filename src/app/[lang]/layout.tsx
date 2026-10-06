@@ -6,6 +6,7 @@ import "@fontsource-variable/dm-sans/wght.css";
 import "../globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { hasLocale, locales } from "@/lib/i18n/config";
 import { site } from "@/lib/site";
@@ -53,6 +54,7 @@ export default async function LangLayout({ children, params }: LayoutProps<"/[la
         >
           {dict.nav.skip}
         </a>
+        <SmoothScroll />
         <SiteHeader lang={lang} nav={dict.nav} />
         <main id="contenu" className="flex-1">
           {children}

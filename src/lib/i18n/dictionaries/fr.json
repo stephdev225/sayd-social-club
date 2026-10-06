@@ -22,15 +22,18 @@
     "seasonTitle": "La saison",
     "seasonEmpty": "Aucune autre date annoncée pour l'instant.",
     "from": "dès",
-    "manifesto": "Depuis 2019, on crée à Québec les soirées qu'on aurait voulu trouver : de la musique afro-caribéenne, des gens bien habillés et une salle qu'on choisit avec soin.",
+    "manifesto": "On crée à Québec les soirées qu'on aurait voulu trouver : de la musique afro-caribéenne, des gens bien habillés et une salle choisie avec soin.",
     "radioTitle": "Sayd Social Radio",
     "radioText": "La musique de nos soirées, dans une playlist mise à jour toute la saison.",
     "radioCta": "Écouter sur Spotify",
     "ambassadorsTitle": "Devenir ambassadeur",
     "ambassadorsText": "Vous connaissez du monde, vous aimez nos soirées ? Représentez Sayd dans votre cercle et profitez d'avantages à chaque événement.",
     "ambassadorsCta": "Poser ma candidature",
-    "galleryTitle": "Nos soirées en images",
-    "galleryEmpty": "Les photos de la saison arrivent après la prochaine soirée."
+    "galleryTitle": "L'ambiance",
+    "galleryEmpty": "Les photos de la saison arrivent après la prochaine soirée.",
+    "galleryNote": "Musique, élégance et bonne compagnie : l'esprit de nos soirées.",
+    "countdownLabel": "Ouverture des portes dans",
+    "manifestoKicker": "Depuis 2019"
   },
   "events": {
     "title": "Événements",
@@ -50,7 +53,7 @@
   },
   "tickets": {
     "title": "Billets",
-    "pricesNote": "Prix avant taxes. TPS et TVQ calculées au paiement.",
+    "pricesNote": "Prix taxes incluses (TPS et TVQ). Paiement sécurisé par Stripe.",
     "available": "disponibles",
     "soldOut": "Complet",
     "notOnSale": "Vente pas encore ouverte",
@@ -92,7 +95,8 @@
       "phone": "Numéro de téléphone invalide.",
       "terms": "Vous devez accepter les conditions."
     },
-    "readTerms": "Lire les conditions"
+    "readTerms": "Lire les conditions",
+    "taxesIncluded": "taxes incluses"
   },
   "confirmation": {
     "pendingTitle": "Paiement en cours de confirmation",
@@ -155,7 +159,8 @@
     "privacy": "Confidentialité",
     "terms": "Conditions de vente",
     "credits": "Site par Stéphane Kouamé",
-    "rights": "Tous droits réservés."
+    "rights": "Tous droits réservés.",
+    "photoCredit": "Photos d'ambiance : Pexels"
   },
   "legal": {
     "privacyTitle": "Politique de confidentialité",

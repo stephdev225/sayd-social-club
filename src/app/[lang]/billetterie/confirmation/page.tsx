@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ConfirmationWatcher } from "@/components/ConfirmationWatcher";
 import { TicketCard } from "@/components/TicketCard";
+import { SuccessMark } from "@/components/motion/SuccessMark";
 import { getStore } from "@/lib/data";
 import { getOrderView } from "@/lib/data/orders";
 import { formatMoney } from "@/lib/domain/money";
@@ -60,6 +61,7 @@ export default async function ConfirmationPage({ params, searchParams }: PagePro
         {status === "pending" && (
           <span aria-hidden className="mb-6 block h-1 w-24 animate-pulse bg-sable motion-reduce:animate-none" />
         )}
+        {status === "paid" && <SuccessMark />}
         <h1 className={`t-h1 ${status === "paid" ? "text-ink" : ""}`}>{heading[0]}</h1>
         <p className="mt-5 max-w-xl text-lg text-muted">{heading[1]}</p>
       </div>

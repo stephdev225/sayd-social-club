@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { SplitTitle } from "@/components/motion/SplitTitle";
 import { SubmissionForm } from "@/components/SubmissionForm";
 import { hasLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
@@ -22,7 +23,7 @@ export default async function ContactPage({ params }: PageProps<"/[lang]/contact
   return (
     <div className="mx-auto grid max-w-7xl gap-14 px-4 pt-14 sm:px-6 lg:grid-cols-2 lg:px-10">
       <div>
-        <h1 className="t-h1">{dict.contact.title}</h1>
+        <h1 className="t-h1"><SplitTitle text={dict.contact.title} /></h1>
         <p className="mt-6 max-w-md text-lg text-ink/90">{dict.contact.intro}</p>
         <dl className="mt-12 grid gap-x-6 gap-y-4 sm:grid-cols-[8rem_1fr]">
           <dt className="text-sm text-muted">{f.email}</dt>

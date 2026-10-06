@@ -2,11 +2,15 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { EventFacts } from "@/components/EventFacts";
+import { Countdown } from "@/components/Countdown";
+import { Reveal } from "@/components/motion/Reveal";
+import { SplitTitle } from "@/components/motion/SplitTitle";
 import { TicketPurchase } from "@/components/TicketPurchase";
 import { canSellOnline } from "@/lib/checkout-availability";
 import { getStore } from "@/lib/data";
 import { getEventBySlug, listTicketTypes } from "@/lib/data/catalog";
 import { availableQuantity } from "@/lib/domain/inventory";
+import { priceWithTaxes } from "@/lib/domain/money";
 import { hasLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { formatDate } from "@/lib/i18n/format";
@@ -53,7 +57,7 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
     offers: types.map((t) => ({
       "@type": "Offer",
       name: t.name[lang],
-      price: (t.priceCents / 100).toFixed(2),
+      price: (priceWithTaxes(t.priceCents) / 100).toFixed(2),
       priceCurrency: "CAD",
       availability: availableQuantity(t) > 0 ? "https://schema.org/InStock" : "https://schema.org/SoldOut",
     })),
@@ -66,6 +70,7 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
       <header className="bg-[var(--accent)]">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[minmax(0,20rem)_1fr] md:items-end md:py-16 lg:px-10">
           {event.coverImage && (
+            <Reveal kind="mask" delay={0.2}>
             <Image
               src={event.coverImage}
               alt={`${event.name} — ${event.venueName}`}
@@ -75,6 +80,7 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
               sizes="(min-width: 768px) 20rem, 100vw"
               className="mx-auto aspect-[9/16] w-full max-w-[13rem] object-cover shadow-[0_30px_60px_-20px_rgba(0,0,0,0.7)] sm:max-w-xs md:max-w-none"
             />
+            </Reveal>
           )}
           <div>
             {event.partners.length > 0 && (
@@ -83,10 +89,15 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
               </p>
             )}
             <h1 className="t-hero break-words">
-              {event.name}
+              <SplitTitle text={event.name} />
               {event.edition && <span className="mt-6 block text-[0.28em] italic tracking-normal text-sable">{event.edition[lang]}</span>}
             </h1>
             <p className="mt-6 max-w-xl font-display text-2xl italic">{event.tagline[lang]}</p>
+            {!isPast && (
+              <div className="mt-8">
+                <Countdown to={event.startsAt} lang={lang} />
+              </div>
+            )}
           </div>
         </div>
       </header>

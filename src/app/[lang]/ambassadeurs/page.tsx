@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import { SubmissionForm } from "@/components/SubmissionForm";
+import { Reveal } from "@/components/motion/Reveal";
+import { SplitTitle } from "@/components/motion/SplitTitle";
+import { ambiance, pexels } from "@/lib/media";
 import { hasLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { t } from "@/lib/i18n/format";
@@ -22,8 +26,11 @@ export default async function AmbassadorsPage({ params }: PageProps<"/[lang]/amb
   return (
     <div className="mx-auto grid max-w-7xl gap-14 px-4 pt-14 sm:px-6 lg:grid-cols-2 lg:px-10">
       <div>
-        <h1 className="t-h1">{dict.ambassadors.title}</h1>
+        <h1 className="t-h1"><SplitTitle text={dict.ambassadors.title} /></h1>
         <p className="mt-6 max-w-lg text-lg text-ink/90">{dict.ambassadors.intro}</p>
+        <Reveal kind="mask" className="relative mt-10 aspect-[4/3] overflow-hidden">
+          <Image src={pexels(ambiance.toast.id, 1400)} alt={ambiance.toast.alt[lang]} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+        </Reveal>
         <h2 className="mt-12 text-muted">{dict.ambassadors.perksTitle}</h2>
         <ul className="mt-4 border-t border-line">
           {dict.ambassadors.perks.map((p) => (

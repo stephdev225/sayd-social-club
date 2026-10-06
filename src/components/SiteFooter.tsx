@@ -41,7 +41,7 @@ export function SiteFooter({ lang, dict }: { lang: Locale; dict: Dictionary }) {
 
       <div className="mx-auto flex max-w-7xl flex-col gap-3 border-t border-line px-4 py-6 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-10">
         <p>
-          © {year} {site.name}. {dict.footer.rights}
+          © {year} {site.name}. {dict.footer.rights} <span className="ml-2 text-muted/70">{dict.footer.photoCredit}</span>
         </p>
         <div className="flex flex-wrap gap-x-6 gap-y-2">
           <Link href={`/${lang}/confidentialite`} className="hover:text-ink">{dict.footer.privacy}</Link>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { SplitTitle } from "@/components/motion/SplitTitle";
 import { getStore } from "@/lib/data";
 import { listPublicEvents } from "@/lib/data/catalog";
 import type { SaydEvent } from "@/lib/domain/types";
@@ -50,7 +51,7 @@ export default async function EventsPage({ params }: PageProps<"/[lang]/evenemen
 
   return (
     <div className="mx-auto max-w-5xl px-4 pt-14 sm:px-6 lg:px-10">
-      <h1 className="t-h1">{dict.events.title}</h1>
+      <h1 className="t-h1"><SplitTitle text={dict.events.title} /></h1>
       <p className="mt-5 max-w-xl text-muted">{dict.events.intro}</p>
 
       <section className="mt-14" aria-labelledby="a-venir">
