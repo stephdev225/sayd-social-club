@@ -21,7 +21,7 @@
 | D-017 | 2026-10-06 | Admin et porte : deux mots de passe (ADMIN_PASSWORD, STAFF_PASSWORD), cookie signé httpOnly 12 h | Livrable aujourd'hui sans dépendre d'un compte Firebase Auth | ACTIVE |
 | D-018 | 2026-10-06 | Hébergement : Vercel projet sayd-social-club relié au dépôt GitHub privé stephdev225/sayd-social-club (déploiement à chaque push) ; Firebase projet sayd-social-club, Firestore northamerica-northeast1 | — | ACTIVE |
 | D-019 | 2026-10-06 | Site = entonnoir de vente : bouton Billets toujours visible dans la navbar (fixe), pastille flottante, barre d'achat mobile sur la page événement, bloc « prochaine soirée » en bas de chaque page | Demande de Stéphane | ACTIVE |
-| D-020 | 2026-10-06 | Nouvelles pages Showcase (artistes invités : Waklexx, DJ Madmaxx, Kulturr ; à venir Leto, Bilouki) et Partenariats (formulaire `partnership`) | Demande de Stéphane | ACTIVE |
+| D-020 | 2026-10-06 | Nouvelles pages Showcase (artistes invités : Waklexx, DJ Madmaxx, Kulturr ; Leto et Bilouki = info interne, jamais affichés sans annonce de Stéphane) et Partenariats (formulaire `partnership`) | Demande de Stéphane | ACTIVE |
 | D-021 | 2026-10-06 | Page événement : visuel sans texte (`heroImage`) à gauche, infos de l'affiche déplacées à droite au-dessus de « Présenté par » ; affiche complète via « Voir l'affiche » | Demande de Stéphane | ACTIVE |
 | D-022 | 2026-10-06 | Champ `externalTicketUrl` : tant que la vente en ligne du site n'est pas ouverte, le bouton d'achat renvoie vers Le Point de Vente (soirée du 11 oct.) | « l'event du 11 reste sur le point de vente » | ACTIVE, URL à fournir |
 | D-013 | 2026-10-06 | Sites de motion fournis (Jitter, Dribbble, Framer, motionsites.ai) = inspiration uniquement, aucun template copié | Règle références | ACTIVE |

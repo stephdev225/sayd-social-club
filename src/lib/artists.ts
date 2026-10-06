@@ -2,7 +2,7 @@
  * Artists and DJs invited by Sayd Social Club (Showcase page).
  * Only facts given by Sayd. Add `image` only with a photo Sayd has the right to use
  * (official press kit or the artist's permission).
- * status: "past" = already performed, "upcoming" = announced soon, "resident" = Sayd's own DJs.
+ * status: "current" = on the next lineup, "past" = already performed, "upcoming" = only once Sayd announces it publicly.
  */
 export interface Artist {
   name: string;
@@ -30,15 +30,5 @@ export const artists: Artist[] = [
     name: "Kulturr",
     role: { fr: "Artiste", en: "Artist" },
     status: "past",
-  },
-  {
-    name: "Leto",
-    role: { fr: "Artiste", en: "Artist" },
-    status: "upcoming",
-  },
-  {
-    name: "Bilouki",
-    role: { fr: "Artiste", en: "Artist" },
-    status: "upcoming",
   },
 ];
