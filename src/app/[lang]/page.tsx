@@ -67,7 +67,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
             {next && nextDate && (
               <Link
                 href={`/${lang}/evenements/${next.slug}`}
-                className="rise group flex items-center gap-4 self-start border border-ink/15 bg-night/70 p-3 pr-5 backdrop-blur-md transition hover:border-sable/60 md:self-auto [animation-delay:1.3s]"
+                className="rise group flex max-w-full items-center gap-4 self-start border border-ink/15 bg-night/70 p-3 pr-4 backdrop-blur-md transition hover:border-sable/60 md:self-auto [animation-delay:1.3s]"
               >
                 {next.coverImage && (
                   <Image src={next.coverImage} alt="" width={1080} height={1920} sizes="4rem" className="aspect-[3/4] w-16 object-cover" />
@@ -79,7 +79,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
                     {nextDate.day} {nextDate.month} · {next.venueName}
                   </span>
                 </span>
-                <span aria-hidden className="ml-2 text-sable transition-transform duration-300 group-hover:translate-x-1">→</span>
+                <span aria-hidden className="ml-auto shrink-0 pl-2 text-sable transition-transform duration-300 group-hover:translate-x-1">→</span>
               </Link>
             )}
           </div>
@@ -87,7 +87,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       </section>
 
       {/* ── Marquee: the sound ───────────────────────────────── */}
-      <Marquee items={[...dict.about.sound.split(", "), site.city]} className="border-y border-line py-6 font-display text-[clamp(2rem,5vw,3.75rem)] italic leading-none text-ink/90" />
+      <Marquee items={[...dict.about.sound.split(", ").map((w) => w.charAt(0).toUpperCase() + w.slice(1)), site.city]} className="border-y border-line py-6 font-display text-[clamp(2rem,5vw,3.75rem)] italic leading-none text-ink/90" />
 
       {/* ── Manifesto ────────────────────────────────────────── */}
       <section className="mx-auto grid max-w-7xl gap-12 px-4 py-24 sm:px-6 md:grid-cols-[1fr_1.1fr] md:items-center md:py-32 lg:px-10">
