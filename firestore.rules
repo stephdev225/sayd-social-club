@@ -1,0 +1,12 @@
+rules_version = '2';
+
+// Every read and write goes through the Next.js server with the Admin SDK,
+// which bypasses these rules. Browsers get nothing directly: no customer data,
+// no orders, no tickets can ever be read or forged from the client.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
