@@ -22,7 +22,7 @@ export default async function TicketPage({ params }: PageProps<"/[lang]/billet/[
   const ticket = code ? await store.get<Ticket & Record<string, unknown>>("tickets", code) : null;
   if (!ticket) {
     return (
-      <div className="mx-auto max-w-xl px-4 py-24 sm:px-6">
+      <div className="mx-auto max-w-xl px-5 pb-24 pt-32 sm:px-6">
         <h1 className="t-h1">{dict.ticketPage.notFound}</h1>
       </div>
     );
@@ -32,7 +32,7 @@ export default async function TicketPage({ params }: PageProps<"/[lang]/billet/[
   const statusLabel = dict.ticketPage[ticket.status];
 
   return (
-    <div className="mx-auto max-w-xl px-4 py-12 sm:px-6">
+    <div className="mx-auto max-w-xl px-5 pb-12 pt-28 sm:px-6">
       {event && (
         <>
           <h1 className="t-h1">{event.name}</h1>

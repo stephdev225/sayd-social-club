@@ -24,7 +24,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/le-club">
 
   return (
     <>
-    <div className="mx-auto max-w-4xl px-4 pt-14 sm:px-6 lg:px-10">
+    <div className="mx-auto max-w-4xl px-5 pt-28 sm:px-6 md:pt-36 lg:px-10">
       <h1 className="t-h1"><SplitTitle text={dict.about.title} /></h1>
       <Reveal><p className="mt-10 max-w-[30ch] font-display text-[clamp(1.8rem,3.6vw,2.8rem)] leading-[1.15]">{dict.about.lead}</p></Reveal>
     </div>

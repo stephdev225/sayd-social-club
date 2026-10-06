@@ -12,7 +12,8 @@
     "menu": "Menu",
     "close": "Close",
     "switchLang": "Français",
-    "skip": "Skip to content"
+    "skip": "Skip to content",
+    "gallery": "Gallery"
   },
   "home": {
     "nextEvent": "Next party",
@@ -150,7 +151,9 @@
     "why": "Why do you want to represent Sayd?",
     "newsletterLabel": "Your email",
     "newsletterCta": "Sign me up",
-    "newsletterDone": "You're signed up."
+    "newsletterDone": "You're signed up.",
+    "sentTitle": "Application sent",
+    "sentText": "Thank you! We'll reach out soon on WhatsApp or by email."
   },
   "ambassadors": {
     "title": "Ambassadors",
@@ -172,7 +175,17 @@
   },
   "contact": {
     "title": "Contact",
-    "intro": "Partnerships, table bookings, a question about a ticket: write to us."
+    "intro": "Partnerships, table bookings, a question about a ticket: write to us.",
+    "sentTitle": "Message sent",
+    "sentText": "Thanks, we'll get back to you quickly, usually the same day.",
+    "subjectLabel": "Subject",
+    "subjects": [
+      "Table booking",
+      "Ticket question",
+      "Partnership or sponsorship",
+      "Press",
+      "Other"
+    ]
   },
   "footer": {
     "newsletterTitle": "Hear about new dates first",
@@ -180,7 +193,8 @@
     "terms": "Terms of sale",
     "credits": "Site by Stéphane Kouamé",
     "rights": "All rights reserved.",
-    "photoCredit": "Ambiance photos: Pexels"
+    "photoCredit": "Ambiance photos: Pexels",
+    "desc": "Premium Afro-Caribbean parties and day parties in Québec City, since 2019."
   },
   "legal": {
     "privacyTitle": "Privacy policy",
@@ -200,5 +214,26 @@
     "cancelled": "Cancelled",
     "refunded": "Refunded",
     "notFound": "This ticket doesn't exist."
+  },
+  "gallery": {
+    "title": "Gallery",
+    "intro": "The atmosphere of our nights: music, light, elegance. Tap a photo to open it full screen.",
+    "viewer": {
+      "close": "Close",
+      "prev": "Previous photo",
+      "next": "Next photo"
+    }
+  },
+  "notify": {
+    "title": "Hear about the next party first",
+    "text": "One alert per announced party, with early access to tickets. No spam.",
+    "name": "First name",
+    "email": "Your email",
+    "cta": "Notify me",
+    "sending": "Signing up…",
+    "done": "You're on the list.",
+    "doneText": "You'll be among the first to hear about the next party.",
+    "error": "Sign-up failed. Try again in a moment.",
+    "consent": "By signing up you agree to receive our announcements. One-click unsubscribe."
   }
 }

@@ -24,7 +24,7 @@ export default async function AmbassadorsPage({ params }: PageProps<"/[lang]/amb
   const f = dict.forms;
 
   return (
-    <div className="mx-auto grid max-w-7xl gap-14 px-4 pt-14 sm:px-6 lg:grid-cols-2 lg:px-10">
+    <div className="mx-auto grid max-w-7xl gap-14 px-5 pt-28 sm:px-6 md:pt-36 lg:grid-cols-2 lg:px-10">
       <div>
         <h1 className="t-h1"><SplitTitle text={dict.ambassadors.title} /></h1>
         <p className="mt-6 max-w-lg text-lg text-ink/90">{dict.ambassadors.intro}</p>
@@ -45,7 +45,7 @@ export default async function AmbassadorsPage({ params }: PageProps<"/[lang]/amb
         <SubmissionForm
           kind="ambassador"
           lang={lang}
-          labels={{ send: f.send, sending: f.sending, sent: f.sent, error: t(f.error, { email: site.email }) }}
+          labels={{ send: f.send, sending: f.sending, sentTitle: f.sentTitle, sentText: f.sentText, error: t(f.error, { email: site.email }) }}
           fields={[
             { name: "name", label: f.name, required: true, autoComplete: "name" },
             { name: "email", label: f.email, type: "email", required: true, autoComplete: "email" },

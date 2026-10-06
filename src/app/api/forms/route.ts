@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { NextResponse } from "next/server";
 import { getStore, usingMemoryStore } from "@/lib/data";
 import { sendEmail } from "@/lib/email/send";
@@ -26,7 +27,15 @@ export async function POST(request: Request) {
   if (usingMemoryStore() && process.env.NODE_ENV === "production") {
     return NextResponse.json({ error: "not_configured" }, { status: 503 });
   }
-  await getStore().add("submissions", { ...fields, createdAt: new Date().toISOString() });
+  const store = getStore();
+  if (data.kind === "newsletter") {
+    // One document per address: signing up twice just refreshes it.
+    const id = "newsletter_" + createHash("sha256").update(data.email).digest("hex").slice(0, 24);
+    const existing = await store.get<Record<string, unknown>>("submissions", id);
+    await store.set("submissions", id, { ...fields, createdAt: (existing?.createdAt as string) ?? new Date().toISOString(), updatedAt: new Date().toISOString() });
+  } else {
+    await store.add("submissions", { ...fields, createdAt: new Date().toISOString() });
+  }
 
   if (data.kind !== "newsletter") {
     const rows = Object.entries(fields)

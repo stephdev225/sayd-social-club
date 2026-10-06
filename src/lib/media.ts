@@ -27,6 +27,17 @@ export const ambiance = {
   bar: { id: "29455146", w: 3, h: 2, photographer: "Pexels", alt: { fr: "Bar éclairé, étagères de bouteilles", en: "Lit bar with shelves of bottles" } },
   monochrome: { id: "3419648", w: 3, h: 2, photographer: "cottonbro studio", alt: { fr: "Portrait noir et blanc en soirée", en: "Black-and-white party portrait" } },
   party: { id: "12297243", w: 3, h: 2, photographer: "Joegraphy", alt: { fr: "Soirée animée dans un club", en: "Lively night in a club" } },
+  decks: { id: "5949085", w: 3, h: 2, photographer: "Pexels", alt: { fr: "Platines sous les lumières", en: "Decks under the lights" } },
+  blueDance: { id: "6173845", w: 3, h: 2, photographer: "RDNE", alt: { fr: "Amies qui dansent sous une lumière bleue", en: "Friends dancing under blue light" } },
+  concertBw: { id: "13202532", w: 3, h: 2, photographer: "Josh A.D.", alt: { fr: "Foule en noir et blanc sous les projecteurs", en: "Crowd in black and white under stage lights" } },
+  beams: { id: "3727138", w: 3, h: 2, photographer: "Jibaro Foto", alt: { fr: "Faisceaux de lumière au-dessus de la foule", en: "Light beams over the crowd" } },
+  lounge: { id: "24643918", w: 3, h: 2, photographer: "Pexels", alt: { fr: "Salon tamisé", en: "Dimly lit lounge" } },
 } satisfies Record<string, StockPhoto>;
+
+/** Full gallery page order (portrait and landscape mixed for the masonry rhythm). */
+export const galleryPage: (keyof typeof ambiance)[] = [
+  "crowd", "djHands", "toast", "duo", "dancing", "cocktail", "group", "decks", "monochrome",
+  "blueDance", "bar", "concertBw", "party", "mixer", "beams", "lounge",
+];
 
 export const galleryOrder: (keyof typeof ambiance)[] = ["party", "cocktail", "mixer", "monochrome", "bar"];

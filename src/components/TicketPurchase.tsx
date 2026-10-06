@@ -116,7 +116,7 @@ export function TicketPurchase({
 
   if (!onSale || ticketTypes.length === 0) {
     return (
-      <div className="border border-line bg-night-2 p-6">
+      <div className="rounded-3xl bg-night-2/80 p-6 ring-1 ring-ink/10">
         <h2 className="t-h3">{d.title}</h2>
         <p className="mt-3 text-muted">{d.unavailable}</p>
       </div>
@@ -134,14 +134,14 @@ export function TicketPurchase({
         if (errors[name]) setErrors((prev) => ({ ...prev, [name]: undefined }));
       }}
       noValidate
-      className="border border-line bg-night-2"
+      className="overflow-hidden rounded-3xl bg-night-2/80 ring-1 ring-ink/10 backdrop-blur"
       aria-labelledby="titre-billets"
     >
       <div className="p-5 sm:p-6">
         <h2 id="titre-billets" className="t-h3">{d.title}</h2>
         <p className="mt-1 text-sm text-muted">{d.pricesNote}</p>
 
-        <ul className="mt-5 divide-y divide-line border-y border-line">
+        <ul className="mt-5 divide-y divide-ink/10">
           {ticketTypes.map((tt) => {
             const n = qty[tt.id] ?? 0;
             const soldOut = tt.available === 0;
@@ -225,7 +225,7 @@ export function TicketPurchase({
         )}
       </div>
 
-      <fieldset className="border-t border-line p-5 sm:p-6">
+      <fieldset className="border-t border-ink/10 p-5 sm:p-6">
         <legend className="sr-only">{d.yourInfo}</legend>
         <p className="font-semibold text-ink" aria-hidden>{d.yourInfo}</p>
         <p className="mt-1 text-sm text-muted">{d.infoNote}</p>

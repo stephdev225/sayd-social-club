@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
-import { SplitTitle } from "@/components/motion/SplitTitle";
 import { SubmissionForm } from "@/components/SubmissionForm";
+import { LineReveal } from "@/components/motion/LineReveal";
+import { Reveal } from "@/components/motion/Reveal";
 import { hasLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { t } from "@/lib/i18n/format";
+import { ambiance, pexels } from "@/lib/media";
 import { site } from "@/lib/site";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/contact">): Promise<Metadata> {
@@ -21,34 +24,41 @@ export default async function ContactPage({ params }: PageProps<"/[lang]/contact
   const f = dict.forms;
 
   return (
-    <div className="mx-auto grid max-w-7xl gap-14 px-4 pt-14 sm:px-6 lg:grid-cols-2 lg:px-10">
-      <div>
-        <h1 className="t-h1"><SplitTitle text={dict.contact.title} /></h1>
-        <p className="mt-6 max-w-md text-lg text-ink/90">{dict.contact.intro}</p>
-        <dl className="mt-12 grid gap-x-6 gap-y-4 sm:grid-cols-[8rem_1fr]">
-          <dt className="text-sm text-muted">{f.email}</dt>
-          <dd><a href={`mailto:${site.email}`} className="underline underline-offset-4">{site.email}</a></dd>
-          <dt className="text-sm text-muted">{f.phone}</dt>
-          <dd><a href={site.phoneHref} className="underline underline-offset-4">{site.phone}</a></dd>
-          <dt className="text-sm text-muted">WhatsApp</dt>
-          <dd><a href={site.whatsapp} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">{site.phone}</a></dd>
-          <dt className="text-sm text-muted">Instagram</dt>
-          <dd><a href={site.instagram} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">{site.instagramHandle}</a></dd>
-        </dl>
+    <>
+      <div className="relative">
+        {/* Image fades into the page: no visible frame */}
+        <div aria-hidden className="absolute inset-x-0 top-0 h-[70svh] [mask-image:linear-gradient(to_bottom,black_30%,transparent)]">
+          <Image src={pexels(ambiance.lounge.id, 2000)} alt="" fill priority sizes="100vw" className="object-cover opacity-35" />
+        </div>
+        <div className="relative mx-auto grid max-w-7xl gap-16 px-5 pb-10 pt-32 sm:px-6 md:pt-44 lg:grid-cols-[1fr_1.1fr] lg:px-10">
+          <div>
+            <LineReveal as="h1" text={dict.contact.title} className="t-hero" />
+            <Reveal delay={0.2}>
+              <p className="mt-6 max-w-md text-lg text-ink/85">{dict.contact.intro}</p>
+            </Reveal>
+            <Reveal delay={0.3}>
+              <ul className="mt-12 space-y-4 text-lg">
+                <li><a href={`mailto:${site.email}`} className="link-draw pb-0.5">{site.email}</a></li>
+                <li><a href={site.whatsapp} target="_blank" rel="noopener noreferrer" className="link-draw pb-0.5">WhatsApp — {site.phone}</a></li>
+                <li><a href={site.instagram} target="_blank" rel="noopener noreferrer" className="link-draw pb-0.5">Instagram {site.instagramHandle}</a></li>
+              </ul>
+            </Reveal>
+          </div>
+          <section aria-label={dict.contact.title} className="lg:pt-6">
+            <SubmissionForm
+              kind="contact"
+              lang={lang}
+              labels={{ send: f.send, sending: f.sending, sentTitle: dict.contact.sentTitle, sentText: dict.contact.sentText, error: t(f.error, { email: site.email }) }}
+              fields={[
+                { name: "name", label: f.name, required: true, autoComplete: "name" },
+                { name: "email", label: f.email, type: "email", required: true, autoComplete: "email" },
+                { name: "subject", label: dict.contact.subjectLabel, type: "select", options: dict.contact.subjects },
+                { name: "message", label: f.message, type: "textarea", required: true },
+              ]}
+            />
+          </section>
+        </div>
       </div>
-      <section aria-label={dict.contact.title} className="lg:pt-4">
-        <SubmissionForm
-          kind="contact"
-          lang={lang}
-          labels={{ send: f.send, sending: f.sending, sent: f.sent, error: t(f.error, { email: site.email }) }}
-          fields={[
-            { name: "name", label: f.name, required: true, autoComplete: "name" },
-            { name: "email", label: f.email, type: "email", required: true, autoComplete: "email" },
-            { name: "subject", label: f.subject },
-            { name: "message", label: f.message, type: "textarea", required: true },
-          ]}
-        />
-      </section>
-    </div>
+    </>
   );
 }

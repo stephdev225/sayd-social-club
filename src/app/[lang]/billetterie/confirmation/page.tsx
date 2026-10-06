@@ -32,7 +32,7 @@ export default async function ConfirmationPage({ params, searchParams }: PagePro
 
   if (!view) {
     return (
-      <div className="mx-auto max-w-2xl px-4 py-24 sm:px-6">
+      <div className="mx-auto max-w-2xl px-5 pb-24 pt-32 sm:px-6">
         <h1 className="t-h1">{c.notFound}</h1>
         <Link href={`/${lang}/evenements`} className="mt-8 inline-block text-sable underline underline-offset-4">
           {dict.nav.events}
@@ -54,7 +54,7 @@ export default async function ConfirmationPage({ params, searchParams }: PagePro
   const qrs = await Promise.all(tickets.map((tk) => ticketQrSvg(tk.id)));
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+    <div className="mx-auto max-w-3xl px-5 pb-16 pt-28 sm:px-6 md:pt-36">
       <ConfirmationWatcher sessionId={sessionId} pending={order.status === "pending"} cancelled={cancelled} />
 
       <div role="status" aria-live="polite">

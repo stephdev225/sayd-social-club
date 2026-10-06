@@ -50,7 +50,7 @@ export default async function EventsPage({ params }: PageProps<"/[lang]/evenemen
   const { upcoming, past } = await listPublicEvents(getStore());
 
   return (
-    <div className="mx-auto max-w-5xl px-4 pt-14 sm:px-6 lg:px-10">
+    <div className="mx-auto max-w-5xl px-5 pt-28 sm:px-6 md:pt-36 lg:px-10">
       <h1 className="t-h1"><SplitTitle text={dict.events.title} /></h1>
       <p className="mt-5 max-w-xl text-muted">{dict.events.intro}</p>
 

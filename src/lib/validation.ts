@@ -35,6 +35,8 @@ export const formSchema = z.discriminatedUnion("kind", [
     kind: z.literal("newsletter"),
     locale: z.enum(["fr", "en"]),
     email,
+    firstName: z.string().trim().max(60).optional(),
+    source: z.string().trim().max(30).optional(),
     website: z.literal("").optional(),
   }),
   z.object({
@@ -42,6 +44,7 @@ export const formSchema = z.discriminatedUnion("kind", [
     locale: z.enum(["fr", "en"]),
     name,
     email,
+    phone: z.string().trim().max(30).regex(/^[+()\d\s.-]*$/).optional(),
     subject: z.string().trim().max(120).optional(),
     message: z.string().trim().min(5).max(4000),
     website: z.literal("").optional(),

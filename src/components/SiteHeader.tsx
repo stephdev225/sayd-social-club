@@ -1,56 +1,60 @@
 "use client";
 
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
+import { site } from "@/lib/site";
 
 type Nav = Dictionary["nav"];
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 export function SiteHeader({ lang, nav }: { lang: Locale; nav: Nav }) {
   const pathname = usePathname() ?? `/${lang}`;
+  const reduce = useReducedMotion();
   const [open, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Hide while scrolling down, show again on the way up.
-  useEffect(() => {
-    let last = window.scrollY;
-    const onScroll = () => {
-      const y = window.scrollY;
-      setScrolled(y > 24);
-      setHidden(y > 200 && y > last);
-      last = y;
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Close the menu when the route changes (adjusting state during render, per React docs).
+  // Close the menu when the route changes (adjusting state during render).
   const [lastPath, setLastPath] = useState(pathname);
   if (pathname !== lastPath) {
     setLastPath(pathname);
     setOpen(false);
   }
 
-  // Lock page scroll while the menu is open; Escape closes it.
+  // Hide on scroll down, show on scroll up. No dividing line, only a soft blur.
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    let last = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 24);
+      if (y > 240 && y > last + 2) setHidden(true);
+      if (y < last - 2 || y < 240) setHidden(false);
+      last = y;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.style.overflow = open ? "hidden" : "";
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
     return () => {
-      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
       window.removeEventListener("keydown", onKey);
     };
   }, [open]);
 
   const other: Locale = lang === "fr" ? "en" : "fr";
   const switchHref = pathname.replace(new RegExp(`^/${lang}(?=/|$)`), `/${other}`);
-
   const links = [
     { href: `/${lang}/evenements`, label: nav.events },
+    { href: `/${lang}/galerie`, label: nav.gallery },
     { href: `/${lang}/le-club`, label: nav.about },
     { href: `/${lang}/ambassadeurs`, label: nav.ambassadors },
     { href: `/${lang}/contact`, label: nav.contact },
@@ -58,76 +62,129 @@ export function SiteHeader({ lang, nav }: { lang: Locale; nav: Nav }) {
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
-    <header
-      className={`sticky top-0 z-50 transition-[translate,background-color,border-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-        hidden && !open ? "-translate-y-full" : ""
-      } ${scrolled || open ? "border-b border-line/70 bg-night/85 backdrop-blur-md" : "border-b border-transparent bg-transparent"}`}
-    >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 md:h-20 lg:px-10">
-        <Link href={`/${lang}`} className="shrink-0" aria-label="Sayd Social Club">
-          <Image src="/brand/logo-ivory.png" alt="Sayd Social Club" width={319} height={134} priority className="h-9 w-auto md:h-11" />
-        </Link>
-
-        <nav aria-label="Principale" className="hidden items-center gap-8 lg:flex">
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              aria-current={isActive(l.href) ? "page" : undefined}
-              className="link-draw pb-1 text-[0.95rem] text-muted transition-colors hover:text-ink aria-[current=page]:text-ink"
-            >
-              {l.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-3 sm:gap-5">
-          <Link href={switchHref} hrefLang={other} lang={other} className="hidden text-sm text-muted hover:text-ink sm:inline">
-            {nav.switchLang}
-          </Link>
-          <Link
-            href={`/${lang}/evenements`}
-            className="rounded-full bg-sable px-4 py-2 text-sm font-semibold text-night transition hover:brightness-110 sm:px-5"
-          >
-            {nav.tickets}
-          </Link>
-          <button
-            type="button"
-            className="-mr-2 flex h-11 w-11 items-center justify-center lg:hidden"
-            aria-expanded={open}
-            aria-controls="menu-mobile"
-            aria-label={open ? nav.close : nav.menu}
-            onClick={() => setOpen((v) => !v)}
-          >
-            <span aria-hidden className="relative block h-3 w-6">
-              <span className={`absolute left-0 h-px w-6 bg-ink transition ${open ? "top-1.5 rotate-45" : "top-0"}`} />
-              <span className={`absolute left-0 h-px w-6 bg-ink transition ${open ? "top-1.5 -rotate-45" : "top-3"}`} />
-            </span>
-          </button>
-        </div>
-      </div>
-
-      <div
-        id="menu-mobile"
-        hidden={!open}
-        className="fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto bg-night px-4 pb-10 pt-6 sm:px-6 lg:hidden"
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-[translate,background-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          hidden && !open ? "-translate-y-full" : ""
+        } ${scrolled && !open ? "bg-night/70 backdrop-blur-xl" : "bg-transparent"}`}
       >
-        <nav aria-label="Mobile" className="flex flex-col">
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              aria-current={isActive(l.href) ? "page" : undefined}
-              className="t-h2 border-b border-line py-4 text-ink aria-[current=page]:text-sable"
-            >
-              {l.label}
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-6 md:h-20 lg:px-10">
+          <Link href={`/${lang}`} className="relative z-[60] shrink-0" aria-label="Sayd Social Club">
+            <Image src="/brand/logo-ivory.png" alt="Sayd Social Club" width={319} height={134} priority className="h-8 w-auto md:h-10" />
+          </Link>
+
+          <nav aria-label="Principale" className="hidden items-center gap-8 lg:flex">
+            {links.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                aria-current={isActive(l.href) ? "page" : undefined}
+                className="link-draw pb-1 text-[0.95rem] text-ink/75 transition-colors hover:text-ink aria-[current=page]:text-ink"
+              >
+                {l.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="relative z-[60] flex items-center gap-4">
+            <Link href={switchHref} hrefLang={other} lang={other} className="hidden text-sm text-ink/70 hover:text-ink lg:inline">
+              {other.toUpperCase()}
             </Link>
-          ))}
-        </nav>
-        <Link href={switchHref} hrefLang={other} lang={other} className="mt-8 inline-block text-muted underline underline-offset-4">
-          {nav.switchLang}
-        </Link>
-      </div>
-    </header>
+            <Link
+              href={`/${lang}/evenements`}
+              className="hidden rounded-full bg-sable px-5 py-2 text-sm font-semibold text-night transition hover:brightness-110 lg:inline-flex"
+            >
+              {nav.tickets}
+            </Link>
+            {/* Mobile: one clean toggle, two lines that morph into a cross */}
+            <button
+              type="button"
+              className="flex h-11 items-center gap-3 lg:hidden"
+              aria-expanded={open}
+              aria-controls="menu-mobile"
+              onClick={() => setOpen((v) => !v)}
+            >
+              <span className="text-sm text-ink/90">{open ? nav.close : nav.menu}</span>
+              <span aria-hidden className="relative block h-3 w-7">
+                <motion.span
+                  className="absolute left-0 top-0 h-px w-7 bg-ink"
+                  animate={open ? { y: 6, rotate: 45 } : { y: 0, rotate: 0 }}
+                  transition={{ duration: 0.4, ease: EASE }}
+                />
+                <motion.span
+                  className="absolute bottom-0 right-0 h-px bg-ink"
+                  animate={open ? { y: -5, rotate: -45, width: 28 } : { y: 0, rotate: 0, width: 18 }}
+                  transition={{ duration: 0.4, ease: EASE }}
+                />
+              </span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            id="menu-mobile"
+            role="dialog"
+            aria-modal="true"
+            aria-label={nav.menu}
+            className="fixed inset-0 z-[55] flex flex-col bg-night px-5 pb-8 pt-24 sm:px-6 lg:hidden"
+            initial={reduce ? { opacity: 0 } : { clipPath: "circle(0% at calc(100% - 2.5rem) 2rem)" }}
+            animate={reduce ? { opacity: 1 } : { clipPath: "circle(150% at calc(100% - 2.5rem) 2rem)" }}
+            exit={reduce ? { opacity: 0 } : { clipPath: "circle(0% at calc(100% - 2.5rem) 2rem)" }}
+            transition={{ duration: 0.7, ease: EASE }}
+          >
+            <nav aria-label="Mobile" className="flex flex-1 flex-col justify-center">
+              {links.map((l, i) => (
+                <div key={l.href} className="overflow-hidden">
+                  <motion.div
+                    initial={{ y: "110%" }}
+                    animate={{ y: "0%" }}
+                    exit={{ y: "110%" }}
+                    transition={{ duration: 0.6, delay: 0.15 + i * 0.06, ease: EASE }}
+                  >
+                    <Link
+                      href={l.href}
+                      onClick={() => setOpen(false)}
+                      aria-current={isActive(l.href) ? "page" : undefined}
+                      className="block py-2 font-display text-[clamp(2.6rem,11vw,4rem)] leading-[1.05] text-ink transition-colors aria-[current=page]:italic aria-[current=page]:text-sable"
+                    >
+                      {l.label}
+                    </Link>
+                  </motion.div>
+                </div>
+              ))}
+            </nav>
+
+            <motion.div
+              className="space-y-6"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5, delay: 0.5, ease: EASE }}
+            >
+              <Link
+                href={`/${lang}/evenements`}
+                onClick={() => setOpen(false)}
+                className="flex min-h-14 w-full items-center justify-center rounded-full bg-sable text-base font-semibold text-night"
+              >
+                {nav.tickets}
+              </Link>
+              <div className="flex items-center justify-between text-sm text-ink/70">
+                <div className="flex gap-5">
+                  <a href={site.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
+                  <a href={site.tiktok} target="_blank" rel="noopener noreferrer">TikTok</a>
+                  <a href={site.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                </div>
+                <Link href={switchHref} hrefLang={other} lang={other} onClick={() => setOpen(false)}>
+                  {nav.switchLang}
+                </Link>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

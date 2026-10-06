@@ -12,7 +12,8 @@
     "menu": "Menu",
     "close": "Fermer",
     "switchLang": "English",
-    "skip": "Aller au contenu"
+    "skip": "Aller au contenu",
+    "gallery": "Galerie"
   },
   "home": {
     "nextEvent": "Prochaine soirée",
@@ -150,7 +151,9 @@
     "why": "Pourquoi voulez-vous représenter Sayd ?",
     "newsletterLabel": "Votre courriel",
     "newsletterCta": "M'inscrire",
-    "newsletterDone": "Inscription confirmée."
+    "newsletterDone": "Inscription confirmée.",
+    "sentTitle": "Candidature envoyée",
+    "sentText": "Merci ! On vous contacte très vite sur WhatsApp ou par courriel."
   },
   "ambassadors": {
     "title": "Ambassadeurs",
@@ -172,7 +175,17 @@
   },
   "contact": {
     "title": "Contact",
-    "intro": "Partenariat, réservation de table, question sur un billet : écrivez-nous."
+    "intro": "Partenariat, réservation de table, question sur un billet : écrivez-nous.",
+    "sentTitle": "Message envoyé",
+    "sentText": "Merci, on vous répond rapidement, en général dans la journée.",
+    "subjectLabel": "Sujet",
+    "subjects": [
+      "Réservation de table",
+      "Question sur un billet",
+      "Partenariat ou commandite",
+      "Presse",
+      "Autre"
+    ]
   },
   "footer": {
     "newsletterTitle": "Les prochaines dates en premier",
@@ -180,7 +193,8 @@
     "terms": "Conditions de vente",
     "credits": "Site par Stéphane Kouamé",
     "rights": "Tous droits réservés.",
-    "photoCredit": "Photos d'ambiance : Pexels"
+    "photoCredit": "Photos d'ambiance : Pexels",
+    "desc": "Soirées et day parties afro-caribéennes haut de gamme à Québec, depuis 2019."
   },
   "legal": {
     "privacyTitle": "Politique de confidentialité",
@@ -200,5 +214,26 @@
     "cancelled": "Annulé",
     "refunded": "Remboursé",
     "notFound": "Ce billet n'existe pas."
+  },
+  "gallery": {
+    "title": "Galerie",
+    "intro": "L'atmosphère de nos soirées : musique, lumière, élégance. Touchez une photo pour l'ouvrir en grand.",
+    "viewer": {
+      "close": "Fermer",
+      "prev": "Photo précédente",
+      "next": "Photo suivante"
+    }
+  },
+  "notify": {
+    "title": "Soyez prévenu de la prochaine soirée",
+    "text": "Une seule alerte par soirée annoncée, avec l'accès aux billets avant tout le monde. Pas de spam.",
+    "name": "Prénom",
+    "email": "Votre courriel",
+    "cta": "Me prévenir",
+    "sending": "Inscription…",
+    "done": "C'est noté.",
+    "doneText": "Vous serez parmi les premiers informés de la prochaine soirée.",
+    "error": "L'inscription a échoué. Réessayez dans un instant.",
+    "consent": "En vous inscrivant, vous acceptez de recevoir nos annonces. Désinscription en un clic."
   }
 }

@@ -67,8 +67,14 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
     <article>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
 
-      <header className="border-b border-line bg-night-2">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[minmax(0,20rem)_1fr] md:items-end md:py-16 lg:px-10">
+      <header className="relative isolate overflow-hidden">
+        {event.coverImage && (
+          <div aria-hidden className="absolute inset-0 -z-10 opacity-40 blur-3xl">
+            <Image src={event.coverImage} alt="" fill sizes="50vw" className="scale-125 object-cover" />
+            <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(18,15,14,0.2),#120f0e_95%)]" />
+          </div>
+        )}
+        <div className="mx-auto grid max-w-7xl gap-10 px-5 pb-12 pt-28 sm:px-6 md:grid-cols-[minmax(0,20rem)_1fr] md:items-end md:pb-16 md:pt-36 lg:px-10">
           {event.coverImage && (
             <Reveal kind="mask" delay={0.2}>
             <Image
@@ -78,7 +84,7 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
               height={1920}
               priority
               sizes="(min-width: 768px) 20rem, 100vw"
-              className="mx-auto aspect-[9/16] w-full max-w-[13rem] object-cover shadow-[0_30px_60px_-20px_rgba(0,0,0,0.7)] sm:max-w-xs md:max-w-none"
+              className="mx-auto aspect-[9/16] w-full max-w-[14rem] rounded-2xl object-cover shadow-[0_30px_60px_-20px_rgba(0,0,0,0.8)] sm:max-w-xs md:max-w-none"
             />
             </Reveal>
           )}
