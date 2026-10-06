@@ -11,10 +11,15 @@
 | D-006 | 2026-10-06 | Prix stockés hors taxes ; TPS 5 % + TVQ 9,975 % ajoutées (Tax Rates Stripe exclusives) | Stéphane : « les prix c'est sans les taxes » | ACTIVE — voir question prix |
 | D-007 | 2026-10-06 | Billets non remboursables (affiché avant paiement et dans les conditions) | Stéphane | ACTIVE |
 | D-008 | 2026-10-06 | Hébergement Vercel, pas de domaine pour l'instant | Stéphane | ACTIVE |
-| D-009 | 2026-10-06 | Aucune photo stock. Affiche officielle Sprezzatura utilisée pour l'événement ; galerie vide (état vide honnête) jusqu'aux vraies photos | Brief client + règle vérité | ACTIVE |
+| D-009 | 2026-10-06 | Aucune photo stock | Brief client | REMPLACÉE par D-014 |
 | D-010 | 2026-10-06 | Palette du brief : noir charbon #120F0E, sable #D9B26A, terracotta #DA7656, vert bouteille #16382B, ivoire #EFE6D8 + accent par événement (bordeaux #5A1420 pour Sprezzatura) | Brief + affiche | ACTIVE |
 | D-011 | 2026-10-06 | Polices auto-hébergées (fontsource) Cormorant Garamond + DM Sans, gardées de l'ancien site | Identité existante, pas d'appel à Google Fonts (vie privée, build hors-ligne) | ACTIVE |
 | D-012 | 2026-10-06 | Mode démo local (`DEMO_PAYMENTS`) pour tester l'achat sans Stripe ; impossible en production | Démonstration et tests E2E | ACTIVE |
+| D-014 | 2026-10-06 | Photos d'ambiance Pexels (licence libre, usage commercial) en attendant les vraies photos de Sayd ; images d'ambiance seulement, jamais présentées comme nos soirées ; crédit en pied de page | Demande de Stéphane : embellir aujourd'hui, remplacement après le 11 | ACTIVE |
+| D-015 | 2026-10-06 | Le site porte l'identité Sayd (hero plein écran, wordmark) ; la prochaine soirée est un élément du site, pas son thème (plus de bandeau bordeaux) | Retour de Stéphane | ACTIVE |
+| D-016 | 2026-10-06 | Prix affichés taxes incluses : 26,49 $ = 23,04 $ + TPS + TVQ ; taxes envoyées à Stripe en lignes séparées | Stéphane : 26,49 $ = prix lepointdevente tout compris | ACTIVE (remplace la question prix) |
+| D-017 | 2026-10-06 | Admin et porte : deux mots de passe (ADMIN_PASSWORD, STAFF_PASSWORD), cookie signé httpOnly 12 h | Livrable aujourd'hui sans dépendre d'un compte Firebase Auth | ACTIVE |
+| D-018 | 2026-10-06 | Hébergement : Vercel projet sayd-social-club relié au dépôt GitHub privé stephdev225/sayd-social-club (déploiement à chaque push) ; Firebase projet sayd-social-club, Firestore northamerica-northeast1 | — | ACTIVE |
 | D-013 | 2026-10-06 | Sites de motion fournis (Jitter, Dribbble, Framer, motionsites.ai) = inspiration uniquement, aucun template copié | Règle références | ACTIVE |
 
 ## Journal de session
@@ -24,8 +29,13 @@
 - Non vérifié : vrais appels Stripe test (pas de clés), Firestore réel (pas de projet), envoi Brevo réel, rendu sur iPhone réel, embed Spotify (bloqué dans l'environnement de test).
 - Prochaine étape : clés Stripe test + projet Firebase → test de bout en bout réel ; puis `/admin` (auth) + `/scan` (check-in) + vente à la porte.
 
+### 2026-10-06 (après-midi)
+- Fait : mise en ligne https://sayd-social-club.vercel.app ; photos d'ambiance ; animations (révélation des titres, masques d'images, parallaxe, galerie épinglée, compte à rebours, transitions de page, défilement doux) ; accueil centré sur la marque ; prix taxes incluses ; tableau de bord /admin ; scanner /scan ; export CSV ; Firestore créé et règles déployées ; auto-seed.
+- Vérifié : 33 tests ; build Vercel OK ; parcours achat → admin → scan en local ; rendu en ligne dans le navigateur Claude.
+- Non vérifié : Stripe test réel et Firestore réel (variables Vercel à ajouter par Stéphane) ; caméra du scanner sur iPhone réel.
+
 ## Questions ouvertes
-- **Prix** : 26,49 $ hors taxes = **30,45 $ taxes incluses**, plus cher que 30 $ à la porte. Le 26,49 $ est-il déjà taxes incluses (prix lepointdevente) ? Le 30 $ à la porte inclut-il les taxes ?
+- Clé Stripe live exposée dans le chat le 2026-10-06 : à faire tourner par Stéphane.
 - Capacité du Mora et nombre de billets en ligne (250 mis par défaut).
 - Adresse exacte du Mora (seulement « Grande Allée Est » confirmé).
 - Origine de la photo de l'affiche (photographe ? IA ?) avant usage public large.
