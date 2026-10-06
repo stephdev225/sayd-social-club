@@ -33,6 +33,11 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+html,
+body {
+  overflow-x: clip; /* no sideways page scroll from scaled/parallax media */
+}
+
 body {
   font-family: var(--font-sans);
   font-size: 1rem;

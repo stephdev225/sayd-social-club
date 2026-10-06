@@ -16,7 +16,11 @@ Visitors buy tickets directly on the site (Stripe Checkout), receive a unique QR
 - Contact, ambassador and newsletter forms: validated, stored, forwarded to the team
 - Privacy policy (Loi 25) and terms of sale (non-refundable tickets)
 
-Coming next: admin dashboard (`/admin`), door scanner (`/scan`) with check-in, door sales.
+- **Admin dashboard** `/admin`: revenue, tickets sold/available, check-ins, orders and guests with search and filters, CSV export
+- **Door scanner** `/scan` (phone camera): valid → green "Bienvenue"; copied or reused code → red "Déjà utilisé à 22 h 14"; manual code entry fallback
+- Staff login with two roles (admin / door staff), signed httpOnly cookie, rate-limited
+
+Coming next: door sales from the dashboard (Stripe QR on the staff phone), event editing in the admin.
 
 ## Stack
 
