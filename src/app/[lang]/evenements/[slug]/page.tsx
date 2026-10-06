@@ -64,10 +64,10 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
   };
 
   return (
-    <article style={{ ["--accent" as string]: event.accent ?? "var(--color-night-2)" }}>
+    <article>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
 
-      <header className="bg-[var(--accent)]">
+      <header className="border-b border-line bg-night-2">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[minmax(0,20rem)_1fr] md:items-end md:py-16 lg:px-10">
           {event.coverImage && (
             <Reveal kind="mask" delay={0.2}>

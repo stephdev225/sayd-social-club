@@ -33,7 +33,27 @@
     "galleryEmpty": "Photos from the season are coming after the next party.",
     "galleryNote": "Music, elegance and good company: the spirit of our nights.",
     "countdownLabel": "Doors open in",
-    "manifestoKicker": "Since 2019"
+    "manifestoKicker": "Since 2019",
+    "heroKicker": "Afro-Caribbean nights · Québec City · since 2019",
+    "heroLine": "Where Afro-Caribbean culture meets contemporary luxury.",
+    "heroCta": "See the events",
+    "nextShort": "Next party",
+    "pillarsTitle": "The Sayd experience",
+    "pillars": [
+      {
+        "t": "The music",
+        "d": "Afrobeats, amapiano, dancehall and house, from DJs who know how to read a room."
+      },
+      {
+        "t": "The elegance",
+        "d": "A dress code for every edition. We dress up, we recognise each other."
+      },
+      {
+        "t": "The community",
+        "d": "A social circle where connections are made, night after night."
+      }
+    ],
+    "nextTitle": "Next party"
   },
   "events": {
     "title": "Events",

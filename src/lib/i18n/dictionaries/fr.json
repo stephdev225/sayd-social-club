@@ -33,7 +33,27 @@
     "galleryEmpty": "Les photos de la saison arrivent après la prochaine soirée.",
     "galleryNote": "Musique, élégance et bonne compagnie : l'esprit de nos soirées.",
     "countdownLabel": "Ouverture des portes dans",
-    "manifestoKicker": "Depuis 2019"
+    "manifestoKicker": "Depuis 2019",
+    "heroKicker": "Soirées afro-caribéennes · Québec · depuis 2019",
+    "heroLine": "Là où la culture afro-caribéenne rencontre le luxe contemporain.",
+    "heroCta": "Voir les événements",
+    "nextShort": "Prochaine soirée",
+    "pillarsTitle": "L'expérience Sayd",
+    "pillars": [
+      {
+        "t": "La musique",
+        "d": "Afrobeats, amapiano, dancehall et house, par des DJs qui connaissent la salle."
+      },
+      {
+        "t": "L'élégance",
+        "d": "Un code vestimentaire à chaque édition. On s'habille, on se reconnaît."
+      },
+      {
+        "t": "La communauté",
+        "d": "Un cercle social où se tissent les liens, soirée après soirée."
+      }
+    ],
+    "nextTitle": "Prochaine soirée"
   },
   "events": {
     "title": "Événements",

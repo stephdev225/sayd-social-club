@@ -18,7 +18,7 @@ export function HorizontalGallery({ items, title, note }: { items: GalleryItem[]
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-62%"]);
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-48%"]);
 
   const card = (it: GalleryItem, i: number, sizes: string) => (
     <figure

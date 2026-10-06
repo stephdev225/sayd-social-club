@@ -29,4 +29,4 @@ export const ambiance = {
   party: { id: "12297243", w: 3, h: 2, photographer: "Joegraphy", alt: { fr: "Soirée animée dans un club", en: "Lively night in a club" } },
 } satisfies Record<string, StockPhoto>;
 
-export const galleryOrder: (keyof typeof ambiance)[] = ["toast", "djHands", "duo", "dancing", "cocktail", "group", "mixer", "monochrome", "bar"];
+export const galleryOrder: (keyof typeof ambiance)[] = ["party", "cocktail", "mixer", "monochrome", "bar"];
