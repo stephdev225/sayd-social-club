@@ -88,7 +88,7 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
                 {dict.events.presentedBy} {event.partners.join(" × ")}
               </p>
             )}
-            <h1 className="t-hero break-words">
+            <h1 className="font-display text-[clamp(3rem,8.5vw,8.5rem)] font-medium leading-[0.86] tracking-[-0.035em]">
               <SplitTitle text={event.name} />
               {event.edition && <span className="mt-6 block text-[0.28em] italic tracking-normal text-sable">{event.edition[lang]}</span>}
             </h1>
