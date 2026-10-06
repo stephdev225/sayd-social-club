@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { NextEventCTA } from "@/components/NextEventCTA";
+import { getNextEventSummary } from "@/lib/data/next-event";
 import { Gallery } from "@/components/Gallery";
 import { LineReveal } from "@/components/motion/LineReveal";
 import { Reveal } from "@/components/motion/Reveal";
@@ -18,8 +20,10 @@ export default async function GalleryPage({ params }: PageProps<"/[lang]/galerie
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
   const dict = await getDictionary(lang);
+  const next = await getNextEventSummary(lang);
 
   return (
+    <>
     <div className="mx-auto max-w-7xl px-3 pb-10 pt-28 sm:px-6 md:pt-36 lg:px-10">
       <div className="px-2 sm:px-0">
         <LineReveal as="h1" text={dict.gallery.title} className="t-h1" />
@@ -41,5 +45,7 @@ export default async function GalleryPage({ params }: PageProps<"/[lang]/galerie
         />
       </div>
     </div>
+    <NextEventCTA next={next} dict={dict} lang={lang} />
+    </>
   );
 }

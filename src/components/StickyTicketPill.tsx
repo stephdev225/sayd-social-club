@@ -15,7 +15,7 @@ export function StickyTicketPill({ href, label, detail }: { href: string; label:
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-  if (pathname?.includes("/evenements/") || pathname?.includes("/billet")) return null;
+  if (pathname?.includes("/evenements/") || pathname?.includes("/billet")) return null; // event page has its own buy bar
   return (
     <AnimatePresence>
       {show && (

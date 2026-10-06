@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { Countdown } from "@/components/Countdown";
 import { DragCarousel } from "@/components/DragCarousel";
 import { HeroBrand } from "@/components/HeroBrand";
-import { StickyTicketPill } from "@/components/StickyTicketPill";
 import { LineReveal } from "@/components/motion/LineReveal";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { Parallax } from "@/components/motion/Parallax";
@@ -43,15 +42,19 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         <div className="mt-8 flex flex-col gap-7 md:mt-10 md:flex-row md:items-end md:justify-between">
           <div className="rise max-w-md [animation-delay:1.1s]">
             <p className="font-display text-[1.45rem] leading-snug text-ink/90 sm:text-[1.7rem]">{dict.home.heroLine}</p>
-            <Magnetic className="mt-7">
-              <Link
-                href={`/${lang}/evenements`}
-                className="group inline-flex min-h-13 items-center gap-3 rounded-full bg-ink px-7 py-3.5 font-semibold text-night transition-colors hover:bg-sable"
-              >
-                {dict.home.heroCta}
-                <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-              </Link>
-            </Magnetic>
+            <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-4">
+              <Magnetic>
+                <Link
+                  href={next ? `/${lang}/evenements/${next.slug}#billets` : `/${lang}/evenements`}
+                  className="group inline-flex min-h-14 items-center gap-3 rounded-full bg-sable px-7 py-4 font-semibold text-night transition hover:brightness-110"
+                >
+                  {next ? dict.funnel.cta : dict.home.heroCta}
+                  {next && nextFrom !== null && <span className="font-normal opacity-80">· {formatMoney(priceWithTaxes(nextFrom), lang)}</span>}
+                  <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </Link>
+              </Magnetic>
+              <Link href={`/${lang}/evenements`} className="link-draw pb-1 text-ink/85">{dict.home.heroCta}</Link>
+            </div>
           </div>
 
           {next && nextDate && (
@@ -215,13 +218,6 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         </div>
       </section>
 
-      {next && nextDate && (
-        <StickyTicketPill
-          href={`/${lang}/evenements/${next.slug}#billets`}
-          label={`${dict.nav.tickets} · ${next.name}`}
-          detail={`${nextDate.day} ${nextDate.month} · ${next.venueName}${nextFrom !== null ? ` · ${formatMoney(priceWithTaxes(nextFrom), lang)}` : ""}`}
-        />
-      )}
     </>
   );
 }

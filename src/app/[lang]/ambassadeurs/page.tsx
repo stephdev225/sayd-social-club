@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import { NextEventCTA } from "@/components/NextEventCTA";
+import { getNextEventSummary } from "@/lib/data/next-event";
 import { SubmissionForm } from "@/components/SubmissionForm";
 import { Reveal } from "@/components/motion/Reveal";
 import { SplitTitle } from "@/components/motion/SplitTitle";
@@ -22,8 +24,10 @@ export default async function AmbassadorsPage({ params }: PageProps<"/[lang]/amb
   if (!hasLocale(lang)) notFound();
   const dict = await getDictionary(lang);
   const f = dict.forms;
+  const next = await getNextEventSummary(lang);
 
   return (
+    <>
     <div className="mx-auto grid max-w-7xl gap-14 px-5 pt-28 sm:px-6 md:pt-36 lg:grid-cols-2 lg:px-10">
       <div>
         <h1 className="t-h1"><SplitTitle text={dict.ambassadors.title} /></h1>
@@ -56,5 +60,7 @@ export default async function AmbassadorsPage({ params }: PageProps<"/[lang]/amb
         />
       </section>
     </div>
+    <NextEventCTA next={next} dict={dict} lang={lang} />
+    </>
   );
 }

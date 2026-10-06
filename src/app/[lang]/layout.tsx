@@ -7,6 +7,8 @@ import "../globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
+import { StickyTicketPill } from "@/components/StickyTicketPill";
+import { getNextEventSummary } from "@/lib/data/next-event";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { hasLocale, locales } from "@/lib/i18n/config";
 import { site } from "@/lib/site";
@@ -44,6 +46,7 @@ export default async function LangLayout({ children, params }: LayoutProps<"/[la
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
   const dict = await getDictionary(lang);
+  const next = await getNextEventSummary(lang);
 
   return (
     <html lang={lang === "fr" ? "fr-CA" : "en-CA"}>
@@ -55,11 +58,18 @@ export default async function LangLayout({ children, params }: LayoutProps<"/[la
           {dict.nav.skip}
         </a>
         <SmoothScroll />
-        <SiteHeader lang={lang} nav={dict.nav} />
+        <SiteHeader lang={lang} nav={dict.nav} ticketsHref={next?.ticketsHref ?? `/${lang}/evenements`} />
         <main id="contenu" className="flex-1">
           {children}
         </main>
         <SiteFooter lang={lang} dict={dict} />
+        {next && (
+          <StickyTicketPill
+            href={next.ticketsHref}
+            label={`${dict.funnel.cta} · ${next.name}`}
+            detail={`${next.dateShort} · ${next.venue}${next.priceLabel ? ` · ${next.priceLabel}` : ""}`}
+          />
+        )}
       </body>
     </html>
   );

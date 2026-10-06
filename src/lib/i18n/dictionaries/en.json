@@ -13,7 +13,12 @@
     "close": "Close",
     "switchLang": "Français",
     "skip": "Skip to content",
-    "gallery": "Gallery"
+    "gallery": "Gallery",
+    "showcase": "Showcase",
+    "partners": "Partnerships",
+    "langShort": "FR",
+    "ariaMain": "Main navigation",
+    "ariaFooter": "Footer"
   },
   "home": {
     "nextEvent": "Next party",
@@ -70,7 +75,8 @@
     "dressCode": "Dress code",
     "lineup": "Music",
     "presentedBy": "Presented by",
-    "notFound": "This event doesn't exist or is no longer online."
+    "notFound": "This event doesn't exist or is no longer online.",
+    "reservations": "Reservations"
   },
   "tickets": {
     "title": "Tickets",
@@ -117,7 +123,9 @@
       "terms": "You need to accept the terms."
     },
     "readTerms": "Read the terms",
-    "taxesIncluded": "taxes included"
+    "taxesIncluded": "taxes included",
+    "externalNote": "For this party, tickets are sold on Le Point de Vente, our ticketing partner. Secure payment, ticket sent by email.",
+    "externalCta": "Buy my tickets"
   },
   "confirmation": {
     "pendingTitle": "Confirming your payment",
@@ -235,5 +243,75 @@
     "doneText": "You'll be among the first to hear about the next party.",
     "error": "Sign-up failed. Try again in a moment.",
     "consent": "By signing up you agree to receive our announcements. One-click unsubscribe."
+  },
+  "funnel": {
+    "ctaTitle": "The next party is waiting",
+    "ctaText": "Online tickets cost less than at the door. Book now, pay securely.",
+    "cta": "Get my tickets",
+    "ctaSecondary": "See the party",
+    "buyBar": "Get my tickets",
+    "onlineCheaper": "Cheaper than at the door",
+    "seePoster": "See the poster"
+  },
+  "showcase": {
+    "title": "Showcase",
+    "intro": "Sayd brings in artists and DJs from here and abroad. An Afro-Caribbean scene in Québec City, with international guests.",
+    "current": "On the bill",
+    "past": "Played at Sayd",
+    "upcoming": "Coming soon",
+    "international": "International guest",
+    "booking": "Are you an artist or a DJ?",
+    "bookingText": "Send us your sound and your links: every edition is programmed with care.",
+    "bookingCta": "Write to us"
+  },
+  "partners": {
+    "title": "Partnerships",
+    "intro": "Brands, venues, artists: we build every party with partners who share our standards.",
+    "whyTitle": "Why Sayd",
+    "why": [
+      {
+        "t": "A targeted crowd",
+        "d": "A 25–35 Afro-Caribbean and cosmopolitan audience that goes out, dresses up and shares."
+      },
+      {
+        "t": "Carefully crafted nights",
+        "d": "Chosen venues, a dress code, international guests: your brand in a premium setting."
+      },
+      {
+        "t": "A social presence",
+        "d": "Every edition lives before, during and after on Instagram and TikTok."
+      }
+    ],
+    "typesTitle": "Ways to work together",
+    "types": [
+      {
+        "t": "Event sponsorship",
+        "d": "Your brand attached to an edition: on-site, on the poster and online."
+      },
+      {
+        "t": "Bar and products",
+        "d": "Product placement, signature cocktail, tasting."
+      },
+      {
+        "t": "Partner venues",
+        "d": "Have a room, a terrace, a restaurant? Let's host together."
+      },
+      {
+        "t": "Collaborations",
+        "d": "Co-productions with other collectives, like Ben G Signature for Sprezzatura."
+      }
+    ],
+    "formTitle": "Propose a partnership",
+    "company": "Company or organisation",
+    "type": "Type of partnership",
+    "typeOptions": [
+      "Event sponsorship",
+      "Bar and products",
+      "Partner venue",
+      "Collaboration",
+      "Other"
+    ],
+    "sentTitle": "Proposal sent",
+    "sentText": "Thank you! We'll get back to you shortly to talk it through."
   }
 }

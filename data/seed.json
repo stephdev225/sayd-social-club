@@ -39,7 +39,8 @@
       "coverImage": "/events/sprezzatura-poster.jpg",
       "instagram": {
         "Waklexx": "https://www.instagram.com/waklexx_"
-      }
+      },
+      "heroImage": "/events/sprezzatura-visual.jpg"
     }
   },
   "ticketTypes": {

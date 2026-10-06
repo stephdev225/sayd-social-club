@@ -12,11 +12,10 @@ import { site } from "@/lib/site";
 type Nav = Dictionary["nav"];
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-export function SiteHeader({ lang, nav }: { lang: Locale; nav: Nav }) {
+export function SiteHeader({ lang, nav, ticketsHref }: { lang: Locale; nav: Nav; ticketsHref: string }) {
   const pathname = usePathname() ?? `/${lang}`;
   const reduce = useReducedMotion();
   const [open, setOpen] = useState(false);
-  const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   // Close the menu when the route changes (adjusting state during render).
@@ -26,16 +25,10 @@ export function SiteHeader({ lang, nav }: { lang: Locale; nav: Nav }) {
     setOpen(false);
   }
 
-  // Hide on scroll down, show on scroll up. No dividing line, only a soft blur.
+  // Always visible; gains a blurred background once the page scrolls. No dividing line.
   useEffect(() => {
-    let last = window.scrollY;
-    const onScroll = () => {
-      const y = window.scrollY;
-      setScrolled(y > 24);
-      if (y > 240 && y > last + 2) setHidden(true);
-      if (y < last - 2 || y < 240) setHidden(false);
-      last = y;
-    };
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -54,9 +47,10 @@ export function SiteHeader({ lang, nav }: { lang: Locale; nav: Nav }) {
   const switchHref = pathname.replace(new RegExp(`^/${lang}(?=/|$)`), `/${other}`);
   const links = [
     { href: `/${lang}/evenements`, label: nav.events },
+    { href: `/${lang}/showcase`, label: nav.showcase },
     { href: `/${lang}/galerie`, label: nav.gallery },
     { href: `/${lang}/le-club`, label: nav.about },
-    { href: `/${lang}/ambassadeurs`, label: nav.ambassadors },
+    { href: `/${lang}/partenariats`, label: nav.partners },
     { href: `/${lang}/contact`, label: nav.contact },
   ];
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
@@ -64,16 +58,16 @@ export function SiteHeader({ lang, nav }: { lang: Locale; nav: Nav }) {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-[translate,background-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-          hidden && !open ? "-translate-y-full" : ""
-        } ${scrolled && !open ? "bg-night/70 backdrop-blur-xl" : "bg-transparent"}`}
+        className={`fixed inset-x-0 top-0 z-50 transition-[background-color,backdrop-filter] duration-500 ${
+          scrolled && !open ? "bg-night/75 backdrop-blur-xl" : "bg-transparent"
+        }`}
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-6 md:h-20 lg:px-10">
           <Link href={`/${lang}`} className="relative z-[60] shrink-0" aria-label="Sayd Social Club">
             <Image src="/brand/logo-ivory.png" alt="Sayd Social Club" width={319} height={134} priority className="h-8 w-auto md:h-10" />
           </Link>
 
-          <nav aria-label="Principale" className="hidden items-center gap-8 lg:flex">
+          <nav aria-label={nav.ariaMain} className="hidden items-center gap-6 lg:flex xl:gap-8">
             {links.map((l) => (
               <Link
                 key={l.href}
@@ -86,13 +80,14 @@ export function SiteHeader({ lang, nav }: { lang: Locale; nav: Nav }) {
             ))}
           </nav>
 
-          <div className="relative z-[60] flex items-center gap-4">
-            <Link href={switchHref} hrefLang={other} lang={other} className="hidden text-sm text-ink/70 hover:text-ink lg:inline">
-              {other.toUpperCase()}
+          <div className="relative z-[60] flex items-center gap-3 sm:gap-4">
+            <Link href={switchHref} hrefLang={other} lang={other} aria-label={nav.switchLang} className="text-sm font-medium text-ink/75 hover:text-ink">
+              {nav.langShort}
             </Link>
             <Link
-              href={`/${lang}/evenements`}
-              className="hidden rounded-full bg-sable px-5 py-2 text-sm font-semibold text-night transition hover:brightness-110 lg:inline-flex"
+              href={ticketsHref}
+              onClick={() => setOpen(false)}
+              className="inline-flex items-center rounded-full bg-sable px-4 py-2 text-sm font-semibold text-night transition hover:brightness-110 sm:px-5"
             >
               {nav.tickets}
             </Link>
@@ -104,7 +99,7 @@ export function SiteHeader({ lang, nav }: { lang: Locale; nav: Nav }) {
               aria-controls="menu-mobile"
               onClick={() => setOpen((v) => !v)}
             >
-              <span className="text-sm text-ink/90">{open ? nav.close : nav.menu}</span>
+              <span className="sr-only">{open ? nav.close : nav.menu}</span>
               <span aria-hidden className="relative block h-3 w-7">
                 <motion.span
                   className="absolute left-0 top-0 h-px w-7 bg-ink"
@@ -135,7 +130,7 @@ export function SiteHeader({ lang, nav }: { lang: Locale; nav: Nav }) {
             exit={reduce ? { opacity: 0 } : { clipPath: "circle(0% at calc(100% - 2.5rem) 2rem)" }}
             transition={{ duration: 0.7, ease: EASE }}
           >
-            <nav aria-label="Mobile" className="flex flex-1 flex-col justify-center">
+            <nav aria-label={nav.menu} className="flex flex-1 flex-col justify-center">
               {links.map((l, i) => (
                 <div key={l.href} className="overflow-hidden">
                   <motion.div
@@ -148,7 +143,7 @@ export function SiteHeader({ lang, nav }: { lang: Locale; nav: Nav }) {
                       href={l.href}
                       onClick={() => setOpen(false)}
                       aria-current={isActive(l.href) ? "page" : undefined}
-                      className="block py-2 font-display text-[clamp(2.6rem,11vw,4rem)] leading-[1.05] text-ink transition-colors aria-[current=page]:italic aria-[current=page]:text-sable"
+                      className="block py-1.5 font-display text-[clamp(2.3rem,10vw,4rem)] leading-[1.05] text-ink transition-colors aria-[current=page]:italic aria-[current=page]:text-sable"
                     >
                       {l.label}
                     </Link>
@@ -165,7 +160,7 @@ export function SiteHeader({ lang, nav }: { lang: Locale; nav: Nav }) {
               transition={{ duration: 0.5, delay: 0.5, ease: EASE }}
             >
               <Link
-                href={`/${lang}/evenements`}
+                href={ticketsHref}
                 onClick={() => setOpen(false)}
                 className="flex min-h-14 w-full items-center justify-center rounded-full bg-sable text-base font-semibold text-night"
               >

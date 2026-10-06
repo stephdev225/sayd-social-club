@@ -29,7 +29,7 @@ export const checkoutSchema = z.object({
 
 export type CheckoutRequest = z.infer<typeof checkoutSchema>;
 
-/** Contact, ambassador and newsletter forms. `website` is a honeypot: bots fill it, people don't see it. */
+/** Contact, ambassador, partnership and newsletter forms. `website` is a honeypot: bots fill it, people don't see it. */
 export const formSchema = z.discriminatedUnion("kind", [
   z.object({
     kind: z.literal("newsletter"),
@@ -57,6 +57,17 @@ export const formSchema = z.discriminatedUnion("kind", [
     phone: z.string().trim().min(7).max(30).regex(/^[+()\d\s.-]+$/),
     instagram: z.string().trim().max(60).optional(),
     message: z.string().trim().min(5).max(2000),
+    website: z.literal("").optional(),
+  }),
+  z.object({
+    kind: z.literal("partnership"),
+    locale: z.enum(["fr", "en"]),
+    company: z.string().trim().min(1).max(120),
+    name,
+    email,
+    phone: z.string().trim().max(30).regex(/^[+()\d\s.-]*$/).optional(),
+    type: z.string().trim().max(60).optional(),
+    message: z.string().trim().min(5).max(4000),
     website: z.literal("").optional(),
   }),
 ]);

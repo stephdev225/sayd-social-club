@@ -7,7 +7,7 @@ import { clientIp, rateLimit } from "@/lib/rate-limit";
 import { site } from "@/lib/site";
 import { formSchema } from "@/lib/validation";
 
-const TITLES = { newsletter: "Inscription newsletter", contact: "Message de contact", ambassador: "Candidature ambassadeur" };
+const TITLES = { newsletter: "Inscription newsletter", contact: "Message de contact", ambassador: "Candidature ambassadeur", partnership: "Proposition de partenariat" };
 
 /** Contact, ambassador and newsletter submissions: validated, stored, and forwarded to the team by email. */
 export async function POST(request: Request) {
@@ -45,7 +45,7 @@ export async function POST(request: Request) {
     try {
       await sendEmail({
         to: [{ email: process.env.TEAM_EMAIL ?? site.email }],
-        subject: `${TITLES[data.kind]} — ${data.name}`,
+        subject: `${TITLES[data.kind]} — ${data.kind === "partnership" ? `${data.company} (${data.name})` : data.name}`,
         html: `<h2>${TITLES[data.kind]}</h2><table>${rows}</table>`,
         text: Object.entries(fields).map(([k, v]) => `${k}: ${v}`).join("\n"),
         replyTo: data.email,

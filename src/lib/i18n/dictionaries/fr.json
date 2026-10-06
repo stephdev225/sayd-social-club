@@ -13,7 +13,12 @@
     "close": "Fermer",
     "switchLang": "English",
     "skip": "Aller au contenu",
-    "gallery": "Galerie"
+    "gallery": "Galerie",
+    "showcase": "Showcase",
+    "partners": "Partenariats",
+    "langShort": "EN",
+    "ariaMain": "Navigation principale",
+    "ariaFooter": "Pied de page"
   },
   "home": {
     "nextEvent": "Prochaine soirée",
@@ -70,7 +75,8 @@
     "dressCode": "Code vestimentaire",
     "lineup": "Musique",
     "presentedBy": "Présenté par",
-    "notFound": "Cet événement n'existe pas ou n'est plus en ligne."
+    "notFound": "Cet événement n'existe pas ou n'est plus en ligne.",
+    "reservations": "Réservations"
   },
   "tickets": {
     "title": "Billets",
@@ -117,7 +123,9 @@
       "terms": "Vous devez accepter les conditions."
     },
     "readTerms": "Lire les conditions",
-    "taxesIncluded": "taxes incluses"
+    "taxesIncluded": "taxes incluses",
+    "externalNote": "Pour cette soirée, les billets sont vendus sur Le Point de Vente, notre billetterie partenaire. Paiement sécurisé, billet envoyé par courriel.",
+    "externalCta": "Acheter mes billets"
   },
   "confirmation": {
     "pendingTitle": "Paiement en cours de confirmation",
@@ -235,5 +243,75 @@
     "doneText": "Vous serez parmi les premiers informés de la prochaine soirée.",
     "error": "L'inscription a échoué. Réessayez dans un instant.",
     "consent": "En vous inscrivant, vous acceptez de recevoir nos annonces. Désinscription en un clic."
+  },
+  "funnel": {
+    "ctaTitle": "La prochaine soirée vous attend",
+    "ctaText": "Les billets en ligne sont moins chers qu'à la porte. Réservez maintenant, payez en toute sécurité.",
+    "cta": "Prendre mes billets",
+    "ctaSecondary": "Voir la soirée",
+    "buyBar": "Prendre mes billets",
+    "onlineCheaper": "Moins cher qu'à la porte",
+    "seePoster": "Voir l'affiche"
+  },
+  "showcase": {
+    "title": "Showcase",
+    "intro": "Sayd invite des artistes et des DJs d'ici et d'ailleurs. Une scène afro-caribéenne à Québec, avec des invités internationaux.",
+    "current": "À l'affiche",
+    "past": "Déjà passés chez Sayd",
+    "upcoming": "Bientôt",
+    "international": "Invité international",
+    "booking": "Vous êtes artiste ou DJ ?",
+    "bookingText": "Envoyez-nous votre univers et vos liens : on programme chaque édition avec soin.",
+    "bookingCta": "Nous écrire"
+  },
+  "partners": {
+    "title": "Partenariats",
+    "intro": "Marques, lieux, artistes : on construit chaque soirée avec des partenaires qui partagent notre exigence.",
+    "whyTitle": "Pourquoi Sayd",
+    "why": [
+      {
+        "t": "Un public ciblé",
+        "d": "Une clientèle de 25 à 35 ans, afro-caribéenne et cosmopolite, qui sort, s'habille et partage."
+      },
+      {
+        "t": "Des soirées soignées",
+        "d": "Des lieux choisis, un code vestimentaire, des invités internationaux : votre marque dans un cadre premium."
+      },
+      {
+        "t": "Une présence sociale",
+        "d": "Chaque édition vit avant, pendant et après sur Instagram et TikTok."
+      }
+    ],
+    "typesTitle": "Comment collaborer",
+    "types": [
+      {
+        "t": "Commandite de soirée",
+        "d": "Votre marque associée à une édition : visibilité sur place, sur l'affiche et en ligne."
+      },
+      {
+        "t": "Bar et produits",
+        "d": "Placement de produit, cocktail signature, dégustation."
+      },
+      {
+        "t": "Lieux partenaires",
+        "d": "Vous avez une salle, une terrasse, un restaurant ? Recevons ensemble."
+      },
+      {
+        "t": "Collaborations",
+        "d": "Co-production avec d'autres collectifs, comme Ben G Signature pour Sprezzatura."
+      }
+    ],
+    "formTitle": "Proposer un partenariat",
+    "company": "Entreprise ou organisation",
+    "type": "Type de partenariat",
+    "typeOptions": [
+      "Commandite de soirée",
+      "Bar et produits",
+      "Lieu partenaire",
+      "Collaboration",
+      "Autre"
+    ],
+    "sentTitle": "Proposition envoyée",
+    "sentText": "Merci ! On revient vers vous rapidement pour en discuter."
   }
 }

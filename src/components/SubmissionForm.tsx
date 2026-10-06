@@ -25,7 +25,7 @@ export function SubmissionForm({
   fields,
   labels,
 }: {
-  kind: "contact" | "ambassador";
+  kind: "contact" | "ambassador" | "partnership";
   lang: Locale;
   fields: FieldDef[];
   labels: { send: string; sending: string; sentTitle: string; sentText: string; error: string };

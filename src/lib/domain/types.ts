@@ -22,7 +22,11 @@ export interface SaydEvent {
   city: string;
   capacity: number;
   status: EventStatus;
-  coverImage?: string;
+  coverImage?: string; // official poster (with text)
+  /** Clean visual without text, used large on the site. Falls back to coverImage. */
+  heroImage?: string;
+  /** While online sales are not open on this site, where tickets are sold (e.g. Le Point de Vente). */
+  externalTicketUrl?: string;
   dressCode?: Localized;
   lineup: string[];
   partners: string[];

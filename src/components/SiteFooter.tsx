@@ -22,11 +22,13 @@ export function SiteFooter({ lang, dict }: { lang: Locale; dict: Dictionary }) {
             <Image src="/brand/logo-ivory.png" alt="Sayd Social Club" width={319} height={134} className="h-10 w-auto" />
             <p className="mt-4 max-w-xs text-sm text-ink/60">{dict.footer.desc}</p>
           </div>
-          <nav aria-label="Pied de page" className="grid grid-cols-2 gap-3 text-ink/75 sm:grid-cols-1">
+          <nav aria-label={dict.nav.ariaFooter} className="grid grid-cols-2 gap-3 text-ink/75 sm:grid-cols-1">
             <Link href={`/${lang}/evenements`} className="hover:text-ink">{dict.nav.events}</Link>
+            <Link href={`/${lang}/showcase`} className="hover:text-ink">{dict.nav.showcase}</Link>
             <Link href={`/${lang}/galerie`} className="hover:text-ink">{dict.nav.gallery}</Link>
             <Link href={`/${lang}/le-club`} className="hover:text-ink">{dict.nav.about}</Link>
             <Link href={`/${lang}/ambassadeurs`} className="hover:text-ink">{dict.nav.ambassadors}</Link>
+            <Link href={`/${lang}/partenariats`} className="hover:text-ink">{dict.nav.partners}</Link>
             <Link href={`/${lang}/contact`} className="hover:text-ink">{dict.nav.contact}</Link>
           </nav>
           <div className="grid grid-cols-2 gap-3 text-ink/75 sm:grid-cols-1">

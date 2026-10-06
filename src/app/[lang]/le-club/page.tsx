@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { NextEventCTA } from "@/components/NextEventCTA";
+import { getNextEventSummary } from "@/lib/data/next-event";
 import { Parallax } from "@/components/motion/Parallax";
 import { Reveal } from "@/components/motion/Reveal";
 import { SplitTitle } from "@/components/motion/SplitTitle";
@@ -21,6 +23,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/le-club">
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
   const dict = await getDictionary(lang);
+  const next = await getNextEventSummary(lang);
 
   return (
     <>
@@ -45,6 +48,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/le-club">
         </a>
       </div>
     </div>
+    <NextEventCTA next={next} dict={dict} lang={lang} />
     </>
   );
 }
