@@ -63,7 +63,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
                 <Image src={next.coverImage} alt="" width={1080} height={1920} sizes="3.5rem" className="aspect-[3/4] w-14 rounded-lg object-cover" />
               )}
               <span className="min-w-0">
-                <span className="block text-xs text-ink/60">{dict.home.nextShort}</span>
+                <span className="block whitespace-nowrap text-xs text-ink/60">{dict.home.nextShort}</span>
                 <span className="block truncate font-display text-xl leading-tight">{next.name}</span>
                 <span className="block text-sm text-ink/75">{nextDate.day} {nextDate.month} · {next.venueName}</span>
               </span>
