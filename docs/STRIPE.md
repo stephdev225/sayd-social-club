@@ -8,7 +8,7 @@ Mode: **test** until the full test plan passes. `lib/env.ts` refuses `sk_live_` 
 1. `POST /api/checkout` validates input (Zod), rate-limits, then `startCheckout()`:
    - **one Firestore transaction**: read event + ticket types, check stock (`total - sold - reserved`),
      create/update customer, create `orders/{id}` `pending` with `expiresAt = now + 35 min`, `reserved += q`;
-   - create the Checkout Session: line items priced **from the database**, GST + QST tax rates (exclusive),
+   - create the Checkout Session: line items priced **from the database** plus GST and QST lines,
      `metadata.orderId`, `client_reference_id`, `expires_at`, idempotency key `checkout-{orderId}`;
    - if Stripe fails, the reservation is released.
 2. Buyer pays on Stripe.
@@ -36,10 +36,10 @@ Mode: **test** until the full test plan passes. `lib/env.ts` refuses `sk_live_` 
 
 ## Taxes
 
-Prices are stored **before tax** in cents. GST 5 % and QST 9.975 % are Stripe Tax Rate objects
-(`scripts/create-tax-rates.mjs`), applied per line, exclusive. The site shows the same breakdown
-(`lib/domain/money.ts`, rounding per line like Stripe). Stripe's amount is the source of truth;
-a mismatch is logged.
+Prices are stored **before tax** in cents (Sprezzatura online: 2304 = 23,04 $ → 26,49 $ with taxes).
+The site advertises the all-in price. GST 5 % and QST 9.975 % are computed by `lib/domain/money.ts`
+and sent to Stripe as two explicit line items, so the Stripe total equals the site total to the cent
+and no Tax Rate setup is needed. Stripe's amount is still recorded on the payment; a mismatch is logged.
 
 ## Local testing
 

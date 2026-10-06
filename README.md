@@ -25,7 +25,7 @@ Coming next: admin dashboard (`/admin`), door scanner (`/scan`) with check-in, d
 | Front + back | Next.js 16 (App Router, Route Handlers), React 19, TypeScript strict |
 | Styles | Tailwind CSS 4, self-hosted fonts (Cormorant Garamond, DM Sans) |
 | Database | Cloud Firestore, **server-side Admin SDK only** (client rules deny everything) |
-| Payments | Stripe Checkout + webhooks, exclusive GST/QST tax rates |
+| Payments | Stripe Checkout + webhooks, GST/QST as explicit line items |
 | Email | Brevo transactional API |
 | Validation | Zod |
 | Tests | Vitest (domain, checkout, fulfilment, signed webhook route) |
@@ -81,7 +81,6 @@ A fake "Stripe + webhook" runs the **real** fulfilment code (disabled in product
 With real Stripe **test** keys and Firebase:
 
 ```bash
-node scripts/create-tax-rates.mjs     # once: prints STRIPE_TAX_RATE_GST / _QST
 npm run seed                          # loads data/seed.json into Firestore
 stripe listen --forward-to localhost:3000/api/stripe/webhook   # prints STRIPE_WEBHOOK_SECRET
 npm run dev
@@ -103,7 +102,7 @@ npm run typecheck && npm run lint && npm test && npm run build
 `checkout.session.expired`, `charge.refunded`; copy its signing secret to `STRIPE_WEBHOOK_SECRET`.
 4. Deploy Firestore rules: `npx firebase-tools deploy --only firestore:rules`.
 
-Going live (later, after the full test plan): live keys, live tax rates, live webhook, `STRIPE_ALLOW_LIVE=true`.
+Going live (later, after the full test plan): live keys, live webhook, `STRIPE_ALLOW_LIVE=true`.
 
 ## Security
 

@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 import { checkReservation, releaseReservation, type ReserveError } from "@/lib/domain/inventory";
-import { computeTotals } from "@/lib/domain/money";
+import { computeTotals, SALES_TAXES } from "@/lib/domain/money";
 import { newOrderId } from "@/lib/domain/ids";
 import type { Customer, Order, OrderItem, SaydEvent, TicketType } from "@/lib/domain/types";
 import type { Store } from "@/lib/data/store";
@@ -26,6 +26,8 @@ export interface PaymentGateway {
     orderId: string;
     eventName: string;
     lines: { name: string; unitAmountCents: number; quantity: number }[];
+    /** GST / QST as separate lines, computed by us so Stripe's total matches the site exactly. */
+    taxLines: { name: string; amountCents: number }[];
     customerEmail: string;
     locale: "fr" | "en";
     expiresAt: Date;
@@ -143,6 +145,12 @@ export async function startCheckout(
       orderId,
       eventName: reserved.eventName,
       lines: reserved.order.items.map((l) => ({ name: l.name, unitAmountCents: l.unitPriceCents, quantity: l.quantity })),
+      taxLines: computeTotals(reserved.order.items.map((l) => ({ unitPriceCents: l.unitPriceCents, quantity: l.quantity })))
+        .taxes.map((tax, i) => ({
+          name: `${SALES_TAXES[i].label[input.locale]} (${(SALES_TAXES[i].rate * 100).toLocaleString(input.locale === "fr" ? "fr-CA" : "en-CA")} %)`,
+          amountCents: tax.cents,
+        }))
+        .filter((t) => t.amountCents > 0),
       customerEmail: email,
       locale: input.locale,
       expiresAt,

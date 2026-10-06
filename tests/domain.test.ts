@@ -81,3 +81,10 @@ describe("locale", () => {
     expect(pickLocale("es;q=1,fr-CA;q=0.5,en;q=0.4")).toBe("fr");
   });
 });
+
+describe("Sprezzatura price", () => {
+  it("23,04 $ before tax is exactly 26,49 $ with GST and QST", async () => {
+    const { priceWithTaxes } = await import("@/lib/domain/money");
+    expect(priceWithTaxes(2304)).toBe(2649);
+  });
+});

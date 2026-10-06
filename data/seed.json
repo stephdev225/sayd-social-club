@@ -1,5 +1,5 @@
 {
-  "_note": "Test data for Sprezzatura (11 Oct 2026). Confirmed by Stéphane on 2026-10-06: online price 26.49$ before taxes, door price 30$, DJ Waklexx, no refunds. Quantities are placeholders (capacity to confirm). Load into Firestore with: npm run seed",
+  "_note": "Sprezzatura (11 Oct 2026). Online 26.49$ taxes included = 23.04$ + GST + QST (confirmed by Stéphane 2026-10-06). Door ~30$ taxes included. DJ Waklexx. No refunds. Quantities are placeholders. Load with: npm run seed",
   "events": {
     "sprezzatura-2026-10-11": {
       "id": "sprezzatura-2026-10-11",
@@ -54,7 +54,7 @@
         "fr": "Entrée à la soirée. Prix en ligne, plus avantageux qu'à la porte.",
         "en": "Entry to the party. Online price, lower than at the door."
       },
-      "priceCents": 2649,
+      "priceCents": 2304,
       "currency": "cad",
       "quantityTotal": 250,
       "quantitySold": 0,
@@ -77,7 +77,7 @@
         "fr": "Vendu sur place le soir même.",
         "en": "Sold on site on the night."
       },
-      "priceCents": 3000,
+      "priceCents": 2609,
       "currency": "cad",
       "quantityTotal": 100,
       "quantitySold": 0,

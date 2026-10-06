@@ -2,7 +2,8 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { computeTotals, formatMoney, SALES_TAXES } from "@/lib/domain/money";
+import { AnimatePresence, motion } from "motion/react";
+import { computeTotals, formatMoney, priceWithTaxes, SALES_TAXES } from "@/lib/domain/money";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 import { t } from "@/lib/i18n/format";
@@ -150,7 +151,9 @@ export function TicketPurchase({
                 <div>
                   <p className="font-semibold text-ink">{tt.name}</p>
                   <p className="text-sm text-muted">{tt.description}</p>
-                  <p className="mt-1 text-ink">{formatMoney(tt.priceCents, lang)}</p>
+                  <p className="mt-1 text-ink">
+                    {formatMoney(priceWithTaxes(tt.priceCents), lang)} <span className="text-sm text-muted">{d.taxesIncluded}</span>
+                  </p>
                   {soldOut ? (
                     <p className="text-sm text-terra">{d.soldOut}</p>
                   ) : (
@@ -168,7 +171,20 @@ export function TicketPurchase({
                     >
                       −
                     </button>
-                    <output aria-live="polite" className="w-8 text-center text-lg tabular-nums">{n}</output>
+                    <output aria-live="polite" className="relative h-7 w-8 overflow-hidden text-center text-lg tabular-nums">
+                      <AnimatePresence mode="popLayout" initial={false}>
+                        <motion.span
+                          key={n}
+                          className="absolute inset-0"
+                          initial={{ y: "-100%", opacity: 0 }}
+                          animate={{ y: "0%", opacity: 1 }}
+                          exit={{ y: "100%", opacity: 0 }}
+                          transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                        >
+                          {n}
+                        </motion.span>
+                      </AnimatePresence>
+                    </output>
                     <button
                       type="button"
                       onClick={() => change(tt, 1)}
@@ -199,7 +215,11 @@ export function TicketPurchase({
             ))}
             <div className="flex justify-between pt-2 text-base font-semibold text-ink">
               <dt>{d.total}</dt>
-              <dd className="tabular-nums">{formatMoney(totals.totalCents, lang)}</dd>
+              <dd className="tabular-nums">
+                <motion.span key={totals.totalCents} initial={{ opacity: 0.3, y: -4 }} animate={{ opacity: 1, y: 0 }} className="inline-block">
+                  {formatMoney(totals.totalCents, lang)}
+                </motion.span>
+              </dd>
             </div>
           </dl>
         )}

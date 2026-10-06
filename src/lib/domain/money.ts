@@ -43,6 +43,11 @@ export function computeTotals(lines: LineInput[]): Totals {
   return { subtotalCents, taxes, taxCents, totalCents: subtotalCents + taxCents };
 }
 
+/** Price of one ticket with taxes, as the buyer will pay it. */
+export function priceWithTaxes(unitPriceCents: number): number {
+  return computeTotals([{ unitPriceCents, quantity: 1 }]).totalCents;
+}
+
 export function formatMoney(cents: number, locale: Locale): string {
   return new Intl.NumberFormat(intlLocale[locale], {
     style: "currency",

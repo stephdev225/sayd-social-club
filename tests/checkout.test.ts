@@ -31,6 +31,7 @@ describe("startCheckout", () => {
     expect(t.quantitySold).toBe(0);
 
     expect(calls[0].lines).toEqual([{ name: "Billet en ligne", unitAmountCents: 2649, quantity: 2 }]);
+    expect(calls[0].taxLines.map((t) => t.amountCents)).toEqual([265, 528]);
     expect(await store.get("customers", customerIdFor("awa@example.com"))).toMatchObject({ firstName: "Awa" });
   });
 

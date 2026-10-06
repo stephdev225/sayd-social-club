@@ -12,8 +12,6 @@ export const env = {
 
   stripeSecretKey: process.env.STRIPE_SECRET_KEY,
   stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
-  stripeTaxRateGst: process.env.STRIPE_TAX_RATE_GST,
-  stripeTaxRateQst: process.env.STRIPE_TAX_RATE_QST,
 
   firebaseProjectId: process.env.FIREBASE_PROJECT_ID,
   firebaseClientEmail: process.env.FIREBASE_CLIENT_EMAIL,
@@ -25,7 +23,7 @@ export function isFirebaseConfigured(): boolean {
 }
 
 export function isStripeConfigured(): boolean {
-  return Boolean(env.stripeSecretKey && env.stripeTaxRateGst && env.stripeTaxRateQst);
+  return Boolean(env.stripeSecretKey && env.stripeWebhookSecret);
 }
 
 /** Refuses live keys until production is explicitly enabled. */
