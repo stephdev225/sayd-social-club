@@ -1,0 +1,93 @@
+{
+  "_note": "Test data for Sprezzatura (11 Oct 2026). Confirmed by Stéphane on 2026-10-06: online price 26.49$ before taxes, door price 30$, DJ Waklexx, no refunds. Quantities are placeholders (capacity to confirm). Load into Firestore with: npm run seed",
+  "events": {
+    "sprezzatura-2026-10-11": {
+      "id": "sprezzatura-2026-10-11",
+      "slug": "sprezzatura",
+      "name": "Sprezzatura",
+      "edition": {
+        "fr": "Édition",
+        "en": "Edition"
+      },
+      "tagline": {
+        "fr": "Une expérience festive unique.",
+        "en": "A one-of-a-kind night out."
+      },
+      "description": {
+        "fr": "Sprezzatura, c'est l'art d'être impeccable sans avoir l'air d'essayer. Sayd Social Club et Ben G Signature investissent le Mora pour une nuit afro-caribéenne sur la Grande Allée : terrasse, salle et musique jusqu'à 3 h.",
+        "en": "Sprezzatura is the art of looking impeccable without seeming to try. Sayd Social Club and Ben G Signature take over Mora for an Afro-Caribbean night on Grande Allée: terrace, dining room and music until 3 a.m."
+      },
+      "startsAt": "2026-10-12T02:00:00.000Z",
+      "endsAt": "2026-10-12T07:00:00.000Z",
+      "venueName": "Mora",
+      "address": "Grande Allée Est",
+      "city": "Québec",
+      "capacity": 250,
+      "status": "published",
+      "dressCode": {
+        "fr": "Style Sprezzatura : chemise ouverte, lin, tons neutres, lunettes de soleil. Chic sans effort.",
+        "en": "Sprezzatura style: open collar, linen, neutral tones, sunglasses. Effortlessly chic."
+      },
+      "lineup": [
+        "Waklexx"
+      ],
+      "partners": [
+        "Sayd Social Club",
+        "Ben G Signature"
+      ],
+      "accent": "#5a1420",
+      "coverImage": "/events/sprezzatura-poster.jpg",
+      "instagram": {
+        "Waklexx": "https://www.instagram.com/waklexx_"
+      }
+    }
+  },
+  "ticketTypes": {
+    "sprezzatura-online": {
+      "id": "sprezzatura-online",
+      "eventId": "sprezzatura-2026-10-11",
+      "name": {
+        "fr": "Billet en ligne",
+        "en": "Online ticket"
+      },
+      "description": {
+        "fr": "Entrée à la soirée. Prix en ligne, plus avantageux qu'à la porte.",
+        "en": "Entry to the party. Online price, lower than at the door."
+      },
+      "priceCents": 2649,
+      "currency": "cad",
+      "quantityTotal": 250,
+      "quantitySold": 0,
+      "quantityReserved": 0,
+      "maxPerOrder": 10,
+      "active": true,
+      "sortOrder": 1,
+      "channels": [
+        "online"
+      ]
+    },
+    "sprezzatura-door": {
+      "id": "sprezzatura-door",
+      "eventId": "sprezzatura-2026-10-11",
+      "name": {
+        "fr": "Billet à la porte",
+        "en": "Door ticket"
+      },
+      "description": {
+        "fr": "Vendu sur place le soir même.",
+        "en": "Sold on site on the night."
+      },
+      "priceCents": 3000,
+      "currency": "cad",
+      "quantityTotal": 100,
+      "quantitySold": 0,
+      "quantityReserved": 0,
+      "maxPerOrder": 10,
+      "active": true,
+      "sortOrder": 2,
+      "channels": [
+        "door"
+      ]
+    }
+  }
+}
