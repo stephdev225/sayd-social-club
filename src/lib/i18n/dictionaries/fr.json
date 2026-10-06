@@ -1,0 +1,179 @@
+{
+  "meta": {
+    "title": "Sayd Social Club — Soirées afro-caribéennes à Québec",
+    "description": "Soirées et day parties afro-caribéennes haut de gamme à Québec depuis 2019. Billets en ligne."
+  },
+  "nav": {
+    "events": "Événements",
+    "ambassadors": "Ambassadeurs",
+    "about": "Le club",
+    "contact": "Contact",
+    "tickets": "Billets",
+    "menu": "Menu",
+    "close": "Fermer",
+    "switchLang": "English",
+    "skip": "Aller au contenu"
+  },
+  "home": {
+    "nextEvent": "Prochaine soirée",
+    "getTickets": "Prendre mes billets",
+    "details": "Voir la soirée",
+    "noEvent": "La prochaine soirée sera annoncée bientôt. Suivez-nous sur Instagram pour être les premiers informés.",
+    "seasonTitle": "La saison",
+    "seasonEmpty": "Aucune autre date annoncée pour l'instant.",
+    "from": "dès",
+    "manifesto": "Depuis 2019, on crée à Québec les soirées qu'on aurait voulu trouver : de la musique afro-caribéenne, des gens bien habillés et une salle qu'on choisit avec soin.",
+    "radioTitle": "Sayd Social Radio",
+    "radioText": "La musique de nos soirées, dans une playlist mise à jour toute la saison.",
+    "radioCta": "Écouter sur Spotify",
+    "ambassadorsTitle": "Devenir ambassadeur",
+    "ambassadorsText": "Vous connaissez du monde, vous aimez nos soirées ? Représentez Sayd dans votre cercle et profitez d'avantages à chaque événement.",
+    "ambassadorsCta": "Poser ma candidature",
+    "galleryTitle": "Nos soirées en images",
+    "galleryEmpty": "Les photos de la saison arrivent après la prochaine soirée."
+  },
+  "events": {
+    "title": "Événements",
+    "intro": "Toutes les dates de la saison. Les billets se prennent directement ici, paiement sécurisé par Stripe.",
+    "upcoming": "À venir",
+    "past": "Passés",
+    "empty": "Aucun événement à venir pour le moment.",
+    "soldOut": "Complet",
+    "cancelled": "Annulé",
+    "lowStock": "Derniers billets",
+    "doors": "Portes",
+    "venue": "Lieu",
+    "dressCode": "Code vestimentaire",
+    "lineup": "Musique",
+    "presentedBy": "Présenté par",
+    "notFound": "Cet événement n'existe pas ou n'est plus en ligne."
+  },
+  "tickets": {
+    "title": "Billets",
+    "pricesNote": "Prix avant taxes. TPS et TVQ calculées au paiement.",
+    "available": "disponibles",
+    "soldOut": "Complet",
+    "notOnSale": "Vente pas encore ouverte",
+    "salesEnded": "Vente terminée",
+    "decrease": "Retirer un billet",
+    "increase": "Ajouter un billet",
+    "maxPerOrder": "Maximum {n} par commande",
+    "subtotal": "Sous-total",
+    "total": "Total",
+    "selectFirst": "Choisissez au moins un billet.",
+    "yourInfo": "Vos coordonnées",
+    "infoNote": "Vos billets seront envoyés à cette adresse. Le nom figure sur chaque billet.",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "email": "Courriel",
+    "phone": "Téléphone (facultatif)",
+    "marketing": "Je veux recevoir les annonces des prochaines soirées.",
+    "terms": "J'accepte les conditions de vente (billets non remboursables) et la politique de confidentialité.",
+    "pay": "Payer {amount}",
+    "paying": "Redirection vers le paiement…",
+    "secure": "Paiement sécurisé par Stripe. Sayd ne voit jamais votre numéro de carte.",
+    "unavailable": "La billetterie en ligne n'est pas encore ouverte pour cet événement.",
+    "errors": {
+      "generic": "Le paiement n'a pas pu démarrer. Réessayez dans un instant.",
+      "invalid": "Vérifiez les champs en rouge.",
+      "sold_out": "Ce billet vient d'être vendu au complet.",
+      "insufficient_stock": "Il ne reste plus que {n} billet(s) de ce type.",
+      "over_max_per_order": "Trop de billets pour une seule commande.",
+      "not_on_sale_yet": "La vente de ce billet n'est pas encore ouverte.",
+      "sales_ended": "La vente de ce billet est terminée.",
+      "inactive": "Ce billet n'est plus en vente.",
+      "rate_limited": "Trop de tentatives. Attendez une minute puis réessayez.",
+      "not_configured": "La billetterie en ligne n'est pas encore activée."
+    },
+    "fieldErrors": {
+      "firstName": "Entrez votre prénom.",
+      "lastName": "Entrez votre nom.",
+      "email": "Entrez une adresse courriel valide.",
+      "phone": "Numéro de téléphone invalide.",
+      "terms": "Vous devez accepter les conditions."
+    },
+    "readTerms": "Lire les conditions"
+  },
+  "confirmation": {
+    "pendingTitle": "Paiement en cours de confirmation",
+    "pendingText": "Stripe nous confirme votre paiement. Cette page se met à jour toute seule, ça prend en général quelques secondes.",
+    "paidTitle": "C'est confirmé",
+    "paidText": "Vos billets sont ci-dessous et ont été envoyés à {email}. Présentez le code QR à l'entrée.",
+    "failedTitle": "Paiement non abouti",
+    "failedText": "Aucun montant n'a été prélevé. Vous pouvez reprendre votre achat.",
+    "expiredTitle": "Session expirée",
+    "expiredText": "Le délai de paiement est dépassé et vos places ont été remises en vente.",
+    "cancelledTitle": "Paiement annulé",
+    "cancelledText": "Vous n'avez pas été débité et vos places ont été remises en vente. Vous pouvez recommencer quand vous voulez.",
+    "backToEvent": "Retour à la soirée",
+    "order": "Commande",
+    "ticket": "Billet",
+    "holder": "Nom",
+    "notFound": "Commande introuvable.",
+    "ticketHint": "Montrez ce code à l'entrée. Luminosité de l'écran au maximum."
+  },
+  "forms": {
+    "send": "Envoyer",
+    "sending": "Envoi…",
+    "sent": "Merci, c'est reçu. On vous répond rapidement.",
+    "error": "L'envoi a échoué. Réessayez ou écrivez-nous à {email}.",
+    "name": "Nom complet",
+    "email": "Courriel",
+    "phone": "Téléphone",
+    "instagram": "Instagram (facultatif)",
+    "message": "Message",
+    "subject": "Sujet",
+    "why": "Pourquoi voulez-vous représenter Sayd ?",
+    "newsletterLabel": "Votre courriel",
+    "newsletterCta": "M'inscrire",
+    "newsletterDone": "Inscription confirmée."
+  },
+  "ambassadors": {
+    "title": "Ambassadeurs",
+    "intro": "Les ambassadeurs font vivre Sayd dans leur cercle. En échange : un accès prioritaire et des avantages à chaque soirée.",
+    "perksTitle": "Ce que vous recevez",
+    "perks": [
+      "Accès prioritaire aux préventes",
+      "Invitations aux soirées privées",
+      "Entrée avant l'ouverture des portes",
+      "Contact direct avec l'équipe sur WhatsApp"
+    ],
+    "formTitle": "Candidature"
+  },
+  "about": {
+    "title": "Le club",
+    "lead": "Sayd Social Club organise des soirées et des day parties haut de gamme à Québec depuis 2019, pour une clientèle de 25 à 35 ans.",
+    "body": "Notre mission : bâtir à Québec une vraie scène afro-caribéenne premium. Afrobeats, amapiano, dancehall, house, des lieux choisis pour l'occasion et un code vestimentaire à chaque édition.",
+    "sound": "Afrobeats, amapiano, dancehall, house"
+  },
+  "contact": {
+    "title": "Contact",
+    "intro": "Partenariat, réservation de table, question sur un billet : écrivez-nous."
+  },
+  "footer": {
+    "newsletterTitle": "Les prochaines dates en premier",
+    "privacy": "Confidentialité",
+    "terms": "Conditions de vente",
+    "credits": "Site par Stéphane Kouamé",
+    "rights": "Tous droits réservés."
+  },
+  "legal": {
+    "privacyTitle": "Politique de confidentialité",
+    "termsTitle": "Conditions de vente"
+  },
+  "common": {
+    "back": "Retour",
+    "loading": "Chargement…",
+    "notFoundTitle": "Page introuvable",
+    "notFoundText": "Cette page n'existe pas ou a été déplacée.",
+    "home": "Accueil"
+  },
+  "ticketPage": {
+    "title": "Billet",
+    "valid": "Valide",
+    "used": "Déjà utilisé",
+    "cancelled": "Annulé",
+    "refunded": "Remboursé",
+    "notFound": "Ce billet n'existe pas."
+  }
+}

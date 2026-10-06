@@ -1,0 +1,179 @@
+{
+  "meta": {
+    "title": "Sayd Social Club — Afro-Caribbean nights in Québec City",
+    "description": "Premium Afro-Caribbean parties and day parties in Québec City since 2019. Tickets online."
+  },
+  "nav": {
+    "events": "Events",
+    "ambassadors": "Ambassadors",
+    "about": "The club",
+    "contact": "Contact",
+    "tickets": "Tickets",
+    "menu": "Menu",
+    "close": "Close",
+    "switchLang": "Français",
+    "skip": "Skip to content"
+  },
+  "home": {
+    "nextEvent": "Next party",
+    "getTickets": "Get tickets",
+    "details": "See the party",
+    "noEvent": "The next party will be announced soon. Follow us on Instagram to hear first.",
+    "seasonTitle": "The season",
+    "seasonEmpty": "No other dates announced yet.",
+    "from": "from",
+    "manifesto": "Since 2019 we've been throwing the parties we wished Québec City had: Afro-Caribbean music, well-dressed people and a venue chosen with care.",
+    "radioTitle": "Sayd Social Radio",
+    "radioText": "The music from our nights, in a playlist updated all season.",
+    "radioCta": "Listen on Spotify",
+    "ambassadorsTitle": "Become an ambassador",
+    "ambassadorsText": "Know people, love our parties? Represent Sayd in your circle and get perks at every event.",
+    "ambassadorsCta": "Apply",
+    "galleryTitle": "Our nights in pictures",
+    "galleryEmpty": "Photos from the season are coming after the next party."
+  },
+  "events": {
+    "title": "Events",
+    "intro": "Every date of the season. Buy tickets right here, with secure payment by Stripe.",
+    "upcoming": "Upcoming",
+    "past": "Past",
+    "empty": "No upcoming events right now.",
+    "soldOut": "Sold out",
+    "cancelled": "Cancelled",
+    "lowStock": "Last tickets",
+    "doors": "Doors",
+    "venue": "Venue",
+    "dressCode": "Dress code",
+    "lineup": "Music",
+    "presentedBy": "Presented by",
+    "notFound": "This event doesn't exist or is no longer online."
+  },
+  "tickets": {
+    "title": "Tickets",
+    "pricesNote": "Prices before tax. GST and QST are added at checkout.",
+    "available": "left",
+    "soldOut": "Sold out",
+    "notOnSale": "Not on sale yet",
+    "salesEnded": "Sales ended",
+    "decrease": "Remove one ticket",
+    "increase": "Add one ticket",
+    "maxPerOrder": "Up to {n} per order",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "selectFirst": "Choose at least one ticket.",
+    "yourInfo": "Your details",
+    "infoNote": "Your tickets will be sent to this address. The name appears on each ticket.",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "phone": "Phone (optional)",
+    "marketing": "Send me announcements about upcoming parties.",
+    "terms": "I accept the terms of sale (non-refundable tickets) and the privacy policy.",
+    "pay": "Pay {amount}",
+    "paying": "Taking you to payment…",
+    "secure": "Secure payment by Stripe. Sayd never sees your card number.",
+    "unavailable": "Online ticketing isn't open for this event yet.",
+    "errors": {
+      "generic": "Payment couldn't start. Try again in a moment.",
+      "invalid": "Check the fields marked in red.",
+      "sold_out": "This ticket just sold out.",
+      "insufficient_stock": "Only {n} ticket(s) of this type are left.",
+      "over_max_per_order": "Too many tickets for one order.",
+      "not_on_sale_yet": "This ticket isn't on sale yet.",
+      "sales_ended": "Sales for this ticket have ended.",
+      "inactive": "This ticket is no longer on sale.",
+      "rate_limited": "Too many attempts. Wait a minute and try again.",
+      "not_configured": "Online ticketing isn't switched on yet."
+    },
+    "fieldErrors": {
+      "firstName": "Enter your first name.",
+      "lastName": "Enter your last name.",
+      "email": "Enter a valid email address.",
+      "phone": "Invalid phone number.",
+      "terms": "You need to accept the terms."
+    },
+    "readTerms": "Read the terms"
+  },
+  "confirmation": {
+    "pendingTitle": "Confirming your payment",
+    "pendingText": "Stripe is confirming your payment. This page updates on its own; it usually takes a few seconds.",
+    "paidTitle": "You're in",
+    "paidText": "Your tickets are below and have been sent to {email}. Show the QR code at the door.",
+    "failedTitle": "Payment didn't go through",
+    "failedText": "You haven't been charged. You can start your purchase again.",
+    "expiredTitle": "Session expired",
+    "expiredText": "The payment window ran out and your spots went back on sale.",
+    "cancelledTitle": "Payment cancelled",
+    "cancelledText": "You haven't been charged and your spots went back on sale. You can start again any time.",
+    "backToEvent": "Back to the party",
+    "order": "Order",
+    "ticket": "Ticket",
+    "holder": "Name",
+    "notFound": "Order not found.",
+    "ticketHint": "Show this code at the door. Turn screen brightness up."
+  },
+  "forms": {
+    "send": "Send",
+    "sending": "Sending…",
+    "sent": "Thanks, we got it. We'll get back to you soon.",
+    "error": "Sending failed. Try again or email us at {email}.",
+    "name": "Full name",
+    "email": "Email",
+    "phone": "Phone",
+    "instagram": "Instagram (optional)",
+    "message": "Message",
+    "subject": "Subject",
+    "why": "Why do you want to represent Sayd?",
+    "newsletterLabel": "Your email",
+    "newsletterCta": "Sign me up",
+    "newsletterDone": "You're signed up."
+  },
+  "ambassadors": {
+    "title": "Ambassadors",
+    "intro": "Ambassadors bring Sayd to their circle. In return: priority access and perks at every party.",
+    "perksTitle": "What you get",
+    "perks": [
+      "Priority access to presales",
+      "Invitations to private parties",
+      "Entry before doors open",
+      "Direct line to the team on WhatsApp"
+    ],
+    "formTitle": "Application"
+  },
+  "about": {
+    "title": "The club",
+    "lead": "Sayd Social Club has been throwing premium parties and day parties in Québec City since 2019, for a 25–35 crowd.",
+    "body": "Our mission: build a real premium Afro-Caribbean scene in Québec City. Afrobeats, amapiano, dancehall, house, venues chosen for the occasion and a dress code for every edition.",
+    "sound": "Afrobeats, amapiano, dancehall, house"
+  },
+  "contact": {
+    "title": "Contact",
+    "intro": "Partnerships, table bookings, a question about a ticket: write to us."
+  },
+  "footer": {
+    "newsletterTitle": "Hear about new dates first",
+    "privacy": "Privacy",
+    "terms": "Terms of sale",
+    "credits": "Site by Stéphane Kouamé",
+    "rights": "All rights reserved."
+  },
+  "legal": {
+    "privacyTitle": "Privacy policy",
+    "termsTitle": "Terms of sale"
+  },
+  "common": {
+    "back": "Back",
+    "loading": "Loading…",
+    "notFoundTitle": "Page not found",
+    "notFoundText": "This page doesn't exist or has moved.",
+    "home": "Home"
+  },
+  "ticketPage": {
+    "title": "Ticket",
+    "valid": "Valid",
+    "used": "Already used",
+    "cancelled": "Cancelled",
+    "refunded": "Refunded",
+    "notFound": "This ticket doesn't exist."
+  }
+}

@@ -1,26 +1,104 @@
 @import "tailwindcss";
 
+/*
+ * Sayd Social Club — design tokens.
+ * Palette from the client brief (noir charbon, sable doré, terracotta, vert bouteille)
+ * plus a per-event accent. Contrast ratios (WCAG 2.1) are documented in docs/DESIGN_SYSTEM.md.
+ */
+@theme {
+  --color-night: #120f0e;      /* noir charbon — page background */
+  --color-night-2: #1b1715;    /* raised surfaces */
+  --color-line: #2e2825;       /* hairlines, input borders */
+  --color-ink: #efe6d8;        /* body text, 15.4:1 on night */
+  --color-muted: #a89d8f;      /* secondary text, 7.2:1 on night */
+  --color-sable: #d9b26a;      /* sable doré — primary action, 9.6:1 on night */
+  --color-terra: #da7656;      /* terracotta — alerts, sold out, 6.1:1 on night */
+  --color-bottle: #16382b;     /* vert bouteille — confirmation surfaces */
+  --color-bottle-ink: #8fd1b0; /* success text, on night */
+
+  --font-display: "Cormorant Garamond Variable", "Cormorant Garamond", Georgia, serif;
+  --font-sans: "DM Sans Variable", "DM Sans", "Helvetica Neue", Arial, sans-serif;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
+  --accent: var(--color-sable);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--color-night);
+  color: var(--color-ink);
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-sable);
+  color: var(--color-night);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-sable);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-feature-settings: "liga", "dlig";
+}
+
+/* Display sizes follow a 1.333 (perfect fourth) scale, fluid between mobile and desktop. */
+.t-hero {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(3.25rem, 12vw, 9.5rem);
+  line-height: 0.86;
+  letter-spacing: -0.035em;
+}
+.t-h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.6rem, 7vw, 5.6rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+.t-h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2rem, 4.2vw, 3.2rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.t-h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.75rem;
+  line-height: 1.1;
+}
+
+/* One orchestrated entrance, on the hero only. */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+.rise {
+  animation: rise 0.9s var(--ease-out-soft) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
