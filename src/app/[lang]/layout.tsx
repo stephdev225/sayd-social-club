@@ -23,7 +23,9 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
   const { lang } = await params;
   if (!hasLocale(lang)) return {};
   const dict = await getDictionary(lang);
-  const base = process.env.SITE_URL ?? "http://localhost:3000";
+  const base =
+    process.env.SITE_URL ??
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000");
   return {
     metadataBase: new URL(base),
     title: { default: dict.meta.title, template: `%s — ${site.name}` },
