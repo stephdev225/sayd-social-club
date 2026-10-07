@@ -65,7 +65,7 @@
     "title": "Événements",
     "intro": "Toutes les soirées de la saison. Choisissez la vôtre, prenez vos billets en quelques secondes.",
     "upcoming": "À venir",
-    "past": "Passés",
+    "past": "Événements précédents",
     "empty": "Aucun événement à venir pour le moment.",
     "soldOut": "Complet",
     "cancelled": "Annulé",
@@ -77,7 +77,8 @@
     "presentedBy": "Présenté par",
     "notFound": "Cet événement n'existe pas ou n'est plus en ligne.",
     "reservations": "Réservations",
-    "all": "Tous les événements"
+    "all": "Tous les événements",
+    "pastIntro": "Quelques soirées qui ont fait l'histoire de Sayd."
   },
   "tickets": {
     "title": "Billets",
@@ -132,7 +133,9 @@
     "reserveTitle": "Réserver vos places",
     "reserveText": "Écrivez-nous ou appelez : on confirme votre réservation rapidement.",
     "reserveWhatsapp": "Réserver par WhatsApp",
-    "reserveCall": "Appeler le {phone}"
+    "reserveCall": "Appeler le {phone}",
+    "externalVia": "Billetterie officielle : Le Point de Vente",
+    "reserveOrCall": "Ou appelez le {phone}"
   },
   "confirmation": {
     "pendingTitle": "Paiement en cours de confirmation",

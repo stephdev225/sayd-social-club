@@ -30,6 +30,10 @@
 | D-026 | 2026-10-07 | Domaine visé : saydsocialclub.com (disponible, 11,25 $ US/an chez Vercel au 2026-10-07). Achat par Stéphane | — | EN ATTENTE |
 | D-027 | 2026-10-07 | Le site s'ouvre toujours en français (plus de détection de langue du navigateur) ; l'anglais est mémorisé seulement si le visiteur le choisit | Demande de Stéphane | ACTIVE |
 | D-028 | 2026-10-07 | Aucune tranche d'âge dans les textes ; lien « ← Accueil » / « ← Tous les événements » sous l'en-tête des pages intérieures | Demande de Stéphane | ACTIVE |
+| D-029 | 2026-10-07 | Page événement : une seule action (bouton billetterie externe, ou réservation WhatsApp près de la date, ou formulaire de vente du site) ; pas de « Voir l'affiche » ; pas de bouton Billets dans l'en-tête sur une page événement | Demande de Stéphane : trop de CTA | ACTIVE |
+| D-030 | 2026-10-07 | Accueil : héros et marquee réduits, sans sur-titre ; « L'expérience Sayd » en cartes photo qui s'empilent au scroll ; « L'ambiance » en bandes de photos qui défilent au scroll | Demande de Stéphane | ACTIVE |
+| D-031 | 2026-10-07 | /evenements : section « Événements précédents » (événements passés publiés, ajoutés depuis l'admin) | Demande de Stéphane | ACTIVE |
+| D-032 | 2026-10-07 | Hébergement recommandé : Vercel Pro (le plan Hobby gratuit interdit l'usage commercial). Pas d'hébergement mutualisé cPanel/WordPress : le site a un serveur (paiements, webhook, admin) | Vérifié sur vercel.com/pricing le 2026-10-07 | PROPOSÉ |
 | D-013 | 2026-10-06 | Sites de motion fournis (Jitter, Dribbble, Framer, motionsites.ai) = inspiration uniquement, aucun template copié | Règle références | ACTIVE |
 
 ## Journal de session

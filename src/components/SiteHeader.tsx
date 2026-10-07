@@ -61,6 +61,8 @@ export function SiteHeader({ lang, nav, ticketsHref }: { lang: Locale; nav: Nav;
     if (href.startsWith("/") && href.split("#")[0] === pathname) setOpen(false);
   };
 
+  // On an event page the page itself carries the ticket button: no duplicate in the header.
+  const onEventPage = new RegExp(`^/${lang}/evenements/[^/]+`).test(pathname);
   const other: Locale = lang === "fr" ? "en" : "fr";
   const switchHref = pathname.replace(new RegExp(`^/${lang}(?=/|$)`), `/${other}`);
   const links = [
@@ -102,6 +104,7 @@ export function SiteHeader({ lang, nav, ticketsHref }: { lang: Locale; nav: Nav;
             <Link href={switchHref} hrefLang={other} lang={other} aria-label={nav.switchLang} className="text-sm font-medium text-ink/75 hover:text-ink">
               {nav.langShort}
             </Link>
+            {!onEventPage && (
             <Link
               href={ticketsHref}
               onClick={() => closeFor(ticketsHref)}
@@ -109,6 +112,7 @@ export function SiteHeader({ lang, nav, ticketsHref }: { lang: Locale; nav: Nav;
             >
               {nav.tickets}
             </Link>
+            )}
             {/* Mobile: one clean toggle, two lines that morph into a cross */}
             <button
               type="button"

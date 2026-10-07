@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { DragCarousel } from "@/components/DragCarousel";
+import { ExperienceStack } from "@/components/ExperienceStack";
+import { ScrollGallery } from "@/components/ScrollGallery";
 import { HeroBrand } from "@/components/HeroBrand";
 import { LineReveal } from "@/components/motion/LineReveal";
 import { Magnetic } from "@/components/motion/Magnetic";
@@ -36,7 +37,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
   return (
     <>
       {/* ── 1. Brand hero: photo zooms, wordmark lifts away on scroll ── */}
-      <HeroBrand image={pexels(ambiance.crowd.id, 2400)} kicker={dict.home.heroKicker}>
+      <HeroBrand image={pexels(ambiance.crowd.id, 2400)}>
         <div className="mt-8 flex flex-col gap-7 md:mt-10 md:flex-row md:items-end md:justify-between">
           <div className="rise max-w-md [animation-delay:1.1s]">
             <p className="font-display text-[1.45rem] leading-snug text-ink/90 sm:text-[1.7rem]">{dict.home.heroLine}</p>
@@ -74,34 +75,24 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       </HeroBrand>
 
       {/* ── 2. The sound, drifting with your scroll speed ── */}
-      <VelocityMarquee items={[...sound, site.city]} className="py-10 font-display text-[clamp(2.6rem,9vw,6rem)] italic leading-none text-ink/90 md:py-14" />
+      <VelocityMarquee items={[...sound, site.city]} className="py-8 font-display text-[clamp(1.7rem,5.2vw,3.4rem)] italic leading-none text-ink/85 md:py-12" />
 
       {/* ── 3. Manifesto: words light up as you read ── */}
       <section className="mx-auto max-w-7xl px-5 pb-20 pt-10 sm:px-6 md:pb-32 lg:px-10">
-        <p className="mb-6 text-sable">{dict.home.manifestoKicker}</p>
         <TextReveal text={dict.home.manifesto} className="max-w-[20ch] font-display text-[clamp(2.1rem,7vw,4.6rem)] leading-[1.06] text-ink" />
       </section>
 
-      {/* ── 4. Experience: images that open as you scroll, offset rhythm ── */}
-      <section className="mx-auto max-w-7xl px-5 pb-24 sm:px-6 md:pb-36 lg:px-10" aria-labelledby="experience">
-        <LineReveal id="experience" text={dict.home.pillarsTitle} className="t-h2 mb-12" />
-        <div className="grid gap-14 md:grid-cols-3 md:gap-8">
-          {dict.home.pillars.map((p, i) => (
-            <div key={p.t} className={i === 1 ? "md:mt-24" : i === 2 ? "md:mt-12" : ""}>
-              <Reveal kind="mask" delay={i * 0.1} className="relative aspect-[4/3] overflow-hidden rounded-2xl md:aspect-[4/5]">
-                <Parallax amount={7} className="absolute inset-0">
-                  <div className="relative h-full w-full">
-                    <Image src={pexels(PILLAR_IMAGES[i].id, 1000)} alt={PILLAR_IMAGES[i].alt[lang]} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" />
-                  </div>
-                </Parallax>
-              </Reveal>
-              <Reveal delay={0.15 + i * 0.1}>
-                <h3 className="t-h3 mt-6">{p.t}</h3>
-                <p className="mt-2 max-w-sm text-ink/70">{p.d}</p>
-              </Reveal>
-            </div>
-          ))}
-        </div>
+      {/* ── 4. Experience: photo cards that pin and stack as you scroll ── */}
+      <section className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 md:pb-36 lg:px-10" aria-labelledby="experience">
+        <LineReveal id="experience" text={dict.home.pillarsTitle} className="t-h2 mb-10 px-1 md:mb-14" />
+        <ExperienceStack
+          items={dict.home.pillars.map((p, i) => ({
+            title: p.t,
+            text: p.d,
+            image: pexels(PILLAR_IMAGES[i].id, 1800),
+            alt: PILLAR_IMAGES[i].alt[lang],
+          }))}
+        />
       </section>
 
       {/* ── 6. Gallery teaser: drag / swipe ── */}
@@ -115,8 +106,9 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
             {dict.nav.gallery} →
           </Link>
         </div>
-        <DragCarousel
-          items={CAROUSEL.map((k) => ({ src: pexels(ambiance[k].id, 1200), alt: ambiance[k].alt[lang], portrait: ambiance[k].h > ambiance[k].w }))}
+        <ScrollGallery
+          href={`/${lang}/galerie`}
+          photos={CAROUSEL.map((k) => ({ src: pexels(ambiance[k].id, 900), alt: ambiance[k].alt[lang], portrait: ambiance[k].h > ambiance[k].w }))}
         />
       </section>
 

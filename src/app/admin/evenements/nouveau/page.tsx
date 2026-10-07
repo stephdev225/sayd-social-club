@@ -16,6 +16,7 @@ export default async function NewEventPage() {
         <Link href="/admin/evenements" className="text-sm text-muted hover:text-ink">← Événements</Link>
         <h1 className="t-h1 mt-2">Nouvel événement</h1>
         <p className="mt-2 max-w-xl text-muted">Remplissez l&apos;essentiel, enregistrez, puis ajoutez les billets. Rien n&apos;apparaît sur le site avant le statut « Publié ».</p>
+        <p className="mt-2 max-w-xl text-sm text-muted">Soirée passée à ajouter ? Mettez sa vraie date, une photo dans « Visuel principal » et le statut « Publié » : elle s&apos;affiche dans « Événements précédents », sans billets.</p>
       </header>
       <EventForm
         isNew

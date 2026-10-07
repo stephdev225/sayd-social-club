@@ -46,9 +46,21 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
   const isPast = new Date(event.endsAt) < new Date();
   const onSale = event.status === "published" && !isPast && canSellOnline();
   const external = !onSale && !isPast && event.status === "published" ? event.externalTicketUrl : undefined;
-  const canBuy = onSale || Boolean(external);
   // Close to the date without online sales: reservations by message or phone (as on the poster).
   const soon = new Date(event.startsAt).getTime() - new Date().getTime() < 21 * 24 * 3600 * 1000;
+  const upcomingPublished = !isPast && event.status === "published";
+  // One clear action per situation: sold here (ticket form), sold elsewhere (one button),
+  // close to the date without ticketing (reserve by WhatsApp), or later (notify me).
+  const heroAction = external
+    ? { href: external, label: dict.funnel.cta, note: dict.tickets.externalVia }
+    : upcomingPublished && !onSale && soon
+      ? {
+          href: `${site.whatsapp}?text=${encodeURIComponent(`${event.name} — ${formatDate(event.startsAt, lang)}`)}`,
+          label: dict.tickets.reserveWhatsapp,
+          note: t(dict.tickets.reserveOrCall, { phone: site.phone }),
+        }
+      : null;
+  const showAside = onSale || (upcomingPublished && !external && !soon);
   const hero = event.heroImage ?? event.coverImage;
   const rawDate = formatDate(event.startsAt, lang);
   const dateLabel = rawDate.charAt(0).toUpperCase() + rawDate.slice(1);
@@ -147,24 +159,27 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
                 <Countdown to={event.startsAt} lang={lang} />
               </div>
             )}
-            <Reveal delay={0.45}>
-              <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
-                {(canBuy || (soon && !isPast && event.status === "published")) && (
-                  <a href={external ?? "#billets"} className="group inline-flex min-h-14 items-center gap-3 rounded-full bg-sable px-8 font-semibold text-night transition hover:brightness-110">
-                    {canBuy ? dict.funnel.cta : dict.tickets.reserveTitle}
-                    <span aria-hidden className="transition-transform duration-300 group-hover:translate-y-0.5">{external ? "↗" : "↓"}</span>
+            {heroAction && (
+              <Reveal delay={0.45}>
+                <div className="mt-9">
+                  <a
+                    href={heroAction.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex min-h-14 items-center gap-3 rounded-full bg-sable px-8 font-semibold text-night transition hover:brightness-110"
+                  >
+                    {heroAction.label}
+                    <span aria-hidden className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span>
                   </a>
-                )}
-                {event.coverImage && (
-                  <a href={event.coverImage} target="_blank" rel="noopener" className="link-draw pb-1 text-ink/80">{dict.funnel.seePoster}</a>
-                )}
-              </div>
-            </Reveal>
+                  <p className="mt-3 text-sm text-ink/60">{heroAction.note}</p>
+                </div>
+              </Reveal>
+            )}
           </div>
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-7xl gap-14 px-4 py-14 sm:px-6 lg:grid-cols-[1fr_27rem] lg:px-10">
+      <div className={`mx-auto grid max-w-7xl gap-14 px-4 py-14 sm:px-6 lg:px-10 ${showAside ? "lg:grid-cols-[1fr_27rem]" : ""}`}>
         <div className="order-2 max-w-2xl lg:order-1">
           <Reveal>
             <p className="text-lg leading-relaxed text-ink/90">{event.description[lang]}</p>
@@ -179,65 +194,35 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
           )}
         </div>
 
-        <aside id="billets" className="order-1 scroll-mt-24 lg:order-2 lg:sticky lg:top-28 lg:self-start">
-          {external ? (
-            <div className="rounded-3xl bg-night-2/80 p-6 ring-1 ring-ink/10 backdrop-blur sm:p-8">
-              <h2 className="t-h3">{dict.tickets.title}</h2>
-              <p className="mt-6 text-ink/80">{dict.tickets.externalNote}</p>
-              <a
-                href={external}
-                target="_blank"
-                rel="noopener"
-                className="group mt-8 flex min-h-14 w-full items-center justify-center gap-3 rounded-full bg-sable px-8 font-semibold text-night transition hover:brightness-110"
-              >
-                {dict.tickets.externalCta}
-                <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
-              </a>
-            </div>
-          ) : !onSale && !isPast && event.status === "published" ? (
-            soon ? (
-              <div className="rounded-3xl bg-night-2/80 p-6 ring-1 ring-ink/10 backdrop-blur sm:p-8">
-                <h2 className="t-h3">{dict.tickets.reserveTitle}</h2>
-                <p className="mt-3 text-ink/75">{dict.tickets.reserveText}</p>
-                <a
-                  href={`${site.whatsapp}?text=${encodeURIComponent(`${event.name} — ${dateLabel}`)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-7 flex min-h-14 w-full items-center justify-center rounded-full bg-sable px-8 font-semibold text-night transition hover:brightness-110"
-                >
-                  {dict.tickets.reserveWhatsapp}
-                </a>
-                <a href={site.phoneHref} className="mt-3 flex min-h-12 w-full items-center justify-center rounded-full px-8 text-ink ring-1 ring-ink/20 transition hover:ring-sable">
-                  {t(dict.tickets.reserveCall, { phone: site.phone })}
-                </a>
-              </div>
+        {showAside && (
+          <aside id="billets" className="order-1 scroll-mt-24 lg:order-2 lg:sticky lg:top-28 lg:self-start">
+            {onSale ? (
+              <TicketPurchase
+                lang={lang}
+                eventId={event.id}
+                onSale={onSale}
+                dict={{ tickets: dict.tickets }}
+                ticketTypes={types.map((t) => ({
+                  id: t.id,
+                  name: t.name[lang],
+                  description: t.description[lang],
+                  priceCents: t.priceCents,
+                  available: availableQuantity(t),
+                  maxPerOrder: t.maxPerOrder,
+                }))}
+              />
             ) : (
               <div className="rounded-3xl bg-night-2/80 p-6 ring-1 ring-ink/10 backdrop-blur sm:p-8">
                 <h2 className="t-h3">{dict.tickets.soonTitle}</h2>
                 <p className="mb-6 mt-3 text-ink/75">{dict.tickets.soonText}</p>
                 <NotifyForm compact lang={lang} labels={dict.notify} source={`event:${event.slug}`} />
               </div>
-            )
-          ) : (
-          <TicketPurchase
-            lang={lang}
-            eventId={event.id}
-            onSale={onSale}
-            dict={{ tickets: dict.tickets }}
-            ticketTypes={types.map((t) => ({
-              id: t.id,
-              name: t.name[lang],
-              description: t.description[lang],
-              priceCents: t.priceCents,
-              available: availableQuantity(t),
-              maxPerOrder: t.maxPerOrder,
-            }))}
-          />
-          )}
-        </aside>
+            )}
+          </aside>
+        )}
       </div>
 
-      {(canBuy || (soon && !isPast && event.status === "published")) && <MobileBuyBar label={canBuy ? dict.funnel.buyBar : dict.tickets.reserveTitle} title={event.name} note={`${dateLabel} · ${event.venueName}`} />}
+      {onSale && <MobileBuyBar label={dict.funnel.buyBar} title={event.name} note={`${dateLabel} · ${event.venueName}`} />}
     </article>
   );
 }

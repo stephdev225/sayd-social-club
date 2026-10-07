@@ -65,7 +65,7 @@
     "title": "Events",
     "intro": "Every party of the season. Pick yours and get your tickets in seconds.",
     "upcoming": "Upcoming",
-    "past": "Past",
+    "past": "Past events",
     "empty": "No upcoming events right now.",
     "soldOut": "Sold out",
     "cancelled": "Cancelled",
@@ -77,7 +77,8 @@
     "presentedBy": "Presented by",
     "notFound": "This event doesn't exist or is no longer online.",
     "reservations": "Reservations",
-    "all": "All events"
+    "all": "All events",
+    "pastIntro": "A few nights that shaped Sayd's story."
   },
   "tickets": {
     "title": "Tickets",
@@ -132,7 +133,9 @@
     "reserveTitle": "Reserve your spot",
     "reserveText": "Message or call us and we'll confirm your reservation quickly.",
     "reserveWhatsapp": "Reserve on WhatsApp",
-    "reserveCall": "Call {phone}"
+    "reserveCall": "Call {phone}",
+    "externalVia": "Official ticketing: Le Point de Vente",
+    "reserveOrCall": "Or call {phone}"
   },
   "confirmation": {
     "pendingTitle": "Confirming your payment",
