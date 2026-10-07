@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { alternates } from "@/lib/seo";
 import { NextEventCTA } from "@/components/NextEventCTA";
 import { getNextEventSummary } from "@/lib/data/next-event";
 import { Gallery } from "@/components/Gallery";
@@ -13,7 +14,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/galerie">)
   const { lang } = await params;
   if (!hasLocale(lang)) return {};
   const dict = await getDictionary(lang);
-  return { title: dict.gallery.title, description: dict.gallery.intro };
+  return { title: dict.gallery.title, description: dict.gallery.intro, alternates: alternates(lang, "/galerie") };
 }
 
 export default async function GalleryPage({ params }: PageProps<"/[lang]/galerie">) {

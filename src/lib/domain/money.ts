@@ -55,3 +55,22 @@ export function formatMoney(cents: number, locale: Locale): string {
     minimumFractionDigits: cents % 100 === 0 ? 0 : 2,
   }).format(cents / 100);
 }
+
+/**
+ * Inverse of priceWithTaxes: the price before taxes that gives the all-in price the
+ * organiser wants to display (e.g. 26,49 $ → 23,04 $). Because each tax is rounded to
+ * the cent, some all-in amounts cannot be reached exactly; `exact` is then false and
+ * `allInCents` is the closest reachable price.
+ */
+export function preTaxForAllIn(allInCents: number): { priceCents: number; allInCents: number; exact: boolean } {
+  if (!Number.isInteger(allInCents) || allInCents < 0) throw new Error("allInCents must be a non-negative integer");
+  const rate = 1 + SALES_TAXES.reduce((s, t) => s + t.rate, 0);
+  const guess = Math.round(allInCents / rate);
+  let best = { priceCents: guess, allInCents: priceWithTaxes(guess) };
+  for (let p = Math.max(0, guess - 3); p <= guess + 3; p++) {
+    const total = priceWithTaxes(p);
+    if (total === allInCents) return { priceCents: p, allInCents: total, exact: true };
+    if (Math.abs(total - allInCents) < Math.abs(best.allInCents - allInCents)) best = { priceCents: p, allInCents: total };
+  }
+  return { ...best, exact: false };
+}

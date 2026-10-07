@@ -16,7 +16,8 @@ export type CollectionName =
   | "tickets"
   | "stripeEvents"
   | "checkins"
-  | "submissions";
+  | "submissions"
+  | "media";
 
 export type Doc = Record<string, unknown>;
 

@@ -11,7 +11,12 @@ import { StickyTicketPill } from "@/components/StickyTicketPill";
 import { getNextEventSummary } from "@/lib/data/next-event";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { hasLocale, locales } from "@/lib/i18n/config";
+import { alternates, siteUrl } from "@/lib/seo";
 import { site } from "@/lib/site";
+
+// Pages are pre-rendered, then refreshed at most every 5 minutes (new event, sold out...).
+// Saving an event in the admin refreshes them immediately.
+export const revalidate = 300;
 
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
@@ -26,19 +31,18 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
   const { lang } = await params;
   if (!hasLocale(lang)) return {};
   const dict = await getDictionary(lang);
-  const base =
-    process.env.SITE_URL ??
-    (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000");
   return {
-    metadataBase: new URL(base),
+    metadataBase: new URL(siteUrl()),
     title: { default: dict.meta.title, template: `%s — ${site.name}` },
     description: dict.meta.description,
-    alternates: { languages: { fr: "/fr", en: "/en" } },
+    alternates: alternates(lang),
     openGraph: {
       siteName: site.name,
       locale: lang === "fr" ? "fr_CA" : "en_CA",
       type: "website",
+      images: [{ url: `/brand/og-${lang}.jpg`, width: 1200, height: 630, alt: dict.meta.title }],
     },
+    twitter: { card: "summary_large_image" },
   };
 }
 
@@ -67,7 +71,7 @@ export default async function LangLayout({ children, params }: LayoutProps<"/[la
           <StickyTicketPill
             href={next.ticketsHref}
             label={`${dict.funnel.cta} · ${next.name}`}
-            detail={`${next.dateShort} · ${next.venue}${next.priceLabel ? ` · ${next.priceLabel}` : ""}`}
+            detail={`${next.dateShort} · ${next.venue}`}
           />
         )}
       </body>

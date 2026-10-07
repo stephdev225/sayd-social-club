@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { alternates } from "@/lib/seo";
 import { SplitTitle } from "@/components/motion/SplitTitle";
 import { getStore } from "@/lib/data";
 import { listPublicEvents } from "@/lib/data/catalog";
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/evenements
   const { lang } = await params;
   if (!hasLocale(lang)) return {};
   const dict = await getDictionary(lang);
-  return { title: dict.events.title, description: dict.events.intro };
+  return { title: dict.events.title, description: dict.events.intro, alternates: alternates(lang, "/evenements") };
 }
 
 function Row({ e, lang, dict, past }: { e: SaydEvent; lang: Locale; dict: Dictionary; past?: boolean }) {

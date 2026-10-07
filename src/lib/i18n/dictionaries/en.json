@@ -125,7 +125,9 @@
     "readTerms": "Read the terms",
     "taxesIncluded": "taxes included",
     "externalNote": "For this party, tickets are sold on Le Point de Vente, our ticketing partner. Secure payment, ticket sent by email.",
-    "externalCta": "Buy my tickets"
+    "externalCta": "Buy my tickets",
+    "soonTitle": "Tickets on sale soon",
+    "soonText": "Leave your email and we'll tell you the moment tickets go on sale, before the public announcement."
   },
   "confirmation": {
     "pendingTitle": "Confirming your payment",

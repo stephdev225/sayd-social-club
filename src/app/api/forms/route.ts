@@ -1,4 +1,4 @@
-import { createHash } from "node:crypto";
+import { createHash, randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { getStore, usingMemoryStore } from "@/lib/data";
 import { sendEmail } from "@/lib/email/send";
@@ -32,9 +32,10 @@ export async function POST(request: Request) {
     // One document per address: signing up twice just refreshes it.
     const id = "newsletter_" + createHash("sha256").update(data.email).digest("hex").slice(0, 24);
     const existing = await store.get<Record<string, unknown>>("submissions", id);
-    await store.set("submissions", id, { ...fields, createdAt: (existing?.createdAt as string) ?? new Date().toISOString(), updatedAt: new Date().toISOString() });
+    await store.set("submissions", id, { id, ...fields, createdAt: (existing?.createdAt as string) ?? new Date().toISOString(), updatedAt: new Date().toISOString() });
   } else {
-    await store.add("submissions", { ...fields, createdAt: new Date().toISOString() });
+    const id = `${data.kind}_${randomUUID()}`;
+    await store.set("submissions", id, { id, ...fields, createdAt: new Date().toISOString() });
   }
 
   if (data.kind !== "newsletter") {

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Countdown } from "@/components/Countdown";
 import { MobileBuyBar } from "@/components/MobileBuyBar";
+import { NotifyForm } from "@/components/NotifyForm";
 import { Reveal } from "@/components/motion/Reveal";
 import { SplitTitle } from "@/components/motion/SplitTitle";
 import { TicketPurchase } from "@/components/TicketPurchase";
@@ -14,6 +15,7 @@ import { formatMoney, priceWithTaxes } from "@/lib/domain/money";
 import { hasLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { formatDate, formatTime } from "@/lib/i18n/format";
+import { alternates } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const dynamic = "force-dynamic"; // stock changes minute to minute
@@ -27,7 +29,8 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/evenements
   return {
     title,
     description: event.tagline[lang],
-    openGraph: { title, description: event.tagline[lang], images: event.coverImage ? [event.coverImage] : [] },
+    alternates: alternates(lang, `/evenements/${event.slug}`),
+    openGraph: { title, description: event.tagline[lang], type: "website", images: event.heroImage ?? event.coverImage ? [{ url: (event.heroImage ?? event.coverImage)!, alt: event.name }] : [] },
   };
 }
 
@@ -76,7 +79,7 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
 
       <header className="relative isolate overflow-hidden">
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 pb-12 pt-24 sm:px-6 md:pt-32 lg:grid-cols-[1.25fr_1fr] lg:items-end lg:gap-14 lg:px-10 lg:pb-20">
+        <div className={`mx-auto grid max-w-7xl gap-10 px-5 pb-12 pt-24 sm:px-6 md:pt-32 lg:items-end lg:gap-14 lg:px-10 lg:pb-20 ${hero ? "lg:grid-cols-[1.25fr_1fr]" : "md:pt-40"}`}>
           {/* The visual on its own, without the poster text, so the image breathes */}
           {hero && (
             <Reveal kind="mask" delay={0.15}>
@@ -149,7 +152,6 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
                 {canBuy && (
                   <a href="#billets" className="group inline-flex min-h-14 items-center gap-3 rounded-full bg-sable px-8 font-semibold text-night transition hover:brightness-110">
                     {dict.funnel.cta}
-                    {priceLabel && <span className="font-normal opacity-80">· {priceLabel}</span>}
                     <span aria-hidden className="transition-transform duration-300 group-hover:translate-y-0.5">↓</span>
                   </a>
                 )}
@@ -194,6 +196,12 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
                 <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
               </a>
             </div>
+          ) : !onSale && !isPast && event.status === "published" ? (
+            <div className="rounded-3xl bg-night-2/80 p-6 ring-1 ring-ink/10 backdrop-blur sm:p-8">
+              <h2 className="t-h3">{dict.tickets.soonTitle}</h2>
+              <p className="mb-6 mt-3 text-ink/75">{dict.tickets.soonText}</p>
+              <NotifyForm lang={lang} labels={dict.notify} source={`event:${event.slug}`} />
+            </div>
           ) : (
           <TicketPurchase
             lang={lang}
@@ -213,7 +221,7 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
         </aside>
       </div>
 
-      {canBuy && <MobileBuyBar label={dict.funnel.buyBar} price={priceLabel} note={dict.funnel.onlineCheaper} />}
+      {canBuy && <MobileBuyBar label={dict.funnel.buyBar} title={event.name} note={`${dateLabel} · ${event.venueName}`} />}
     </article>
   );
 }

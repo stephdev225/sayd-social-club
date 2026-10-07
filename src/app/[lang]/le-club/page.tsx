@@ -8,6 +8,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { SplitTitle } from "@/components/motion/SplitTitle";
 import { ambiance, pexels } from "@/lib/media";
 import { notFound } from "next/navigation";
+import { alternates } from "@/lib/seo";
 import { hasLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { site } from "@/lib/site";
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/le-club">)
   const { lang } = await params;
   if (!hasLocale(lang)) return {};
   const dict = await getDictionary(lang);
-  return { title: dict.about.title, description: dict.about.lead };
+  return { title: dict.about.title, description: dict.about.lead, alternates: alternates(lang, "/le-club") };
 }
 
 export default async function AboutPage({ params }: PageProps<"/[lang]/le-club">) {

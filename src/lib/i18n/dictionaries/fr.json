@@ -125,7 +125,9 @@
     "readTerms": "Lire les conditions",
     "taxesIncluded": "taxes incluses",
     "externalNote": "Pour cette soirée, les billets sont vendus sur Le Point de Vente, notre billetterie partenaire. Paiement sécurisé, billet envoyé par courriel.",
-    "externalCta": "Acheter mes billets"
+    "externalCta": "Acheter mes billets",
+    "soonTitle": "Billets bientôt en vente",
+    "soonText": "Laissez votre courriel : vous serez prévenu·e dès l'ouverture de la billetterie, avant l'annonce publique."
   },
   "confirmation": {
     "pendingTitle": "Paiement en cours de confirmation",

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { alternates } from "@/lib/seo";
 import { ArtistList } from "@/components/ArtistList";
 import { NextEventCTA } from "@/components/NextEventCTA";
 import { LineReveal } from "@/components/motion/LineReveal";
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/showcase">
   const { lang } = await params;
   if (!hasLocale(lang)) return {};
   const dict = await getDictionary(lang);
-  return { title: dict.showcase.title, description: dict.showcase.intro };
+  return { title: dict.showcase.title, description: dict.showcase.intro, alternates: alternates(lang, "/showcase") };
 }
 
 // Mood photos shown behind names on hover until official artist photos are provided.

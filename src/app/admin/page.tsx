@@ -1,13 +1,11 @@
-import Image from "next/image";
-import Link from "next/link";
 import { redirect } from "next/navigation";
+import { AdminShell } from "@/components/staff/AdminShell";
 import { GuestsTable, OrdersTable } from "@/components/staff/OrdersTable";
+import { SetupChecklist } from "@/components/staff/SetupChecklist";
 import { getSession } from "@/lib/auth/session";
-import { canSellOnline } from "@/lib/checkout-availability";
-import { getStore, usingMemoryStore } from "@/lib/data";
+import { getStore } from "@/lib/data";
 import { getDashboard } from "@/lib/data/admin";
 import { formatMoney, priceWithTaxes } from "@/lib/domain/money";
-import { isStripeConfigured } from "@/lib/env";
 import { formatDate, formatTime } from "@/lib/i18n/format";
 
 export const dynamic = "force-dynamic";
@@ -44,25 +42,14 @@ export default async function AdminPage({ searchParams }: PageProps<"/admin">) {
   ];
 
   return (
-    <div className="lg:grid lg:min-h-svh lg:grid-cols-[15rem_1fr]">
-      <aside className="border-b border-line bg-night-2 p-5 lg:sticky lg:top-0 lg:h-svh lg:border-b-0 lg:border-r">
-        <Image src="/brand/logo-ivory.png" alt="Sayd Social Club" width={319} height={134} className="h-9 w-auto" />
-        <nav aria-label="Admin" className="mt-8 flex gap-4 overflow-x-auto text-sm lg:flex-col lg:gap-1">
-          {nav.map(([href, label]) => (
-            <a key={href} href={href} className="whitespace-nowrap rounded px-2 py-1.5 text-muted hover:bg-night hover:text-ink">{label}</a>
-          ))}
-          <Link href="/scan" className="whitespace-nowrap rounded px-2 py-1.5 text-sable hover:bg-night">Scanner à la porte →</Link>
-          {event && (
-            <a href={`/api/admin/export?event=${event.id}`} className="whitespace-nowrap rounded px-2 py-1.5 text-muted hover:bg-night hover:text-ink">Exporter la liste (CSV)</a>
-          )}
-        </nav>
-        <form action="/api/staff/logout" method="post" className="mt-6 lg:absolute lg:bottom-5">
-          <p className="text-xs text-muted">Connecté : {session.name}</p>
-          <button className="mt-1 text-sm text-muted underline hover:text-ink">Se déconnecter</button>
-        </form>
-      </aside>
-
-      <main className="space-y-14 p-5 sm:p-8 lg:p-10">
+    <AdminShell
+      active="dashboard"
+      staffName={session.name}
+      extraLinks={[
+        ...nav.map(([href, label]) => ({ href, label })),
+        ...(event ? [{ href: `/api/admin/export?event=${event.id}`, label: "Exporter la liste (CSV)" }] : []),
+      ]}
+    >
         <header className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="text-sm text-muted">Événement</p>
@@ -83,16 +70,7 @@ export default async function AdminPage({ searchParams }: PageProps<"/admin">) {
           )}
         </header>
 
-        {(usingMemoryStore() || !isStripeConfigured() || stripeTest) && (
-          <div className="border-l-2 border-sable bg-sable/10 p-4 text-sm">
-            <p className="font-semibold text-sable">Configuration</p>
-            <ul className="mt-1 space-y-0.5 text-ink/90">
-              <li>Base de données : {usingMemoryStore() ? "⚠️ mémoire temporaire (Firebase non branché)" : "Firestore ✓"}</li>
-              <li>Stripe : {isStripeConfigured() ? (stripeTest ? "mode Test ✓" : "mode LIVE") : "⚠️ clé ou webhook manquant"}</li>
-              <li>Vente en ligne : {canSellOnline() ? "ouverte ✓" : "fermée"}</li>
-            </ul>
-          </div>
-        )}
+        <SetupChecklist />
 
         <section id="apercu" aria-labelledby="t-apercu" className="scroll-mt-6">
           <h2 id="t-apercu" className="sr-only">Vue d&apos;ensemble</h2>
@@ -162,7 +140,6 @@ export default async function AdminPage({ searchParams }: PageProps<"/admin">) {
             }))}
           />
         </section>
-      </main>
-    </div>
+    </AdminShell>
   );
 }

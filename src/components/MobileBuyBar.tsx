@@ -4,10 +4,10 @@ import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 
 /**
- * Event page, mobile: a bottom bar with the price and a button that jumps to the
+ * Event page, mobile: a bottom bar with the event name and a button that jumps to the
  * ticket form. Hidden while the form itself is on screen.
  */
-export function MobileBuyBar({ label, price, note, targetId = "billets" }: { label: string; price: string | null; note: string; targetId?: string }) {
+export function MobileBuyBar({ label, title, note, targetId = "billets" }: { label: string; title: string; note: string; targetId?: string }) {
   const [show, setShow] = useState(false);
   useEffect(() => {
     const target = document.getElementById(targetId);
@@ -44,7 +44,7 @@ export function MobileBuyBar({ label, price, note, targetId = "billets" }: { lab
         >
           <div className="flex items-center gap-4">
             <div className="min-w-0">
-              {price && <p className="font-display text-2xl leading-none">{price}</p>}
+              <p className="truncate font-display text-2xl leading-none">{title}</p>
               <p className="truncate text-xs text-ink/60">{note}</p>
             </div>
             <a

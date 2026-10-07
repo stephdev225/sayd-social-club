@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { alternates } from "@/lib/seo";
 import { SubmissionForm } from "@/components/SubmissionForm";
 import { LineReveal } from "@/components/motion/LineReveal";
 import { Reveal } from "@/components/motion/Reveal";
@@ -14,7 +15,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/contact">)
   const { lang } = await params;
   if (!hasLocale(lang)) return {};
   const dict = await getDictionary(lang);
-  return { title: dict.contact.title, description: dict.contact.intro };
+  return { title: dict.contact.title, description: dict.contact.intro, alternates: alternates(lang, "/contact") };
 }
 
 export default async function ContactPage({ params }: PageProps<"/[lang]/contact">) {

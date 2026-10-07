@@ -11,8 +11,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { TextReveal } from "@/components/motion/TextReveal";
 import { VelocityMarquee } from "@/components/motion/VelocityMarquee";
 import { getStore } from "@/lib/data";
-import { listPublicEvents, listTicketTypes, lowestPrice } from "@/lib/data/catalog";
-import { formatMoney, priceWithTaxes } from "@/lib/domain/money";
+import { listPublicEvents } from "@/lib/data/catalog";
 import { hasLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { formatDate, formatShortDate, formatTime } from "@/lib/i18n/format";
@@ -31,7 +30,6 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const store = getStore();
   const { upcoming } = await listPublicEvents(store);
   const next = upcoming[0];
-  const nextFrom = next ? lowestPrice(await listTicketTypes(store, next.id)) : null;
   const nextDate = next ? formatShortDate(next.startsAt, lang) : null;
   const sound = dict.about.sound.split(", ").map((w) => w.charAt(0).toUpperCase() + w.slice(1));
 
@@ -49,7 +47,6 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
                   className="group inline-flex min-h-14 items-center gap-3 rounded-full bg-sable px-7 py-4 font-semibold text-night transition hover:brightness-110"
                 >
                   {next ? dict.funnel.cta : dict.home.heroCta}
-                  {next && nextFrom !== null && <span className="font-normal opacity-80">· {formatMoney(priceWithTaxes(nextFrom), lang)}</span>}
                   <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                 </Link>
               </Magnetic>
@@ -144,11 +141,6 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
                       <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                     </Link>
                   </Magnetic>
-                  {nextFrom !== null && (
-                    <p className="text-ink/70">
-                      {dict.home.from} <span className="text-ink">{formatMoney(priceWithTaxes(nextFrom), lang)}</span>
-                    </p>
-                  )}
                 </div>
               </Reveal>
             </div>

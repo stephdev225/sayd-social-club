@@ -34,6 +34,8 @@ export interface SaydEvent {
   instagram?: Record<string, string>;
   /** Event-specific accent colour used on the event page (hex). */
   accent?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface TicketType {

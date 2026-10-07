@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { alternates } from "@/lib/seo";
 import { NextEventCTA } from "@/components/NextEventCTA";
 import { SubmissionForm } from "@/components/SubmissionForm";
 import { LineReveal } from "@/components/motion/LineReveal";
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/partenaria
   const { lang } = await params;
   if (!hasLocale(lang)) return {};
   const dict = await getDictionary(lang);
-  return { title: dict.partners.title, description: dict.partners.intro };
+  return { title: dict.partners.title, description: dict.partners.intro, alternates: alternates(lang, "/partenariats") };
 }
 
 export default async function PartnersPage({ params }: PageProps<"/[lang]/partenariats">) {

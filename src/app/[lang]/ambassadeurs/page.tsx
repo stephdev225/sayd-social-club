@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { alternates } from "@/lib/seo";
 import Image from "next/image";
 import { NextEventCTA } from "@/components/NextEventCTA";
 import { getNextEventSummary } from "@/lib/data/next-event";
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/ambassadeu
   const { lang } = await params;
   if (!hasLocale(lang)) return {};
   const dict = await getDictionary(lang);
-  return { title: dict.ambassadors.title, description: dict.ambassadors.intro };
+  return { title: dict.ambassadors.title, description: dict.ambassadors.intro, alternates: alternates(lang, "/ambassadeurs") };
 }
 
 export default async function AmbassadorsPage({ params }: PageProps<"/[lang]/ambassadeurs">) {

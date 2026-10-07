@@ -31,7 +31,6 @@ export function NextEventCTA({ next, dict, lang }: { next: NextEventSummary | nu
                 className="group inline-flex min-h-14 items-center gap-3 rounded-full bg-sable px-8 py-4 text-base font-semibold text-night transition hover:brightness-110"
               >
                 {dict.funnel.cta}
-                {next.priceLabel && <span className="font-normal opacity-80">· {next.priceLabel}</span>}
                 <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>
               </Link>
             </Magnetic>

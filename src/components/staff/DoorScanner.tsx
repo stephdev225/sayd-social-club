@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type QrScannerType from "qr-scanner";
 
@@ -45,6 +46,7 @@ export function DoorScanner(props: { eventId?: string; eventName: string; staffN
   const scanner = useRef<QrScannerType | null>(null);
   const busy = useRef(false);
   const lastCode = useRef<{ code: string; at: number } | null>(null);
+  const router = useRouter();
   const [res, setRes] = useState<Result | null>(null);
   const [count, setCount] = useState(props.initialCheckedIn);
   const [camError, setCamError] = useState<string | null>(null);
@@ -64,7 +66,7 @@ export function DoorScanner(props: { eventId?: string; eventName: string; staffN
           body: JSON.stringify({ code, eventId: props.eventId }),
         });
         if (r.status === 401) {
-          window.location.assign("/admin/connexion?next=/scan");
+          router.push("/admin/connexion?next=/scan");
           return;
         }
         const body = (await r.json()) as Result;
@@ -78,7 +80,7 @@ export function DoorScanner(props: { eventId?: string; eventName: string; staffN
         busy.current = false;
       }
     },
-    [props.eventId],
+    [props.eventId, router],
   );
 
   useEffect(() => {
