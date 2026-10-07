@@ -34,6 +34,7 @@
 | D-030 | 2026-10-07 | Accueil : héros et marquee réduits, sans sur-titre ; « L'expérience Sayd » en cartes photo qui s'empilent au scroll ; « L'ambiance » en bandes de photos qui défilent au scroll | Demande de Stéphane | ACTIVE |
 | D-031 | 2026-10-07 | /evenements : section « Événements précédents » (événements passés publiés, ajoutés depuis l'admin) | Demande de Stéphane | ACTIVE |
 | D-032 | 2026-10-07 | Hébergement recommandé : Vercel Pro (le plan Hobby gratuit interdit l'usage commercial). Pas d'hébergement mutualisé cPanel/WordPress : le site a un serveur (paiements, webhook, admin) | Vérifié sur vercel.com/pricing le 2026-10-07 | PROPOSÉ |
+| D-033 | 2026-10-07 | Shader WebGL maison (soie lumineuse sable/bordeaux, suit le curseur) sur le héros et derrière l'inscription du pied de page ; mots du logo qui réagissent au curseur et à la vitesse de scroll ; « Événements précédents » toujours visible (état vide élégant) | Demande de Stéphane | ACTIVE |
 | D-013 | 2026-10-06 | Sites de motion fournis (Jitter, Dribbble, Framer, motionsites.ai) = inspiration uniquement, aucun template copié | Règle références | ACTIVE |
 
 ## Journal de session

@@ -66,10 +66,19 @@ export default async function EventsPage({ params }: PageProps<"/[lang]/evenemen
         )}
       </section>
 
-      {past.length > 0 && (
-        <section className="mt-24 md:mt-32" aria-labelledby="passes">
+      <section className="mt-24 md:mt-32" aria-labelledby="passes">
           <h2 id="passes" className="t-h2">{dict.events.past}</h2>
           <p className="mt-3 text-muted">{dict.events.pastIntro}</p>
+          {past.length === 0 ? (
+            <div className="mt-10 grid gap-5 sm:grid-cols-3">
+              {[0, 1, 2].map((i) => (
+                <div key={i} className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-night-2">
+                  <div aria-hidden className="absolute inset-0 animate-pulse bg-[radial-gradient(circle_at_30%_20%,rgba(217,178,106,0.12),transparent_60%)]" />
+                  {i === 0 && <p className="absolute inset-x-5 bottom-5 text-sm text-ink/70">{dict.events.pastEmpty}</p>}
+                </div>
+              ))}
+            </div>
+          ) : (
           <ul className="mt-10 grid gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {past.map((e) => {
               const img = e.heroImage ?? e.coverImage;
@@ -98,8 +107,8 @@ export default async function EventsPage({ params }: PageProps<"/[lang]/evenemen
               );
             })}
           </ul>
+          )}
         </section>
-      )}
     </div>
   );
 }

@@ -78,7 +78,8 @@
     "notFound": "This event doesn't exist or is no longer online.",
     "reservations": "Reservations",
     "all": "All events",
-    "pastIntro": "A few nights that shaped Sayd's story."
+    "pastIntro": "A few nights that shaped Sayd's story.",
+    "pastEmpty": "Our past parties are coming here soon, in pictures."
   },
   "tickets": {
     "title": "Tickets",
@@ -134,7 +135,6 @@
     "reserveText": "Message or call us and we'll confirm your reservation quickly.",
     "reserveWhatsapp": "Reserve on WhatsApp",
     "reserveCall": "Call {phone}",
-    "externalVia": "Official ticketing: Le Point de Vente",
     "reserveOrCall": "Or call {phone}"
   },
   "confirmation": {

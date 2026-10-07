@@ -52,7 +52,7 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
   // One clear action per situation: sold here (ticket form), sold elsewhere (one button),
   // close to the date without ticketing (reserve by WhatsApp), or later (notify me).
   const heroAction = external
-    ? { href: external, label: dict.funnel.cta, note: dict.tickets.externalVia }
+    ? { href: external, label: dict.funnel.cta, note: "" }
     : upcomingPublished && !onSale && soon
       ? {
           href: `${site.whatsapp}?text=${encodeURIComponent(`${event.name} — ${formatDate(event.startsAt, lang)}`)}`,
@@ -171,7 +171,7 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
                     {heroAction.label}
                     <span aria-hidden className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span>
                   </a>
-                  <p className="mt-3 text-sm text-ink/60">{heroAction.note}</p>
+                  {heroAction.note && <p className="mt-3 text-sm text-ink/60">{heroAction.note}</p>}
                 </div>
               </Reveal>
             )}

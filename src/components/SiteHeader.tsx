@@ -83,8 +83,8 @@ export function SiteHeader({ lang, nav, ticketsHref }: { lang: Locale; nav: Nav;
         } ${open ? "z-[60]" : "z-50"}`}
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-6 md:h-20 lg:px-10">
-          <Link href={`/${lang}`} className="relative z-[60] shrink-0" aria-label="Sayd Social Club">
-            <Image src="/brand/logo-ivory.png" alt="Sayd Social Club" width={319} height={134} priority className="h-8 w-auto md:h-10" />
+          <Link href={`/${lang}`} className="group relative z-[60] shrink-0" aria-label="Sayd Social Club">
+            <Image src="/brand/logo-ivory.png" alt="Sayd Social Club" width={319} height={134} priority className="h-8 w-auto transition duration-500 group-hover:-rotate-2 group-hover:scale-105 group-hover:drop-shadow-[0_0_14px_rgba(217,178,106,0.55)] md:h-10" />
           </Link>
 
           <nav aria-label={nav.ariaMain} className="hidden items-center gap-6 lg:flex xl:gap-8">

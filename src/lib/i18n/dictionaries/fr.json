@@ -78,7 +78,8 @@
     "notFound": "Cet événement n'existe pas ou n'est plus en ligne.",
     "reservations": "Réservations",
     "all": "Tous les événements",
-    "pastIntro": "Quelques soirées qui ont fait l'histoire de Sayd."
+    "pastIntro": "Quelques soirées qui ont fait l'histoire de Sayd.",
+    "pastEmpty": "Nos soirées passées arrivent ici très bientôt, en photos."
   },
   "tickets": {
     "title": "Billets",
@@ -134,7 +135,6 @@
     "reserveText": "Écrivez-nous ou appelez : on confirme votre réservation rapidement.",
     "reserveWhatsapp": "Réserver par WhatsApp",
     "reserveCall": "Appeler le {phone}",
-    "externalVia": "Billetterie officielle : Le Point de Vente",
     "reserveOrCall": "Ou appelez le {phone}"
   },
   "confirmation": {
