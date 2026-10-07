@@ -63,7 +63,7 @@
   },
   "events": {
     "title": "Événements",
-    "intro": "Toutes les dates de la saison. Les billets se prennent directement ici, paiement sécurisé par Stripe.",
+    "intro": "Toutes les soirées de la saison. Choisissez la vôtre, prenez vos billets en quelques secondes.",
     "upcoming": "À venir",
     "past": "Passés",
     "empty": "Aucun événement à venir pour le moment.",
@@ -127,7 +127,11 @@
     "externalNote": "Pour cette soirée, les billets sont vendus sur Le Point de Vente, notre billetterie partenaire. Paiement sécurisé, billet envoyé par courriel.",
     "externalCta": "Acheter mes billets",
     "soonTitle": "Billets bientôt en vente",
-    "soonText": "Laissez votre courriel : vous serez prévenu·e dès l'ouverture de la billetterie, avant l'annonce publique."
+    "soonText": "Laissez votre courriel : vous serez prévenu·e dès l'ouverture de la billetterie, avant l'annonce publique.",
+    "reserveTitle": "Réserver vos places",
+    "reserveText": "Écrivez-nous ou appelez : on confirme votre réservation rapidement.",
+    "reserveWhatsapp": "Réserver par WhatsApp",
+    "reserveCall": "Appeler le {phone}"
   },
   "confirmation": {
     "pendingTitle": "Paiement en cours de confirmation",

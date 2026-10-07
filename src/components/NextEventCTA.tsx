@@ -11,7 +11,7 @@ import { Reveal } from "./motion/Reveal";
 export function NextEventCTA({ next, dict, lang }: { next: NextEventSummary | null; dict: Dictionary; lang: "fr" | "en" }) {
   if (!next) return null;
   return (
-    <section className="relative isolate mt-24 overflow-hidden" aria-labelledby="cta-next">
+    <section className="relative isolate mt-12 overflow-hidden md:mt-24" aria-labelledby="cta-next">
       {next.image && (
         <div aria-hidden className="absolute inset-0 -z-10">
           <Image src={next.image} alt="" fill sizes="100vw" className="object-cover opacity-45" />

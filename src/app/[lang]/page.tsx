@@ -88,7 +88,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         <div className="grid gap-14 md:grid-cols-3 md:gap-8">
           {dict.home.pillars.map((p, i) => (
             <div key={p.t} className={i === 1 ? "md:mt-24" : i === 2 ? "md:mt-12" : ""}>
-              <Reveal kind="mask" delay={i * 0.1} className="relative aspect-[4/5] overflow-hidden rounded-2xl">
+              <Reveal kind="mask" delay={i * 0.1} className="relative aspect-[4/3] overflow-hidden rounded-2xl md:aspect-[4/5]">
                 <Parallax amount={7} className="absolute inset-0">
                   <div className="relative h-full w-full">
                     <Image src={pexels(PILLAR_IMAGES[i].id, 1000)} alt={PILLAR_IMAGES[i].alt[lang]} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover" />

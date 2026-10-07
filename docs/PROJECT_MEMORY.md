@@ -24,6 +24,10 @@
 | D-020 | 2026-10-06 | Nouvelles pages Showcase (artistes invités : Waklexx, DJ Madmaxx, Kulturr ; Leto et Bilouki = info interne, jamais affichés sans annonce de Stéphane) et Partenariats (formulaire `partnership`) | Demande de Stéphane | ACTIVE |
 | D-021 | 2026-10-06 | Page événement : visuel sans texte (`heroImage`) à gauche, infos de l'affiche déplacées à droite au-dessus de « Présenté par » ; affiche complète via « Voir l'affiche » | Demande de Stéphane | ACTIVE |
 | D-022 | 2026-10-06 | Champ `externalTicketUrl` : tant que la vente en ligne du site n'est pas ouverte, le bouton d'achat renvoie vers Le Point de Vente (soirée du 11 oct.) | « l'event du 11 reste sur le point de vente » | ACTIVE, URL à fournir |
+| D-023 | 2026-10-07 | Aucun prix dans les boutons/CTA du site : le prix n'apparaît que dans la boîte de billetterie | Demande de Stéphane | ACTIVE |
+| D-024 | 2026-10-07 | Événements et billets gérés dans /admin/evenements (prix saisis taxes incluses, heures de Québec, images stockées dans Firestore en WebP ≤ 700 Ko) ; le site public se met à jour à l'enregistrement | Stéphane veut annoncer les prochains events lui-même | ACTIVE |
+| D-025 | 2026-10-07 | Vente non ouverte : à moins de 21 jours → boîte « Réserver » (WhatsApp/téléphone, comme l'affiche) ; plus tôt → « Me prévenir » ; lien externe (Le Point de Vente) prioritaire s'il est renseigné | Sprezzatura reste sur lepointdevente, lien exact à fournir | ACTIVE |
+| D-026 | 2026-10-07 | Domaine visé : saydsocialclub.com (disponible, 11,25 $ US/an chez Vercel au 2026-10-07). Achat par Stéphane | — | EN ATTENTE |
 | D-013 | 2026-10-06 | Sites de motion fournis (Jitter, Dribbble, Framer, motionsites.ai) = inspiration uniquement, aucun template copié | Règle références | ACTIVE |
 
 ## Journal de session

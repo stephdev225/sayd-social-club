@@ -14,7 +14,7 @@ import { availableQuantity } from "@/lib/domain/inventory";
 import { formatMoney, priceWithTaxes } from "@/lib/domain/money";
 import { hasLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
-import { formatDate, formatTime } from "@/lib/i18n/format";
+import { formatDate, formatTime, t } from "@/lib/i18n/format";
 import { alternates } from "@/lib/seo";
 import { site } from "@/lib/site";
 
@@ -47,6 +47,8 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
   const onSale = event.status === "published" && !isPast && canSellOnline();
   const external = !onSale && !isPast && event.status === "published" ? event.externalTicketUrl : undefined;
   const canBuy = onSale || Boolean(external);
+  // Close to the date without online sales: reservations by message or phone (as on the poster).
+  const soon = new Date(event.startsAt).getTime() - new Date().getTime() < 21 * 24 * 3600 * 1000;
   const hero = event.heroImage ?? event.coverImage;
   const from = lowestPrice(types);
   const priceLabel = from !== null ? formatMoney(priceWithTaxes(from), lang) : null;
@@ -149,9 +151,9 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
             )}
             <Reveal delay={0.45}>
               <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
-                {canBuy && (
+                {(canBuy || (soon && !isPast && event.status === "published")) && (
                   <a href="#billets" className="group inline-flex min-h-14 items-center gap-3 rounded-full bg-sable px-8 font-semibold text-night transition hover:brightness-110">
-                    {dict.funnel.cta}
+                    {canBuy ? dict.funnel.cta : dict.tickets.reserveTitle}
                     <span aria-hidden className="transition-transform duration-300 group-hover:translate-y-0.5">↓</span>
                   </a>
                 )}
@@ -197,11 +199,29 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
               </a>
             </div>
           ) : !onSale && !isPast && event.status === "published" ? (
-            <div className="rounded-3xl bg-night-2/80 p-6 ring-1 ring-ink/10 backdrop-blur sm:p-8">
-              <h2 className="t-h3">{dict.tickets.soonTitle}</h2>
-              <p className="mb-6 mt-3 text-ink/75">{dict.tickets.soonText}</p>
-              <NotifyForm lang={lang} labels={dict.notify} source={`event:${event.slug}`} />
-            </div>
+            soon ? (
+              <div className="rounded-3xl bg-night-2/80 p-6 ring-1 ring-ink/10 backdrop-blur sm:p-8">
+                <h2 className="t-h3">{dict.tickets.reserveTitle}</h2>
+                <p className="mt-3 text-ink/75">{dict.tickets.reserveText}</p>
+                <a
+                  href={`${site.whatsapp}?text=${encodeURIComponent(`${event.name} — ${dateLabel}`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-7 flex min-h-14 w-full items-center justify-center rounded-full bg-sable px-8 font-semibold text-night transition hover:brightness-110"
+                >
+                  {dict.tickets.reserveWhatsapp}
+                </a>
+                <a href={site.phoneHref} className="mt-3 flex min-h-12 w-full items-center justify-center rounded-full px-8 text-ink ring-1 ring-ink/20 transition hover:ring-sable">
+                  {t(dict.tickets.reserveCall, { phone: site.phone })}
+                </a>
+              </div>
+            ) : (
+              <div className="rounded-3xl bg-night-2/80 p-6 ring-1 ring-ink/10 backdrop-blur sm:p-8">
+                <h2 className="t-h3">{dict.tickets.soonTitle}</h2>
+                <p className="mb-6 mt-3 text-ink/75">{dict.tickets.soonText}</p>
+                <NotifyForm compact lang={lang} labels={dict.notify} source={`event:${event.slug}`} />
+              </div>
+            )
           ) : (
           <TicketPurchase
             lang={lang}
@@ -221,7 +241,7 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
         </aside>
       </div>
 
-      {canBuy && <MobileBuyBar label={dict.funnel.buyBar} title={event.name} note={`${dateLabel} · ${event.venueName}`} />}
+      {(canBuy || (soon && !isPast && event.status === "published")) && <MobileBuyBar label={canBuy ? dict.funnel.buyBar : dict.tickets.reserveTitle} title={event.name} note={`${dateLabel} · ${event.venueName}`} />}
     </article>
   );
 }

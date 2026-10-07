@@ -63,7 +63,7 @@
   },
   "events": {
     "title": "Events",
-    "intro": "Every date of the season. Buy tickets right here, with secure payment by Stripe.",
+    "intro": "Every party of the season. Pick yours and get your tickets in seconds.",
     "upcoming": "Upcoming",
     "past": "Past",
     "empty": "No upcoming events right now.",
@@ -127,7 +127,11 @@
     "externalNote": "For this party, tickets are sold on Le Point de Vente, our ticketing partner. Secure payment, ticket sent by email.",
     "externalCta": "Buy my tickets",
     "soonTitle": "Tickets on sale soon",
-    "soonText": "Leave your email and we'll tell you the moment tickets go on sale, before the public announcement."
+    "soonText": "Leave your email and we'll tell you the moment tickets go on sale, before the public announcement.",
+    "reserveTitle": "Reserve your spot",
+    "reserveText": "Message or call us and we'll confirm your reservation quickly.",
+    "reserveWhatsapp": "Reserve on WhatsApp",
+    "reserveCall": "Call {phone}"
   },
   "confirmation": {
     "pendingTitle": "Confirming your payment",
