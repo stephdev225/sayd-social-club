@@ -15,6 +15,19 @@ export default function ErrorPage({ error, retry }: { error: Error & { digest?: 
   const t = params?.lang === "en" ? TEXT.en : TEXT.fr;
   useEffect(() => {
     console.error(error);
+    // Right after a new version goes live, a tab opened before it can fail to load the
+    // next page. A single automatic full reload fixes it without the visitor noticing.
+    try {
+      const key = "sayd-reloaded";
+      if (!sessionStorage.getItem(key)) {
+        sessionStorage.setItem(key, "1");
+        window.location.reload();
+        return;
+      }
+      setTimeout(() => sessionStorage.removeItem(key), 10000);
+    } catch {
+      /* storage unavailable: show the message below */
+    }
   }, [error]);
 
   return (
