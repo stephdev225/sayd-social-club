@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Countdown } from "@/components/Countdown";
 import { DragCarousel } from "@/components/DragCarousel";
 import { HeroBrand } from "@/components/HeroBrand";
 import { LineReveal } from "@/components/motion/LineReveal";
@@ -15,7 +14,7 @@ import { listPublicEvents } from "@/lib/data/catalog";
 import { ticketsHrefFor } from "@/lib/data/next-event";
 import { hasLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
-import { formatDate, formatShortDate, formatTime } from "@/lib/i18n/format";
+import { formatShortDate } from "@/lib/i18n/format";
 import { ambiance, pexels } from "@/lib/media";
 import { site } from "@/lib/site";
 
@@ -104,50 +103,6 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
           ))}
         </div>
       </section>
-
-      {/* ── 5. Next party, inside the page flow (no band) ── */}
-      {next && (
-        <section className="relative overflow-hidden" aria-labelledby="prochaine">
-          {next.coverImage && (
-            <div aria-hidden className="absolute inset-0 -z-10 opacity-30 blur-3xl">
-              <Image src={next.coverImage} alt="" fill sizes="50vw" className="scale-125 object-cover" />
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#120f0e_70%)]" />
-            </div>
-          )}
-          <div className="mx-auto grid max-w-7xl gap-10 px-5 py-20 sm:px-6 md:grid-cols-[minmax(0,20rem)_1fr] md:items-center md:gap-16 md:py-32 lg:px-10">
-            {next.coverImage && (
-              <Reveal kind="mask" className="mx-auto w-full max-w-[17rem] md:max-w-none">
-                <Link href={`/${lang}/evenements/${next.slug}`} aria-label={dict.home.details} className="block overflow-hidden rounded-2xl">
-                  <Image src={next.coverImage} alt={`${next.name} — ${next.venueName}`} width={1080} height={1920} sizes="20rem" className="aspect-[9/16] w-full object-cover transition duration-700 hover:scale-[1.03]" />
-                </Link>
-              </Reveal>
-            )}
-            <div>
-              <Reveal><h2 id="prochaine" className="text-sable">{dict.home.nextTitle}</h2></Reveal>
-              <LineReveal as="p" text={next.name} className="mt-3 font-display text-[clamp(3.2rem,13vw,7rem)] leading-[0.88]" />
-              <Reveal delay={0.15}>
-                <p className="mt-5 text-lg text-ink/85 first-letter:uppercase">
-                  {formatDate(next.startsAt, lang)}, {formatTime(next.startsAt, lang)}
-                  <br />
-                  {next.venueName}{next.lineup.length > 0 && <> · DJ {next.lineup.join(", ")}</>}
-                </p>
-                <div className="mt-8"><Countdown to={next.startsAt} lang={lang} /></div>
-                <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
-                  <Magnetic>
-                    <Link
-                      href={ticketsHrefFor(next, lang)}
-                      className="group inline-flex min-h-14 items-center gap-3 rounded-full bg-sable px-8 py-4 text-base font-semibold text-night transition hover:brightness-110"
-                    >
-                      {dict.home.getTickets}
-                      <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                    </Link>
-                  </Magnetic>
-                </div>
-              </Reveal>
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* ── 6. Gallery teaser: drag / swipe ── */}
       <section className="pb-24 pt-10 md:pb-36" aria-labelledby="ambiance">

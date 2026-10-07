@@ -33,6 +33,18 @@ export function SiteHeader({ lang, nav, ticketsHref }: { lang: Locale; nav: Nav;
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Phone "back" gesture closes the menu instead of leaving the page.
+  useEffect(() => {
+    if (!open) return;
+    window.history.pushState({ ...window.history.state, saydMenu: true }, "");
+    const onPop = () => setOpen(false);
+    window.addEventListener("popstate", onPop);
+    return () => {
+      window.removeEventListener("popstate", onPop);
+      if (window.history.state?.saydMenu) window.history.back();
+    };
+  }, [open]);
+
   useEffect(() => {
     document.documentElement.style.overflow = open ? "hidden" : "";
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
@@ -42,6 +54,12 @@ export function SiteHeader({ lang, nav, ticketsHref }: { lang: Locale; nav: Nav;
       window.removeEventListener("keydown", onKey);
     };
   }, [open]);
+
+  // Links that change page close the menu through the route change; closing it here
+  // would rewind history (see the back-gesture effect) and cancel the navigation.
+  const closeFor = (href: string) => {
+    if (href.startsWith("/") && href.split("#")[0] === pathname) setOpen(false);
+  };
 
   const other: Locale = lang === "fr" ? "en" : "fr";
   const switchHref = pathname.replace(new RegExp(`^/${lang}(?=/|$)`), `/${other}`);
@@ -58,9 +76,9 @@ export function SiteHeader({ lang, nav, ticketsHref }: { lang: Locale; nav: Nav;
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-[background-color,backdrop-filter] duration-500 ${
+        className={`fixed inset-x-0 top-0 transition-[background-color,backdrop-filter] duration-500 ${
           scrolled && !open ? "bg-night/75 backdrop-blur-xl" : "bg-transparent"
-        }`}
+        } ${open ? "z-[60]" : "z-50"}`}
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-6 md:h-20 lg:px-10">
           <Link href={`/${lang}`} className="relative z-[60] shrink-0" aria-label="Sayd Social Club">
@@ -86,7 +104,7 @@ export function SiteHeader({ lang, nav, ticketsHref }: { lang: Locale; nav: Nav;
             </Link>
             <Link
               href={ticketsHref}
-              onClick={() => setOpen(false)}
+              onClick={() => closeFor(ticketsHref)}
               className="inline-flex items-center rounded-full bg-sable px-4 py-2 text-sm font-semibold text-night transition hover:brightness-110 sm:px-5"
             >
               {nav.tickets}
@@ -99,7 +117,7 @@ export function SiteHeader({ lang, nav, ticketsHref }: { lang: Locale; nav: Nav;
               aria-controls="menu-mobile"
               onClick={() => setOpen((v) => !v)}
             >
-              <span className="sr-only">{open ? nav.close : nav.menu}</span>
+              <span className={open ? "text-sm font-medium text-ink" : "sr-only"}>{open ? nav.close : nav.menu}</span>
               <span aria-hidden className="relative block h-3 w-7">
                 <motion.span
                   className="absolute left-0 top-0 h-px w-7 bg-ink"
@@ -141,7 +159,7 @@ export function SiteHeader({ lang, nav, ticketsHref }: { lang: Locale; nav: Nav;
                   >
                     <Link
                       href={l.href}
-                      onClick={() => setOpen(false)}
+                      onClick={() => closeFor(l.href)}
                       aria-current={isActive(l.href) ? "page" : undefined}
                       className="block py-1.5 font-display text-[clamp(2.3rem,10vw,4rem)] leading-[1.05] text-ink transition-colors aria-[current=page]:italic aria-[current=page]:text-sable"
                     >
@@ -161,7 +179,7 @@ export function SiteHeader({ lang, nav, ticketsHref }: { lang: Locale; nav: Nav;
             >
               <Link
                 href={ticketsHref}
-                onClick={() => setOpen(false)}
+                onClick={() => closeFor(ticketsHref)}
                 className="flex min-h-14 w-full items-center justify-center rounded-full bg-sable text-base font-semibold text-night"
               >
                 {nav.tickets}
@@ -172,7 +190,7 @@ export function SiteHeader({ lang, nav, ticketsHref }: { lang: Locale; nav: Nav;
                   <a href={site.tiktok} target="_blank" rel="noopener noreferrer">TikTok</a>
                   <a href={site.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp</a>
                 </div>
-                <Link href={switchHref} hrefLang={other} lang={other} onClick={() => setOpen(false)}>
+                <Link href={switchHref} hrefLang={other} lang={other}>
                   {nav.switchLang}
                 </Link>
               </div>
