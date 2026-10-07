@@ -12,6 +12,7 @@ import { TextReveal } from "@/components/motion/TextReveal";
 import { VelocityMarquee } from "@/components/motion/VelocityMarquee";
 import { getStore } from "@/lib/data";
 import { listPublicEvents } from "@/lib/data/catalog";
+import { ticketsHrefFor } from "@/lib/data/next-event";
 import { hasLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { formatDate, formatShortDate, formatTime } from "@/lib/i18n/format";
@@ -43,7 +44,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
             <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-4">
               <Magnetic>
                 <Link
-                  href={next ? `/${lang}/evenements/${next.slug}#billets` : `/${lang}/evenements`}
+                  href={next ? ticketsHrefFor(next, lang) : `/${lang}/evenements`}
                   className="group inline-flex min-h-14 items-center gap-3 rounded-full bg-sable px-7 py-4 font-semibold text-night transition hover:brightness-110"
                 >
                   {next ? dict.funnel.cta : dict.home.heroCta}
@@ -134,7 +135,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
                 <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
                   <Magnetic>
                     <Link
-                      href={`/${lang}/evenements/${next.slug}#billets`}
+                      href={ticketsHrefFor(next, lang)}
                       className="group inline-flex min-h-14 items-center gap-3 rounded-full bg-sable px-8 py-4 text-base font-semibold text-night transition hover:brightness-110"
                     >
                       {dict.home.getTickets}

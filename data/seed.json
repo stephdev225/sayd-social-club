@@ -40,7 +40,8 @@
       "instagram": {
         "Waklexx": "https://www.instagram.com/waklexx_"
       },
-      "heroImage": "/events/sprezzatura-visual.jpg"
+      "heroImage": "/events/sprezzatura-visual.jpg",
+      "externalTicketUrl": "https://thepointofsale.com/tickets/sprezzatura"
     }
   },
   "ticketTypes": {

@@ -9,9 +9,9 @@ import { SplitTitle } from "@/components/motion/SplitTitle";
 import { TicketPurchase } from "@/components/TicketPurchase";
 import { canSellOnline } from "@/lib/checkout-availability";
 import { getStore } from "@/lib/data";
-import { getEventBySlug, listTicketTypes, lowestPrice } from "@/lib/data/catalog";
+import { getEventBySlug, listTicketTypes } from "@/lib/data/catalog";
 import { availableQuantity } from "@/lib/domain/inventory";
-import { formatMoney, priceWithTaxes } from "@/lib/domain/money";
+import { priceWithTaxes } from "@/lib/domain/money";
 import { hasLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { formatDate, formatTime, t } from "@/lib/i18n/format";
@@ -50,8 +50,6 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
   // Close to the date without online sales: reservations by message or phone (as on the poster).
   const soon = new Date(event.startsAt).getTime() - new Date().getTime() < 21 * 24 * 3600 * 1000;
   const hero = event.heroImage ?? event.coverImage;
-  const from = lowestPrice(types);
-  const priceLabel = from !== null ? formatMoney(priceWithTaxes(from), lang) : null;
   const rawDate = formatDate(event.startsAt, lang);
   const dateLabel = rawDate.charAt(0).toUpperCase() + rawDate.slice(1);
 
@@ -152,9 +150,9 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
             <Reveal delay={0.45}>
               <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
                 {(canBuy || (soon && !isPast && event.status === "published")) && (
-                  <a href="#billets" className="group inline-flex min-h-14 items-center gap-3 rounded-full bg-sable px-8 font-semibold text-night transition hover:brightness-110">
+                  <a href={external ?? "#billets"} className="group inline-flex min-h-14 items-center gap-3 rounded-full bg-sable px-8 font-semibold text-night transition hover:brightness-110">
                     {canBuy ? dict.funnel.cta : dict.tickets.reserveTitle}
-                    <span aria-hidden className="transition-transform duration-300 group-hover:translate-y-0.5">↓</span>
+                    <span aria-hidden className="transition-transform duration-300 group-hover:translate-y-0.5">{external ? "↗" : "↓"}</span>
                   </a>
                 )}
                 {event.coverImage && (
@@ -185,8 +183,6 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
           {external ? (
             <div className="rounded-3xl bg-night-2/80 p-6 ring-1 ring-ink/10 backdrop-blur sm:p-8">
               <h2 className="t-h3">{dict.tickets.title}</h2>
-              {priceLabel && <p className="mt-5 font-display text-5xl leading-none">{priceLabel}</p>}
-              <p className="mt-2 text-sm text-ink/60">{dict.tickets.pricesNote.split(".")[0]}. {dict.funnel.onlineCheaper}.</p>
               <p className="mt-6 text-ink/80">{dict.tickets.externalNote}</p>
               <a
                 href={external}

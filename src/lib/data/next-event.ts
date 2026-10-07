@@ -1,6 +1,8 @@
 import "server-only";
 import type { Locale } from "@/lib/i18n/config";
 import { formatDate, formatShortDate, formatTime } from "@/lib/i18n/format";
+import { canSellOnline } from "@/lib/checkout-availability";
+import type { SaydEvent } from "@/lib/domain/types";
 import { listPublicEvents } from "./catalog";
 import { getStore } from "./index";
 
@@ -16,6 +18,15 @@ export interface NextEventSummary {
   image?: string;
 }
 
+/**
+ * Where "Buy tickets" buttons lead: straight to the partner ticketing page when the
+ * event is sold there (one click less), otherwise to the ticket box on the event page.
+ */
+export function ticketsHrefFor(e: Pick<SaydEvent, "slug" | "externalTicketUrl">, lang: Locale): string {
+  if (e.externalTicketUrl && !canSellOnline()) return e.externalTicketUrl;
+  return `/${lang}/evenements/${e.slug}#billets`;
+}
+
 /** The next party, formatted for calls to action across the site. Null when nothing is announced. */
 export async function getNextEventSummary(lang: Locale): Promise<NextEventSummary | null> {
   try {
@@ -28,7 +39,7 @@ export async function getNextEventSummary(lang: Locale): Promise<NextEventSummar
       name: e.name,
       slug: e.slug,
       href: `/${lang}/evenements/${e.slug}`,
-      ticketsHref: `/${lang}/evenements/${e.slug}#billets`,
+      ticketsHref: ticketsHrefFor(e, lang),
       startsAt: e.startsAt,
       dateShort: `${d.day} ${d.month}`,
       dateLong: `${formatDate(e.startsAt, lang)}, ${formatTime(e.startsAt, lang)}`,
