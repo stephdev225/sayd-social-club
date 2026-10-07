@@ -35,6 +35,7 @@
 | D-031 | 2026-10-07 | /evenements : section « Événements précédents » (événements passés publiés, ajoutés depuis l'admin) | Demande de Stéphane | ACTIVE |
 | D-032 | 2026-10-07 | Hébergement recommandé : Vercel Pro (le plan Hobby gratuit interdit l'usage commercial). Pas d'hébergement mutualisé cPanel/WordPress : le site a un serveur (paiements, webhook, admin) | Vérifié sur vercel.com/pricing le 2026-10-07 | PROPOSÉ |
 | D-033 | 2026-10-07 | Shader WebGL maison (soie lumineuse sable/bordeaux, suit le curseur) sur le héros et derrière l'inscription du pied de page ; mots du logo qui réagissent au curseur et à la vitesse de scroll ; « Événements précédents » toujours visible (état vide élégant) | Demande de Stéphane | ACTIVE |
+| D-034 | 2026-10-07 | Pas de Stripe pour l'instant : chaque soirée renvoie vers son lien Le Point de Vente (champ externalTicketUrl). Hébergement Vercel, domaine saydsocialclub.com acheté par Stéphane sur Vercel | Stéphane | ACTIVE (remplace D-001 pour la vente) |
 | D-013 | 2026-10-06 | Sites de motion fournis (Jitter, Dribbble, Framer, motionsites.ai) = inspiration uniquement, aucun template copié | Règle références | ACTIVE |
 
 ## Journal de session

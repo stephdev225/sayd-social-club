@@ -7,6 +7,10 @@ Les clés secrètes ne passent jamais par Claude : tu les colles toi-même dans
 Le tableau de bord admin (`/admin`) affiche une carte « Mise en route » qui coche
 chaque réglage dès qu'il est présent (sans jamais afficher les valeurs).
 
+> **Décision du 2026-10-07 :** les billets restent vendus sur Le Point de Vente. Pour chaque
+> soirée, on colle son lien dans l'admin (champ « Lien de billetterie externe ») et tous les
+> boutons « Billets » du site y mènent. Stripe n'est pas branché : la section 2 est facultative.
+
 ## 1. Base de données et accès admin (débloque les formulaires et /admin)
 
 | Variable | Où la trouver |
@@ -18,7 +22,7 @@ chaque réglage dès qu'il est présent (sans jamais afficher les valeurs).
 > Tant que `FIREBASE_SERVICE_ACCOUNT` manque, les formulaires du site (contact,
 > « Me prévenir », partenariats) répondent par une erreur en production.
 
-## 2. Stripe en mode TEST
+## 2. Stripe en mode TEST (facultatif : pas utilisé tant que les billets sont vendus sur Le Point de Vente)
 
 1. Stripe → activer **Mode test** (interrupteur en haut à droite).
 2. **Développeurs → Clés API** → copier la *clé secrète* `sk_test_…` → variable `STRIPE_SECRET_KEY`.

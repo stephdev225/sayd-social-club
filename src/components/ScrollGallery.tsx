@@ -34,7 +34,7 @@ export function ScrollGallery({ photos, href }: { photos: ScrollPhoto[]; href: s
               href={href}
               tabIndex={i >= row.length ? -1 : undefined}
               aria-hidden={i >= row.length ? true : undefined}
-              className="group relative block h-[34vw] shrink-0 overflow-hidden rounded-2xl md:h-[21vw] md:max-h-[22rem]"
+              className="group relative block h-[34vw] shrink-0 overflow-hidden rounded-2xl md:h-[15vw] md:max-h-[15rem]"
               style={{ aspectRatio: p.portrait ? "4 / 5" : "3 / 2" }}
             >
               <Image

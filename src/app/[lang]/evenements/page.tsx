@@ -70,7 +70,7 @@ export default async function EventsPage({ params }: PageProps<"/[lang]/evenemen
           <h2 id="passes" className="t-h2">{dict.events.past}</h2>
           <p className="mt-3 text-muted">{dict.events.pastIntro}</p>
           {past.length === 0 ? (
-            <div className="mt-10 grid gap-5 sm:grid-cols-3">
+            <div className="mt-10 grid max-w-4xl gap-5 sm:grid-cols-3">
               {[0, 1, 2].map((i) => (
                 <div key={i} className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-night-2">
                   <div aria-hidden className="absolute inset-0 animate-pulse bg-[radial-gradient(circle_at_30%_20%,rgba(217,178,106,0.12),transparent_60%)]" />
@@ -79,7 +79,7 @@ export default async function EventsPage({ params }: PageProps<"/[lang]/evenemen
               ))}
             </div>
           ) : (
-          <ul className="mt-10 grid gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-10 grid gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
             {past.map((e) => {
               const img = e.heroImage ?? e.coverImage;
               return (

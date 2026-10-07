@@ -85,6 +85,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       {/* ── 4. Experience: photo cards that pin and stack as you scroll ── */}
       <section className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 md:pb-36 lg:px-10" aria-labelledby="experience">
         <LineReveal id="experience" text={dict.home.pillarsTitle} className="t-h2 mb-10 px-1 md:mb-14" />
+        <div className="mx-auto max-w-5xl">
         <ExperienceStack
           items={dict.home.pillars.map((p, i) => ({
             title: p.t,
@@ -93,6 +94,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
             alt: PILLAR_IMAGES[i].alt[lang],
           }))}
         />
+        </div>
       </section>
 
       {/* ── 6. Gallery teaser: drag / swipe ── */}
