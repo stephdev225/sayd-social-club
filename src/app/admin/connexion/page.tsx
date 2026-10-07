@@ -10,7 +10,7 @@ export default async function LoginPage({ searchParams }: PageProps<"/admin/conn
   if (session) redirect(session.role === "staff" ? "/scan" : next);
   return (
     <main className="mx-auto flex min-h-svh max-w-sm flex-col justify-center px-4">
-      <Image src="/brand/logo-ivory.png" alt="Sayd Social Club" width={319} height={134} className="mb-10 h-12 w-auto self-start" />
+      <Image src="/brand/logo-block-ivory.png" alt="Sayd Social Club" width={560} height={590} className="mb-10 h-20 w-auto self-start" />
       <h1 className="t-h2 mb-8">Espace équipe</h1>
       <LoginForm next={next} />
     </main>

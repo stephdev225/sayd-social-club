@@ -24,7 +24,7 @@ export function AdminShell({
     <div className="lg:grid lg:min-h-svh lg:grid-cols-[15rem_1fr]">
       <aside className="border-b border-line bg-night-2 p-5 lg:sticky lg:top-0 lg:flex lg:h-svh lg:flex-col lg:border-b-0 lg:border-r">
         <Link href="/admin" aria-label="Tableau de bord">
-          <Image src="/brand/logo-ivory.png" alt="Sayd Social Club" width={319} height={134} className="h-9 w-auto" />
+          <Image src="/brand/logo-block-ivory.png" alt="Sayd Social Club" width={560} height={590} className="h-12 w-auto" />
         </Link>
         <nav aria-label="Admin" className="mt-8 flex gap-1 overflow-x-auto text-sm lg:flex-col">
           {main.map((l) => (

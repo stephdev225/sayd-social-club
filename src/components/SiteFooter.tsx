@@ -23,7 +23,7 @@ export function SiteFooter({ lang, dict }: { lang: Locale; dict: Dictionary }) {
 
         <div className="mt-20 grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
           <div>
-            <Image src="/brand/logo-ivory.png" alt="Sayd Social Club" width={319} height={134} className="h-10 w-auto" />
+            <Image src="/brand/logo-block-ivory.png" alt="Sayd Social Club" width={560} height={590} className="h-20 w-auto" />
             <p className="mt-4 max-w-xs text-sm text-ink/60">{dict.footer.desc}</p>
           </div>
           <nav aria-label={dict.nav.ariaFooter} className="grid grid-cols-2 gap-3 text-ink/75 sm:grid-cols-1">
