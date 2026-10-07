@@ -4,6 +4,7 @@ import "@fontsource-variable/cormorant-garamond/wght.css";
 import "@fontsource-variable/cormorant-garamond/wght-italic.css";
 import "@fontsource-variable/dm-sans/wght.css";
 import "../globals.css";
+import { BackLink } from "@/components/BackLink";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
@@ -63,7 +64,8 @@ export default async function LangLayout({ children, params }: LayoutProps<"/[la
         </a>
         <SmoothScroll />
         <SiteHeader lang={lang} nav={dict.nav} ticketsHref={next?.ticketsHref ?? `/${lang}/evenements`} />
-        <main id="contenu" className="flex-1">
+        <main id="contenu" className="relative flex-1">
+          <BackLink lang={lang} home={dict.common.home} events={dict.events.all} />
           {children}
         </main>
         <SiteFooter lang={lang} dict={dict} />

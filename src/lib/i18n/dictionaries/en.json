@@ -48,7 +48,7 @@
     "pillars": [
       {
         "t": "The music",
-        "d": "Afrobeats, amapiano, dancehall and house, from DJs who know how to read a room."
+        "d": "Afrobeats, amapiano, dancehall and house, with DJs who know how to fill a dance floor."
       },
       {
         "t": "The elegance",
@@ -76,7 +76,8 @@
     "lineup": "Music",
     "presentedBy": "Presented by",
     "notFound": "This event doesn't exist or is no longer online.",
-    "reservations": "Reservations"
+    "reservations": "Reservations",
+    "all": "All events"
   },
   "tickets": {
     "title": "Tickets",
@@ -127,7 +128,7 @@
     "externalNote": "For this party, tickets are sold on Le Point de Vente, our ticketing partner. Secure payment, ticket sent by email.",
     "externalCta": "Buy my tickets",
     "soonTitle": "Tickets on sale soon",
-    "soonText": "Leave your email and we'll tell you the moment tickets go on sale, before the public announcement.",
+    "soonText": "Leave your email and we'll write as soon as tickets go on sale, before the public announcement.",
     "reserveTitle": "Reserve your spot",
     "reserveText": "Message or call us and we'll confirm your reservation quickly.",
     "reserveWhatsapp": "Reserve on WhatsApp",
@@ -183,7 +184,7 @@
   },
   "about": {
     "title": "The club",
-    "lead": "Sayd Social Club has been throwing premium parties and day parties in Québec City since 2019, for a 25–35 crowd.",
+    "lead": "Since 2019, Sayd Social Club has been creating Afro-Caribbean parties and day parties in Québec City, where people come for the music, the style and the company.",
     "body": "Our mission: build a real premium Afro-Caribbean scene in Québec City. Afrobeats, amapiano, dancehall, house, venues chosen for the occasion and a dress code for every edition.",
     "sound": "Afrobeats, amapiano, dancehall, house"
   },
@@ -231,7 +232,7 @@
   },
   "gallery": {
     "title": "Gallery",
-    "intro": "The atmosphere of our nights: music, light, elegance. Tap a photo to open it full screen.",
+    "intro": "The atmosphere of our nights: music, light, elegance. Click a photo to enlarge it.",
     "viewer": {
       "close": "Close",
       "prev": "Previous photo",
@@ -239,20 +240,19 @@
     }
   },
   "notify": {
-    "title": "Hear about the next party first",
-    "text": "One alert per announced party, with early access to tickets. No spam.",
+    "title": "Don't miss the next party",
     "name": "First name",
     "email": "Your email",
     "cta": "Notify me",
     "sending": "Signing up…",
     "done": "You're on the list.",
-    "doneText": "You'll be among the first to hear about the next party.",
+    "doneText": "We'll write as soon as the next party is announced.",
     "error": "Sign-up failed. Try again in a moment.",
     "consent": "By signing up you agree to receive our announcements. One-click unsubscribe."
   },
   "funnel": {
     "ctaTitle": "The next party is waiting",
-    "ctaText": "Online tickets cost less than at the door. Book now, pay securely.",
+    "ctaText": "Spots go fast, and tickets cost less online than at the door.",
     "cta": "Get my tickets",
     "ctaSecondary": "See the party",
     "buyBar": "Get my tickets",
@@ -261,9 +261,9 @@
   },
   "showcase": {
     "title": "Showcase",
-    "intro": "Sayd brings in artists and DJs from here and abroad. An Afro-Caribbean scene in Québec City, with international guests.",
+    "intro": "Artists and DJs from here and abroad, invited to light up our nights in Québec City.",
     "current": "On the bill",
-    "past": "Played at Sayd",
+    "past": "They played at Sayd",
     "upcoming": "Coming soon",
     "international": "International guest",
     "booking": "Are you an artist or a DJ?",
@@ -276,8 +276,8 @@
     "whyTitle": "Why Sayd",
     "why": [
       {
-        "t": "A targeted crowd",
-        "d": "A 25–35 Afro-Caribbean and cosmopolitan audience that goes out, dresses up and shares."
+        "t": "A loyal crowd",
+        "d": "An Afro-Caribbean and cosmopolitan community that goes out, dresses up and shares its nights."
       },
       {
         "t": "Carefully crafted nights",
@@ -300,7 +300,7 @@
       },
       {
         "t": "Partner venues",
-        "d": "Have a room, a terrace, a restaurant? Let's host together."
+        "d": "Have a room, a terrace or a restaurant? Let's throw a party at your place."
       },
       {
         "t": "Collaborations",

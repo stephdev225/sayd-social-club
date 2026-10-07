@@ -28,6 +28,8 @@
 | D-024 | 2026-10-07 | Événements et billets gérés dans /admin/evenements (prix saisis taxes incluses, heures de Québec, images stockées dans Firestore en WebP ≤ 700 Ko) ; le site public se met à jour à l'enregistrement | Stéphane veut annoncer les prochains events lui-même | ACTIVE |
 | D-025 | 2026-10-07 | Vente non ouverte : à moins de 21 jours → boîte « Réserver » (WhatsApp/téléphone, comme l'affiche) ; plus tôt → « Me prévenir » ; lien externe (Le Point de Vente) prioritaire s'il est renseigné | Sprezzatura reste sur lepointdevente, lien exact à fournir | ACTIVE |
 | D-026 | 2026-10-07 | Domaine visé : saydsocialclub.com (disponible, 11,25 $ US/an chez Vercel au 2026-10-07). Achat par Stéphane | — | EN ATTENTE |
+| D-027 | 2026-10-07 | Le site s'ouvre toujours en français (plus de détection de langue du navigateur) ; l'anglais est mémorisé seulement si le visiteur le choisit | Demande de Stéphane | ACTIVE |
+| D-028 | 2026-10-07 | Aucune tranche d'âge dans les textes ; lien « ← Accueil » / « ← Tous les événements » sous l'en-tête des pages intérieures | Demande de Stéphane | ACTIVE |
 | D-013 | 2026-10-06 | Sites de motion fournis (Jitter, Dribbble, Framer, motionsites.ai) = inspiration uniquement, aucun template copié | Règle références | ACTIVE |
 
 ## Journal de session

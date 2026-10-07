@@ -12,7 +12,6 @@ export function SiteFooter({ lang, dict }: { lang: Locale; dict: Dictionary }) {
     <footer className="relative mt-10 overflow-hidden md:mt-16">
       <div className="mx-auto max-w-7xl px-5 pb-10 pt-12 sm:px-6 md:pt-16 lg:px-10">
         <LineReveal text={dict.notify.title} className="max-w-3xl font-display text-[clamp(2.4rem,7vw,5.5rem)] leading-[0.95]" />
-        <p className="mt-5 max-w-lg text-ink/75">{dict.notify.text}</p>
         <div className="mt-10 max-w-4xl">
           <NotifyForm lang={lang} source="footer" labels={dict.notify} />
         </div>

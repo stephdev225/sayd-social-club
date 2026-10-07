@@ -48,7 +48,7 @@
     "pillars": [
       {
         "t": "La musique",
-        "d": "Afrobeats, amapiano, dancehall et house, par des DJs qui connaissent la salle."
+        "d": "Afrobeats, amapiano, dancehall et house, avec des DJs qui savent faire danser une salle."
       },
       {
         "t": "L'élégance",
@@ -76,7 +76,8 @@
     "lineup": "Musique",
     "presentedBy": "Présenté par",
     "notFound": "Cet événement n'existe pas ou n'est plus en ligne.",
-    "reservations": "Réservations"
+    "reservations": "Réservations",
+    "all": "Tous les événements"
   },
   "tickets": {
     "title": "Billets",
@@ -127,7 +128,7 @@
     "externalNote": "Pour cette soirée, les billets sont vendus sur Le Point de Vente, notre billetterie partenaire. Paiement sécurisé, billet envoyé par courriel.",
     "externalCta": "Acheter mes billets",
     "soonTitle": "Billets bientôt en vente",
-    "soonText": "Laissez votre courriel : vous serez prévenu·e dès l'ouverture de la billetterie, avant l'annonce publique.",
+    "soonText": "Laissez votre courriel : on vous écrit dès l'ouverture de la billetterie, avant l'annonce publique.",
     "reserveTitle": "Réserver vos places",
     "reserveText": "Écrivez-nous ou appelez : on confirme votre réservation rapidement.",
     "reserveWhatsapp": "Réserver par WhatsApp",
@@ -183,7 +184,7 @@
   },
   "about": {
     "title": "Le club",
-    "lead": "Sayd Social Club organise des soirées et des day parties haut de gamme à Québec depuis 2019, pour une clientèle de 25 à 35 ans.",
+    "lead": "Depuis 2019, Sayd Social Club crée à Québec des soirées et des day parties afro-caribéennes où l'on vient pour la musique, l'élégance et les rencontres.",
     "body": "Notre mission : bâtir à Québec une vraie scène afro-caribéenne premium. Afrobeats, amapiano, dancehall, house, des lieux choisis pour l'occasion et un code vestimentaire à chaque édition.",
     "sound": "Afrobeats, amapiano, dancehall, house"
   },
@@ -231,7 +232,7 @@
   },
   "gallery": {
     "title": "Galerie",
-    "intro": "L'atmosphère de nos soirées : musique, lumière, élégance. Touchez une photo pour l'ouvrir en grand.",
+    "intro": "L'atmosphère de nos soirées : musique, lumière, élégance. Cliquez sur une photo pour l'agrandir.",
     "viewer": {
       "close": "Fermer",
       "prev": "Photo précédente",
@@ -239,20 +240,19 @@
     }
   },
   "notify": {
-    "title": "Soyez prévenu de la prochaine soirée",
-    "text": "Une seule alerte par soirée annoncée, avec l'accès aux billets avant tout le monde. Pas de spam.",
+    "title": "Ne manquez pas la prochaine soirée",
     "name": "Prénom",
     "email": "Votre courriel",
     "cta": "Me prévenir",
     "sending": "Inscription…",
     "done": "C'est noté.",
-    "doneText": "Vous serez parmi les premiers informés de la prochaine soirée.",
+    "doneText": "On vous écrit dès que la prochaine soirée est annoncée.",
     "error": "L'inscription a échoué. Réessayez dans un instant.",
     "consent": "En vous inscrivant, vous acceptez de recevoir nos annonces. Désinscription en un clic."
   },
   "funnel": {
     "ctaTitle": "La prochaine soirée vous attend",
-    "ctaText": "Les billets en ligne sont moins chers qu'à la porte. Réservez maintenant, payez en toute sécurité.",
+    "ctaText": "Les places partent vite, et les billets coûtent moins cher en ligne qu'à la porte.",
     "cta": "Prendre mes billets",
     "ctaSecondary": "Voir la soirée",
     "buyBar": "Prendre mes billets",
@@ -261,9 +261,9 @@
   },
   "showcase": {
     "title": "Showcase",
-    "intro": "Sayd invite des artistes et des DJs d'ici et d'ailleurs. Une scène afro-caribéenne à Québec, avec des invités internationaux.",
+    "intro": "Des artistes et des DJs d'ici et d'ailleurs, invités à faire vibrer nos soirées à Québec.",
     "current": "À l'affiche",
-    "past": "Déjà passés chez Sayd",
+    "past": "Ils sont passés par Sayd",
     "upcoming": "Bientôt",
     "international": "Invité international",
     "booking": "Vous êtes artiste ou DJ ?",
@@ -276,8 +276,8 @@
     "whyTitle": "Pourquoi Sayd",
     "why": [
       {
-        "t": "Un public ciblé",
-        "d": "Une clientèle de 25 à 35 ans, afro-caribéenne et cosmopolite, qui sort, s'habille et partage."
+        "t": "Un public fidèle",
+        "d": "Une communauté afro-caribéenne et cosmopolite qui sort, s'habille et partage ses soirées."
       },
       {
         "t": "Des soirées soignées",
@@ -300,7 +300,7 @@
       },
       {
         "t": "Lieux partenaires",
-        "d": "Vous avez une salle, une terrasse, un restaurant ? Recevons ensemble."
+        "d": "Vous avez une salle, une terrasse ou un restaurant ? Organisons une soirée chez vous."
       },
       {
         "t": "Collaborations",
