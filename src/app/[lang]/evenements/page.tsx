@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { alternates } from "@/lib/seo";
 import { SplitTitle } from "@/components/motion/SplitTitle";
+import { VideoLoop } from "@/components/VideoLoop";
 import { getStore } from "@/lib/data";
 import { listPublicEvents } from "@/lib/data/catalog";
 import type { SaydEvent } from "@/lib/domain/types";
@@ -79,14 +80,16 @@ export default async function EventsPage({ params }: PageProps<"/[lang]/evenemen
               ))}
             </div>
           ) : (
-          <ul className="mt-10 grid gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-10 grid gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {past.map((e) => {
               const img = e.heroImage ?? e.coverImage;
               return (
                 <li key={e.id}>
                   <Link href={`/${lang}/evenements/${e.slug}`} className="group block">
                     <span className="relative block aspect-[4/5] overflow-hidden rounded-2xl bg-night-2">
-                      {img && (
+                      {e.videoLoop ? (
+                        <VideoLoop src={e.videoLoop} poster={img} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+                      ) : img && (
                         <Image
                           src={img}
                           alt={e.name}

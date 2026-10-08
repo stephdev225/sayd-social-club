@@ -20,10 +20,10 @@ export function EventFacts({ event, lang, dict, className = "" }: { event: SaydE
             {i > 0 && ", "}
             {href ? (
               <a href={href} target="_blank" rel="noopener noreferrer" className="underline decoration-sable/60 underline-offset-4 hover:decoration-sable">
-                DJ {name}
+                {name}
               </a>
             ) : (
-              `DJ ${name}`
+              name
             )}
           </span>
         );

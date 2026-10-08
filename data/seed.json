@@ -29,7 +29,7 @@
         "en": "Sprezzatura style: open collar, linen, neutral tones, sunglasses. Effortlessly chic."
       },
       "lineup": [
-        "Waklexx"
+        "DJ Waklexx"
       ],
       "partners": [
         "Sayd Social Club",
@@ -38,10 +38,79 @@
       "accent": "#5a1420",
       "coverImage": "/events/sprezzatura-poster.jpg",
       "instagram": {
-        "Waklexx": "https://www.instagram.com/waklexx_"
+        "DJ Waklexx": "https://www.instagram.com/waklexx_"
       },
       "heroImage": "/events/sprezzatura-visual.jpg",
       "externalTicketUrl": "https://thepointofsale.com/tickets/sprezzatura"
+    },
+    "showcase-kulturr-2026-09-04": {
+      "id": "showcase-kulturr-2026-09-04",
+      "slug": "showcase-kulturr",
+      "name": "Showcase Kulturr",
+      "tagline": {
+        "fr": "Kulturr en live à Québec.",
+        "en": "Kulturr live in Québec City."
+      },
+      "description": {
+        "fr": "Sayd Social Club, Belick Vibes et Ivoire Production ont reçu l'artiste Kulturr pour un showcase au JGolf, avec Ben, Delfa et Mzo aux platines.",
+        "en": "Sayd Social Club, Belick Vibes and Ivoire Production welcomed the artist Kulturr for a showcase at JGolf, with Ben, Delfa and Mzo on the decks."
+      },
+      "startsAt": "2026-09-05T03:00:00.000Z",
+      "endsAt": "2026-09-05T07:00:00.000Z",
+      "venueName": "JGolf",
+      "address": "2360, chemin Sainte-Foy",
+      "city": "Québec",
+      "capacity": 300,
+      "status": "published",
+      "lineup": [
+        "Kulturr",
+        "Ben",
+        "Delfa",
+        "Mzo"
+      ],
+      "partners": [
+        "Sayd Social Club",
+        "Belick Vibes",
+        "Ivoire Production",
+        "JGolf"
+      ],
+      "heroImage": "/events/kulturr-poster.webp",
+      "video": "/events/kulturr.mp4",
+      "videoLoop": "/events/kulturr-loop.mp4"
+    },
+    "bagatelle-2026-09-06": {
+      "id": "bagatelle-2026-09-06",
+      "slug": "the-bagatelle",
+      "name": "The Bagatelle",
+      "edition": {
+        "fr": "Édition",
+        "en": "Edition"
+      },
+      "tagline": {
+        "fr": "Un dimanche soir en terrasse.",
+        "en": "A Sunday night on the terrace."
+      },
+      "description": {
+        "fr": "Sayd Social Club et Ben G ont transformé un dimanche de septembre en soirée sur la Grande Allée, en musique avec DJ Ben & Friends.",
+        "en": "Sayd Social Club and Ben G turned a September Sunday into a night on Grande Allée, with music by DJ Ben & Friends."
+      },
+      "startsAt": "2026-09-07T00:00:00.000Z",
+      "endsAt": "2026-09-07T05:00:00.000Z",
+      "venueName": "624, Grande Allée Est",
+      "address": "",
+      "city": "Québec",
+      "capacity": 200,
+      "status": "published",
+      "lineup": [
+        "DJ Ben & Friends"
+      ],
+      "partners": [
+        "Sayd Social Club",
+        "Ben G Signature"
+      ],
+      "heroImage": "/events/bagatelle-poster.webp",
+      "video": "/events/bagatelle.mp4",
+      "videoLoop": "/events/bagatelle-loop.mp4"
     }
   },
   "ticketTypes": {

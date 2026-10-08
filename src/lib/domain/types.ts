@@ -25,6 +25,9 @@ export interface SaydEvent {
   coverImage?: string; // official poster (with text)
   /** Clean visual without text, used large on the site. Falls back to coverImage. */
   heroImage?: string;
+  /** Recap video of the night (mp4) and a short silent loop for previews. */
+  video?: string;
+  videoLoop?: string;
   /** While online sales are not open on this site, where tickets are sold (e.g. Le Point de Vente). */
   externalTicketUrl?: string;
   dressCode?: Localized;

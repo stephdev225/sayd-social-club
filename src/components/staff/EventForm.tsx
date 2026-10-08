@@ -97,7 +97,7 @@ export function EventForm({
       </Section>
 
       <Section title="Programme" intro="Un nom par ligne. Ajoutez « | lien Instagram » pour le rendre cliquable.">
-        <TextArea name="lineup" label="Artistes et DJs" defaultValue={values.lineup} rows={3} placeholder={"Waklexx | https://www.instagram.com/waklexx_"} />
+        <TextArea name="lineup" label="Artistes et DJs" defaultValue={values.lineup} rows={3} placeholder={"DJ Waklexx | https://www.instagram.com/waklexx_"} />
         <Field name="partners" label="Présenté par" defaultValue={values.partners} hint="Séparés par des virgules." placeholder="Sayd Social Club, Ben G Signature" />
       </Section>
 

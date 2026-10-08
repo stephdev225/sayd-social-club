@@ -73,7 +73,7 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
     endDate: event.endsAt,
     eventStatus: event.status === "cancelled" ? "https://schema.org/EventCancelled" : "https://schema.org/EventScheduled",
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-    location: { "@type": "Place", name: event.venueName, address: `${event.address}, ${event.city}, QC, CA` },
+    location: { "@type": "Place", name: event.venueName, address: [event.address || event.venueName, event.city, "QC", "CA"].join(", ") },
     image: event.coverImage ? [event.coverImage] : undefined,
     description: event.description[lang],
     organizer: event.partners.map((name) => ({ "@type": "Organization", name })),
@@ -91,9 +91,23 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
 
       <header className="relative isolate overflow-hidden">
-        <div className={`mx-auto grid max-w-7xl gap-10 px-5 pb-12 pt-24 sm:px-6 md:pt-32 lg:items-end lg:gap-14 lg:px-10 lg:pb-20 ${hero ? "lg:grid-cols-[1.25fr_1fr]" : "md:pt-40"}`}>
+        <div className={`mx-auto grid max-w-7xl gap-10 px-5 pb-12 pt-24 sm:px-6 md:pt-32 lg:items-end lg:gap-14 lg:px-10 lg:pb-20 ${hero || event.video ? "lg:grid-cols-[1.25fr_1fr]" : "md:pt-40"}`}>
           {/* The visual on its own, without the poster text, so the image breathes */}
-          {hero && (
+          {event.video ? (
+            <Reveal delay={0.15}>
+              {/* Recap of the night: vertical video, played with sound by the visitor */}
+              <video
+                src={event.video}
+                poster={event.heroImage}
+                controls
+                playsInline
+                preload="metadata"
+                className="mx-auto block aspect-[9/16] max-h-[78svh] w-full max-w-md rounded-3xl bg-night-2 object-cover"
+              >
+                <track kind="captions" />
+              </video>
+            </Reveal>
+          ) : hero && (
             <Reveal kind="mask" delay={0.15}>
               <div className="relative -mx-5 aspect-[4/3] sm:mx-0 lg:aspect-[1080/900]">
                 <Image
@@ -116,7 +130,7 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
                 <dt className="text-sable">{dict.events.doors}</dt>
                 <dd className="text-ink">{dateLabel} · {formatTime(event.startsAt, lang)} – {formatTime(event.endsAt, lang)}</dd>
                 <dt className="text-sable">{dict.events.venue}</dt>
-                <dd className="text-ink">{event.venueName}, {event.address}, {event.city}</dd>
+                <dd className="text-ink">{[event.venueName, event.address, event.city].filter(Boolean).join(", ")}</dd>
                 {event.lineup.length > 0 && (
                   <>
                     <dt className="text-sable">{dict.events.lineup}</dt>
@@ -127,9 +141,9 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
                           <span key={name}>
                             {i > 0 && ", "}
                             {href ? (
-                              <a href={href} target="_blank" rel="noopener noreferrer" className="link-draw pb-0.5">DJ {name}</a>
+                              <a href={href} target="_blank" rel="noopener noreferrer" className="link-draw pb-0.5">{name}</a>
                             ) : (
-                              `DJ ${name}`
+                              name
                             )}
                           </span>
                         );
@@ -137,8 +151,12 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
                     </dd>
                   </>
                 )}
-                <dt className="text-sable">{dict.events.reservations}</dt>
-                <dd><a href={site.phoneHref} className="link-draw pb-0.5 text-ink">{site.phone}</a></dd>
+                {!isPast && (
+                  <>
+                    <dt className="text-sable">{dict.events.reservations}</dt>
+                    <dd><a href={site.phoneHref} className="link-draw pb-0.5 text-ink">{site.phone}</a></dd>
+                  </>
+                )}
               </dl>
             </Reveal>
 
