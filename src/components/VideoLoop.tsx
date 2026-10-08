@@ -13,15 +13,25 @@ export function VideoLoop({ src, poster, className = "" }: { src: string; poster
     const v = ref.current;
     if (!v) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let onScreen = false;
+    const sync = () => {
+      if (onScreen && document.visibilityState === "visible") v.play().catch(() => {});
+      else v.pause();
+    };
     const io = new IntersectionObserver(
       ([e]) => {
-        if (e.isIntersecting) v.play().catch(() => {});
-        else v.pause();
+        onScreen = e.isIntersecting;
+        sync();
       },
       { threshold: 0.25 },
     );
     io.observe(v);
-    return () => io.disconnect();
+    // Browsers pause silent videos in background tabs: resume when the tab comes back.
+    document.addEventListener("visibilitychange", sync);
+    return () => {
+      io.disconnect();
+      document.removeEventListener("visibilitychange", sync);
+    };
   }, []);
 
   return <video ref={ref} src={src} poster={poster} muted loop playsInline preload="none" aria-hidden className={className} />;
