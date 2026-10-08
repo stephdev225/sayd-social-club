@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/evenements
   if (!hasLocale(lang)) return {};
   const event = await getEventBySlug(getStore(), slug);
   if (!event) return {};
-  const title = `${event.name} — ${formatDate(event.startsAt, lang, { weekday: undefined })}`;
+  const title = event.dateHidden ? event.name : `${event.name} — ${formatDate(event.startsAt, lang, { weekday: undefined })}`;
   return {
     title,
     description: event.tagline[lang],
@@ -88,7 +88,9 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
 
   return (
     <article>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
+      {!event.dateHidden && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
+      )}
 
       <header className="relative isolate overflow-hidden">
         <div className={`mx-auto grid max-w-7xl gap-10 px-5 pb-12 pt-24 sm:px-6 md:pt-32 lg:items-end lg:gap-14 lg:px-10 lg:pb-20 ${hero || event.video ? "lg:grid-cols-[1.25fr_1fr]" : "md:pt-40"}`}>
@@ -127,10 +129,18 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
             {/* What the poster said, moved here */}
             <Reveal delay={0.25}>
               <dl className="grid grid-cols-[auto_1fr] gap-x-5 gap-y-2.5 text-[0.95rem]">
-                <dt className="text-sable">{dict.events.doors}</dt>
-                <dd className="text-ink">{dateLabel} · {formatTime(event.startsAt, lang)} – {formatTime(event.endsAt, lang)}</dd>
-                <dt className="text-sable">{dict.events.venue}</dt>
-                <dd className="text-ink">{[event.venueName, event.address, event.city].filter(Boolean).join(", ")}</dd>
+                {!event.dateHidden && (
+                  <>
+                    <dt className="text-sable">{dict.events.doors}</dt>
+                    <dd className="text-ink">{dateLabel} · {formatTime(event.startsAt, lang)} – {formatTime(event.endsAt, lang)}</dd>
+                  </>
+                )}
+                {event.venueName && (
+                  <>
+                    <dt className="text-sable">{dict.events.venue}</dt>
+                    <dd className="text-ink">{[event.venueName, event.address, event.city].filter(Boolean).join(", ")}</dd>
+                  </>
+                )}
                 {event.lineup.length > 0 && (
                   <>
                     <dt className="text-sable">{dict.events.lineup}</dt>

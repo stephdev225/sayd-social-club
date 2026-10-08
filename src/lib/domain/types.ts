@@ -28,6 +28,8 @@ export interface SaydEvent {
   /** Recap video of the night (mp4) and a short silent loop for previews. */
   video?: string;
   videoLoop?: string;
+  /** Past event shown without its date and venue (date kept only for ordering). */
+  dateHidden?: boolean;
   /** While online sales are not open on this site, where tickets are sold (e.g. Le Point de Vente). */
   externalTicketUrl?: string;
   dressCode?: Localized;

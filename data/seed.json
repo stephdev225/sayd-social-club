@@ -111,6 +111,34 @@
       "heroImage": "/events/bagatelle-poster.webp",
       "video": "/events/bagatelle.mp4",
       "videoLoop": "/events/bagatelle-loop.mp4"
+    },
+    "azur": {
+      "id": "azur",
+      "slug": "azur",
+      "name": "Azur",
+      "tagline": {
+        "fr": "Une soirée Sayd Social Club.",
+        "en": "A Sayd Social Club night."
+      },
+      "description": {
+        "fr": "Lumières tamisées, DJs aux platines et une salle pleine du début à la fin : retour en images sur Azur.",
+        "en": "Low lights, DJs on the decks and a full room from start to finish: Azur in pictures."
+      },
+      "startsAt": "2026-08-01T02:00:00.000Z",
+      "endsAt": "2026-08-01T07:00:00.000Z",
+      "dateHidden": true,
+      "venueName": "",
+      "address": "",
+      "city": "Québec",
+      "capacity": 200,
+      "status": "published",
+      "lineup": [],
+      "partners": [
+        "Sayd Social Club"
+      ],
+      "heroImage": "/events/azur-poster.webp",
+      "video": "/events/azur.mp4",
+      "videoLoop": "/events/azur-loop.mp4"
     }
   },
   "ticketTypes": {

@@ -37,6 +37,7 @@
 | D-033 | 2026-10-07 | Shader WebGL maison (soie lumineuse sable/bordeaux, suit le curseur) sur le héros et derrière l'inscription du pied de page ; mots du logo qui réagissent au curseur et à la vitesse de scroll ; « Événements précédents » toujours visible (état vide élégant) | Demande de Stéphane | ACTIVE |
 | D-034 | 2026-10-07 | Pas de Stripe pour l'instant : chaque soirée renvoie vers son lien Le Point de Vente (champ externalTicketUrl). Hébergement Vercel, domaine saydsocialclub.com acheté par Stéphane sur Vercel | Stéphane | ACTIVE (remplace D-001 pour la vente) |
 | D-035 | 2026-10-07 | Événements passés : Showcase Kulturr (4 sept. 2026, JGolf) et The Bagatelle (6 sept. 2026, 624 Grande Allée Est) avec leurs vidéos récap (mp4 720p + boucle muette) ; affiches non publiées, infos seulement. Line-up affiché tel qu'écrit (plus de « DJ » ajouté automatiquement) | Vidéos fournies par Stéphane | ACTIVE |
+| D-036 | 2026-10-07 | Azur ajouté aux événements précédents sans date ni lieu (champ dateHidden) ; vidéo du mur de photos en tête de la Galerie | Stéphane : « pas besoin de date et lieu » | ACTIVE |
 | D-013 | 2026-10-06 | Sites de motion fournis (Jitter, Dribbble, Framer, motionsites.ai) = inspiration uniquement, aucun template copié | Règle références | ACTIVE |
 
 ## Journal de session

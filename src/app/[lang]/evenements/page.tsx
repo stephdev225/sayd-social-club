@@ -99,12 +99,14 @@ export default async function EventsPage({ params }: PageProps<"/[lang]/evenemen
                         />
                       )}
                       <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-night/80 via-transparent to-transparent" />
-                      <span className="absolute bottom-4 left-4 text-sm text-ink/85 first-letter:uppercase">
-                        {formatDate(e.startsAt, lang, { weekday: undefined, day: undefined, year: "numeric" })}
-                      </span>
+                      {!e.dateHidden && (
+                        <span className="absolute bottom-4 left-4 text-sm text-ink/85 first-letter:uppercase">
+                          {formatDate(e.startsAt, lang, { weekday: undefined, day: undefined, year: "numeric" })}
+                        </span>
+                      )}
                     </span>
                     <span className="mt-4 block font-display text-2xl leading-tight transition-colors group-hover:text-sable">{e.name}</span>
-                    <span className="block text-sm text-muted">{e.venueName}, {e.city}</span>
+                    {e.venueName && <span className="block text-sm text-muted">{[e.venueName, e.city].filter(Boolean).join(", ")}</span>}
                   </Link>
                 </li>
               );
