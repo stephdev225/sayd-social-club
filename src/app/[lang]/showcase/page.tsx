@@ -11,7 +11,7 @@ import { artists, type Artist } from "@/lib/artists";
 import { getNextEventSummary } from "@/lib/data/next-event";
 import { hasLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
-import { ambiance, pexels } from "@/lib/media";
+import { photos } from "@/lib/media";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/showcase">): Promise<Metadata> {
   const { lang } = await params;
@@ -20,8 +20,8 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/showcase">
   return { title: dict.showcase.title, description: dict.showcase.intro, alternates: alternates(lang, "/showcase") };
 }
 
-// Mood photos shown behind names on hover until official artist photos are provided.
-const HOVER = [ambiance.djHands, ambiance.decks, ambiance.concertBw, ambiance.beams, ambiance.mixer];
+// Sayd DJ photos shown behind names on hover until official artist photos are provided.
+const HOVER = [photos.booth, photos.djBlue, photos.djDark, photos.djCap, photos.djClose];
 
 export default async function ShowcasePage({ params }: PageProps<"/[lang]/showcase">) {
   const { lang } = await params;
@@ -35,7 +35,7 @@ export default async function ShowcasePage({ params }: PageProps<"/[lang]/showca
     meta: [a.role[lang], a.origin?.[lang]].filter(Boolean).join(" · "),
     badge: a.origin ? s.international : undefined,
     href: a.instagram,
-    image: a.image ?? pexels(HOVER[i % HOVER.length].id, 600),
+    image: a.image ?? HOVER[i % HOVER.length].src,
   });
   const groups: { key: Artist["status"]; title: string }[] = [
     { key: "current", title: s.current },

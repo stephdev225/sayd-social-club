@@ -13,7 +13,6 @@ const nextConfig: NextConfig = {
   images: {
     // Local visual checks only (sandbox without access to the image CDN).
     unoptimized: process.env.IMAGES_UNOPTIMIZED === "1",
-    remotePatterns: [{ protocol: "https", hostname: "images.pexels.com" }],
   },
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];

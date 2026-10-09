@@ -9,6 +9,8 @@ export interface ExperienceItem {
   text: string;
   image: string;
   alt: string;
+  /** CSS object-position for the crop. */
+  pos?: string;
 }
 
 /**
@@ -59,7 +61,7 @@ function Card({
         className="relative h-[68svh] min-h-[26rem] overflow-hidden rounded-[1.75rem] bg-night-2 md:h-[56svh] md:min-h-[22rem] lg:h-[60svh] lg:max-h-[38rem]"
       >
         <motion.div className="absolute inset-0" style={still ? undefined : { scale: imageScale }}>
-          <Image src={item.image} alt={item.alt} fill sizes="(min-width: 1024px) 1024px, 100vw" className="object-cover" />
+          <Image src={item.image} alt={item.alt} fill sizes="(min-width: 1024px) 1024px, 100vw" className="object-cover" style={{ objectPosition: item.pos }} />
         </motion.div>
         <div aria-hidden className="absolute inset-0 bg-[linear-gradient(to_top,rgba(18,15,14,0.92)_0%,rgba(18,15,14,0.35)_45%,rgba(18,15,14,0.1)_100%)]" />
         {!still && <motion.div aria-hidden className="pointer-events-none absolute inset-0 bg-night" style={{ opacity: dim }} />}

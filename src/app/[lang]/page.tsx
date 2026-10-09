@@ -16,13 +16,13 @@ import { ticketsHrefFor } from "@/lib/data/next-event";
 import { hasLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { formatShortDate } from "@/lib/i18n/format";
-import { ambiance, pexels } from "@/lib/media";
+import { photos } from "@/lib/media";
 import { site } from "@/lib/site";
 
 export const revalidate = 60;
 
-const PILLAR_IMAGES = [ambiance.djHands, ambiance.duo, ambiance.dancing] as const;
-const CAROUSEL = ["toast", "party", "cocktail", "decks", "monochrome", "blueDance", "bar", "concertBw"] as const;
+const PILLAR_IMAGES = [photos.dj, photos.portrait, photos.hype2] as const;
+const CAROUSEL = ["sparklers", "braids", "floorWide", "orangeDress", "cheer", "arms", "barWide", "laugh"] as const;
 
 export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
@@ -37,7 +37,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
   return (
     <>
       {/* ── 1. Brand hero: photo zooms, wordmark lifts away on scroll ── */}
-      <HeroBrand image={pexels(ambiance.crowd.id, 2400)}>
+      <HeroBrand image={photos.crowdWide.src}>
         <div className="mt-8 flex flex-col gap-7 md:mt-10 md:flex-row md:items-end md:justify-between">
           <div className="rise max-w-md [animation-delay:1.1s]">
             <p className="font-display text-[1.45rem] leading-snug text-ink/90 sm:text-[1.7rem]">{dict.home.heroLine}</p>
@@ -90,7 +90,8 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
           items={dict.home.pillars.map((p, i) => ({
             title: p.t,
             text: p.d,
-            image: pexels(PILLAR_IMAGES[i].id, 1800),
+            image: PILLAR_IMAGES[i].src,
+            pos: PILLAR_IMAGES[i].pos,
             alt: PILLAR_IMAGES[i].alt[lang],
           }))}
         />
@@ -110,7 +111,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         </div>
         <ScrollGallery
           href={`/${lang}/galerie`}
-          photos={CAROUSEL.map((k) => ({ src: pexels(ambiance[k].id, 900), alt: ambiance[k].alt[lang], portrait: ambiance[k].h > ambiance[k].w }))}
+          photos={CAROUSEL.map((k) => ({ src: photos[k].src, alt: photos[k].alt[lang], portrait: photos[k].h > photos[k].w, pos: photos[k].pos }))}
         />
       </section>
 
@@ -140,7 +141,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       <section className="relative isolate overflow-hidden">
         <Parallax amount={8} className="absolute inset-0 -z-10">
           <div className="grain relative h-full w-full">
-            <Image src={pexels(ambiance.group.id, 2000)} alt="" fill sizes="100vw" className="object-cover" />
+            <Image src={photos.floorWide2.src} alt="" fill sizes="100vw" className="object-cover" />
           </div>
         </Parallax>
         <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,#120f0e_0%,rgba(18,15,14,0.55)_30%,rgba(18,15,14,0.6)_70%,#120f0e_100%)]" />

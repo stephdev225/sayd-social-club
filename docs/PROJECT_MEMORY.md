@@ -39,6 +39,7 @@
 | D-035 | 2026-10-07 | Événements passés : Showcase Kulturr (4 sept. 2026, JGolf) et The Bagatelle (6 sept. 2026, 624 Grande Allée Est) avec leurs vidéos récap (mp4 720p + boucle muette) ; affiches non publiées, infos seulement. Line-up affiché tel qu'écrit (plus de « DJ » ajouté automatiquement) | Vidéos fournies par Stéphane | ACTIVE |
 | D-036 | 2026-10-07 | Azur ajouté aux événements précédents sans date ni lieu (champ dateHidden) ; vidéo du mur de photos en tête de la Galerie | Stéphane : « pas besoin de date et lieu » | ACTIVE |
 | D-037 | 2026-10-09 | Événements passés : jamais d'adresse, seulement le nom du lieu (si c'en est un) et la ville. Ajout de La Troisième Mi-Temps (Toronto, Prestige × Afro Friday × Sayd), sans date | Stéphane | ACTIVE |
+| D-038 | 2026-10-09 | Photos de stock retirées : 36 photos de Toronto (Kendsgns) exportées en WebP (1,4 Go → 5,3 Mo), crédit « Photos : Kendsgns » | Stéphane : « remplace toutes les photos existantes », « les images sont trop lourdes » | ACTIVE |
 | D-013 | 2026-10-06 | Sites de motion fournis (Jitter, Dribbble, Framer, motionsites.ai) = inspiration uniquement, aucun template copié | Règle références | ACTIVE |
 
 ## Journal de session

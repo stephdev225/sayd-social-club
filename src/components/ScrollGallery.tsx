@@ -9,6 +9,7 @@ export interface ScrollPhoto {
   src: string;
   alt: string;
   portrait: boolean;
+  pos?: string;
 }
 
 /**
@@ -43,6 +44,7 @@ export function ScrollGallery({ photos, href }: { photos: ScrollPhoto[]; href: s
                 fill
                 sizes="(min-width: 768px) 30vw, 50vw"
                 className="object-cover transition duration-700 group-hover:scale-105"
+                style={{ objectPosition: p.pos }}
               />
             </Link>
           ))}

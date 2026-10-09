@@ -10,7 +10,7 @@ import { getNextEventSummary } from "@/lib/data/next-event";
 import { hasLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { t } from "@/lib/i18n/format";
-import { ambiance, pexels } from "@/lib/media";
+import { photos } from "@/lib/media";
 import { site } from "@/lib/site";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/partenariats">): Promise<Metadata> {
@@ -32,7 +32,7 @@ export default async function PartnersPage({ params }: PageProps<"/[lang]/parten
     <>
       <div className="relative">
         <div aria-hidden className="absolute inset-x-0 top-0 h-[75svh] [mask-image:linear-gradient(to_bottom,black_25%,transparent)]">
-          <Image src={pexels(ambiance.toast.id, 2000)} alt="" fill priority sizes="100vw" className="object-cover opacity-35" />
+          <Image src={photos.friendsWide.src} alt="" fill priority sizes="100vw" className="object-cover opacity-35" />
         </div>
         <div className="relative mx-auto max-w-7xl px-5 pt-32 sm:px-6 md:pt-44 lg:px-10">
           <LineReveal as="h1" text={p.title} className="t-hero" />

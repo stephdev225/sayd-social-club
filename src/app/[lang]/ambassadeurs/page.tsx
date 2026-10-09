@@ -7,7 +7,7 @@ import { getNextEventSummary } from "@/lib/data/next-event";
 import { SubmissionForm } from "@/components/SubmissionForm";
 import { Reveal } from "@/components/motion/Reveal";
 import { SplitTitle } from "@/components/motion/SplitTitle";
-import { ambiance, pexels } from "@/lib/media";
+import { photos } from "@/lib/media";
 import { hasLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { t } from "@/lib/i18n/format";
@@ -34,7 +34,7 @@ export default async function AmbassadorsPage({ params }: PageProps<"/[lang]/amb
         <h1 className="t-h1"><SplitTitle text={dict.ambassadors.title} /></h1>
         <p className="mt-6 max-w-lg text-lg text-ink/90">{dict.ambassadors.intro}</p>
         <Reveal kind="mask" className="relative mt-10 aspect-[4/3] overflow-hidden">
-          <Image src={pexels(ambiance.toast.id, 1400)} alt={ambiance.toast.alt[lang]} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+          <Image src={photos.pair.src} alt={photos.pair.alt[lang]} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" style={{ objectPosition: photos.pair.pos }} />
         </Reveal>
         <h2 className="mt-12 text-muted">{dict.ambassadors.perksTitle}</h2>
         <ul className="mt-4 border-t border-line">

@@ -6,7 +6,7 @@ import { getNextEventSummary } from "@/lib/data/next-event";
 import { Parallax } from "@/components/motion/Parallax";
 import { Reveal } from "@/components/motion/Reveal";
 import { SplitTitle } from "@/components/motion/SplitTitle";
-import { ambiance, pexels } from "@/lib/media";
+import { photos } from "@/lib/media";
 import { notFound } from "next/navigation";
 import { alternates } from "@/lib/seo";
 import { hasLocale } from "@/lib/i18n/config";
@@ -34,7 +34,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/le-club">
     </div>
     <Parallax amount={8} className="grain relative mx-auto mt-16 aspect-[16/9] max-w-7xl md:aspect-[21/9]">
       <div className="relative h-full w-full">
-        <Image src={pexels(ambiance.group.id, 2000)} alt={ambiance.group.alt[lang]} fill sizes="100vw" className="object-cover" />
+        <Image src={photos.floorWide.src} alt={photos.floorWide.alt[lang]} fill sizes="100vw" className="object-cover" />
       </div>
     </Parallax>
     <div className="mx-auto max-w-4xl px-4 pt-16 sm:px-6 lg:px-10">

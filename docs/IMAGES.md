@@ -30,3 +30,18 @@ Règle : uniquement des images de Sayd (photographe ou équipe), avec crédit. P
 6. **Variété** : large / moyen / détail ; ne pas répéter la même scène.
 
 Livraison idéale : un dossier partagé avec les originaux (pas via WhatsApp/Instagram, qui compressent).
+
+## Photos en place (9 oct. 2026)
+Toutes les photos de stock (Pexels) ont été retirées. Le site n'utilise que des photos de Sayd :
+**La Troisième Mi-Temps, Toronto, 20 juin 2026 — photographe Kendsgns** (crédit en pied de page).
+
+- 36 photos choisies sur 180 (netteté, énergie, variété large / moyen / détail, DJ, foule, invités).
+- Originaux : 4672×7008 JPG, **1,4 Go** pour les 36 → exportés en **WebP, 5,3 Mo au total** :
+  portraits 1200×1800 (q72, 40-300 Ko), recadrages larges 2000×1125 et 2400×1600 pour les fonds.
+- Next/Image génère ensuite des versions AVIF/WebP plus petites selon l'écran.
+- Fichiers : `public/photos/toronto-<n>.webp` et `toronto-<n>-wide.webp` ; correspondance dans `src/lib/media.ts`
+  (texte alternatif FR/EN et point focal `pos` par photo).
+- À venir : photos de The Bagatelle (Québec, 6 sept.) depuis la galerie Pixieset de Veep Media Group.
+
+Pour ajouter une photo : exporter en WebP ≤ 1800 px de haut (≈ 100-250 Ko), la placer dans
+`public/photos/` puis l'ajouter dans `src/lib/media.ts`.

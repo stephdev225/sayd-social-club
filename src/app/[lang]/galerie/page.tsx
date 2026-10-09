@@ -9,7 +9,7 @@ import { LineReveal } from "@/components/motion/LineReveal";
 import { Reveal } from "@/components/motion/Reveal";
 import { hasLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
-import { ambiance, galleryPage, pexels } from "@/lib/media";
+import { galleryPage, photos } from "@/lib/media";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/galerie">): Promise<Metadata> {
   const { lang } = await params;
@@ -47,12 +47,12 @@ export default async function GalleryPage({ params }: PageProps<"/[lang]/galerie
         <Gallery
           labels={dict.gallery.viewer}
           photos={galleryPage.map((k) => ({
-            id: ambiance[k].id,
-            src: pexels(ambiance[k].id, 900),
-            full: pexels(ambiance[k].id, 2000),
-            alt: ambiance[k].alt[lang],
-            w: ambiance[k].w,
-            h: ambiance[k].h,
+            id: k,
+            src: photos[k].src,
+            full: photos[k].src,
+            alt: photos[k].alt[lang],
+            w: photos[k].w,
+            h: photos[k].h,
           }))}
         />
       </div>

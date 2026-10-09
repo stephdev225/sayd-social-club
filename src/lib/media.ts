@@ -1,43 +1,68 @@
 /**
- * Ambiance photos from Pexels (free for commercial use, no attribution required —
- * https://www.pexels.com/license/). Mood images only: they are NOT presented as
- * Sayd events and will be replaced by Sayd's own photos (see docs/IMAGES.md).
+ * Sayd's own photos (La Troisième Mi-Temps, Toronto, June 2026 — photographer: Kendsgns).
+ * Exported from the 30–60 MB camera originals to WebP: 1200×1800 for portraits,
+ * 2000–2400 px wide crops for full-width backgrounds. Next/Image then serves
+ * smaller AVIF/WebP variants per screen. See docs/IMAGES.md.
  */
-export interface StockPhoto {
-  id: string;
-  alt: { fr: string; en: string };
+export interface Photo {
+  src: string;
   w: number;
   h: number;
-  photographer: string;
+  /** CSS object-position: keeps faces in frame when the photo is cropped. */
+  pos?: string;
+  alt: { fr: string; en: string };
 }
 
-export function pexels(id: string, width = 1600): string {
-  return `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${width}`;
-}
+const P = (n: number, fr: string, en: string, pos?: string): Photo => ({ src: `/photos/toronto-${n}.webp`, w: 1200, h: 1800, pos, alt: { fr, en } });
+const W = (n: number, w: number, h: number, fr: string, en: string, pos?: string): Photo => ({ src: `/photos/toronto-${n}-wide.webp`, w, h, pos, alt: { fr, en } });
 
-export const ambiance = {
-  crowd: { id: "5192266", w: 3, h: 2, photographer: "cottonbro studio", alt: { fr: "Foule dans une salle baignée de lumière chaude", en: "Crowd in a room bathed in warm light" } },
-  dancing: { id: "5152595", w: 3, h: 2, photographer: "cottonbro studio", alt: { fr: "Silhouettes qui dansent sous les projecteurs", en: "Silhouettes dancing under the lights" } },
-  djHands: { id: "30727065", w: 2, h: 3, photographer: "Pexels", alt: { fr: "Mains d'un DJ sur la table de mixage, lumière rouge", en: "DJ's hands on the mixer, red light" } },
-  mixer: { id: "31827066", w: 3, h: 2, photographer: "Pexels", alt: { fr: "Table de mixage vue de dessus", en: "Mixing desk seen from above" } },
-  cocktail: { id: "36189454", w: 2, h: 3, photographer: "Pexels", alt: { fr: "Espresso martini sur fond sombre", en: "Espresso martini on a dark background" } },
-  toast: { id: "36873979", w: 3, h: 2, photographer: "Basunga Visual", alt: { fr: "Verres levés et champagne servi", en: "Glasses raised as champagne is poured" } },
-  duo: { id: "17533400", w: 3, h: 2, photographer: "Pexels", alt: { fr: "Deux femmes élégantes en tenue noire", en: "Two elegant women dressed in black" } },
-  group: { id: "28280981", w: 3, h: 2, photographer: "Covantnyc", alt: { fr: "Groupe d'amis qui dansent en soirée", en: "Friends dancing on a night out" } },
-  bar: { id: "29455146", w: 3, h: 2, photographer: "Pexels", alt: { fr: "Bar éclairé, étagères de bouteilles", en: "Lit bar with shelves of bottles" } },
-  monochrome: { id: "3419648", w: 3, h: 2, photographer: "cottonbro studio", alt: { fr: "Portrait noir et blanc en soirée", en: "Black-and-white party portrait" } },
-  party: { id: "12297243", w: 3, h: 2, photographer: "Joegraphy", alt: { fr: "Soirée animée dans un club", en: "Lively night in a club" } },
-  decks: { id: "5949085", w: 3, h: 2, photographer: "Pexels", alt: { fr: "Platines sous les lumières", en: "Decks under the lights" } },
-  blueDance: { id: "6173845", w: 3, h: 2, photographer: "RDNE", alt: { fr: "Amies qui dansent sous une lumière bleue", en: "Friends dancing under blue light" } },
-  concertBw: { id: "13202532", w: 3, h: 2, photographer: "Josh A.D.", alt: { fr: "Foule en noir et blanc sous les projecteurs", en: "Crowd in black and white under stage lights" } },
-  beams: { id: "3727138", w: 3, h: 2, photographer: "Jibaro Foto", alt: { fr: "Faisceaux de lumière au-dessus de la foule", en: "Light beams over the crowd" } },
-  lounge: { id: "24643918", w: 3, h: 2, photographer: "Pexels", alt: { fr: "Salon tamisé", en: "Dimly lit lounge" } },
-} satisfies Record<string, StockPhoto>;
+export const photos = {
+  // Full-width crops
+  crowdWide: W(47, 2400, 1600, "La foule, mains levées, sous les lumières de la salle", "The crowd, hands up, under the room lights"),
+  floorWide: W(103, 2000, 1125, "Piste pleine, téléphones levés", "A full dance floor, phones in the air"),
+  floorWide2: W(104, 2000, 1125, "La salle en pleine soirée, lumières rouges et bleues", "The room in full swing, red and blue lights"),
+  barWide: W(37, 2000, 1125, "Invités devant le bar éclairé en rouge", "Guests in front of the red-lit bar"),
+  friendsWide: W(100, 2000, 1125, "Amis qui posent avec le drapeau ivoirien", "Friends posing with the Ivorian flag", "50% 35%"),
+  // Portraits
+  bottles: P(2, "Bouteilles et étincelles portées au-dessus de la foule", "Bottles and sparklers carried above the crowd"),
+  sparklers: P(3, "Service bouteille sous les néons", "Bottle service under the neon lights"),
+  booth: P(4, "Les DJs derrière les platines, lumière rouge", "The DJs behind the decks, red light"),
+  djClose: P(13, "La DJ aux platines, maillot orange", "The DJ at the decks in an orange jersey", "50% 45%"),
+  hype: P(21, "Un groupe d'amis en pleine euphorie", "A group of friends in full celebration", "50% 55%"),
+  hype2: P(22, "Le groupe chante et danse ensemble", "The group singing and dancing together", "50% 55%"),
+  stageLine: P(25, "Invitées qui dansent devant le mur de disques", "Guests dancing in front of the record wall", "50% 45%"),
+  violet: P(32, "Danseuse en tenue brodée, lumière violette", "Dancer in an embroidered outfit, violet light", "50% 40%"),
+  pink: P(41, "Ambiance rose et violette sur la piste", "Pink and violet mood on the dance floor"),
+  hands: P(46, "Mains levées dans une salle comble", "Hands up in a packed room"),
+  djBlue: P(54, "Le DJ dans la lumière bleue", "The DJ in blue light"),
+  barViolet: P(64, "Le bar illuminé en violet", "The bar lit in violet"),
+  braids: P(82, "Une invitée qui danse, sourire aux lèvres", "A guest dancing with a smile", "50% 40%"),
+  jersey: P(85, "Invité en maillot qui danse", "Guest in a jersey dancing", "50% 40%"),
+  orangeDress: P(98, "Robe orange sur la piste", "An orange dress on the dance floor", "50% 40%"),
+  flag: P(100, "Amis qui posent avec le drapeau ivoirien", "Friends posing with the Ivorian flag", "50% 35%"),
+  dance: P(105, "Invitée qui danse au milieu de la foule", "A guest dancing in the middle of the crowd"),
+  twirl: P(106, "Pas de danse en chemise blanche", "Dance moves in a white shirt"),
+  duo: P(112, "Deux amies qui dansent", "Two friends dancing", "50% 40%"),
+  djDark: P(115, "Silhouette du DJ dans la pénombre", "The DJ's silhouette in the dark"),
+  djCap: P(119, "Le DJ en maillot turquoise", "The DJ in a turquoise jersey", "50% 40%"),
+  smile: P(125, "Invitée souriante, lumière rouge", "A smiling guest in red light", "50% 40%"),
+  laugh: P(127, "Éclats de rire entre amis", "Friends laughing together", "50% 40%"),
+  cheer: P(130, "Invité qui applaudit sous les lumières rouges", "A guest cheering under red lights", "50% 40%"),
+  heart: P(140, "Un cœur avec les mains", "A heart made with hands", "50% 40%"),
+  arms: P(144, "Bras levés en maillot vert", "Arms up in a green jersey", "50% 35%"),
+  white: P(152, "Invité en t-shirt blanc qui danse", "A guest in a white tee dancing", "50% 35%"),
+  portrait: P(157, "Invitée en maillot orange, sourire", "A guest in an orange jersey, smiling", "50% 40%"),
+  pair: P(161, "Deux amies en maillots", "Two friends in jerseys", "50% 40%"),
+  dj: P(165, "La DJ aux platines Pioneer", "The DJ at the Pioneer decks", "50% 70%"),
+  redRoom: P(173, "La salle baignée de rouge", "The room bathed in red"),
+} satisfies Record<string, Photo>;
 
-/** Full gallery page order (portrait and landscape mixed for the masonry rhythm). */
-export const galleryPage: (keyof typeof ambiance)[] = [
-  "crowd", "djHands", "toast", "duo", "dancing", "cocktail", "group", "decks", "monochrome",
-  "blueDance", "bar", "concertBw", "party", "mixer", "beams", "lounge",
+export type PhotoKey = keyof typeof photos;
+
+/** Full gallery page order (masonry). */
+export const galleryPage: PhotoKey[] = [
+  "hands", "djClose", "bottles", "braids", "hype", "orangeDress", "dj", "violet", "smile", "barViolet", "arms", "portrait",
+  "dance", "pink", "djCap", "stageLine", "heart", "duo", "flag", "booth", "white", "pair", "twirl", "redRoom",
 ];
 
-export const galleryOrder: (keyof typeof ambiance)[] = ["party", "cocktail", "mixer", "monochrome", "bar"];
+export const PHOTO_CREDIT = "Kendsgns";
