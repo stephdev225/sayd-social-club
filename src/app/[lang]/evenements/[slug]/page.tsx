@@ -75,7 +75,7 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
     endDate: event.endsAt,
     eventStatus: event.status === "cancelled" ? "https://schema.org/EventCancelled" : "https://schema.org/EventScheduled",
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-    location: { "@type": "Place", name: event.venueName, address: [event.address || event.venueName, event.city, "QC", "CA"].join(", ") },
+    location: { "@type": "Place", name: event.venueName, address: (isPast ? [event.city] : [event.address || event.venueName, event.city]).concat("CA").filter(Boolean).join(", ") },
     image: event.coverImage ? [event.coverImage] : undefined,
     description: event.description[lang],
     organizer: event.partners.map((name) => ({ "@type": "Organization", name })),
