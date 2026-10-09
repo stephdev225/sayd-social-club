@@ -59,10 +59,11 @@ export async function destroySession() {
 }
 
 export async function getSession(): Promise<{ role: Role; name: string } | null> {
-  const k = key();
-  if (!k) return null;
+  // Read the cookie first: it marks every page that checks the session as dynamic,
+  // even when the passwords are not configured yet at build time.
   const raw = (await cookies()).get(COOKIE)?.value;
-  if (!raw) return null;
+  const k = key();
+  if (!k || !raw) return null;
   const [payload, sig] = raw.split(".");
   if (!payload || !sig || !safeEqual(sig, sign(payload, k))) return null;
   try {

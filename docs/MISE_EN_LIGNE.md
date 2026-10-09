@@ -13,6 +13,15 @@ chaque réglage dès qu'il est présent (sans jamais afficher les valeurs).
 
 ## 1. Base de données et accès admin (débloque les formulaires et /admin)
 
+Liens directs :
+- Clé Firebase (se connecter avec **nickystephane@gmail.com**, le compte propriétaire du projet) :
+  https://console.firebase.google.com/project/sayd-social-club/settings/serviceaccounts/adminsdk
+- Variables Vercel :
+  https://vercel.com/kouamestephanedev-6239s-projects/sayd-social-club/settings/environment-variables
+
+État vérifié le 9 oct. 2026 : projet Firebase `sayd-social-club` actif, base Firestore créée
+(Montréal, gratuite), règles verrouillées (aucun accès direct depuis un navigateur).
+
 | Variable | Où la trouver |
 |---|---|
 | `FIREBASE_SERVICE_ACCOUNT` | Console Firebase → projet *sayd-social-club* → ⚙️ Paramètres du projet → Comptes de service → **Générer une nouvelle clé privée**. Ouvrir le fichier JSON téléchargé et coller **tout son contenu** comme valeur. Supprimer ensuite le fichier de l'ordinateur. |
@@ -46,7 +55,7 @@ n'est pas ajouté : impossible de passer en réel par accident.
 | `BREVO_API_KEY` | Brevo → SMTP & API → Clés API → Générer |
 | `EMAIL_FROM` | `billets@saydsocialclub.com` (une fois le domaine vérifié dans Brevo) |
 | `EMAIL_FROM_NAME` | `Sayd Social Club` |
-| `TEAM_EMAIL` | l'adresse qui reçoit les messages du formulaire de contact |
+| `TEAM_EMAIL` | facultatif : par défaut saydsocialclub@gmail.com reçoit les messages du formulaire de contact |
 
 Dans Brevo → Expéditeurs et domaines → ajouter `saydsocialclub.com` et créer les
 enregistrements DNS demandés (SPF, DKIM, DMARC). Sans ça, les billets risquent

@@ -1,5 +1,5 @@
 import { authConfigured } from "@/lib/auth/session";
-import { isFirebaseConfigured, isStripeConfigured } from "@/lib/env";
+import { isFirebaseConfigured } from "@/lib/env";
 import { siteUrl } from "@/lib/seo";
 
 interface Item {
@@ -23,17 +23,19 @@ export function SetupChecklist() {
     {
       ok: Boolean(key),
       label: `Clé Stripe ${key ? (live ? "(LIVE)" : "(mode test)") : ""}`,
-      detail: "STRIPE_SECRET_KEY : Stripe → Développeurs → Clés API. Commencer par sk_test_.",
+      detail: "Facultatif tant que les billets sont vendus sur Le Point de Vente. STRIPE_SECRET_KEY : commencer par sk_test_.",
+      optional: true,
     },
     {
       ok: Boolean(process.env.STRIPE_WEBHOOK_SECRET),
       label: "Webhook Stripe",
-      detail: `STRIPE_WEBHOOK_SECRET (whsec_…) : endpoint ${webhookUrl}`,
+      detail: `Facultatif. STRIPE_WEBHOOK_SECRET (whsec_…) : endpoint ${webhookUrl}`,
+      optional: true,
     },
-    { ok: Boolean(process.env.BREVO_API_KEY), label: "Courriels de confirmation (Brevo)", detail: "BREVO_API_KEY + EMAIL_FROM sur un domaine vérifié. Sans clé, aucun billet n'est envoyé par courriel." },
+    { ok: Boolean(process.env.BREVO_API_KEY), label: "Courriels de confirmation (Brevo)", detail: "BREVO_API_KEY + EMAIL_FROM sur un domaine vérifié. Sans clé, les messages du site restent visibles dans Contacts." , optional: true },
     { ok: Boolean(process.env.SITE_URL), label: "Adresse du site", detail: "SITE_URL (ex. https://saydsocialclub.com) : liens des courriels et retour de paiement.", optional: true },
   ];
-  const ready = isStripeConfigured() && isFirebaseConfigured();
+  const ready = isFirebaseConfigured() && authConfigured();
   const missing = items.filter((i) => !i.ok && !i.optional).length;
   if (missing === 0 && !live) return null;
 
@@ -42,7 +44,7 @@ export function SetupChecklist() {
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <h2 id="t-config" className="font-display text-2xl">Mise en route</h2>
         <p className={`text-sm ${ready ? "text-sable" : "text-terra"}`}>
-          {ready ? (live ? "Vente en ligne ouverte — Stripe en mode LIVE" : "Vente en ligne prête en mode test") : `${missing} réglage(s) manquant(s) dans Vercel`}
+          {ready ? (live ? "Stripe en mode LIVE" : "Site prêt : formulaires et admin actifs") : `${missing} réglage(s) manquant(s) dans Vercel`}
         </p>
       </div>
       <ul className="mt-4 grid gap-3 sm:grid-cols-2">
