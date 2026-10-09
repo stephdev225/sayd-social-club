@@ -40,8 +40,7 @@ Liens directs :
 1. Stripe → activer **Mode test** (interrupteur en haut à droite).
 2. **Développeurs → Clés API** → copier la *clé secrète* `sk_test_…` → variable `STRIPE_SECRET_KEY`.
 3. **Développeurs → Webhooks → Ajouter un endpoint**
-   - URL : `https://sayd-social-club.vercel.app/api/stripe/webhook`
-     (à remplacer par `https://saydsocialclub.com/api/stripe/webhook` après le domaine)
+   - URL : `https://saydsocialclub.com/api/stripe/webhook`
    - Événements à cocher :
      `checkout.session.completed`, `checkout.session.async_payment_succeeded`,
      `checkout.session.async_payment_failed`, `checkout.session.expired`, `charge.refunded`
@@ -66,6 +65,8 @@ enregistrements DNS demandés (SPF, DKIM, DMARC). Sans ça, les billets risquent
 d'arriver dans les indésirables.
 
 ## 4. Domaine saydsocialclub.com
+
+> ✅ Fait le 9 oct. 2026 : domaine acheté, branché (www → sans www), SITE_URL réglé.
 
 1. Acheter le domaine (Vercel → Domains, ou un registraire au choix).
 2. Vercel → projet → Settings → Domains → ajouter `saydsocialclub.com` et `www.saydsocialclub.com` (redirection vers la version sans www).

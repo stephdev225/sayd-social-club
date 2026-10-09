@@ -41,6 +41,7 @@
 | D-037 | 2026-10-09 | Événements passés : jamais d'adresse, seulement le nom du lieu (si c'en est un) et la ville. Ajout de La Troisième Mi-Temps (Toronto, Prestige × Afro Friday × Sayd), sans date | Stéphane | ACTIVE |
 | D-038 | 2026-10-09 | Photos de stock retirées : 36 photos de Toronto (Kendsgns) exportées en WebP (1,4 Go → 5,3 Mo), crédit « Photos : Kendsgns » | Stéphane : « remplace toutes les photos existantes », « les images sont trop lourdes » | ACTIVE |
 | D-039 | 2026-10-09 | Un seul compte pour tout : kouame.stephane.dev@gmail.com. Firebase = projet `sayd-social-club-be23f` (Firestore à créer en mode production, Montréal). L'ancien projet `sayd-social-club` (autre compte) n'est plus utilisé | Stéphane | ACTIVE |
+| D-040 | 2026-10-09 | Domaine saydsocialclub.com (acheté sur Vercel, DNS Vercel) branché sur le projet ; www redirige (308) vers la version sans www ; SITE_URL=https://saydsocialclub.com en production | Stéphane : « le domaine est payé » | ACTIVE |
 | D-013 | 2026-10-06 | Sites de motion fournis (Jitter, Dribbble, Framer, motionsites.ai) = inspiration uniquement, aucun template copié | Règle références | ACTIVE |
 
 ## Journal de session
