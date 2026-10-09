@@ -45,7 +45,7 @@ export default async function EditEventPage({ params, searchParams }: PageProps<
             <span className={`rounded-full px-2.5 py-1 text-xs ${statusCls}`}>{statusLabel}</span>
             {event.status === "published" && (
               <a href={`/fr/evenements/${event.slug}`} target="_blank" rel="noopener" className="text-muted underline hover:text-ink">
-                Voir la page publique ↗
+                Voir la page publique →
               </a>
             )}
             <Link href={`/admin?event=${encodeURIComponent(event.id)}`} className="text-muted underline hover:text-ink">Ventes et participants</Link>

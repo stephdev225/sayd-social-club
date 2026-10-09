@@ -46,7 +46,7 @@ export function AdminShell({
             Scanner à la porte →
           </Link>
           <a href="/fr" target="_blank" rel="noopener" className="whitespace-nowrap rounded-md px-3 py-2 text-muted hover:bg-night hover:text-ink">
-            Voir le site ↗
+            Voir le site →
           </a>
         </nav>
         <form action="/api/staff/logout" method="post" className="mt-6 lg:mt-auto">

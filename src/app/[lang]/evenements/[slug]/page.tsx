@@ -199,7 +199,7 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
                     className="group inline-flex min-h-14 items-center gap-3 rounded-full bg-sable px-8 font-semibold text-night transition hover:brightness-110"
                   >
                     {heroAction.label}
-                    <span aria-hidden className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span>
+                    <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                   </a>
                   {heroAction.note && <p className="mt-3 text-sm text-ink/60">{heroAction.note}</p>}
                 </div>
