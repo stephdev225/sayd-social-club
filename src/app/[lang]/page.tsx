@@ -36,11 +36,11 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
 
   return (
     <>
-      {/* ── 1. Brand hero: photo zooms, wordmark lifts away on scroll ── */}
+      {/* ── 1. Hero: photo zooms, content lifts away on scroll ── */}
       <HeroBrand image={photos.crowdWide.src}>
-        <div className="mt-8 flex flex-col gap-7 md:mt-10 md:flex-row md:items-end md:justify-between">
-          <div className="rise max-w-md [animation-delay:1.1s]">
-            <p className="font-display text-[1.45rem] leading-snug text-ink/90 sm:text-[1.7rem]">{dict.home.heroLine}</p>
+        <div className="flex flex-col gap-7 md:flex-row md:items-end md:justify-between">
+          <div className="rise max-w-xl [animation-delay:0.2s]">
+            <p className="font-display text-[clamp(2rem,7.5vw,3.6rem)] leading-[1.05] tracking-[-0.01em] text-ink">{dict.home.heroLine}</p>
             <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-4">
               <Magnetic>
                 <Link
@@ -58,7 +58,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
           {next && nextDate && (
             <Link
               href={`/${lang}/evenements/${next.slug}`}
-              className="rise group flex max-w-full items-center gap-4 self-start rounded-2xl bg-night/55 p-2.5 pr-4 backdrop-blur-md transition hover:bg-night/80 md:self-auto [animation-delay:1.3s]"
+              className="rise group flex max-w-full items-center gap-4 self-start rounded-2xl bg-night/55 p-2.5 pr-4 backdrop-blur-md transition hover:bg-night/80 md:self-auto [animation-delay:0.4s]"
             >
               {next.coverImage && (
                 <Image src={next.coverImage} alt="" width={1080} height={1920} sizes="3.5rem" className="aspect-[3/4] w-14 rounded-lg object-cover" />
