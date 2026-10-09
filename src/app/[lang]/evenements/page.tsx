@@ -106,7 +106,7 @@ export default async function EventsPage({ params }: PageProps<"/[lang]/evenemen
                       )}
                     </span>
                     <span className="mt-4 block font-display text-2xl leading-tight transition-colors group-hover:text-sable">{e.name}</span>
-                    {e.venueName && <span className="block text-sm text-muted">{[e.venueName, e.city].filter(Boolean).join(", ")}</span>}
+                    <span className="block text-sm text-muted">{[e.venueName, e.city].filter(Boolean).join(", ")}</span>
                   </Link>
                 </li>
               );

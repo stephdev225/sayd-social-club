@@ -62,6 +62,8 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
       : null;
   const showAside = onSale || (upcomingPublished && !external && !soon);
   const hero = event.heroImage ?? event.coverImage;
+  // Past nights: venue name and city only, never the street address.
+  const place = (isPast ? [event.venueName, event.city] : [event.venueName, event.address, event.city]).filter(Boolean).join(", ");
   const rawDate = formatDate(event.startsAt, lang);
   const dateLabel = rawDate.charAt(0).toUpperCase() + rawDate.slice(1);
 
@@ -135,10 +137,10 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
                     <dd className="text-ink">{dateLabel} · {formatTime(event.startsAt, lang)} – {formatTime(event.endsAt, lang)}</dd>
                   </>
                 )}
-                {event.venueName && (
+                {place && (
                   <>
                     <dt className="text-sable">{dict.events.venue}</dt>
-                    <dd className="text-ink">{[event.venueName, event.address, event.city].filter(Boolean).join(", ")}</dd>
+                    <dd className="text-ink">{place}</dd>
                   </>
                 )}
                 {event.lineup.length > 0 && (

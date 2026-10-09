@@ -96,7 +96,7 @@
       },
       "startsAt": "2026-09-07T00:00:00.000Z",
       "endsAt": "2026-09-07T05:00:00.000Z",
-      "venueName": "624, Grande Allée Est",
+      "venueName": "",
       "address": "",
       "city": "Québec",
       "capacity": 200,
@@ -139,6 +139,44 @@
       "heroImage": "/events/azur-poster.webp",
       "video": "/events/azur.mp4",
       "videoLoop": "/events/azur-loop.mp4"
+    },
+    "troisieme-mi-temps-toronto": {
+      "id": "troisieme-mi-temps-toronto",
+      "slug": "la-troisieme-mi-temps",
+      "name": "La Troisième Mi-Temps",
+      "edition": {
+        "fr": "Toronto",
+        "en": "Toronto"
+      },
+      "tagline": {
+        "fr": "L'after-party officielle d'un match de la Coupe du monde.",
+        "en": "The official World Cup game after-party."
+      },
+      "description": {
+        "fr": "Prestige, Afro Friday et Sayd Social Club ont fait vibrer Toronto après un match de la Coupe du monde : afrobeats, amapiano, hip-hop et coupé-décalé avec Spxnzo, Kenzhelo et Ben.",
+        "en": "Prestige, Afro Friday and Sayd Social Club lit up Toronto after a World Cup game: afrobeats, amapiano, hip-hop and coupé-décalé with Spxnzo, Kenzhelo and Ben."
+      },
+      "startsAt": "2026-06-21T02:00:00.000Z",
+      "endsAt": "2026-06-21T07:00:00.000Z",
+      "dateHidden": true,
+      "venueName": "",
+      "address": "",
+      "city": "Toronto",
+      "capacity": 300,
+      "status": "published",
+      "lineup": [
+        "Spxnzo",
+        "Kenzhelo",
+        "Ben"
+      ],
+      "partners": [
+        "Prestige",
+        "Afro Friday",
+        "Sayd Social Club"
+      ],
+      "heroImage": "/events/toronto-poster.webp",
+      "video": "/events/toronto.mp4",
+      "videoLoop": "/events/toronto-loop.mp4"
     }
   },
   "ticketTypes": {
