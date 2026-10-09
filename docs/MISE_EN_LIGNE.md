@@ -13,18 +13,22 @@ chaque réglage dès qu'il est présent (sans jamais afficher les valeurs).
 
 ## 1. Base de données et accès admin (débloque les formulaires et /admin)
 
+Compte unique : **kouame.stephane.dev@gmail.com** (Firebase, Vercel). Projet Firebase : `sayd-social-club-be23f`.
+
+Une seule fois — créer la base de données :
+Console Firebase → *Bases de données et stockage* → **Firestore Database** → **Créer une base de données**
+→ édition Standard → emplacement **northamerica-northeast1 (Montréal)** → **mode production** → Créer.
+(Le mode production refuse tout accès direct depuis un navigateur : c'est exactement ce qu'il faut,
+le site passe uniquement par le serveur.)
+
 Liens directs :
-- Clé Firebase (se connecter avec **nickystephane@gmail.com**, le compte propriétaire du projet) :
-  https://console.firebase.google.com/project/sayd-social-club/settings/serviceaccounts/adminsdk
+- Clé Firebase : https://console.firebase.google.com/project/sayd-social-club-be23f/settings/serviceaccounts/adminsdk
 - Variables Vercel :
   https://vercel.com/kouamestephanedev-6239s-projects/sayd-social-club/settings/environment-variables
 
-État vérifié le 9 oct. 2026 : projet Firebase `sayd-social-club` actif, base Firestore créée
-(Montréal, gratuite), règles verrouillées (aucun accès direct depuis un navigateur).
-
 | Variable | Où la trouver |
 |---|---|
-| `FIREBASE_SERVICE_ACCOUNT` | Console Firebase → projet *sayd-social-club* → ⚙️ Paramètres du projet → Comptes de service → **Générer une nouvelle clé privée**. Ouvrir le fichier JSON téléchargé et coller **tout son contenu** comme valeur. Supprimer ensuite le fichier de l'ordinateur. |
+| `FIREBASE_SERVICE_ACCOUNT` | Console Firebase → projet *sayd-social-club-be23f* → ⚙️ Paramètres du projet → Comptes de service → **Générer une nouvelle clé privée**. Ouvrir le fichier JSON téléchargé et coller **tout son contenu** comme valeur. Supprimer ensuite le fichier de l'ordinateur. |
 | `ADMIN_PASSWORD` | Un mot de passe que tu inventes, 10 caractères minimum (gestionnaire de mots de passe). |
 | `STAFF_PASSWORD` | Mot de passe pour l'équipe de la porte (scanner seulement), 8 caractères minimum. |
 
