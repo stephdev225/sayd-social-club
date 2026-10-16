@@ -79,19 +79,26 @@ export function Gallery({ photos, labels }: { photos: GalleryPhoto[]; labels: { 
     };
   }, [index, go]);
 
-  // Deal photos into columns, keeping their order left-to-right, row by row.
+  // Each photo goes into the currently shortest column (by height relative to width),
+  // so all columns end level: no empty band under the last photos.
   const columns: { p: GalleryPhoto; i: number }[][] = Array.from({ length: cols }, () => []);
-  photos.forEach((p, i) => columns[i % cols].push({ p, i }));
-  // How far each column travels over the whole scroll (px): the middle one moves most.
-  const travel = cols === 3 ? [0, -220, -90] : [0, -140];
+  const heights = new Array(cols).fill(0);
+  photos.forEach((p, i) => {
+    const c = heights.indexOf(Math.min(...heights));
+    columns[c].push({ p, i });
+    heights[c] += p.h / p.w + 0.04;
+  });
+  // Columns start offset downwards and line up as you scroll to the end, so the depth
+  // effect never leaves an empty band under the last photos.
+  const travel = cols === 3 ? [0, 180, 80] : [0, 110];
 
   return (
     <>
-      <div ref={ref} className="flex gap-3 pb-[min(14rem,22vw)] sm:gap-4">
+      <div ref={ref} className="flex items-stretch gap-3 sm:gap-4">
         {columns.map((col, c) => (
           <Column key={`${cols}-${c}`} progress={smooth} travel={reduce ? 0 : travel[c]}>
-            {col.map(({ p, i }) => (
-              <Tile key={p.id} photo={p} order={i} reduce={reduce} onOpen={() => { setDir(0); setIndex(i); }} />
+            {col.map(({ p, i }, n) => (
+              <Tile key={p.id} photo={p} order={i} reduce={reduce} last={n === col.length - 1} onOpen={() => { setDir(0); setIndex(i); }} />
             ))}
           </Column>
         ))}
@@ -157,7 +164,7 @@ export function Gallery({ photos, labels }: { photos: GalleryPhoto[]; labels: { 
 }
 
 function Column({ progress, travel, children }: { progress: MotionValue<number>; travel: number; children: React.ReactNode }) {
-  const y = useTransform(progress, [0, 1], [0, travel]);
+  const y = useTransform(progress, [0, 0.85], [travel, 0], { clamp: true });
   return (
     <motion.ul className="flex min-w-0 flex-1 flex-col gap-3 sm:gap-4" style={travel ? { y } : undefined}>
       {children}
@@ -165,19 +172,20 @@ function Column({ progress, travel, children }: { progress: MotionValue<number>;
   );
 }
 
-function Tile({ photo: p, order, reduce, onOpen }: { photo: GalleryPhoto; order: number; reduce: boolean; onOpen: () => void }) {
+/** `last`: the final photo of a column grows to fill it, so every column ends level. */
+function Tile({ photo: p, order, reduce, last, onOpen }: { photo: GalleryPhoto; order: number; reduce: boolean; last: boolean; onOpen: () => void }) {
   // Desktop only: the photo leans towards the pointer, with a soft light following it.
   const rx = useMotionValue(0);
   const ry = useMotionValue(0);
-  const srx = useSpring(rx, { stiffness: 150, damping: 15 });
-  const sry = useSpring(ry, { stiffness: 150, damping: 15 });
+  const srx = useSpring(rx, { stiffness: 180, damping: 18 });
+  const sry = useSpring(ry, { stiffness: 180, damping: 18 });
   const gx = useMotionValue(50);
   const gy = useMotionValue(50);
   const glare = useTransform([gx, gy], ([x, y]) => `radial-gradient(circle at ${x}% ${y}%, rgba(255,255,255,0.18), transparent 55%)`);
 
   return (
     <motion.li
-      className="[perspective:900px]"
+      className={`[perspective:900px] ${last ? "flex flex-1 flex-col" : ""}`}
       initial={reduce ? false : { opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: "0px 0px -10% 0px" }}
@@ -187,15 +195,16 @@ function Tile({ photo: p, order, reduce, onOpen }: { photo: GalleryPhoto; order:
         type="button"
         onClick={onOpen}
         aria-label={p.alt}
-        className="group relative block w-full overflow-hidden rounded-xl sm:rounded-2xl"
+        className={`group relative block w-full overflow-hidden rounded-xl sm:rounded-2xl ${last ? "flex-1" : ""}`}
+        whileHover={reduce ? undefined : { scale: 1.06, zIndex: 10 }}
         style={reduce ? undefined : { rotateX: srx, rotateY: sry, transformStyle: "preserve-3d" }}
         onPointerMove={(e) => {
           if (reduce || e.pointerType !== "mouse") return;
           const r = e.currentTarget.getBoundingClientRect();
           const px = (e.clientX - r.left) / r.width;
           const py = (e.clientY - r.top) / r.height;
-          ry.set((px - 0.5) * 10);
-          rx.set((0.5 - py) * 10);
+          ry.set((px - 0.5) * 22);
+          rx.set((0.5 - py) * 22);
           gx.set(px * 100);
           gy.set(py * 100);
         }}
@@ -206,18 +215,22 @@ function Tile({ photo: p, order, reduce, onOpen }: { photo: GalleryPhoto; order:
         initial={reduce ? false : { clipPath: "inset(100% 0% 0% 0%)" }}
         whileInView={{ clipPath: "inset(0% 0% 0% 0%)" }}
         viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-        transition={{ duration: 1.15, delay: (order % 3) * 0.09, ease: EASE }}
+        transition={{
+          clipPath: { duration: 1.15, delay: (order % 3) * 0.09, ease: EASE },
+          scale: { type: "spring", stiffness: 260, damping: 22 },
+        }}
       >
+        {/* Keeps the photo's own shape; the last tile of a column may grow taller than this. */}
+        <div aria-hidden style={{ aspectRatio: `${p.w} / ${p.h}` }} />
         <motion.div
           layoutId={reduce ? undefined : `photo-${p.id}`}
-          className="relative"
-          style={{ aspectRatio: `${p.w} / ${p.h}` }}
+          className="absolute inset-0"
           initial={reduce ? false : { scale: 1.35, filter: "blur(14px) brightness(0.6)" }}
           whileInView={{ scale: 1, filter: "blur(0px) brightness(1)" }}
           viewport={{ once: true, margin: "0px 0px -10% 0px" }}
           transition={{ duration: 1.5, delay: (order % 3) * 0.09, ease: EASE }}
         >
-          <Image src={p.src} alt={p.alt} fill sizes="(min-width: 768px) 33vw, 50vw" className="object-cover transition duration-[1.1s] ease-out group-hover:scale-[1.04]" />
+          <Image src={p.src} alt={p.alt} fill sizes="(min-width: 768px) 33vw, 50vw" className="object-cover transition duration-700 ease-out group-hover:scale-[1.06]" />
         </motion.div>
         {!reduce && (
           <motion.span aria-hidden className="pointer-events-none absolute inset-0 hidden opacity-0 transition-opacity duration-500 group-hover:opacity-100 md:block" style={{ background: glare }} />

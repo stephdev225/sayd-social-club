@@ -4,56 +4,86 @@ import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } fr
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
-export interface HeroImage {
-  src: string;
+export interface CoverSlide {
+  /** Portrait photo, used on phones. */
+  portrait: string;
+  /** Landscape photo, used from 768 px. */
+  land: string;
   alt: string;
 }
 
 /**
- * Home hero, deliberately bare: the aerial show photos, always shown whole and in their
- * original colours, at screen height. A blurred copy of the same photo fills the
- * leftover space on wide screens. The photos cross-fade every few seconds.
- * The brand name stays in the logo; the h1 is for screen readers and search engines.
+ * Full-bleed cinematic cover (home and gallery). Each slide fills the screen edge to
+ * edge, right up under the navigation, in its original colours: a portrait photo on
+ * phones, a landscape one on larger screens. Slides cross-fade every few seconds with
+ * a slow push-in, and the cover drifts gently as you scroll away.
  */
-export function HeroBrand({ images, children }: { images: HeroImage[]; children?: React.ReactNode }) {
+export function HeroBrand({
+  slides,
+  title,
+  className = "h-[100svh] min-h-[34rem]",
+  children,
+}: {
+  slides: CoverSlide[];
+  /** Visible heading (gallery). Without it, an h1 is kept for screen readers only. */
+  title?: React.ReactNode;
+  className?: string;
+  children?: React.ReactNode;
+}) {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
   const [i, setI] = useState(0);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
-  const fade = useTransform(scrollYProgress, [0, 0.8], [1, 0.2]);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "16%"]);
 
   useEffect(() => {
-    if (reduce || images.length < 2) return;
+    if (reduce || slides.length < 2) return;
     const t = setInterval(() => {
-      if (!document.hidden) setI((n) => (n + 1) % images.length);
-    }, 5500);
+      if (!document.hidden) setI((n) => (n + 1) % slides.length);
+    }, 6000);
     return () => clearInterval(t);
-  }, [reduce, images.length]);
+  }, [reduce, slides.length]);
 
-  const img = images[i];
+  const s = slides[i];
   return (
-    <section ref={ref} className="relative h-[100svh] min-h-[32rem] overflow-hidden bg-night">
-      <h1 className="sr-only">Sayd Social Club</h1>
-      <motion.div className="absolute inset-0" style={reduce ? undefined : { y, opacity: fade }}>
+    <section ref={ref} className={`relative overflow-hidden bg-night ${className}`}>
+      {!title && <h1 className="sr-only">Sayd Social Club</h1>}
+      <motion.div className="absolute inset-0" style={reduce ? undefined : { y }}>
         <AnimatePresence initial={false}>
           <motion.div
-            key={img.src}
+            key={s.land}
             className="absolute inset-0"
-            initial={{ opacity: 0, scale: 1.04 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1.6, ease: "easeInOut" }}
           >
-            {/* Leftover space: the same photo, blurred and dimmed */}
-            <Image src={img.src} alt="" aria-hidden fill sizes="40vw" priority={i === 0} className="scale-110 object-cover opacity-50 blur-2xl" />
-            {/* The photo itself, whole */}
-            <Image src={img.src} alt={img.alt} fill sizes="(min-width: 768px) 60vw, 100vw" priority={i === 0} className="object-contain" />
+            <motion.div
+              className="absolute inset-0"
+              initial={reduce ? false : { scale: 1.1 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 7, ease: "linear" }}
+            >
+              <Image src={s.portrait} alt={s.alt} fill priority={i === 0} sizes="100vw" className="object-cover md:hidden" />
+              <Image src={s.land} alt={s.alt} fill priority={i === 0} sizes="100vw" className="hidden object-cover md:block" />
+            </motion.div>
           </motion.div>
         </AnimatePresence>
       </motion.div>
-      <div aria-hidden className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-night to-transparent" />
-      {children && <div className="absolute inset-x-0 bottom-0 mx-auto w-full max-w-7xl px-5 pb-8 sm:px-6 md:pb-12 lg:px-10">{children}</div>}
+      {/* Soft fades only where text sits (logo on top, title or button at the bottom) */}
+      <div aria-hidden className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-night/45 to-transparent" />
+      <div aria-hidden className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-night via-night/40 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 mx-auto w-full max-w-7xl px-5 pb-8 sm:px-6 md:pb-12 lg:px-10">
+        {title}
+        {children}
+      </div>
+      {slides.length > 1 && (
+        <div className="absolute bottom-5 right-5 flex gap-1.5 sm:right-6 md:bottom-8 lg:right-10" aria-hidden>
+          {slides.map((sl, n) => (
+            <span key={sl.land} className={`h-0.5 rounded-full transition-all duration-700 ${n === i ? "w-6 bg-ink" : "w-3 bg-ink/35"}`} />
+          ))}
+        </div>
+      )}
     </section>
   );
 }

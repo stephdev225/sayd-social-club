@@ -8,6 +8,8 @@ export interface ExperienceItem {
   title: string;
   text: string;
   image: string;
+  /** Landscape version for wide cards (from 768 px). */
+  imageWide?: string;
   alt: string;
   /** CSS object-position for the crop. */
   pos?: string;
@@ -58,26 +60,24 @@ function Card({
     <div ref={wrapper} className={`sticky ${last ? "" : "mb-[12svh]"}`} style={{ top: `calc(5.5rem + ${index * 1.1}rem)` }}>
       <motion.article
         style={still ? undefined : { scale, transformOrigin: "50% 0%" }}
-        className="relative h-[72svh] min-h-[26rem] overflow-hidden rounded-[1.75rem] bg-night-2 md:grid md:h-[62svh] md:max-h-[40rem] md:min-h-[24rem] md:grid-cols-[auto_1fr]"
+        className="relative h-[72svh] min-h-[26rem] overflow-hidden rounded-[1.75rem] bg-night-2 md:h-auto md:min-h-0 md:aspect-[16/9] md:max-h-[78svh]"
       >
-        {/* Phones: the photo fills the card (portrait card, portrait photo: almost nothing is cut).
-            Larger screens: the photo keeps its own shape on the left, the text sits beside it. */}
-        <div className="absolute inset-0 overflow-hidden md:relative md:inset-auto md:aspect-[2/3] md:h-full">
-          <motion.div className="absolute inset-0" style={still ? undefined : { scale: imageScale }}>
-            <Image src={item.image} alt={item.alt} fill sizes="(min-width: 768px) 30rem, 100vw" className="object-cover" style={{ objectPosition: item.pos }} />
-          </motion.div>
-        </div>
-        <div aria-hidden className="absolute inset-0 bg-[linear-gradient(to_top,rgba(18,15,14,0.9)_0%,rgba(18,15,14,0.25)_40%,transparent_65%)] md:hidden" />
-        {!still && <motion.div aria-hidden className="pointer-events-none absolute inset-0 z-10 bg-night" style={{ opacity: dim }} />}
+        {/* Full-bleed photo: portrait on phones, landscape on wider cards, text written on it */}
+        <motion.div className="absolute inset-0" style={still ? undefined : { scale: imageScale }}>
+          <Image src={item.image} alt={item.alt} fill sizes="100vw" className={`object-cover ${item.imageWide ? "md:hidden" : ""}`} style={{ objectPosition: item.pos }} />
+          {item.imageWide && <Image src={item.imageWide} alt={item.alt} fill sizes="(min-width: 1024px) 1024px, 100vw" className="hidden object-cover md:block" />}
+        </motion.div>
+        <div aria-hidden className="absolute inset-0 bg-[linear-gradient(to_top,rgba(18,15,14,0.88)_0%,rgba(18,15,14,0.35)_38%,transparent_62%)]" />
+        {!still && <motion.div aria-hidden className="pointer-events-none absolute inset-0 bg-night" style={{ opacity: dim }} />}
 
-        <div className="absolute inset-x-0 bottom-0 grid gap-4 p-6 sm:p-10 md:relative md:flex md:flex-col md:justify-end md:p-12 lg:p-14">
+        <div className="absolute inset-x-0 bottom-0 grid gap-4 p-6 sm:p-10 md:grid-cols-[1fr_auto] md:items-end md:p-12">
           <div>
-            <p className="font-display text-lg italic text-ink/70">
-              {String(index + 1).padStart(2, "0")} <span className="text-ink/40">/ {String(total).padStart(2, "0")}</span>
+            <p className="font-display text-lg italic text-ink/80">
+              {String(index + 1).padStart(2, "0")} <span className="text-ink/50">/ {String(total).padStart(2, "0")}</span>
             </p>
             <h3 className="mt-2 font-display text-[clamp(2.4rem,5.5vw,4.25rem)] leading-[0.92] tracking-[-0.02em]">{item.title}</h3>
           </div>
-          <p className="max-w-sm text-base text-ink/85 md:text-lg">{item.text}</p>
+          <p className="max-w-sm text-base text-ink/90 md:pb-2 md:text-lg">{item.text}</p>
         </div>
       </motion.article>
     </div>

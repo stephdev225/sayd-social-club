@@ -11,10 +11,20 @@ export interface Photo {
   h: number;
   /** CSS object-position for the rare places where a photo has to be cropped. */
   pos?: string;
+  /** Landscape (3:2) version for wide screens: full-bleed covers and cards. */
+  land?: string;
   alt: { fr: string; en: string };
 }
 
-const M = (n: string, fr: string, en: string, pos?: string): Photo => ({ src: `/photos/mora-${n}.webp`, w: 1200, h: 1800, pos, alt: { fr, en } });
+const LAND = new Set(["08684", "08715", "09183", "08800", "08371", "08581", "09167", "08275", "09005", "09135"]);
+const M = (n: string, fr: string, en: string, pos?: string): Photo => ({
+  src: `/photos/mora-${n}.webp`,
+  w: 1200,
+  h: 1800,
+  pos,
+  land: LAND.has(n) ? `/photos/mora-${n}-land.webp` : undefined,
+  alt: { fr, en },
+});
 const T = (n: number, fr: string, en: string, pos?: string): Photo => ({ src: `/photos/toronto-${n}.webp`, w: 1200, h: 1800, pos, alt: { fr, en } });
 
 export const photos = {
@@ -30,7 +40,7 @@ export const photos = {
   // Music
   djAbove: M("08296", "Le DJ aux platines, vu d'en haut", "The DJ at the decks, seen from above", "50% 45%"),
   djDecks: M("08800", "Mains du DJ sur les platines", "The DJ's hands on the decks", "50% 50%"),
-  decks: { src: "/photos/mora-08606.webp", w: 1800, h: 1200, alt: { fr: "Les platines dans la lumière rouge", en: "The decks in red light" } } as Photo,
+  decks: { src: "/photos/mora-08606-land.webp", w: 2000, h: 1333, land: "/photos/mora-08606-land.webp", alt: { fr: "Le DJ et ses platines, vus d'en haut", en: "The DJ and his decks, seen from above" } } as Photo,
   djRed: M("08238", "Le DJ dans la lumière rouge", "The DJ in red light", "50% 40%"),
   djBooth: M("09029", "La cabine du DJ", "The DJ booth"),
   djViolet: M("09433", "Le DJ sous la lumière violette", "The DJ under violet light"),
@@ -49,6 +59,7 @@ export const photos = {
   facade: M("08159", "La façade du Mora, Grande Allée", "The Mora façade on Grande Allée"),
   wine: M("08143", "Le mur de champagne éclairé", "The lit champagne wall"),
   bar: M("08275", "Le bar vu d'en haut", "The bar seen from above"),
+  barWide: { src: "/photos/mora-08275-land.webp", w: 2000, h: 1333, alt: { fr: "Le bar vu d'en haut", en: "The bar seen from above" } } as Photo,
   bucket: M("08575", "Belvedere dans son seau à glace", "Belvedere in its ice bucket", "50% 40%"),
   service: M("08837", "Service bouteille à table", "Table bottle service"),
   veuve: M("09005", "Veuve Clicquot servie au-dessus de la foule", "Veuve Clicquot served above the crowd", "50% 30%"),
@@ -68,7 +79,7 @@ export type PhotoKey = keyof typeof photos;
 
 /** Gallery page order: the aerial show and Stéphane's picks first. */
 export const galleryPage: PhotoKey[] = [
-  "aerialSplit", "couple", "djAbove", "wine", "aerial", "duo", "bar", "aerialHoop",
+  "aerialSplit", "couple", "djAbove", "wine", "aerial", "duo", "barWide", "aerialHoop",
   "veuve", "glow", "crowd", "aerialist", "bucket", "decks", "djDecks", "sign", "balcony",
   "service", "sparklers", "aerialBeams", "facade", "trio", "yellow", "aerialDj", "smiles",
   "dance", "haze", "champagne", "hoop", "toast", "djViolet", "hands", "braids", "orangeDress",

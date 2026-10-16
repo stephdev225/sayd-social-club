@@ -5,12 +5,17 @@ import type { Dictionary } from "@/lib/i18n/dictionaries";
 import { site } from "@/lib/site";
 import { NotifyForm } from "./NotifyForm";
 import { LineReveal } from "./motion/LineReveal";
+import { PointerGlow } from "./motion/PointerGlow";
 
 export function SiteFooter({ lang, dict }: { lang: Locale; dict: Dictionary }) {
   const year = new Date().getFullYear();
   return (
-    <footer className="relative mt-10 border-t border-line md:mt-16">
-      <div className="relative mx-auto max-w-7xl px-5 pb-10 pt-12 sm:px-6 md:pt-16 lg:px-10">
+    <footer className="relative overflow-hidden">
+      {/* Red light following the mouse behind the sign-up, fading out towards the links */}
+      <div className="absolute inset-x-0 top-0 h-[36rem] [mask-image:linear-gradient(to_bottom,black_55%,transparent)]">
+        <PointerGlow />
+      </div>
+      <div className="relative mx-auto max-w-7xl px-5 pb-10 pt-16 sm:px-6 md:pt-24 lg:px-10">
         <LineReveal text={dict.notify.title} className="max-w-3xl font-display text-[clamp(2.4rem,7vw,5.5rem)] leading-[0.95]" />
         <div className="mt-10 max-w-4xl">
           <NotifyForm lang={lang} source="footer" labels={dict.notify} />

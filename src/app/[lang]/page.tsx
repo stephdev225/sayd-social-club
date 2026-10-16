@@ -20,9 +20,16 @@ import { site } from "@/lib/site";
 
 export const revalidate = 60;
 
-const HERO = [photos.aerialSplit, photos.aerial, photos.aerialBeams] as const;
-const PILLAR_IMAGES = [photos.djAbove, photos.couple, photos.crowd] as const;
-const CAROUSEL = ["aerialHoop", "duo", "wine", "veuve", "decks", "glow", "balcony", "bar", "bucket", "sparklers"] as const;
+// Home cover: no aerial show here (it lives in the gallery). Phones get the portrait photo.
+const HERO = [
+  { portrait: photos.djAbove.src, land: photos.decks.src, alt: photos.decks.alt },
+  { portrait: photos.above.src, land: photos.above.land!, alt: photos.above.alt },
+  { portrait: photos.veuve.src, land: photos.veuve.land!, alt: photos.veuve.alt },
+  { portrait: photos.bar.src, land: photos.bar.land!, alt: photos.bar.alt },
+  { portrait: photos.glow.src, land: photos.glow.land!, alt: photos.glow.alt },
+];
+const PILLAR_IMAGES = [photos.djDecks, photos.couple, photos.crowd] as const;
+const CAROUSEL = ["duo", "wine", "veuve", "decks", "glow", "bar", "bucket", "sparklers", "sign", "service"] as const;
 
 export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
@@ -37,7 +44,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
   return (
     <>
       {/* ── 1. Hero: the aerial show, photos shown whole; one quiet button ── */}
-      <HeroBrand images={HERO.map((h) => ({ src: h.src, alt: h.alt[lang] }))}>
+      <HeroBrand slides={HERO.map((h) => ({ portrait: h.portrait, land: h.land, alt: h.alt[lang] }))}>
         <div className="flex flex-wrap items-center justify-center gap-3 md:justify-start">
           <Link
             href={next ? ticketsHrefFor(next, lang) : `/${lang}/evenements`}
@@ -66,6 +73,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
             title: p.t,
             text: p.d,
             image: PILLAR_IMAGES[i].src,
+            imageWide: PILLAR_IMAGES[i].land,
             pos: PILLAR_IMAGES[i].pos,
             alt: PILLAR_IMAGES[i].alt[lang],
           }))}

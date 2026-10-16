@@ -78,8 +78,8 @@ export function SiteHeader({ lang, nav, ticketsHref }: { lang: Locale; nav: Nav;
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 transition-[background-color,backdrop-filter] duration-500 ${
-          scrolled && !open ? "bg-night/75 backdrop-blur-xl" : "bg-transparent"
+        className={`fixed inset-x-0 top-0 transition-[background-color] duration-500 ${
+          scrolled && !open ? "bg-gradient-to-b from-night/90 via-night/60 to-transparent" : "bg-transparent"
         } ${open ? "z-[60]" : "z-50"}`}
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-6 md:h-20 lg:px-10">
