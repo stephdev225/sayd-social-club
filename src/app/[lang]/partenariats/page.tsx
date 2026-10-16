@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { alternates } from "@/lib/seo";
 import { NextEventCTA } from "@/components/NextEventCTA";
@@ -11,6 +10,7 @@ import { hasLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { t } from "@/lib/i18n/format";
 import { photos } from "@/lib/media";
+import { FeatureCard } from "@/components/FeatureCard";
 import { site } from "@/lib/site";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/partenariats">): Promise<Metadata> {
@@ -30,15 +30,12 @@ export default async function PartnersPage({ params }: PageProps<"/[lang]/parten
 
   return (
     <>
-      {/* Header: the photo whole and in its own colours, beside the title */}
-      <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 pt-28 sm:px-6 md:grid-cols-[1fr_auto] md:gap-16 md:pt-36 lg:px-10">
-        <div>
+      {/* Header: photo with a floating panel holding the title */}
+      <div className="pt-24 md:pt-32">
+        <FeatureCard image={photos.glow.src} alt={photos.glow.alt[lang]} reverse priority>
           <LineReveal as="h1" text={p.title} className="t-hero" />
-          <Reveal delay={0.2}><p className="mt-6 max-w-xl text-lg text-ink/85">{p.intro}</p></Reveal>
-        </div>
-        <Reveal kind="mask" className="relative mx-auto aspect-[2/3] w-full max-w-sm overflow-hidden rounded-[1.75rem] md:h-[min(78svh,40rem)] md:w-auto md:max-w-none">
-          <Image src={photos.glow.src} alt={photos.glow.alt[lang]} fill priority sizes="(min-width: 768px) 27rem, 100vw" className="object-cover" />
-        </Reveal>
+          <p className="mt-6 max-w-xl text-lg text-ink/85 md:text-xl">{p.intro}</p>
+        </FeatureCard>
       </div>
 
       <div className="mx-auto max-w-7xl space-y-24 px-5 pt-24 sm:px-6 md:space-y-32 md:pt-32 lg:px-10">

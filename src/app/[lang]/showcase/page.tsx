@@ -56,7 +56,7 @@ export default async function ShowcasePage({ params }: PageProps<"/[lang]/showca
           const rows = list.map(row);
           return (
             <section key={g.key} aria-label={g.title}>
-              <Reveal><h2 className="mb-4 text-ink">{g.title}</h2></Reveal>
+              <Reveal><h2 className="mb-8 font-display text-[clamp(2rem,4vw,3rem)] leading-none">{g.title}</h2></Reveal>
               <ArtistList rows={rows} />
               {g.key === "current" && next && (
                 <Reveal>

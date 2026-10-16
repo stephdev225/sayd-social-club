@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { FeatureCard } from "@/components/FeatureCard";
 import Link from "next/link";
 import { NextEventCTA } from "@/components/NextEventCTA";
 import { getNextEventSummary } from "@/lib/data/next-event";
@@ -31,22 +31,19 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/le-club">
       <h1 className="t-h1"><SplitTitle text={dict.about.title} /></h1>
       <Reveal><p className="mt-10 max-w-[30ch] font-display text-[clamp(1.8rem,3.6vw,2.8rem)] leading-[1.15]">{dict.about.lead}</p></Reveal>
     </div>
-    <div className="mx-auto mt-16 grid max-w-6xl items-center gap-10 px-5 sm:px-6 md:grid-cols-[minmax(0,26rem)_1fr] md:gap-16 lg:px-10">
-      <Reveal kind="mask" className="relative aspect-[2/3] w-full overflow-hidden rounded-[1.75rem]">
-        <Image src={photos.ben.src} alt={photos.ben.alt[lang]} fill sizes="(min-width: 768px) 26rem, 100vw" className="object-cover" />
-      </Reveal>
-      <Reveal><p className="max-w-xl text-lg leading-relaxed text-ink/90">{dict.about.body}</p></Reveal>
-    </div>
-    <div className="mx-auto max-w-4xl px-4 pt-8 sm:px-6 lg:px-10">
-      <Reveal><p className="mt-16 font-display text-[clamp(2rem,6vw,4.5rem)] italic leading-none text-ink">{dict.about.sound}</p></Reveal>
-      <div className="mt-16 flex flex-wrap gap-4">
-        <Link href={`/${lang}/evenements`} className="inline-flex min-h-12 items-center rounded-full bg-sable px-7 font-semibold text-ink">
-          {dict.nav.events}
-        </Link>
-        <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center rounded-full border border-line px-7 text-ink">
-          Instagram
-        </a>
-      </div>
+    <div className="mt-14 md:mt-20">
+      <FeatureCard image={photos.ben.src} alt={photos.ben.alt[lang]}>
+        <p className="font-display text-[clamp(1.7rem,2.8vw,2.5rem)] leading-[1.2]">{dict.about.body}</p>
+        <p className="mt-8 font-display text-[clamp(1.5rem,2.4vw,2.1rem)] italic leading-tight text-ink/75">{dict.about.sound}</p>
+        <div className="mt-10 flex flex-wrap gap-4">
+          <Link href={`/${lang}/evenements`} className="inline-flex min-h-13 items-center rounded-full bg-sable px-8 font-semibold text-ink transition hover:brightness-110">
+            {dict.nav.events}
+          </Link>
+          <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-13 items-center rounded-full border border-ink/25 px-8 text-ink transition hover:bg-ink hover:text-night">
+            Instagram
+          </a>
+        </div>
+      </FeatureCard>
     </div>
     <NextEventCTA next={next} dict={dict} lang={lang} />
     </>

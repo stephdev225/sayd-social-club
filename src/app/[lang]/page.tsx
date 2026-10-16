@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ExperienceStack } from "@/components/ExperienceStack";
+import { FeatureCard } from "@/components/FeatureCard";
 import { ScrollGallery } from "@/components/ScrollGallery";
 import { HeroBrand } from "@/components/HeroBrand";
 import { LineReveal } from "@/components/motion/LineReveal";
@@ -40,9 +40,9 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       {/* ── 1. Hero: the photo behind the whole first screen, the promise written on it ── */}
       <HeroBrand image={HERO.image} imageMobile={HERO.mobile} alt={HERO.alt[lang]}>
         <h1 className="sr-only">Sayd Social Club</h1>
-        <p className="rise max-w-3xl font-display text-[clamp(2.6rem,7vw,5.6rem)] leading-[0.98] tracking-[-0.02em] [animation-delay:0.1s]">{dict.home.heroLine}</p>
-        <p className="rise mt-6 max-w-md text-lg text-ink/80 [animation-delay:0.25s]">{dict.footer.desc}</p>
-        <div className="rise mt-9 flex flex-wrap items-center gap-x-6 gap-y-4 [animation-delay:0.4s]">
+        <p className="rise max-w-2xl font-display text-[clamp(2.3rem,5.6vw,4.6rem)] leading-[1] tracking-[-0.02em] [animation-delay:0.1s]">{dict.home.heroLine}</p>
+        <p className="rise mt-5 max-w-md text-lg text-ink/85 [animation-delay:0.25s]">{dict.footer.desc}</p>
+        <div className="rise mt-8 flex flex-wrap items-center gap-x-6 gap-y-4 [animation-delay:0.4s]">
           <Magnetic>
             <Link
               href={next ? ticketsHrefFor(next, lang) : `/${lang}/evenements`}
@@ -52,7 +52,6 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
               <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>
             </Link>
           </Magnetic>
-          <Link href={`/${lang}/galerie`} className="link-draw pb-1 text-ink/85">{dict.nav.gallery}</Link>
         </div>
       </HeroBrand>
 
@@ -67,7 +66,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       {/* ── 4. Experience: photo cards that pin and stack as you scroll ── */}
       <section className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 md:pb-36 lg:px-10" aria-labelledby="experience">
         <LineReveal id="experience" text={dict.home.pillarsTitle} className="t-h2 mb-10 px-1 md:mb-14" />
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-6xl">
         <ExperienceStack
           items={dict.home.pillars.map((p, i) => ({
             title: p.t,
@@ -98,27 +97,20 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         />
       </section>
 
-      {/* ── 8. Ambassadors: the photo whole, the invitation beside it ── */}
-      <section className="mx-auto grid max-w-7xl items-center gap-10 px-5 pb-24 sm:px-6 md:grid-cols-2 md:gap-16 md:pb-36 lg:px-10">
-        <Reveal>
-          <div className="relative mx-auto aspect-[2/3] w-full max-w-md overflow-hidden rounded-[1.75rem] md:max-h-[80svh] md:w-auto">
-            <Image src={photos.trio.src} alt={photos.trio.alt[lang]} fill sizes="(min-width: 768px) 28rem, 100vw" className="object-cover" />
-          </div>
-        </Reveal>
-        <div>
-          <LineReveal text={dict.home.ambassadorsTitle} className="max-w-3xl font-display text-[clamp(2.6rem,9vw,6rem)] leading-[0.92]" />
-          <Reveal delay={0.15}>
-            <p className="mt-6 max-w-lg text-lg text-ink/85">{dict.home.ambassadorsText}</p>
-            <Magnetic className="mt-9">
-              <Link
-                href={`/${lang}/ambassadeurs`}
-                className="inline-flex min-h-13 items-center rounded-full bg-sable px-8 py-3.5 font-semibold text-ink transition hover:brightness-110"
-              >
-                {dict.home.ambassadorsCta}
-              </Link>
-            </Magnetic>
-          </Reveal>
-        </div>
+      {/* ── 8. Ambassadors: photo with a floating panel ── */}
+      <section className="pb-24 md:pb-36">
+        <FeatureCard image={photos.trio.src} alt={photos.trio.alt[lang]} reverse>
+          <LineReveal text={dict.home.ambassadorsTitle} className="font-display text-[clamp(2.6rem,6vw,5rem)] leading-[0.95]" />
+          <p className="mt-6 max-w-lg text-lg text-ink/85 md:text-xl">{dict.home.ambassadorsText}</p>
+          <Magnetic className="mt-9">
+            <Link
+              href={`/${lang}/ambassadeurs`}
+              className="inline-flex min-h-13 items-center rounded-full bg-sable px-8 py-3.5 font-semibold text-ink transition hover:brightness-110"
+            >
+              {dict.home.ambassadorsCta}
+            </Link>
+          </Magnetic>
+        </FeatureCard>
       </section>
 
     </>

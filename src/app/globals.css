@@ -28,6 +28,7 @@
 }
 
 html {
+  font-size: 106.25%; /* 17 px base: comfortable reading on phones and screens */
   background: var(--color-night);
   color: var(--color-ink);
   -webkit-text-size-adjust: 100%;

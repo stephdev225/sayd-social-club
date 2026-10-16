@@ -27,7 +27,7 @@ export default async function GalleryPage({ params }: PageProps<"/[lang]/galerie
   return (
     <>
     {/* Opening: the champagne wall behind the title, no animation */}
-    <HeroBrand image="/photos/mora-bottles-hero.webp" alt={lang === "fr" ? "Bouteilles de champagne alignées sous la lumière" : "Champagne bottles lined up under the light"} className="min-h-[78svh]">
+    <HeroBrand image="/photos/mora-bottles-hero.webp" alt={lang === "fr" ? "Bouteilles de champagne alignées sous la lumière" : "Champagne bottles lined up under the light"}>
       <LineReveal as="h1" text={dict.gallery.title} className="t-hero" />
       <Reveal delay={0.2}>
         <p className="mt-6 max-w-md text-lg text-ink/85">{dict.gallery.intro}</p>

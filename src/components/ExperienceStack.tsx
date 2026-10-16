@@ -57,7 +57,7 @@ function Card({
   const dim = useTransform(progress, [start, start + 1 / total, 1], [0, last ? 0 : 0.35, last ? 0 : 0.55]);
 
   return (
-    <div ref={wrapper} className={`sticky ${last ? "" : "mb-[12svh]"}`} style={{ top: `calc(5.5rem + ${index * 1.1}rem)` }}>
+    <div ref={wrapper} className={`sticky ${last ? "" : "mb-5 md:mb-8"}`} style={{ top: `calc(5.5rem + ${index * 1.1}rem)` }}>
       <motion.article
         style={still ? undefined : { scale, transformOrigin: "50% 0%" }}
         className="relative h-[72svh] min-h-[26rem] overflow-hidden rounded-[1.75rem] bg-night-2 md:h-auto md:min-h-0 md:aspect-[16/9] md:max-h-[78svh]"
@@ -77,7 +77,7 @@ function Card({
             </p>
             <h3 className="mt-2 font-display text-[clamp(2.4rem,5.5vw,4.25rem)] leading-[0.92] tracking-[-0.02em]">{item.title}</h3>
           </div>
-          <p className="max-w-sm text-base text-ink/90 md:pb-2 md:text-lg">{item.text}</p>
+          <p className="max-w-md text-lg text-ink/90 md:pb-2 md:text-xl">{item.text}</p>
         </div>
       </motion.article>
     </div>
