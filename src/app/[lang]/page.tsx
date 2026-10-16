@@ -20,8 +20,8 @@ import { site } from "@/lib/site";
 
 export const revalidate = 60;
 
-// Home opening photos: no aerial show here (it lives in the gallery).
-const HERO = [photos.djAbove, photos.above, photos.veuve, photos.bar, photos.glow];
+// Home opening: the DJ from above (08606), sharp high-resolution versions, no aerial show.
+const HERO = { image: "/photos/mora-08606-hero.webp", mobile: "/photos/mora-08296-hero.webp", alt: photos.decks.alt };
 const PILLAR_IMAGES = [photos.djDecks, photos.couple, photos.crowd] as const;
 const CAROUSEL = ["duo", "wine", "veuve", "decks", "glow", "bar", "bucket", "sparklers", "sign", "service"] as const;
 
@@ -37,10 +37,10 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
 
   return (
     <>
-      {/* ── 1. Hero: the promise in words, a framed photo beside it ── */}
-      <HeroBrand slides={HERO.map((p) => ({ src: p.src, alt: p.alt[lang] }))}>
+      {/* ── 1. Hero: the photo behind the whole first screen, the promise written on it ── */}
+      <HeroBrand image={HERO.image} imageMobile={HERO.mobile} alt={HERO.alt[lang]}>
         <h1 className="sr-only">Sayd Social Club</h1>
-        <p className="rise font-display text-[clamp(2.6rem,7vw,5.4rem)] leading-[0.98] tracking-[-0.02em] [animation-delay:0.1s]">{dict.home.heroLine}</p>
+        <p className="rise max-w-3xl font-display text-[clamp(2.6rem,7vw,5.6rem)] leading-[0.98] tracking-[-0.02em] [animation-delay:0.1s]">{dict.home.heroLine}</p>
         <p className="rise mt-6 max-w-md text-lg text-ink/80 [animation-delay:0.25s]">{dict.footer.desc}</p>
         <div className="rise mt-9 flex flex-wrap items-center gap-x-6 gap-y-4 [animation-delay:0.4s]">
           <Magnetic>

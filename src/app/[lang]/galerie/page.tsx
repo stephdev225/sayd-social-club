@@ -11,8 +11,6 @@ import { hasLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { galleryPage, photos } from "@/lib/media";
 
-const COVER = [photos.aerialSplit, photos.aerialDj, photos.aerialist, photos.balcony];
-
 export async function generateMetadata({ params }: PageProps<"/[lang]/galerie">): Promise<Metadata> {
   const { lang } = await params;
   if (!hasLocale(lang)) return {};
@@ -28,8 +26,8 @@ export default async function GalleryPage({ params }: PageProps<"/[lang]/galerie
 
   return (
     <>
-    {/* Opening: title and words beside a framed photo of the aerial show */}
-    <HeroBrand slides={COVER.map((p) => ({ src: p.src, alt: p.alt[lang] }))}>
+    {/* Opening: the champagne wall behind the title, no animation */}
+    <HeroBrand image="/photos/mora-bottles-hero.webp" alt={lang === "fr" ? "Bouteilles de champagne alignées sous la lumière" : "Champagne bottles lined up under the light"} className="min-h-[78svh]">
       <LineReveal as="h1" text={dict.gallery.title} className="t-hero" />
       <Reveal delay={0.2}>
         <p className="mt-6 max-w-md text-lg text-ink/85">{dict.gallery.intro}</p>
