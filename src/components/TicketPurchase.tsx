@@ -306,7 +306,7 @@ export function TicketPurchase({
         <button
           type="submit"
           disabled={submitting}
-          className="mt-6 min-h-13 w-full rounded-full bg-sable px-6 py-3.5 text-base font-semibold text-night transition hover:brightness-110 disabled:cursor-wait disabled:opacity-70"
+          className="mt-6 min-h-13 w-full rounded-full bg-sable px-6 py-3.5 text-base font-semibold text-ink transition hover:brightness-110 disabled:cursor-wait disabled:opacity-70"
         >
           {submitting ? d.paying : t(d.pay, { amount: formatMoney(totals.totalCents, lang) })}
         </button>

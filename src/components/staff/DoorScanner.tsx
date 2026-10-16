@@ -183,7 +183,7 @@ export function DoorScanner(props: { eventId?: string; eventName: string; staffN
           autoComplete="off"
           className="min-h-12 flex-1 rounded-md border border-line bg-night-2 px-3 font-mono uppercase text-ink placeholder:text-muted focus:border-sable focus:outline-none"
         />
-        <button className="min-h-12 rounded-md bg-sable px-5 font-semibold text-night">Vérifier</button>
+        <button className="min-h-12 rounded-md bg-sable px-5 font-semibold text-ink">Vérifier</button>
       </form>
       {props.isAdmin && (
         <Link href="/admin" className="pb-4 text-center text-sm text-muted underline">Tableau de bord</Link>

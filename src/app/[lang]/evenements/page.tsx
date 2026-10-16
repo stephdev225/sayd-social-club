@@ -31,7 +31,7 @@ function Row({ e, lang, dict }: { e: SaydEvent; lang: Locale; dict: Dictionary }
           <span aria-hidden className="aspect-[3/4] w-full bg-night-2" />
         )}
         <span>
-          <span className="t-h3 block group-hover:text-sable">{e.name}</span>
+          <span className="t-h3 block group-hover:text-ink">{e.name}</span>
           <span className="mt-1 block text-muted first-letter:uppercase">
             {formatDate(e.startsAt, lang)}, {formatTime(e.startsAt, lang)}
           </span>
@@ -39,7 +39,7 @@ function Row({ e, lang, dict }: { e: SaydEvent; lang: Locale; dict: Dictionary }
           {e.status === "sold_out" && <span className="mt-2 inline-block text-terra">{dict.events.soldOut}</span>}
           {e.status === "cancelled" && <span className="mt-2 inline-block text-terra">{dict.events.cancelled}</span>}
         </span>
-        <span className="col-start-2 text-sable sm:col-start-auto">{dict.home.details}</span>
+        <span className="col-start-2 text-ink sm:col-start-auto">{dict.home.details}</span>
       </Link>
     </li>
   );
@@ -74,7 +74,7 @@ export default async function EventsPage({ params }: PageProps<"/[lang]/evenemen
             <div className="mt-10 grid max-w-4xl gap-5 sm:grid-cols-3">
               {[0, 1, 2].map((i) => (
                 <div key={i} className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-night-2">
-                  <div aria-hidden className="absolute inset-0 animate-pulse bg-[radial-gradient(circle_at_30%_20%,rgba(217,178,106,0.12),transparent_60%)]" />
+                  <div aria-hidden className="absolute inset-0 animate-pulse bg-[radial-gradient(circle_at_30%_20%,rgba(193,18,31,0.14),transparent_60%)]" />
                   {i === 0 && <p className="absolute inset-x-5 bottom-5 text-sm text-ink/70">{dict.events.pastEmpty}</p>}
                 </div>
               ))}
@@ -105,7 +105,7 @@ export default async function EventsPage({ params }: PageProps<"/[lang]/evenemen
                         </span>
                       )}
                     </span>
-                    <span className="mt-4 block font-display text-2xl leading-tight transition-colors group-hover:text-sable">{e.name}</span>
+                    <span className="mt-4 block font-display text-2xl leading-tight transition-colors group-hover:text-ink">{e.name}</span>
                     <span className="block text-sm text-muted">{[e.venueName, e.city].filter(Boolean).join(", ")}</span>
                   </Link>
                 </li>

@@ -30,14 +30,15 @@ export default async function PartnersPage({ params }: PageProps<"/[lang]/parten
 
   return (
     <>
-      <div className="relative">
-        <div aria-hidden className="absolute inset-x-0 top-0 h-[75svh] [mask-image:linear-gradient(to_bottom,black_25%,transparent)]">
-          <Image src={photos.bottleWide.src} alt="" fill priority sizes="100vw" className="object-cover opacity-35" />
-        </div>
-        <div className="relative mx-auto max-w-7xl px-5 pt-32 sm:px-6 md:pt-44 lg:px-10">
+      {/* Header: the photo whole and in its own colours, beside the title */}
+      <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 pt-28 sm:px-6 md:grid-cols-[1fr_auto] md:gap-16 md:pt-36 lg:px-10">
+        <div>
           <LineReveal as="h1" text={p.title} className="t-hero" />
           <Reveal delay={0.2}><p className="mt-6 max-w-xl text-lg text-ink/85">{p.intro}</p></Reveal>
         </div>
+        <Reveal kind="mask" className="relative mx-auto aspect-[2/3] w-full max-w-sm overflow-hidden rounded-[1.75rem] md:h-[min(78svh,40rem)] md:w-auto md:max-w-none">
+          <Image src={photos.glow.src} alt={photos.glow.alt[lang]} fill priority sizes="(min-width: 768px) 27rem, 100vw" className="object-cover" />
+        </Reveal>
       </div>
 
       <div className="mx-auto max-w-7xl space-y-24 px-5 pt-24 sm:px-6 md:space-y-32 md:pt-32 lg:px-10">
@@ -46,7 +47,7 @@ export default async function PartnersPage({ params }: PageProps<"/[lang]/parten
           <div className="mt-10 grid gap-10 md:grid-cols-3">
             {p.why.map((w, i) => (
               <Reveal key={w.t} delay={i * 0.08}>
-                <p className="font-display text-5xl text-sable/60">0{i + 1}</p>
+                <p className="font-display text-5xl text-ink/40">0{i + 1}</p>
                 <h3 className="mt-3 font-display text-3xl">{w.t}</h3>
                 <p className="mt-3 text-ink/75">{w.d}</p>
               </Reveal>

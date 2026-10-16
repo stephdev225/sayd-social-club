@@ -44,7 +44,7 @@ export function SubmissionsTable({ rows }: { rows: SubmissionRow[] }) {
               role="tab"
               aria-selected={tab === t.key}
               onClick={() => setTab(t.key)}
-              className="rounded-full px-3.5 py-1.5 text-sm text-muted transition-colors aria-selected:bg-sable aria-selected:text-night"
+              className="rounded-full px-3.5 py-1.5 text-sm text-muted transition-colors aria-selected:bg-sable aria-selected:text-ink"
             >
               {t.label} <span className="tabular-nums opacity-70">{counts[t.key] ?? 0}</span>
             </button>
@@ -73,7 +73,7 @@ export function SubmissionsTable({ rows }: { rows: SubmissionRow[] }) {
                 aria-expanded={r.message ? open === r.id : undefined}
                 className="grid w-full grid-cols-[1fr_auto] gap-x-4 gap-y-1 p-4 text-left text-sm sm:grid-cols-[9rem_1fr_1fr_8rem]"
               >
-                <span className="text-xs uppercase tracking-wide text-sable">{TABS.find((t) => t.key === r.kind)?.label}</span>
+                <span className="text-xs uppercase tracking-wide text-ink">{TABS.find((t) => t.key === r.kind)?.label}</span>
                 <span className="order-first font-medium sm:order-none">{r.who || "—"}</span>
                 <span className="col-span-2 truncate text-muted sm:col-span-1">
                   <a href={`mailto:${r.email}`} onClick={(e) => e.stopPropagation()} className="hover:text-ink hover:underline">{r.email}</a>

@@ -55,7 +55,7 @@ export function NewsletterForm({ lang, labels }: { lang: Locale; labels: Labels 
       <button
         type="submit"
         disabled={state === "sending"}
-        className="min-h-12 rounded-md border border-sable px-5 font-semibold text-sable transition hover:bg-sable hover:text-night disabled:opacity-60"
+        className="min-h-12 rounded-md border border-sable px-5 font-semibold text-ink transition hover:bg-sable hover:text-ink disabled:opacity-60"
       >
         {state === "sending" ? labels.sending : labels.cta}
       </button>

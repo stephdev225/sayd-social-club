@@ -38,7 +38,7 @@ export default function ErrorPage({ error, retry }: { error: Error & { digest?: 
         <button
           type="button"
           onClick={() => retry()}
-          className="inline-flex min-h-12 items-center rounded-full bg-sable px-7 font-semibold text-night transition hover:brightness-110"
+          className="inline-flex min-h-12 items-center rounded-full bg-sable px-7 font-semibold text-ink transition hover:brightness-110"
         >
           {t.retry}
         </button>

@@ -55,7 +55,7 @@ export function TicketTypesPanel({ rows, createAction }: { rows: TicketTypeRow[]
               {r.sold} vendus · {r.available} dispo.
               {r.reserved > 0 && <span className="block text-xs">{r.reserved} en paiement</span>}
             </span>
-            <span className={`hidden text-xs sm:block ${r.values.active ? "text-sable" : "text-muted"}`}>{r.values.active ? "Actif" : "Inactif"}</span>
+            <span className={`hidden text-xs sm:block ${r.values.active ? "text-ink" : "text-muted"}`}>{r.values.active ? "Actif" : "Inactif"}</span>
             <span aria-hidden className={`text-muted transition-transform ${open === r.id ? "rotate-180" : ""}`}>⌄</span>
           </button>
           <AnimatePresence initial={false}>
@@ -81,7 +81,7 @@ export function TicketTypesPanel({ rows, createAction }: { rows: TicketTypeRow[]
       ))}
 
       {flash && open !== "new" && (
-        <p role="status" className="text-sm text-sable">{flash}</p>
+        <p role="status" className="text-sm text-ink">{flash}</p>
       )}
       {open === "new" ? (
         <TicketTypeForm action={createAction} values={NEW} isNew onDone={(m) => {

@@ -3,7 +3,7 @@ export const site = {
   name: "Sayd Social Club",
   since: 2019,
   city: "Québec",
-  email: "saydsocialclub@gmail.com",
+  email: "saydsocialclubc@gmail.com",
   phone: "+1 418 618-4346",
   phoneHref: "tel:+14186184346",
   whatsapp: "https://wa.me/14186184346",

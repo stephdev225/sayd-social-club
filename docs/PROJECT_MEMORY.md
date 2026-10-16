@@ -43,6 +43,7 @@
 | D-039 | 2026-10-09 | Un seul compte pour tout : kouame.stephane.dev@gmail.com. Firebase = projet `sayd-social-club-be23f` (Firestore à créer en mode production, Montréal). L'ancien projet `sayd-social-club` (autre compte) n'est plus utilisé | Stéphane | ACTIVE |
 | D-040 | 2026-10-09 | Domaine saydsocialclub.com (acheté sur Vercel, DNS Vercel) branché sur le projet ; www redirige (308) vers la version sans www ; SITE_URL=https://saydsocialclub.com en production | Stéphane : « le domaine est payé » | ACTIVE |
 | D-041 | 2026-10-16 | Photos de Sprezzatura (Mora, Rogelio Photographe) à la place des photos avec maillots ; manifeste « des gens élégants et une salle incroyable » ; mise en ligne seulement après validation en local par Stéphane | Stéphane | ACTIVE |
+| D-042 | 2026-10-16 | Retours PDF de Stéphane : textes blancs et boutons rouges (#c1121f), plus de doré ni de vert ; photos montrées entières et dans leurs couleurs d'origine ; accueil sans texte (photos de l'acrobate en fondu) ; DJ à lunettes retiré partout ; Spotify, crédit photo et shader du pied de page retirés ; galerie avec couverture et animation en 3 couches ; Showcase en cartes avec photos et liens Instagram ; Ben dans Le club ; courriel saydsocialclubc@gmail.com ; politique de confidentialité complète (Loi 25) | PDF « Document sans titre » | ACTIVE |
 | D-013 | 2026-10-06 | Sites de motion fournis (Jitter, Dribbble, Framer, motionsites.ai) = inspiration uniquement, aucun template copié | Règle références | ACTIVE |
 
 ## Journal de session

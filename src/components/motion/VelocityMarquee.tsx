@@ -44,7 +44,7 @@ export function VelocityMarquee({ items, baseVelocity = -2.2, className = "" }: 
       {items.map((t, i) => (
         <span key={i} className="flex items-center whitespace-nowrap">
           <span className="px-6 sm:px-10">{t}</span>
-          <span className="text-[0.45em] text-sable">✦</span>
+          <span className="text-[0.45em] text-ink">✦</span>
         </span>
       ))}
     </span>

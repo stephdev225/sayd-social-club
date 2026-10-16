@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { alternates } from "@/lib/seo";
 import { SubmissionForm } from "@/components/SubmissionForm";
@@ -8,7 +7,6 @@ import { Reveal } from "@/components/motion/Reveal";
 import { hasLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { t } from "@/lib/i18n/format";
-import { photos } from "@/lib/media";
 import { site } from "@/lib/site";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/contact">): Promise<Metadata> {
@@ -27,10 +25,6 @@ export default async function ContactPage({ params }: PageProps<"/[lang]/contact
   return (
     <>
       <div className="relative">
-        {/* Image fades into the page: no visible frame */}
-        <div aria-hidden className="absolute inset-x-0 top-0 h-[70svh] [mask-image:linear-gradient(to_bottom,black_30%,transparent)]">
-          <Image src={photos.wineWide.src} alt="" fill priority sizes="100vw" className="object-cover opacity-35" />
-        </div>
         <div className="relative mx-auto grid max-w-7xl gap-16 px-5 pb-10 pt-32 sm:px-6 md:pt-44 lg:grid-cols-[1fr_1.1fr] lg:px-10">
           <div>
             <LineReveal as="h1" text={dict.contact.title} className="t-hero" />

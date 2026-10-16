@@ -58,7 +58,7 @@ export default async function LangLayout({ children, params }: LayoutProps<"/[la
       <body className="flex min-h-svh flex-col">
         <a
           href="#contenu"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-sable focus:px-4 focus:py-2 focus:text-night"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-sable focus:px-4 focus:py-2 focus:text-ink"
         >
           {dict.nav.skip}
         </a>

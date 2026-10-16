@@ -21,7 +21,7 @@ export function Field({
     <div className={className}>
       <label htmlFor={id} className="text-sm text-ink/85">
         {label}
-        {rest.required && <span className="text-sable"> *</span>}
+        {rest.required && <span className="text-ink"> *</span>}
       </label>
       <input id={id} name={name} aria-invalid={error ? true : undefined} aria-describedby={hint || error ? `${id}-h` : undefined} className={`${inputBase} min-h-11`} {...rest} />
       {(error || hint) && (
@@ -46,7 +46,7 @@ export function TextArea({
     <div className={className}>
       <label htmlFor={id} className="text-sm text-ink/85">
         {label}
-        {rest.required && <span className="text-sable"> *</span>}
+        {rest.required && <span className="text-ink"> *</span>}
       </label>
       <textarea id={id} name={name} aria-invalid={error ? true : undefined} rows={4} className={`${inputBase} py-2.5`} {...rest} />
       {(error || hint) && <p className={`mt-1 text-xs ${error ? "text-terra" : "text-muted"}`}>{error ?? hint}</p>}

@@ -130,10 +130,10 @@ export function EventForm({
 
       <div className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-night/95 px-5 py-3 backdrop-blur lg:left-60">
         <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3">
-          <p role="status" aria-live="polite" className={`text-sm ${state.ok ? "text-sable" : state.message ? "text-terra" : "text-muted"}`}>
+          <p role="status" aria-live="polite" className={`text-sm ${state.ok ? "text-ink" : state.message ? "text-terra" : "text-muted"}`}>
             {state.message ?? (isNew ? "Brouillon : rien n'est publié tant que le statut n'est pas « Publié »." : "Les changements sont visibles sur le site dès l'enregistrement.")}
           </p>
-          <button disabled={pending} className="min-h-11 rounded-full bg-sable px-7 font-semibold text-night transition hover:brightness-110 disabled:opacity-60">
+          <button disabled={pending} className="min-h-11 rounded-full bg-sable px-7 font-semibold text-ink transition hover:brightness-110 disabled:opacity-60">
             {pending ? "Enregistrement…" : isNew ? "Créer l'événement" : "Enregistrer"}
           </button>
         </div>

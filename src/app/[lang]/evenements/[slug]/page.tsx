@@ -133,19 +133,19 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
               <dl className="grid grid-cols-[auto_1fr] gap-x-5 gap-y-2.5 text-[0.95rem]">
                 {!event.dateHidden && (
                   <>
-                    <dt className="text-sable">{dict.events.doors}</dt>
+                    <dt className="text-ink">{dict.events.doors}</dt>
                     <dd className="text-ink">{dateLabel} · {formatTime(event.startsAt, lang)} – {formatTime(event.endsAt, lang)}</dd>
                   </>
                 )}
                 {place && (
                   <>
-                    <dt className="text-sable">{dict.events.venue}</dt>
+                    <dt className="text-ink">{dict.events.venue}</dt>
                     <dd className="text-ink">{place}</dd>
                   </>
                 )}
                 {event.lineup.length > 0 && (
                   <>
-                    <dt className="text-sable">{dict.events.lineup}</dt>
+                    <dt className="text-ink">{dict.events.lineup}</dt>
                     <dd className="text-ink">
                       {event.lineup.map((name, i) => {
                         const href = event.instagram?.[name];
@@ -165,7 +165,7 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
                 )}
                 {!isPast && (
                   <>
-                    <dt className="text-sable">{dict.events.reservations}</dt>
+                    <dt className="text-ink">{dict.events.reservations}</dt>
                     <dd><a href={site.phoneHref} className="link-draw pb-0.5 text-ink">{site.phone}</a></dd>
                   </>
                 )}
@@ -181,7 +181,7 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
             )}
             <h1 className="font-display text-[clamp(3rem,8vw,7rem)] font-medium leading-[0.86] tracking-[-0.035em]">
               <SplitTitle text={event.name} />
-              {event.edition && <span className="mt-4 block text-[0.3em] italic tracking-normal text-sable">{event.edition[lang]}</span>}
+              {event.edition && <span className="mt-4 block text-[0.3em] italic tracking-normal text-ink">{event.edition[lang]}</span>}
             </h1>
             <p className="mt-5 max-w-xl font-display text-2xl italic text-ink/90">{event.tagline[lang]}</p>
             {!isPast && (
@@ -196,7 +196,7 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
                     href={heroAction.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex min-h-14 items-center gap-3 rounded-full bg-sable px-8 font-semibold text-night transition hover:brightness-110"
+                    className="group inline-flex min-h-14 items-center gap-3 rounded-full bg-sable px-8 font-semibold text-ink transition hover:brightness-110"
                   >
                     {heroAction.label}
                     <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>

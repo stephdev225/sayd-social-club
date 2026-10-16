@@ -19,7 +19,7 @@ export function NextEventCTA({ next, dict, lang }: { next: NextEventSummary | nu
         </div>
       )}
       <div className="mx-auto max-w-7xl px-5 py-28 sm:px-6 md:py-40 lg:px-10">
-        <Reveal><p className="text-sable">{dict.home.nextShort} · {next.dateShort} · {next.venue}</p></Reveal>
+        <Reveal><p className="text-ink">{dict.home.nextShort} · {next.dateShort} · {next.venue}</p></Reveal>
         <LineReveal id="cta-next" text={next.name} className="mt-3 font-display text-[clamp(3.4rem,14vw,8rem)] leading-[0.86]" />
         <Reveal delay={0.1}>
           <p className="mt-6 max-w-lg text-lg text-ink/85">{dict.funnel.ctaText}</p>
@@ -28,7 +28,7 @@ export function NextEventCTA({ next, dict, lang }: { next: NextEventSummary | nu
             <Magnetic>
               <Link
                 href={next.ticketsHref}
-                className="group inline-flex min-h-14 items-center gap-3 rounded-full bg-sable px-8 py-4 text-base font-semibold text-night transition hover:brightness-110"
+                className="group inline-flex min-h-14 items-center gap-3 rounded-full bg-sable px-8 py-4 text-base font-semibold text-ink transition hover:brightness-110"
               >
                 {dict.funnel.cta}
                 <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>

@@ -1,40 +1,59 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
-import { useRef } from "react";
-import { ShaderBackdrop } from "./motion/ShaderBackdrop";
+import { useEffect, useRef, useState } from "react";
+
+export interface HeroImage {
+  src: string;
+  alt: string;
+}
 
 /**
- * Home hero: the crowd photo, lit by an animated shader, slowly zooms while the
- * content lifts away on scroll. The brand name stays in the logo; the h1 is kept
- * for screen readers and search engines only.
+ * Home hero, deliberately bare: the aerial show photos, always shown whole and in their
+ * original colours, at screen height. A blurred copy of the same photo fills the
+ * leftover space on wide screens. The photos cross-fade every few seconds.
+ * The brand name stays in the logo; the h1 is for screen readers and search engines.
  */
-export function HeroBrand({ image, children }: { image: string; children: React.ReactNode }) {
+export function HeroBrand({ images, children }: { images: HeroImage[]; children?: React.ReactNode }) {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
+  const [i, setI] = useState(0);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const scale = useTransform(scrollYProgress, [0, 1], [1.05, 1.25]);
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-  const still = Boolean(reduce);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
+  const fade = useTransform(scrollYProgress, [0, 0.8], [1, 0.2]);
 
+  useEffect(() => {
+    if (reduce || images.length < 2) return;
+    const t = setInterval(() => {
+      if (!document.hidden) setI((n) => (n + 1) % images.length);
+    }, 5500);
+    return () => clearInterval(t);
+  }, [reduce, images.length]);
+
+  const img = images[i];
   return (
-    <section ref={ref} className="relative flex min-h-[88svh] flex-col justify-end overflow-hidden md:min-h-[84svh]">
-      <motion.div aria-hidden className="grain absolute inset-0" style={still ? undefined : { scale }}>
-        <Image src={image} alt="" fill priority sizes="100vw" className="object-cover object-[50%_35%]" />
+    <section ref={ref} className="relative h-[100svh] min-h-[32rem] overflow-hidden bg-night">
+      <h1 className="sr-only">Sayd Social Club</h1>
+      <motion.div className="absolute inset-0" style={reduce ? undefined : { y, opacity: fade }}>
+        <AnimatePresence initial={false}>
+          <motion.div
+            key={img.src}
+            className="absolute inset-0"
+            initial={{ opacity: 0, scale: 1.04 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {/* Leftover space: the same photo, blurred and dimmed */}
+            <Image src={img.src} alt="" aria-hidden fill sizes="40vw" priority={i === 0} className="scale-110 object-cover opacity-50 blur-2xl" />
+            {/* The photo itself, whole */}
+            <Image src={img.src} alt={img.alt} fill sizes="(min-width: 768px) 60vw, 100vw" priority={i === 0} className="object-contain" />
+          </motion.div>
+        </AnimatePresence>
       </motion.div>
-      {/* Living light over the photo */}
-      <div aria-hidden className="absolute inset-0 opacity-40 mix-blend-screen">
-        <ShaderBackdrop />
-      </div>
-      {/* Fades into the page colour: no visible bottom edge */}
-      <div aria-hidden className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(18,15,14,0.55)_0%,rgba(18,15,14,0.2)_35%,rgba(18,15,14,0.75)_75%,#120f0e_100%)]" />
-
-      <motion.div style={still ? undefined : { y, opacity }} className="relative mx-auto w-full max-w-7xl px-5 pb-10 pt-32 sm:px-6 md:pb-14 lg:px-10">
-        <h1 className="sr-only">Sayd Social Club</h1>
-        {children}
-      </motion.div>
+      <div aria-hidden className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-night to-transparent" />
+      {children && <div className="absolute inset-x-0 bottom-0 mx-auto w-full max-w-7xl px-5 pb-8 sm:px-6 md:pb-12 lg:px-10">{children}</div>}
     </section>
   );
 }

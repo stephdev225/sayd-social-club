@@ -84,7 +84,7 @@ export function SiteHeader({ lang, nav, ticketsHref }: { lang: Locale; nav: Nav;
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-6 md:h-20 lg:px-10">
           <Link href={`/${lang}`} className="group relative z-[60] shrink-0" aria-label="Sayd Social Club">
-            <Image src="/brand/logo-block-ivory.png" alt="Sayd Social Club" width={560} height={590} priority className="h-11 w-auto transition duration-500 group-hover:-rotate-2 group-hover:scale-105 group-hover:drop-shadow-[0_0_14px_rgba(217,178,106,0.55)] md:h-12" />
+            <Image src="/brand/logo-block-ivory.png" alt="Sayd Social Club" width={560} height={590} priority className="h-11 w-auto transition duration-500 group-hover:-rotate-2 group-hover:scale-105 group-hover:drop-shadow-[0_0_14px_rgba(255,255,255,0.35)] md:h-12" />
           </Link>
 
           <nav aria-label={nav.ariaMain} className="hidden items-center gap-6 lg:flex xl:gap-8">
@@ -108,7 +108,7 @@ export function SiteHeader({ lang, nav, ticketsHref }: { lang: Locale; nav: Nav;
             <Link
               href={ticketsHref}
               onClick={() => closeFor(ticketsHref)}
-              className="inline-flex items-center rounded-full bg-sable px-4 py-2 text-sm font-semibold text-night transition hover:brightness-110 sm:px-5"
+              className="inline-flex items-center rounded-full bg-sable px-4 py-2 text-sm font-semibold text-ink transition hover:brightness-110 sm:px-5"
             >
               {nav.tickets}
             </Link>
@@ -165,7 +165,7 @@ export function SiteHeader({ lang, nav, ticketsHref }: { lang: Locale; nav: Nav;
                       href={l.href}
                       onClick={() => closeFor(l.href)}
                       aria-current={isActive(l.href) ? "page" : undefined}
-                      className="block py-1.5 font-display text-[clamp(2.3rem,10vw,4rem)] leading-[1.05] text-ink transition-colors aria-[current=page]:italic aria-[current=page]:text-sable"
+                      className="block py-1.5 font-display text-[clamp(2.3rem,10vw,4rem)] leading-[1.05] text-ink transition-colors aria-[current=page]:italic aria-[current=page]:text-ink"
                     >
                       {l.label}
                     </Link>
@@ -184,7 +184,7 @@ export function SiteHeader({ lang, nav, ticketsHref }: { lang: Locale; nav: Nav;
               <Link
                 href={ticketsHref}
                 onClick={() => closeFor(ticketsHref)}
-                className="flex min-h-14 w-full items-center justify-center rounded-full bg-sable text-base font-semibold text-night"
+                className="flex min-h-14 w-full items-center justify-center rounded-full bg-sable text-base font-semibold text-ink"
               >
                 {nav.tickets}
               </Link>

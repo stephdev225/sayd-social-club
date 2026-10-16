@@ -26,13 +26,13 @@ export interface GuestRow {
 
 const STATUS: Record<string, { label: string; cls: string }> = {
   paid: { label: "Payé", cls: "bg-bottle text-bottle-ink" },
-  pending: { label: "En attente", cls: "bg-sable/15 text-sable" },
+  pending: { label: "En attente", cls: "bg-sable/15 text-ink" },
   expired: { label: "Expiré", cls: "bg-line text-muted" },
   cancelled: { label: "Annulé", cls: "bg-line text-muted" },
   failed: { label: "Échoué", cls: "bg-terra/15 text-terra" },
   refunded: { label: "Remboursé", cls: "bg-terra/15 text-terra" },
   valid: { label: "Valide", cls: "bg-bottle text-bottle-ink" },
-  used: { label: "Entré", cls: "bg-sable/15 text-sable" },
+  used: { label: "Entré", cls: "bg-sable/15 text-ink" },
 };
 
 function Badge({ s }: { s: string }) {
@@ -90,7 +90,7 @@ export function OrdersTable({ rows }: { rows: OrderRow[] }) {
                   <td className="px-3 py-2.5 tabular-nums">{r.total}</td>
                   <td className="px-3 py-2.5"><Badge s={r.status} /></td>
                   <td className="whitespace-nowrap px-3 py-2.5 text-muted">{r.date}</td>
-                  <td className="px-3 py-2.5">{r.stripeUrl ? <a href={r.stripeUrl} target="_blank" rel="noopener noreferrer" className="text-sable underline">Voir</a> : "—"}</td>
+                  <td className="px-3 py-2.5">{r.stripeUrl ? <a href={r.stripeUrl} target="_blank" rel="noopener noreferrer" className="text-ink underline">Voir</a> : "—"}</td>
                 </tr>
               ))}
             </tbody>

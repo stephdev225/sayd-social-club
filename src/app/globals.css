@@ -2,19 +2,19 @@
 
 /*
  * Sayd Social Club — design tokens.
- * Palette from the client brief (noir charbon, sable doré, terracotta, vert bouteille)
- * plus a per-event accent. Contrast ratios (WCAG 2.1) are documented in docs/DESIGN_SYSTEM.md.
+ * Oct 2026 (Stéphane): text in white, buttons in red, nothing gold or green.
+ * The token keeps its historical name "sable" but is now Sayd red. White on red: 6.3:1.
  */
 @theme {
   --color-night: #120f0e;      /* noir charbon — page background */
   --color-night-2: #1b1715;    /* raised surfaces */
   --color-line: #2e2825;       /* hairlines, input borders */
-  --color-ink: #efe6d8;        /* body text, 15.4:1 on night */
-  --color-muted: #a89d8f;      /* secondary text, 7.2:1 on night */
-  --color-sable: #d9b26a;      /* sable doré — primary action, 9.6:1 on night */
+  --color-ink: #f5f3f0;        /* body text, white */
+  --color-muted: #a6a29e;      /* secondary text, neutral grey */
+  --color-sable: #c1121f;      /* Sayd red — buttons and accents (white text on top) */
   --color-terra: #da7656;      /* terracotta — alerts, sold out, 6.1:1 on night */
   --color-bottle: #16382b;     /* vert bouteille — confirmation surfaces */
-  --color-bottle-ink: #8fd1b0; /* success text, on night */
+  --color-bottle-ink: #f5f3f0; /* success text (white) */
 
   --font-display: "Cormorant Garamond Variable", "Cormorant Garamond", Georgia, serif;
   --font-sans: "DM Sans Variable", "DM Sans", "Helvetica Neue", Arial, sans-serif;
@@ -47,11 +47,11 @@ body {
 
 ::selection {
   background: var(--color-sable);
-  color: var(--color-night);
+  color: var(--color-ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-sable);
+  outline: 2px solid var(--color-ink);
   outline-offset: 3px;
   border-radius: 2px;
 }

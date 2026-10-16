@@ -16,7 +16,7 @@ export interface FieldDef {
 const input =
   "peer block w-full border-0 border-b border-ink/25 bg-transparent px-0 pb-3 pt-7 text-lg text-ink placeholder-transparent transition-colors focus:border-sable focus:outline-none focus:ring-0";
 const floating =
-  "pointer-events-none absolute left-0 top-7 text-lg text-ink/50 transition-all peer-focus:top-0 peer-focus:text-xs peer-focus:text-sable peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:text-xs";
+  "pointer-events-none absolute left-0 top-7 text-lg text-ink/50 transition-all peer-focus:top-0 peer-focus:text-xs peer-focus:text-ink peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:text-xs";
 
 /** Contact and ambassador forms: underlined fields with floating labels, honeypot, animated confirmation. */
 export function SubmissionForm({
@@ -52,7 +52,7 @@ export function SubmissionForm({
     <AnimatePresence mode="wait">
       {state === "sent" ? (
         <motion.div key="sent" role="status" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="py-10">
-          <svg viewBox="0 0 64 64" className="mb-6 h-14 w-14 text-sable" aria-hidden>
+          <svg viewBox="0 0 64 64" className="mb-6 h-14 w-14 text-ink" aria-hidden>
             <motion.circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" strokeWidth="2" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.7 }} />
             <motion.path d="M20 33 l8 8 l16 -18" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.5, delay: 0.5 }} />
           </svg>
@@ -117,7 +117,7 @@ export function SubmissionForm({
           <button
             type="submit"
             disabled={state === "sending"}
-            className="group inline-flex min-h-14 items-center justify-center gap-3 justify-self-stretch rounded-full bg-sable px-9 font-semibold text-night transition hover:brightness-110 disabled:opacity-60 sm:justify-self-start"
+            className="group inline-flex min-h-14 items-center justify-center gap-3 justify-self-stretch rounded-full bg-sable px-9 font-semibold text-ink transition hover:brightness-110 disabled:opacity-60 sm:justify-self-start"
           >
             {state === "sending" ? labels.sending : labels.send}
             <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>

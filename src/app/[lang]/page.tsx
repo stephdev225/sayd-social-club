@@ -6,7 +6,6 @@ import { ScrollGallery } from "@/components/ScrollGallery";
 import { HeroBrand } from "@/components/HeroBrand";
 import { LineReveal } from "@/components/motion/LineReveal";
 import { Magnetic } from "@/components/motion/Magnetic";
-import { Parallax } from "@/components/motion/Parallax";
 import { Reveal } from "@/components/motion/Reveal";
 import { TextReveal } from "@/components/motion/TextReveal";
 import { VelocityMarquee } from "@/components/motion/VelocityMarquee";
@@ -21,8 +20,9 @@ import { site } from "@/lib/site";
 
 export const revalidate = 60;
 
-const PILLAR_IMAGES = [photos.djSuit, photos.elegant, photos.friends] as const;
-const CAROUSEL = ["aerial", "scarf", "wineWide", "sign", "yellow", "champagne", "crowdAbove", "couple"] as const;
+const HERO = [photos.aerialSplit, photos.aerial, photos.aerialBeams] as const;
+const PILLAR_IMAGES = [photos.djAbove, photos.couple, photos.crowd] as const;
+const CAROUSEL = ["aerialHoop", "duo", "wine", "veuve", "decks", "glow", "balcony", "bar", "bucket", "sparklers"] as const;
 
 export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
@@ -36,41 +36,16 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
 
   return (
     <>
-      {/* ── 1. Hero: photo zooms, content lifts away on scroll ── */}
-      <HeroBrand image={photos.heroWide.src}>
-        <div className="flex flex-col gap-7 md:flex-row md:items-end md:justify-between">
-          <div className="rise max-w-xl [animation-delay:0.2s]">
-            <p className="font-display text-[clamp(2rem,7.5vw,3.6rem)] leading-[1.05] tracking-[-0.01em] text-ink">{dict.home.heroLine}</p>
-            <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-4">
-              <Magnetic>
-                <Link
-                  href={next ? ticketsHrefFor(next, lang) : `/${lang}/evenements`}
-                  className="group inline-flex min-h-14 items-center gap-3 rounded-full bg-sable px-7 py-4 font-semibold text-night transition hover:brightness-110"
-                >
-                  {next ? dict.funnel.cta : dict.home.heroCta}
-                  <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                </Link>
-              </Magnetic>
-              {next && <Link href={`/${lang}/evenements`} className="link-draw pb-1 text-ink/85">{dict.home.heroCta}</Link>}
-            </div>
-          </div>
-
-          {next && nextDate && (
-            <Link
-              href={`/${lang}/evenements/${next.slug}`}
-              className="rise group flex max-w-full items-center gap-4 self-start rounded-2xl bg-night/55 p-2.5 pr-4 backdrop-blur-md transition hover:bg-night/80 md:self-auto [animation-delay:0.4s]"
-            >
-              {next.coverImage && (
-                <Image src={next.coverImage} alt="" width={1080} height={1920} sizes="3.5rem" className="aspect-[3/4] w-14 rounded-lg object-cover" />
-              )}
-              <span className="min-w-0">
-                <span className="block whitespace-nowrap text-xs text-ink/60">{dict.home.nextShort}</span>
-                <span className="block truncate font-display text-xl leading-tight">{next.name}</span>
-                <span className="block text-sm text-ink/75">{nextDate.day} {nextDate.month} · {next.venueName}</span>
-              </span>
-              <span aria-hidden className="ml-auto shrink-0 pl-2 text-sable transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </Link>
-          )}
+      {/* ── 1. Hero: the aerial show, photos shown whole; one quiet button ── */}
+      <HeroBrand images={HERO.map((h) => ({ src: h.src, alt: h.alt[lang] }))}>
+        <div className="flex flex-wrap items-center justify-center gap-3 md:justify-start">
+          <Link
+            href={next ? ticketsHrefFor(next, lang) : `/${lang}/evenements`}
+            className="group inline-flex min-h-12 items-center gap-3 rounded-full bg-sable px-6 font-semibold text-ink transition hover:brightness-110"
+          >
+            {next ? `${dict.funnel.cta} · ${next.name}${nextDate ? `, ${nextDate.day} ${nextDate.month}` : ""}` : dict.home.heroCta}
+            <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+          </Link>
         </div>
       </HeroBrand>
 
@@ -105,7 +80,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
             <LineReveal id="ambiance" text={dict.home.galleryTitle} className="t-h2" />
             <Reveal delay={0.1}><p className="mt-3 max-w-md text-ink/70">{dict.home.galleryNote}</p></Reveal>
           </div>
-          <Link href={`/${lang}/galerie`} className="link-draw shrink-0 pb-1 text-sable">
+          <Link href={`/${lang}/galerie`} className="link-draw shrink-0 pb-1 text-ink">
             {dict.nav.gallery} →
           </Link>
         </div>
@@ -115,44 +90,21 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         />
       </section>
 
-      {/* ── 7. Radio ── */}
-      <section className="mx-auto grid max-w-7xl items-center gap-10 px-5 pb-24 sm:px-6 md:grid-cols-[1fr_1.3fr] md:pb-36 lg:px-10" aria-labelledby="radio">
-        <div>
-          <LineReveal id="radio" text={dict.home.radioTitle} className="t-h2" />
-          <Reveal delay={0.1}>
-            <p className="mt-4 max-w-md text-ink/70">{dict.home.radioText}</p>
-            <a href={site.spotifyPlaylist} target="_blank" rel="noopener noreferrer" className="link-draw mt-6 inline-block pb-1 text-sable">
-              {dict.home.radioCta}
-            </a>
-          </Reveal>
-        </div>
-        <Reveal delay={0.15}>
-          <iframe
-            title={dict.home.radioTitle}
-            src={site.spotifyEmbed}
-            loading="lazy"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            className="h-[352px] w-full rounded-2xl border-0"
-          />
-        </Reveal>
-      </section>
-
-      {/* ── 8. Ambassadors: image bleeds, text over the fade ── */}
-      <section className="relative isolate overflow-hidden">
-        <Parallax amount={8} className="absolute inset-0 -z-10">
-          <div className="grain relative h-full w-full">
-            <Image src={photos.crowdAbove.src} alt="" fill sizes="100vw" className="object-cover" />
+      {/* ── 8. Ambassadors: the photo whole, the invitation beside it ── */}
+      <section className="mx-auto grid max-w-7xl items-center gap-10 px-5 pb-24 sm:px-6 md:grid-cols-2 md:gap-16 md:pb-36 lg:px-10">
+        <Reveal>
+          <div className="relative mx-auto aspect-[2/3] w-full max-w-md overflow-hidden rounded-[1.75rem] md:max-h-[80svh] md:w-auto">
+            <Image src={photos.trio.src} alt={photos.trio.alt[lang]} fill sizes="(min-width: 768px) 28rem, 100vw" className="object-cover" />
           </div>
-        </Parallax>
-        <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,#120f0e_0%,rgba(18,15,14,0.55)_30%,rgba(18,15,14,0.6)_70%,#120f0e_100%)]" />
-        <div className="mx-auto max-w-7xl px-5 py-32 sm:px-6 md:py-48 lg:px-10">
+        </Reveal>
+        <div>
           <LineReveal text={dict.home.ambassadorsTitle} className="max-w-3xl font-display text-[clamp(2.6rem,9vw,6rem)] leading-[0.92]" />
           <Reveal delay={0.15}>
             <p className="mt-6 max-w-lg text-lg text-ink/85">{dict.home.ambassadorsText}</p>
             <Magnetic className="mt-9">
               <Link
                 href={`/${lang}/ambassadeurs`}
-                className="inline-flex min-h-13 items-center rounded-full bg-ink px-8 py-3.5 font-semibold text-night transition-colors hover:bg-sable"
+                className="inline-flex min-h-13 items-center rounded-full bg-sable px-8 py-3.5 font-semibold text-ink transition hover:brightness-110"
               >
                 {dict.home.ambassadorsCta}
               </Link>

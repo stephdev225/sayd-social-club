@@ -58,7 +58,7 @@ n'est pas ajouté : impossible de passer en réel par accident.
 | `BREVO_API_KEY` | Brevo → SMTP & API → Clés API → Générer |
 | `EMAIL_FROM` | `billets@saydsocialclub.com` (une fois le domaine vérifié dans Brevo) |
 | `EMAIL_FROM_NAME` | `Sayd Social Club` |
-| `TEAM_EMAIL` | facultatif : par défaut saydsocialclub@gmail.com reçoit les messages du formulaire de contact |
+| `TEAM_EMAIL` | facultatif : par défaut saydsocialclubc@gmail.com reçoit les messages du formulaire de contact |
 
 Dans Brevo → Expéditeurs et domaines → ajouter `saydsocialclub.com` et créer les
 enregistrements DNS demandés (SPF, DKIM, DMARC). Sans ça, les billets risquent

@@ -34,7 +34,7 @@ export default async function ConfirmationPage({ params, searchParams }: PagePro
     return (
       <div className="mx-auto max-w-2xl px-5 pb-24 pt-32 sm:px-6">
         <h1 className="t-h1">{c.notFound}</h1>
-        <Link href={`/${lang}/evenements`} className="mt-8 inline-block text-sable underline underline-offset-4">
+        <Link href={`/${lang}/evenements`} className="mt-8 inline-block text-ink underline underline-offset-4">
           {dict.nav.events}
         </Link>
       </div>
@@ -95,7 +95,7 @@ export default async function ConfirmationPage({ params, searchParams }: PagePro
       {status !== "paid" && status !== "pending" && event && (
         <Link
           href={`/${lang}/evenements/${event.slug}#billets`}
-          className="mt-10 inline-flex min-h-12 items-center rounded-full bg-sable px-7 font-semibold text-night"
+          className="mt-10 inline-flex min-h-12 items-center rounded-full bg-sable px-7 font-semibold text-ink"
         >
           {c.backToEvent}
         </Link>

@@ -29,7 +29,7 @@ export default async function EventsAdminPage() {
           <h1 className="t-h1">Événements</h1>
           <p className="mt-2 text-muted">Annoncez une soirée, réglez les billets, ouvrez ou fermez la vente.</p>
         </div>
-        <Link href="/admin/evenements/nouveau" className="inline-flex min-h-11 items-center rounded-full bg-sable px-6 font-semibold text-night hover:brightness-110">
+        <Link href="/admin/evenements/nouveau" className="inline-flex min-h-11 items-center rounded-full bg-sable px-6 font-semibold text-ink hover:brightness-110">
           + Nouvel événement
         </Link>
       </header>

@@ -27,7 +27,7 @@ export function Countdown({ to, lang }: { to: string; lang: "fr" | "en" }) {
   const L = LABELS[lang];
   if (now === null) return <div className="h-[3.75rem]" aria-hidden />;
   const left = new Date(to).getTime() - now;
-  if (left <= 0) return <p className="font-display text-2xl italic text-sable">{L.live}</p>;
+  if (left <= 0) return <p className="font-display text-2xl italic text-ink">{L.live}</p>;
   const p = parts(left);
   const cells: [number, string][] = [
     [p.d, L.d],

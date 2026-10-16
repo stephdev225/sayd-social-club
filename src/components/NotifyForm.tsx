@@ -38,13 +38,13 @@ export function NotifyForm({ lang, labels, source, compact = false }: { lang: Lo
   const input =
     "peer block w-full border-0 border-b border-ink/25 bg-transparent px-0 pb-3 pt-6 text-lg text-ink placeholder-transparent transition-colors focus:border-sable focus:outline-none focus:ring-0";
   const label =
-    "pointer-events-none absolute left-0 top-6 text-lg text-ink/50 transition-all peer-focus:top-0 peer-focus:text-xs peer-focus:text-sable peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:text-xs";
+    "pointer-events-none absolute left-0 top-6 text-lg text-ink/50 transition-all peer-focus:top-0 peer-focus:text-xs peer-focus:text-ink peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:text-xs";
 
   return (
     <AnimatePresence mode="wait">
       {state === "done" ? (
         <motion.div key="done" role="status" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="py-6">
-          <p className="font-display text-3xl text-sable">{labels.done}</p>
+          <p className="font-display text-3xl text-ink">{labels.done}</p>
           <p className="mt-2 text-ink/80">{labels.doneText}</p>
         </motion.div>
       ) : (
@@ -63,7 +63,7 @@ export function NotifyForm({ lang, labels, source, compact = false }: { lang: Lo
           <button
             type="submit"
             disabled={state === "sending"}
-            className="min-h-13 rounded-full bg-sable px-8 py-3.5 font-semibold text-night transition hover:brightness-110 disabled:opacity-60"
+            className="min-h-13 rounded-full bg-sable px-8 py-3.5 font-semibold text-ink transition hover:brightness-110 disabled:opacity-60"
           >
             {state === "sending" ? labels.sending : labels.cta}
           </button>

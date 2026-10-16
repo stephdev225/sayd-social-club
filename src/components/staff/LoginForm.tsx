@@ -44,7 +44,7 @@ export function LoginForm({ next }: { next: string }) {
         <input id="password" name="password" type="password" required autoComplete="current-password" className={input} />
       </div>
       {error && <p role="alert" className="text-terra">{error}</p>}
-      <button disabled={busy} className="min-h-12 rounded-full bg-sable font-semibold text-night disabled:opacity-60">
+      <button disabled={busy} className="min-h-12 rounded-full bg-sable font-semibold text-ink disabled:opacity-60">
         {busy ? "Connexion…" : "Se connecter"}
       </button>
     </form>

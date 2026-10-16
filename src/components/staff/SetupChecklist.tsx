@@ -43,14 +43,14 @@ export function SetupChecklist() {
     <section aria-labelledby="t-config" className="rounded-lg border border-line bg-night-2 p-5">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <h2 id="t-config" className="font-display text-2xl">Mise en route</h2>
-        <p className={`text-sm ${ready ? "text-sable" : "text-terra"}`}>
+        <p className={`text-sm ${ready ? "text-ink" : "text-terra"}`}>
           {ready ? (live ? "Stripe en mode LIVE" : "Site prêt : formulaires et admin actifs") : `${missing} réglage(s) manquant(s) dans Vercel`}
         </p>
       </div>
       <ul className="mt-4 grid gap-3 sm:grid-cols-2">
         {items.map((i) => (
           <li key={i.label} className="flex gap-3 text-sm">
-            <span aria-hidden className={`mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full text-xs ${i.ok ? "bg-sable text-night" : i.optional ? "bg-ink/10 text-muted" : "bg-terra/20 text-terra"}`}>
+            <span aria-hidden className={`mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full text-xs ${i.ok ? "bg-sable text-ink" : i.optional ? "bg-ink/10 text-muted" : "bg-terra/20 text-terra"}`}>
               {i.ok ? "✓" : i.optional ? "–" : "!"}
             </span>
             <span>

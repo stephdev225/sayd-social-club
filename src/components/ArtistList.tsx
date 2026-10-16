@@ -1,90 +1,76 @@
 "use client";
 
-import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
-import { useState } from "react";
 
 export interface ArtistRow {
   name: string;
   meta: string; // "DJ · France"
   badge?: string;
   href?: string;
-  image: string;
+  handle?: string;
+  image?: string;
 }
 
+const EASE = [0.22, 1, 0.36, 1] as const;
+
 /**
- * Big typographic list of names. On desktop, hovering a name brings up a photo that
- * follows the cursor; on touch screens rows simply rise in as you scroll.
+ * Artist cards: the photo is always visible (phones first), the name links to the
+ * artist's Instagram. Photos open like a curtain as they scroll into view.
  */
 export function ArtistList({ rows }: { rows: ArtistRow[] }) {
   const reduce = useReducedMotion();
-  const [active, setActive] = useState<number | null>(null);
-  const x = useSpring(useMotionValue(0), { stiffness: 300, damping: 30 });
-  const y = useSpring(useMotionValue(0), { stiffness: 300, damping: 30 });
-
   return (
-    <div
-      className="relative"
-      onPointerMove={(e) => {
-        if (e.pointerType !== "mouse") return;
-        const r = e.currentTarget.getBoundingClientRect();
-        x.set(e.clientX - r.left);
-        y.set(e.clientY - r.top);
-      }}
-      onPointerLeave={() => setActive(null)}
-    >
-      <ul>
-        {rows.map((r, i) => {
-          const content = (
-            <>
-              <span className="font-display text-[clamp(2.6rem,11vw,7.5rem)] leading-[0.95] transition-colors duration-500 group-hover:text-sable">
-                {r.name}
-              </span>
-              <span className="flex flex-wrap items-center gap-3 text-ink/70 md:justify-end">
-                <span>{r.meta}</span>
-                {r.badge && <span className="rounded-full bg-sable/15 px-3 py-1 text-xs font-semibold text-sable">{r.badge}</span>}
-              </span>
-            </>
-          );
-          return (
-            <motion.li
-              key={r.name}
-              initial={reduce ? false : { opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-              transition={{ duration: 0.8, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
-              onPointerEnter={(e) => e.pointerType === "mouse" && setActive(i)}
-            >
-              {r.href ? (
-                <a href={r.href} target="_blank" rel="noopener noreferrer" className="group grid gap-2 py-5 md:grid-cols-[1fr_auto] md:items-end">
-                  {content}
-                </a>
-              ) : (
-                <div className="group grid gap-2 py-5 md:grid-cols-[1fr_auto] md:items-end">{content}</div>
-              )}
-            </motion.li>
-          );
-        })}
-      </ul>
-
-      {!reduce && (
-        <AnimatePresence>
-          {active !== null && (
+    <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {rows.map((r, i) => {
+        const inner = (
+          <>
             <motion.div
-              key={active}
-              aria-hidden
-              className="pointer-events-none absolute left-0 top-0 z-10 hidden h-64 w-48 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl md:block"
-              style={{ x, y }}
-              initial={{ opacity: 0, scale: 0.8, rotate: -6 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-night-2"
+              initial={reduce ? false : { clipPath: "inset(18% 10% 18% 10% round 1rem)" }}
+              whileInView={{ clipPath: "inset(0% 0% 0% 0% round 1rem)" }}
+              viewport={{ once: true, margin: "0px 0px -12% 0px" }}
+              transition={{ duration: 1.1, delay: (i % 3) * 0.08, ease: EASE }}
             >
-              <Image src={rows[active].image} alt="" fill sizes="12rem" className="object-cover" />
+              {r.image ? (
+                <Image
+                  src={r.image}
+                  alt={r.name}
+                  fill
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  className="object-cover transition duration-[1.2s] ease-out group-hover:scale-[1.04]"
+                />
+              ) : (
+                <div aria-hidden className="absolute inset-0 grid place-items-center">
+                  <span className="font-display text-[7rem] leading-none text-ink/10">
+                    {r.name.replace(/^DJ\s+/i, "").slice(0, 1)}
+                  </span>
+                </div>
+              )}
+              <div aria-hidden className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-night/90 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-5">
+                <p className="font-display text-[clamp(2.2rem,8vw,3rem)] leading-none">{r.name}</p>
+                <p className="mt-2 flex flex-wrap items-center gap-2 text-sm text-ink/80">
+                  <span>{r.meta}</span>
+                  {r.badge && <span className="rounded-full border border-ink/30 px-2.5 py-0.5 text-xs">{r.badge}</span>}
+                </p>
+              </div>
             </motion.div>
-          )}
-        </AnimatePresence>
-      )}
-    </div>
+            {r.handle && <p className="mt-3 text-sm text-ink/70 group-hover:text-ink">{r.handle} ↗</p>}
+          </>
+        );
+        return (
+          <li key={r.name}>
+            {r.href ? (
+              <a href={r.href} target="_blank" rel="noopener noreferrer" className="group block" aria-label={`${r.name} — Instagram`}>
+                {inner}
+              </a>
+            ) : (
+              <div className="group">{inner}</div>
+            )}
+          </li>
+        );
+      })}
+    </ul>
   );
 }

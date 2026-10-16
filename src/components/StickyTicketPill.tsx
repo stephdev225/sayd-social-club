@@ -28,13 +28,13 @@ export function StickyTicketPill({ href, label, detail }: { href: string; label:
         >
           <Link
             href={href}
-            className="flex min-h-14 items-center justify-between rounded-full bg-sable pl-6 pr-2 text-night shadow-[0_20px_40px_-12px_rgba(0,0,0,0.8)]"
+            className="flex min-h-14 items-center justify-between rounded-full bg-sable pl-6 pr-2 text-ink shadow-[0_20px_40px_-12px_rgba(0,0,0,0.8)]"
           >
             <span className="text-sm">
               <span className="block font-semibold leading-tight">{label}</span>
               <span className="block text-xs opacity-75">{detail}</span>
             </span>
-            <span aria-hidden className="flex h-10 w-10 items-center justify-center rounded-full bg-night text-sable">→</span>
+            <span aria-hidden className="flex h-10 w-10 items-center justify-center rounded-full bg-night text-ink">→</span>
           </Link>
         </motion.div>
       )}

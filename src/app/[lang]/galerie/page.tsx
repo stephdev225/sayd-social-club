@@ -4,7 +4,7 @@ import { alternates } from "@/lib/seo";
 import { NextEventCTA } from "@/components/NextEventCTA";
 import { getNextEventSummary } from "@/lib/data/next-event";
 import { Gallery } from "@/components/Gallery";
-import { VideoLoop } from "@/components/VideoLoop";
+import Image from "next/image";
 import { LineReveal } from "@/components/motion/LineReveal";
 import { Reveal } from "@/components/motion/Reveal";
 import { hasLocale } from "@/lib/i18n/config";
@@ -23,30 +23,27 @@ export default async function GalleryPage({ params }: PageProps<"/[lang]/galerie
   if (!hasLocale(lang)) notFound();
   const dict = await getDictionary(lang);
   const next = await getNextEventSummary(lang);
+  const cover = photos.aerialHoop;
 
   return (
     <>
-    <div className="mx-auto max-w-7xl px-3 pb-10 pt-28 sm:px-6 md:pt-36 lg:px-10">
-      <div className="grid items-end gap-10 px-2 sm:px-0 md:grid-cols-[1fr_auto]">
-        <div>
-          <LineReveal as="h1" text={dict.gallery.title} className="t-h1" />
-          <Reveal delay={0.2}>
-            <p className="mt-5 max-w-xl text-lg text-ink/80">{dict.gallery.intro}</p>
-          </Reveal>
-        </div>
-        {/* Sayd photo wall, in motion */}
-        <Reveal delay={0.3} className="mx-auto w-[min(72vw,20rem)] md:mx-0 md:w-[17rem] lg:w-[19rem]">
-          <VideoLoop
-            src="/brand/sayd-wall.mp4"
-            poster="/brand/sayd-wall-poster.webp"
-            className="aspect-[9/16] w-full rounded-3xl bg-night-2 object-cover"
-          />
+    {/* Cover: the photo whole over a blurred copy of itself, title at the bottom */}
+    <section className="relative h-[78svh] min-h-[28rem] overflow-hidden bg-night">
+      <Image src={cover.src} alt="" aria-hidden fill priority sizes="40vw" className="scale-110 object-cover opacity-50 blur-2xl" />
+      <Image src={cover.src} alt={cover.alt[lang]} fill priority sizes="(min-width: 768px) 60vw, 100vw" className="object-contain" />
+      <div aria-hidden className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-night to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 mx-auto max-w-7xl px-5 pb-8 sm:px-6 md:pb-12 lg:px-10">
+        <LineReveal as="h1" text={dict.gallery.title} className="t-h1" />
+        <Reveal delay={0.2}>
+          <p className="mt-4 max-w-xl text-lg text-ink/85">{dict.gallery.intro}</p>
         </Reveal>
       </div>
-      <div className="mt-12">
+    </section>
+    <div className="mx-auto max-w-7xl px-3 pb-10 pt-10 sm:px-6 md:pt-16 lg:px-10">
+      <div>
         <Gallery
           labels={dict.gallery.viewer}
-          photos={galleryPage.map((k) => ({
+          photos={galleryPage.filter((k) => k !== "aerialHoop").map((k) => ({
             id: k,
             src: photos[k].src,
             full: photos[k].src,

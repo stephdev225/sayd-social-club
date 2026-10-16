@@ -19,16 +19,20 @@ export const artists: Artist[] = [
     role: { fr: "DJ", en: "DJ" },
     status: "current",
     instagram: "https://www.instagram.com/waklexx_",
+    image: "/photos/artist-waklexx.webp",
   },
   {
     name: "DJ Madmaxx",
     role: { fr: "DJ", en: "DJ" },
     origin: { fr: "France", en: "France" },
     status: "past",
+    instagram: "https://www.instagram.com/deejaymadmaxx",
   },
   {
     name: "Kulturr",
     role: { fr: "Artiste", en: "Artist" },
     status: "past",
+    instagram: "https://www.instagram.com/realkulturr",
+    image: "/photos/artist-kulturr.webp",
   },
 ];

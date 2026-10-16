@@ -77,8 +77,8 @@ export function TicketTypeForm({
         <Check name="active" label="Actif" defaultChecked={values.active} hint="Décochez pour arrêter la vente sans rien supprimer." />
       </div>
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <p role="status" aria-live="polite" className={`text-sm ${state.ok ? "text-sable" : "text-terra"}`}>{state.message}</p>
-        <button disabled={pending} className="min-h-10 rounded-full bg-sable px-6 text-sm font-semibold text-night disabled:opacity-60">
+        <p role="status" aria-live="polite" className={`text-sm ${state.ok ? "text-ink" : "text-terra"}`}>{state.message}</p>
+        <button disabled={pending} className="min-h-10 rounded-full bg-sable px-6 text-sm font-semibold text-ink disabled:opacity-60">
           {pending ? "Enregistrement…" : isNew ? "Ajouter ce billet" : "Enregistrer le billet"}
         </button>
       </div>

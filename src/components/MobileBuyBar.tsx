@@ -53,7 +53,7 @@ export function MobileBuyBar({ label, title, note, targetId = "billets" }: { lab
                 e.preventDefault();
                 document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth", block: "start" });
               }}
-              className="ml-auto inline-flex min-h-12 shrink-0 items-center rounded-full bg-sable px-6 font-semibold text-night"
+              className="ml-auto inline-flex min-h-12 shrink-0 items-center rounded-full bg-sable px-6 font-semibold text-ink"
             >
               {label}
             </a>
