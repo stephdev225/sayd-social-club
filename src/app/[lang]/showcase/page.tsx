@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/showcase">
 }
 
 // Sayd DJ photos shown behind names on hover until official artist photos are provided.
-const HOVER = [photos.booth, photos.djBlue, photos.djDark, photos.djCap, photos.djClose];
+const HOVER = [photos.djSuit, photos.djLaptop, photos.djRed, photos.djBooth, photos.djViolet];
 
 export default async function ShowcasePage({ params }: PageProps<"/[lang]/showcase">) {
   const { lang } = await params;

@@ -45,3 +45,12 @@ Toutes les photos de stock (Pexels) ont été retirées. Le site n'utilise que d
 
 Pour ajouter une photo : exporter en WebP ≤ 1800 px de haut (≈ 100-250 Ko), la placer dans
 `public/photos/` puis l'ajouter dans `src/lib/media.ts`.
+
+## Mise à jour (16 oct. 2026) — photos de Sprezzatura au Mora
+Stéphane : remplacer les maillots de pays et tout ce qui n'est pas beau.
+- 117 photos de **Rogelio Photographe** (Sprezzatura, Mora, 11 oct. 2026) triées → 28 retenues + 6 recadrages larges
+  (`public/photos/mora-*.webp`, 40-340 Ko chacune ; 927 Mo d'originaux → ≈ 4 Mo).
+- Retirées : toutes les photos de Toronto avec maillots, drapeau ou cadrage faible. Gardées de Toronto : 25, 32, 46, 82, 98.
+- Accueil : acrobate dans les faisceaux rouges (hero), DJ en costume / invitée élégante / groupe d'amies (L'expérience).
+- Crédit pied de page : « Photos : Rogelio Photographe, Kendsgns ».
+- Originaux hors du dépôt : `C:\BUREAU\CLAUDE PROJETS\FREEDOM\photos-mora`.

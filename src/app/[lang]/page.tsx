@@ -21,8 +21,8 @@ import { site } from "@/lib/site";
 
 export const revalidate = 60;
 
-const PILLAR_IMAGES = [photos.dj, photos.portrait, photos.hype2] as const;
-const CAROUSEL = ["sparklers", "braids", "floorWide", "orangeDress", "cheer", "arms", "barWide", "laugh"] as const;
+const PILLAR_IMAGES = [photos.djSuit, photos.elegant, photos.friends] as const;
+const CAROUSEL = ["aerial", "scarf", "wineWide", "sign", "yellow", "champagne", "crowdAbove", "couple"] as const;
 
 export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
@@ -37,7 +37,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
   return (
     <>
       {/* ── 1. Hero: photo zooms, content lifts away on scroll ── */}
-      <HeroBrand image={photos.crowdWide.src}>
+      <HeroBrand image={photos.heroWide.src}>
         <div className="flex flex-col gap-7 md:flex-row md:items-end md:justify-between">
           <div className="rise max-w-xl [animation-delay:0.2s]">
             <p className="font-display text-[clamp(2rem,7.5vw,3.6rem)] leading-[1.05] tracking-[-0.01em] text-ink">{dict.home.heroLine}</p>
@@ -51,7 +51,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
                   <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                 </Link>
               </Magnetic>
-              <Link href={`/${lang}/evenements`} className="link-draw pb-1 text-ink/85">{dict.home.heroCta}</Link>
+              {next && <Link href={`/${lang}/evenements`} className="link-draw pb-1 text-ink/85">{dict.home.heroCta}</Link>}
             </div>
           </div>
 
@@ -141,7 +141,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       <section className="relative isolate overflow-hidden">
         <Parallax amount={8} className="absolute inset-0 -z-10">
           <div className="grain relative h-full w-full">
-            <Image src={photos.floorWide2.src} alt="" fill sizes="100vw" className="object-cover" />
+            <Image src={photos.crowdAbove.src} alt="" fill sizes="100vw" className="object-cover" />
           </div>
         </Parallax>
         <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,#120f0e_0%,rgba(18,15,14,0.55)_30%,rgba(18,15,14,0.6)_70%,#120f0e_100%)]" />

@@ -34,7 +34,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/le-club">
     </div>
     <Parallax amount={8} className="grain relative mx-auto mt-16 aspect-[16/9] max-w-7xl md:aspect-[21/9]">
       <div className="relative h-full w-full">
-        <Image src={photos.floorWide.src} alt={photos.floorWide.alt[lang]} fill sizes="100vw" className="object-cover" />
+        <Image src={photos.aerialWide.src} alt={photos.aerialWide.alt[lang]} fill sizes="100vw" className="object-cover" />
       </div>
     </Parallax>
     <div className="mx-auto max-w-4xl px-4 pt-16 sm:px-6 lg:px-10">
