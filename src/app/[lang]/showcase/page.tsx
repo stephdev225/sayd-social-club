@@ -6,7 +6,6 @@ import { ArtistList } from "@/components/ArtistList";
 import { NextEventCTA } from "@/components/NextEventCTA";
 import { LineReveal } from "@/components/motion/LineReveal";
 import { Reveal } from "@/components/motion/Reveal";
-import { VelocityMarquee } from "@/components/motion/VelocityMarquee";
 import { artists, type Artist } from "@/lib/artists";
 import { getNextEventSummary } from "@/lib/data/next-event";
 import { hasLocale } from "@/lib/i18n/config";
@@ -47,9 +46,8 @@ export default async function ShowcasePage({ params }: PageProps<"/[lang]/showca
         <Reveal delay={0.2}><p className="mt-6 max-w-xl text-lg text-ink/85">{s.intro}</p></Reveal>
       </div>
 
-      <VelocityMarquee items={artists.map((a) => a.name)} className="my-16 font-display text-[clamp(3rem,12vw,9rem)] italic leading-none text-ink/15 md:my-24" />
 
-      <div className="mx-auto max-w-7xl space-y-20 px-5 sm:px-6 lg:px-10">
+      <div className="mx-auto mt-14 max-w-7xl space-y-20 px-5 sm:px-6 md:mt-20 lg:px-10">
         {groups.map((g) => {
           const list = artists.filter((a) => a.status === g.key);
           if (list.length === 0) return null;

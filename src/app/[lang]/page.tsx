@@ -7,8 +7,6 @@ import { HeroBrand } from "@/components/HeroBrand";
 import { LineReveal } from "@/components/motion/LineReveal";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { Reveal } from "@/components/motion/Reveal";
-import { TextReveal } from "@/components/motion/TextReveal";
-import { VelocityMarquee } from "@/components/motion/VelocityMarquee";
 import { getStore } from "@/lib/data";
 import { listPublicEvents } from "@/lib/data/catalog";
 import { ticketsHrefFor } from "@/lib/data/next-event";
@@ -16,7 +14,6 @@ import { hasLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { formatShortDate } from "@/lib/i18n/format";
 import { photos } from "@/lib/media";
-import { site } from "@/lib/site";
 
 export const revalidate = 60;
 
@@ -33,7 +30,6 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const { upcoming } = await listPublicEvents(store);
   const next = upcoming[0];
   const nextDate = next ? formatShortDate(next.startsAt, lang) : null;
-  const sound = dict.about.sound.split(", ").map((w) => w.charAt(0).toUpperCase() + w.slice(1));
 
   return (
     <>
@@ -55,18 +51,14 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         </div>
       </HeroBrand>
 
-      {/* ── 2. The sound, drifting with your scroll speed ── */}
-      <VelocityMarquee items={[...sound, site.city]} className="py-8 font-display text-[clamp(1.7rem,5.2vw,3.4rem)] italic leading-none text-ink/85 md:py-12" />
-
-      {/* ── 3. Manifesto: words light up as you read ── */}
-      <section className="mx-auto max-w-7xl px-5 pb-20 pt-10 sm:px-6 md:pb-32 lg:px-10">
-        <TextReveal text={dict.home.manifesto} className="max-w-[20ch] font-display text-[clamp(2.1rem,7vw,4.6rem)] leading-[1.06] text-ink" />
-      </section>
-
-      {/* ── 4. Experience: photo cards that pin and stack as you scroll ── */}
-      <section className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 md:pb-36 lg:px-10" aria-labelledby="experience">
-        <LineReveal id="experience" text={dict.home.pillarsTitle} className="t-h2 mb-10 px-1 md:mb-14" />
-        <div className="mx-auto max-w-6xl">
+      {/* ── 2. Experience: title and manifesto, then the three cards slide sideways as you scroll ── */}
+      <section aria-labelledby="experience" className="pt-16 md:pt-24">
+        <div className="mx-auto grid max-w-7xl gap-6 px-5 sm:px-6 md:grid-cols-[auto_1fr] md:items-end md:gap-16 lg:px-10">
+          <LineReveal id="experience" text={dict.home.pillarsTitle} className="t-h2" />
+          <Reveal delay={0.1}>
+            <p className="max-w-xl text-lg text-ink/80 md:justify-self-end md:text-xl">{dict.home.manifesto}</p>
+          </Reveal>
+        </div>
         <ExperienceStack
           items={dict.home.pillars.map((p, i) => ({
             title: p.t,
@@ -77,7 +69,6 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
             alt: PILLAR_IMAGES[i].alt[lang],
           }))}
         />
-        </div>
       </section>
 
       {/* ── 6. Gallery teaser: drag / swipe ── */}

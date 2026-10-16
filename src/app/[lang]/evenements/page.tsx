@@ -69,7 +69,6 @@ export default async function EventsPage({ params }: PageProps<"/[lang]/evenemen
 
       <section className="mt-24 md:mt-32" aria-labelledby="passes">
           <h2 id="passes" className="t-h2">{dict.events.past}</h2>
-          <p className="mt-3 text-muted">{dict.events.pastIntro}</p>
           {past.length === 0 ? (
             <div className="mt-10 grid max-w-4xl gap-5 sm:grid-cols-3">
               {[0, 1, 2].map((i) => (

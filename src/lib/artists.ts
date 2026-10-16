@@ -27,6 +27,7 @@ export const artists: Artist[] = [
     origin: { fr: "France", en: "France" },
     status: "past",
     instagram: "https://www.instagram.com/deejaymadmaxx",
+    image: "/photos/artist-madmaxx.webp",
   },
   {
     name: "Kulturr",
