@@ -53,10 +53,10 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
 
       {/* ── 2. Experience: title and manifesto, then the three cards slide sideways as you scroll ── */}
       <section aria-labelledby="experience" className="pt-16 md:pt-24">
-        <div className="mx-auto grid max-w-7xl gap-6 px-5 sm:px-6 md:grid-cols-[auto_1fr] md:items-end md:gap-16 lg:px-10">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-10">
           <LineReveal id="experience" text={dict.home.pillarsTitle} className="t-h2" />
           <Reveal delay={0.1}>
-            <p className="max-w-xl font-display text-[clamp(1.5rem,2.4vw,2.1rem)] leading-[1.25] text-ink/90 md:justify-self-end">{dict.home.manifesto}</p>
+            <p className="mt-5 max-w-3xl font-display text-[clamp(1.5rem,2.4vw,2.1rem)] leading-[1.25] text-ink/90">{dict.home.manifesto}</p>
           </Reveal>
         </div>
         <ExperienceStack
