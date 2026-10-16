@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { alternates } from "@/lib/seo";
+import { PageBackdrop } from "@/components/PageBackdrop";
 import { SubmissionForm } from "@/components/SubmissionForm";
 import { LineReveal } from "@/components/motion/LineReveal";
 import { Reveal } from "@/components/motion/Reveal";
 import { hasLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { t } from "@/lib/i18n/format";
+import { photos } from "@/lib/media";
 import { site } from "@/lib/site";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/contact">): Promise<Metadata> {
@@ -24,8 +26,10 @@ export default async function ContactPage({ params }: PageProps<"/[lang]/contact
 
   return (
     <>
-      <div className="relative">
-        <div className="relative mx-auto grid max-w-7xl gap-16 px-5 pb-10 pt-32 sm:px-6 md:pt-44 lg:grid-cols-[1fr_1.1fr] lg:px-10">
+      {/* The photo dissolves all the way down into the footer: no visible edge */}
+      <div className="relative isolate">
+        <PageBackdrop portrait={photos.bar.src} land={photos.bar.land!} />
+        <div className="relative mx-auto grid max-w-7xl gap-16 px-5 pb-24 pt-32 sm:px-6 md:pb-32 md:pt-44 lg:grid-cols-[1fr_1.1fr] lg:px-10">
           <div>
             <LineReveal as="h1" text={dict.contact.title} className="t-hero" />
             <Reveal delay={0.2}>
@@ -39,7 +43,7 @@ export default async function ContactPage({ params }: PageProps<"/[lang]/contact
               </ul>
             </Reveal>
           </div>
-          <section aria-label={dict.contact.title} className="lg:pt-6">
+          <section aria-label={dict.contact.title} className="rounded-[1.75rem] bg-night/55 p-6 backdrop-blur-xl sm:p-8 lg:mt-2">
             <SubmissionForm
               kind="contact"
               lang={lang}

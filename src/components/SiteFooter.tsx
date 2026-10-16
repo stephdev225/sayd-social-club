@@ -12,7 +12,7 @@ export function SiteFooter({ lang, dict }: { lang: Locale; dict: Dictionary }) {
   return (
     <footer className="relative overflow-hidden">
       {/* Red light following the mouse behind the sign-up, fading out towards the links */}
-      <div className="absolute inset-x-0 top-0 h-[36rem] [mask-image:linear-gradient(to_bottom,black_55%,transparent)]">
+      <div className="absolute inset-x-0 top-0 h-[36rem] [mask-image:linear-gradient(to_bottom,transparent_0%,black_22%,black_55%,transparent_100%)]">
         <PointerGlow />
       </div>
       <div className="relative mx-auto max-w-7xl px-5 pb-10 pt-16 sm:px-6 md:pt-24 lg:px-10">
