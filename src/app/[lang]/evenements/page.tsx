@@ -54,18 +54,17 @@ export default async function EventsPage({ params }: PageProps<"/[lang]/evenemen
   return (
     <div className="mx-auto max-w-5xl px-5 pt-28 sm:px-6 md:pt-36 lg:px-10">
       <h1 className="t-h1"><SplitTitle text={dict.events.title} /></h1>
-      <p className="mt-5 max-w-xl text-muted">{dict.events.intro}</p>
+      <p className="mt-5 max-w-xl text-lg text-ink/80">{dict.events.intro}</p>
 
-      <section className="mt-14" aria-labelledby="a-venir">
-        <h2 id="a-venir" className="mb-2 text-muted">{dict.events.upcoming}</h2>
-        {upcoming.length ? (
+      {/* Only shown when a date is announced: no "nothing planned" message */}
+      {upcoming.length > 0 && (
+        <section className="mt-14" aria-labelledby="a-venir">
+          <h2 id="a-venir" className="mb-2 text-lg text-muted">{dict.events.upcoming}</h2>
           <ul className="border-t border-line">
             {upcoming.map((e) => <Row key={e.id} e={e} lang={lang} dict={dict} />)}
           </ul>
-        ) : (
-          <p className="border-t border-line pt-6 text-muted">{dict.events.empty}</p>
-        )}
-      </section>
+        </section>
+      )}
 
       <section className="mt-24 md:mt-32" aria-labelledby="passes">
           <h2 id="passes" className="t-h2">{dict.events.past}</h2>

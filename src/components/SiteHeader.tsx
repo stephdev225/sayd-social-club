@@ -82,18 +82,18 @@ export function SiteHeader({ lang, nav, ticketsHref }: { lang: Locale; nav: Nav;
           scrolled && !open ? "bg-gradient-to-b from-night/90 via-night/60 to-transparent" : "bg-transparent"
         } ${open ? "z-[60]" : "z-50"}`}
       >
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-6 md:h-20 lg:px-10">
+        <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between px-5 sm:px-6 md:h-24 lg:px-10">
           <Link href={`/${lang}`} className="group relative z-[60] shrink-0" aria-label="Sayd Social Club">
-            <Image src="/brand/logo-block-ivory.png" alt="Sayd Social Club" width={560} height={590} priority className="h-11 w-auto transition duration-500 group-hover:-rotate-2 group-hover:scale-105 group-hover:drop-shadow-[0_0_14px_rgba(255,255,255,0.35)] md:h-12" />
+            <Image src="/brand/logo-block-ivory.png" alt="Sayd Social Club" width={560} height={590} priority className="h-12 w-auto transition duration-500 group-hover:-rotate-2 group-hover:scale-105 group-hover:drop-shadow-[0_0_14px_rgba(255,255,255,0.35)] md:h-16" />
           </Link>
 
-          <nav aria-label={nav.ariaMain} className="hidden items-center gap-6 lg:flex xl:gap-8">
+          <nav aria-label={nav.ariaMain} className="hidden items-center gap-7 lg:flex xl:gap-10">
             {links.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
                 aria-current={isActive(l.href) ? "page" : undefined}
-                className="link-draw pb-1 text-[0.95rem] text-ink/75 transition-colors hover:text-ink aria-[current=page]:text-ink"
+                className="link-draw pb-1 text-[1.08rem] font-medium text-ink/80 transition-colors hover:text-ink aria-[current=page]:text-ink"
               >
                 {l.label}
               </Link>
@@ -101,14 +101,14 @@ export function SiteHeader({ lang, nav, ticketsHref }: { lang: Locale; nav: Nav;
           </nav>
 
           <div className="relative z-[60] flex items-center gap-3 sm:gap-4">
-            <Link href={switchHref} hrefLang={other} lang={other} aria-label={nav.switchLang} className="text-sm font-medium text-ink/75 hover:text-ink">
+            <Link href={switchHref} hrefLang={other} lang={other} aria-label={nav.switchLang} className="text-base font-medium text-ink/80 hover:text-ink">
               {nav.langShort}
             </Link>
             {!onEventPage && (
             <Link
               href={ticketsHref}
               onClick={() => closeFor(ticketsHref)}
-              className="inline-flex items-center rounded-full bg-sable px-4 py-2 text-sm font-semibold text-ink transition hover:brightness-110 sm:px-5"
+              className="inline-flex items-center rounded-full bg-sable px-5 py-2.5 text-base font-semibold text-ink transition hover:brightness-110 sm:px-6"
             >
               {nav.tickets}
             </Link>

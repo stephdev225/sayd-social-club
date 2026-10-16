@@ -14,9 +14,9 @@ export interface FieldDef {
 }
 
 const input =
-  "peer block w-full border-0 border-b border-ink/25 bg-transparent px-0 pb-3 pt-7 text-lg text-ink placeholder-transparent transition-colors focus:border-sable focus:outline-none focus:ring-0";
+  "peer block w-full border-0 border-b border-ink/25 bg-transparent px-0 pb-3 pt-7 text-xl text-ink placeholder-transparent transition-colors focus:border-sable focus:outline-none focus:ring-0";
 const floating =
-  "pointer-events-none absolute left-0 top-7 text-lg text-ink/50 transition-all peer-focus:top-0 peer-focus:text-xs peer-focus:text-ink peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:text-xs";
+  "pointer-events-none absolute left-0 top-7 text-xl text-ink/55 transition-all peer-focus:top-0 peer-focus:text-sm peer-focus:text-ink peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:text-sm";
 
 /** Contact and ambassador forms: underlined fields with floating labels, honeypot, animated confirmation. */
 export function SubmissionForm({
@@ -72,7 +72,7 @@ export function SubmissionForm({
             >
               {f.type === "select" ? (
                 <>
-                  <label htmlFor={`${kind}-${f.name}`} className="text-xs text-ink/50">{f.label}</label>
+                  <label htmlFor={`${kind}-${f.name}`} className="text-sm text-ink/60">{f.label}</label>
                   <select
                     id={`${kind}-${f.name}`}
                     name={f.name}

@@ -24,9 +24,9 @@ export function SiteFooter({ lang, dict }: { lang: Locale; dict: Dictionary }) {
         <div className="mt-20 grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
           <div>
             <Image src="/brand/logo-block-ivory.png" alt="Sayd Social Club" width={560} height={590} className="h-20 w-auto" />
-            <p className="mt-4 max-w-xs text-sm text-ink/60">{dict.footer.desc}</p>
+            <p className="mt-5 max-w-sm text-base text-ink/70 md:text-lg">{dict.footer.desc}</p>
           </div>
-          <nav aria-label={dict.nav.ariaFooter} className="grid grid-cols-2 gap-3 text-ink/75 sm:grid-cols-1">
+          <nav aria-label={dict.nav.ariaFooter} className="grid grid-cols-2 gap-3.5 text-lg text-ink/80 sm:grid-cols-1">
             <Link href={`/${lang}/evenements`} className="hover:text-ink">{dict.nav.events}</Link>
             <Link href={`/${lang}/showcase`} className="hover:text-ink">{dict.nav.showcase}</Link>
             <Link href={`/${lang}/galerie`} className="hover:text-ink">{dict.nav.gallery}</Link>
@@ -35,7 +35,7 @@ export function SiteFooter({ lang, dict }: { lang: Locale; dict: Dictionary }) {
             <Link href={`/${lang}/partenariats`} className="hover:text-ink">{dict.nav.partners}</Link>
             <Link href={`/${lang}/contact`} className="hover:text-ink">{dict.nav.contact}</Link>
           </nav>
-          <div className="grid grid-cols-2 gap-3 text-ink/75 sm:grid-cols-1">
+          <div className="grid grid-cols-2 content-start gap-3.5 text-lg text-ink/80 sm:grid-cols-1">
             <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-ink">Instagram</a>
             <a href={site.tiktok} target="_blank" rel="noopener noreferrer" className="hover:text-ink">TikTok</a>
             <a href={site.whatsapp} target="_blank" rel="noopener noreferrer" className="hover:text-ink">WhatsApp</a>
@@ -43,7 +43,7 @@ export function SiteFooter({ lang, dict }: { lang: Locale; dict: Dictionary }) {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-3 text-xs text-ink/45 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-16 flex flex-col gap-3 text-sm text-ink/55 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {year} {site.name}. {dict.footer.rights}
           </p>

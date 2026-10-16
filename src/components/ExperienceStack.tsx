@@ -74,7 +74,7 @@ function Card({ item, index, total }: { item: ExperienceItem; index: number; tot
           </p>
           <h3 className="mt-2 font-display text-[clamp(2.4rem,5.5vw,4.25rem)] leading-[0.92] tracking-[-0.02em]">{item.title}</h3>
         </div>
-        <p className="max-w-md text-lg text-ink/90 md:pb-2 md:text-xl">{item.text}</p>
+        <p className="max-w-lg text-xl text-ink/95 md:pb-2 md:text-2xl md:leading-snug">{item.text}</p>
       </div>
     </article>
   );

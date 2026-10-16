@@ -51,6 +51,7 @@ export const photos = {
   yellow: M("09220", "Invitée en robe jaune qui danse", "A guest dancing in a yellow dress", "50% 35%"),
   smiles: M("09065", "Sourires entre amies", "Friends sharing a smile", "50% 35%"),
   ben: M("08146", "Ben, de Sayd Social Club", "Ben, from Sayd Social Club", "50% 35%"),
+  vip: { src: "/photos/mora-ambassadrice.webp", w: 1717, h: 2576, alt: { fr: "Invitée VIP en lunettes de soleil, bracelet au poignet", en: "A VIP guest in sunglasses, wristband on" } } as Photo,
   // Room, bar & bottles
   crowd: M("08581", "La salle comble vue d'en haut", "The packed room from above", "50% 50%"),
   above: M("09167", "La salle et la cabine du DJ vues d'en haut", "The room and the DJ booth from above"),

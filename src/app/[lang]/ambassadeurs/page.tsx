@@ -34,7 +34,7 @@ export default async function AmbassadorsPage({ params }: PageProps<"/[lang]/amb
         <h1 className="t-h1"><SplitTitle text={dict.ambassadors.title} /></h1>
         <p className="mt-6 max-w-lg text-lg text-ink/90">{dict.ambassadors.intro}</p>
         <Reveal kind="mask" className="relative mt-10 aspect-[2/3] max-w-md overflow-hidden rounded-[1.5rem]">
-          <Image src={photos.duo.src} alt={photos.duo.alt[lang]} fill sizes="(min-width: 1024px) 28rem, 100vw" className="object-cover" />
+          <Image src={photos.vip.src} alt={photos.vip.alt[lang]} fill sizes="(min-width: 1024px) 28rem, 100vw" className="object-cover" />
         </Reveal>
         <h2 className="mt-12 text-muted">{dict.ambassadors.perksTitle}</h2>
         <ul className="mt-4 border-t border-line">
