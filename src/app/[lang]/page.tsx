@@ -2,7 +2,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ExperienceStack } from "@/components/ExperienceStack";
 import { FeatureCard } from "@/components/FeatureCard";
-import { LiveCalendar } from "@/components/LiveCalendar";
 import { ScrollGallery } from "@/components/ScrollGallery";
 import { HeroBrand } from "@/components/HeroBrand";
 import { LineReveal } from "@/components/motion/LineReveal";
@@ -54,15 +53,10 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
 
       {/* ── 2. Experience: title and manifesto, then the three cards slide sideways as you scroll ── */}
       <section aria-labelledby="experience" className="pt-16 md:pt-24">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 sm:px-6 md:grid-cols-[1.1fr_0.9fr] md:gap-16 lg:px-10">
-          <div>
-            <LineReveal id="experience" text={dict.home.pillarsTitle} className="t-h2" />
-            <Reveal delay={0.1}>
-              <p className="mt-6 max-w-xl font-display text-[clamp(1.6rem,2.6vw,2.3rem)] leading-[1.25] text-ink/90">{dict.home.manifesto}</p>
-            </Reveal>
-          </div>
-          <Reveal delay={0.2}>
-            <LiveCalendar lang={lang} eventDates={upcoming.map((e) => e.startsAt)} />
+        <div className="mx-auto grid max-w-7xl gap-6 px-5 sm:px-6 md:grid-cols-[auto_1fr] md:items-end md:gap-16 lg:px-10">
+          <LineReveal id="experience" text={dict.home.pillarsTitle} className="t-h2" />
+          <Reveal delay={0.1}>
+            <p className="max-w-xl font-display text-[clamp(1.5rem,2.4vw,2.1rem)] leading-[1.25] text-ink/90 md:justify-self-end">{dict.home.manifesto}</p>
           </Reveal>
         </div>
         <ExperienceStack
@@ -78,7 +72,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       </section>
 
       {/* ── 6. Gallery teaser: drag / swipe ── */}
-      <section className="pb-24 pt-10 md:pb-36" aria-labelledby="ambiance">
+      <section className="pb-24 pt-14 md:pb-36 md:pt-20" aria-labelledby="ambiance">
         <div className="mx-auto mb-10 flex max-w-7xl items-end justify-between gap-6 px-5 sm:px-6 lg:px-10">
           <div>
             <LineReveal id="ambiance" text={dict.home.galleryTitle} className="t-h2" />

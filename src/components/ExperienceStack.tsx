@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export interface ExperienceItem {
   title: string;
@@ -17,10 +17,14 @@ export interface ExperienceItem {
 /**
  * « L'expérience Sayd »: the section pins to the screen and, while you keep scrolling
  * down, the three cards slide from right to left. Text sits on each photo.
+ * The pinned block is only as tall as the cards (measured), centred on the screen while
+ * pinned: no empty band above it on the way in, nor below it on the way out.
  * Reduced motion: a plain stack, no pinning.
  */
 export function ExperienceStack({ items }: { items: ExperienceItem[] }) {
   const ref = useRef<HTMLDivElement>(null);
+  const pin = useRef<HTMLDivElement>(null);
+  const [h, setH] = useState<number | null>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const smooth = useSpring(scrollYProgress, { stiffness: 90, damping: 24, mass: 0.4 });
@@ -28,6 +32,14 @@ export function ExperienceStack({ items }: { items: ExperienceItem[] }) {
   // The track is n cards wide; slide it until the last card is in view.
   const x = useTransform(smooth, [0.05, 0.95], ["0%", `-${((n - 1) / n) * 100}%`]);
   const bar = useTransform(smooth, [0.05, 0.95], ["0%", "100%"]);
+
+  useEffect(() => {
+    const el = pin.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([e]) => setH(Math.round(e.contentRect.height)));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [reduce]);
 
   if (reduce) {
     return (
@@ -40,9 +52,13 @@ export function ExperienceStack({ items }: { items: ExperienceItem[] }) {
   }
 
   return (
-    // Height = how long the pin lasts: one screen per card.
-    <div ref={ref} className="relative" style={{ height: `${n * 100}svh` }}>
-      <div className="sticky top-0 flex h-[100svh] flex-col justify-center overflow-hidden">
+    // Scroll length of the pin: one screen per extra card, on top of the block's own height.
+    <div ref={ref} className="relative mt-10 md:mt-14" style={{ height: h ? `calc(${(n - 1) * 100}svh + ${h}px)` : `${n * 100}svh` }}>
+      <div
+        ref={pin}
+        className="sticky flex flex-col overflow-hidden"
+        style={{ top: h ? `max(5.5rem, calc(50svh - ${h / 2}px))` : 0 }}
+      >
         <motion.div className="flex will-change-transform" style={{ x, width: `${n * 100}%` }}>
           {items.map((item, i) => (
             <div key={item.title} className="px-5 sm:px-6 lg:px-10" style={{ width: `${100 / n}%` }}>

@@ -2,9 +2,11 @@ import Image from "next/image";
 import { Reveal } from "./motion/Reveal";
 
 /**
- * Photo with a floating glass panel overlapping it (Le club, ambassadors, partners).
- * Phones: the photo full width, the panel rising over its lower edge.
- * Larger screens: photo on one side, the panel overlapping it from the other side.
+ * Photo with a text panel floating over its edge (Le club, ambassadors, partners).
+ * No frame, no box over the picture: the photo is square-cornered and melts into the page
+ * on the side of the text (phones: at the bottom), so nothing hides the people in it.
+ * Phones: the photo full width, the text rising over its faded lower edge.
+ * Larger screens: photo on one side, the text beside it, over the faded edge only.
  */
 export function FeatureCard({
   image,
@@ -25,18 +27,23 @@ export function FeatureCard({
       <div className="md:grid md:grid-cols-12 md:items-center">
         <Reveal
           kind="mask"
-          className={`relative aspect-[4/5] overflow-hidden rounded-[1.75rem] md:row-start-1 md:col-span-5 ${reverse ? "md:col-start-8" : "md:col-start-1"}`}
-        >
-          <Image src={image} alt={alt} fill priority={priority} sizes="(min-width: 768px) 42vw, 100vw" className="object-cover" />
-        </Reveal>
-        <Reveal
-          delay={0.15}
-          className={`relative z-10 mx-3 -mt-24 rounded-[1.75rem] border border-ink/10 bg-night/75 p-7 shadow-[0_40px_90px_-30px_rgba(0,0,0,0.9)] backdrop-blur-xl sm:mx-6 sm:p-10 md:row-start-1 md:mx-0 md:mt-0 md:p-12 lg:p-16 ${
-            reverse ? "md:col-start-1 md:col-end-9" : "md:col-start-5 md:col-end-13"
+          className={`relative aspect-[4/5] overflow-hidden md:row-start-1 md:col-span-5 ${
+            reverse
+              ? "md:col-start-8 md:[mask-image:linear-gradient(to_right,transparent_0%,black_16%)]"
+              : "md:col-start-1 md:[mask-image:linear-gradient(to_left,transparent_0%,black_16%)]"
           }`}
         >
-          {children}
+          <Image src={image} alt={alt} fill priority={priority} sizes="(min-width: 768px) 42vw, 100vw" className="object-cover" />
+          {/* Phones: the photo melts into the page under the text */}
+          <div aria-hidden className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-night via-night/60 to-transparent md:hidden" />
         </Reveal>
+        <div
+          className={`relative z-10 -mt-20 px-1 pb-2 sm:px-4 md:row-start-1 md:mt-0 md:py-12 lg:py-16 ${
+            reverse ? "md:col-start-1 md:col-end-9 md:pl-0 md:pr-[18%]" : "md:col-start-5 md:col-end-13 md:pl-[18%] md:pr-0"
+          }`}
+        >
+          <Reveal delay={0.15}>{children}</Reveal>
+        </div>
       </div>
     </div>
   );
