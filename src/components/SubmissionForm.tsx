@@ -14,9 +14,9 @@ export interface FieldDef {
 }
 
 const input =
-  "peer block w-full border-0 border-b border-ink/25 bg-transparent px-0 pb-3 pt-7 text-xl text-ink placeholder-transparent transition-colors focus:border-sable focus:outline-none focus:ring-0";
+  "peer block w-full border-0 border-b border-ink/25 bg-transparent px-0 pb-2.5 pt-6 text-xl text-ink placeholder-transparent transition-colors focus:border-sable focus:outline-none focus:ring-0";
 const floating =
-  "pointer-events-none absolute left-0 top-7 text-xl text-ink/55 transition-all peer-focus:top-0 peer-focus:text-sm peer-focus:text-ink peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:text-sm";
+  "pointer-events-none absolute left-0 top-6 text-xl text-ink/55 transition-all peer-focus:top-0 peer-focus:text-sm peer-focus:text-ink peer-[:not(:placeholder-shown)]:top-0 peer-[:not(:placeholder-shown)]:text-sm";
 
 /** Contact and ambassador forms: underlined fields with floating labels, honeypot, animated confirmation. */
 export function SubmissionForm({
@@ -60,7 +60,7 @@ export function SubmissionForm({
           <p className="mt-3 max-w-md text-ink/80">{labels.sentText}</p>
         </motion.div>
       ) : (
-        <motion.form key="form" onSubmit={onSubmit} exit={{ opacity: 0, y: -16 }} className="grid gap-7">
+        <motion.form key="form" onSubmit={onSubmit} exit={{ opacity: 0, y: -16 }} className="grid gap-4">
           {fields.map((f, i) => (
             <motion.div
               key={f.name}
@@ -87,7 +87,7 @@ export function SubmissionForm({
                 </>
               ) : f.type === "textarea" ? (
                 <>
-                  <textarea id={`${kind}-${f.name}`} name={f.name} required={f.required} rows={4} placeholder={f.label} className={`${input} resize-none`} />
+                  <textarea id={`${kind}-${f.name}`} name={f.name} required={f.required} rows={3} placeholder={f.label} className={`${input} resize-none`} />
                   <label htmlFor={`${kind}-${f.name}`} className={floating}>{f.label}</label>
                 </>
               ) : (

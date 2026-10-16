@@ -39,10 +39,10 @@ export default async function PartnersPage({ params }: PageProps<"/[lang]/parten
         </FeatureCard>
       </div>
 
-      <div className="mx-auto max-w-7xl space-y-24 px-5 pt-24 sm:px-6 md:space-y-32 md:pt-32 lg:px-10">
+      <div className="mx-auto max-w-7xl space-y-16 px-5 pt-16 sm:px-6 md:space-y-24 md:pt-24 lg:px-10">
         <section aria-labelledby="why">
           <LineReveal id="why" text={p.whyTitle} className="t-h2" />
-          <div className="mt-10 grid gap-10 md:grid-cols-3">
+          <div className="mt-8 grid gap-8 md:grid-cols-3">
             {p.why.map((w, i) => (
               <Reveal key={w.t} delay={i * 0.08}>
                 <p className="font-display text-5xl text-ink/40">0{i + 1}</p>
@@ -55,11 +55,11 @@ export default async function PartnersPage({ params }: PageProps<"/[lang]/parten
 
         <section aria-labelledby="types">
           <LineReveal id="types" text={p.typesTitle} className="t-h2" />
-          <ul className="mt-8">
+          <ul className="mt-6">
             {p.types.map((ty, i) => (
               <Reveal key={ty.t} delay={i * 0.05}>
-                <li className="grid gap-2 py-6 md:grid-cols-[1fr_1.3fr] md:items-baseline">
-                  <span className="font-display text-[clamp(2rem,6vw,3.5rem)] leading-none">{ty.t}</span>
+                <li className="grid gap-1 py-3.5 md:grid-cols-[1fr_1.3fr] md:items-baseline md:gap-2">
+                  <span className="font-display text-[clamp(1.8rem,3.4vw,2.7rem)] leading-tight">{ty.t}</span>
                   <span className="text-ink/75">{ty.d}</span>
                 </li>
               </Reveal>
@@ -67,11 +67,11 @@ export default async function PartnersPage({ params }: PageProps<"/[lang]/parten
           </ul>
         </section>
 
-        <section aria-labelledby="partner-form" className="grid gap-12 lg:grid-cols-[1fr_1.1fr]">
+        <section aria-labelledby="partner-form" className="grid gap-10 lg:grid-cols-[1fr_1.1fr]">
           <div>
             <LineReveal id="partner-form" text={p.formTitle} className="t-h2" />
             <Reveal delay={0.1}>
-              <ul className="mt-8 space-y-3 text-lg">
+              <ul className="mt-6 space-y-2 text-lg">
                 <li><a href={`mailto:${site.email}`} className="link-draw pb-0.5">{site.email}</a></li>
                 <li><a href={site.whatsapp} target="_blank" rel="noopener noreferrer" className="link-draw pb-0.5">WhatsApp — {site.phone}</a></li>
               </ul>
@@ -79,7 +79,7 @@ export default async function PartnersPage({ params }: PageProps<"/[lang]/parten
             {/* A sponsor's bottle carried over the crowd: what a partnership looks like */}
             <Reveal
               kind="mask"
-              className="relative mt-10 aspect-[4/5] max-w-md overflow-hidden [mask-image:linear-gradient(to_bottom,black_70%,transparent_100%)] lg:[mask-image:linear-gradient(to_left,transparent_0%,black_18%),linear-gradient(to_bottom,black_75%,transparent_100%)] lg:[mask-composite:intersect]"
+              className="relative mt-8 aspect-[4/5] max-w-md overflow-hidden [mask-image:linear-gradient(to_bottom,black_70%,transparent_100%)] lg:[mask-image:linear-gradient(to_left,transparent_0%,black_18%),linear-gradient(to_bottom,black_75%,transparent_100%)] lg:[mask-composite:intersect]"
             >
               <Image src={photos.veuve.src} alt={photos.veuve.alt[lang]} fill sizes="(min-width: 1024px) 28rem, 100vw" className="object-cover" style={{ objectPosition: photos.veuve.pos }} />
             </Reveal>

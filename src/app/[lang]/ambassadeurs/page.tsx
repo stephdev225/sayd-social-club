@@ -30,20 +30,15 @@ export default async function AmbassadorsPage({ params }: PageProps<"/[lang]/amb
   return (
     <>
     <div className="mx-auto grid max-w-7xl gap-14 px-5 pt-28 sm:px-6 md:pt-36 lg:grid-cols-2 lg:px-10">
-      <div>
+      <div className="lg:flex lg:flex-col">
         <h1 className="t-h1"><SplitTitle text={dict.ambassadors.title} /></h1>
         <p className="mt-6 max-w-lg text-lg text-ink/90">{dict.ambassadors.intro}</p>
-        <Reveal kind="mask" className="relative mt-10 aspect-[2/3] max-w-md overflow-hidden rounded-[1.5rem]">
-          <Image src={photos.vip.src} alt={photos.vip.alt[lang]} fill sizes="(min-width: 1024px) 28rem, 100vw" className="object-cover" />
+        <Reveal
+          kind="mask"
+          className="relative mt-10 aspect-[2/3] max-w-lg overflow-hidden lg:aspect-auto lg:min-h-[30rem] lg:flex-1 [mask-image:linear-gradient(to_bottom,black_72%,transparent_100%)] lg:[mask-image:linear-gradient(to_left,transparent_0%,black_20%),linear-gradient(to_bottom,black_72%,transparent_100%)] lg:[mask-composite:intersect]"
+        >
+          <Image src={photos.vip.src} alt={photos.vip.alt[lang]} fill sizes="(min-width: 1024px) 32rem, 100vw" className="object-cover" />
         </Reveal>
-        <h2 className="mt-12 text-muted">{dict.ambassadors.perksTitle}</h2>
-        <ul className="mt-4 border-t border-line">
-          {dict.ambassadors.perks.map((p) => (
-            <li key={p} className="border-b border-line py-4 font-display text-2xl">
-              {p}
-            </li>
-          ))}
-        </ul>
       </div>
       <section aria-labelledby="candidature" className="lg:pt-4">
         <h2 id="candidature" className="t-h3 mb-6">{dict.ambassadors.formTitle}</h2>
@@ -59,6 +54,15 @@ export default async function AmbassadorsPage({ params }: PageProps<"/[lang]/amb
             { name: "message", label: f.why, type: "textarea", required: true },
           ]}
         />
+        {/* Perks under the form: both columns end level, no empty space */}
+        <h2 className="mt-12 text-lg text-ink/60">{dict.ambassadors.perksTitle}</h2>
+        <ul className="mt-4 border-t border-line">
+          {dict.ambassadors.perks.map((p) => (
+            <li key={p} className="border-b border-line py-4 font-display text-2xl">
+              {p}
+            </li>
+          ))}
+        </ul>
       </section>
     </div>
     <NextEventCTA next={next} dict={dict} lang={lang} />
