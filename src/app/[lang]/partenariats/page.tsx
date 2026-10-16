@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { alternates } from "@/lib/seo";
 import { NextEventCTA } from "@/components/NextEventCTA";
@@ -74,6 +75,13 @@ export default async function PartnersPage({ params }: PageProps<"/[lang]/parten
                 <li><a href={`mailto:${site.email}`} className="link-draw pb-0.5">{site.email}</a></li>
                 <li><a href={site.whatsapp} target="_blank" rel="noopener noreferrer" className="link-draw pb-0.5">WhatsApp — {site.phone}</a></li>
               </ul>
+            </Reveal>
+            {/* A sponsor's bottle carried over the crowd: what a partnership looks like */}
+            <Reveal
+              kind="mask"
+              className="relative mt-10 aspect-[4/5] max-w-md overflow-hidden [mask-image:linear-gradient(to_bottom,black_70%,transparent_100%)] lg:[mask-image:linear-gradient(to_left,transparent_0%,black_18%),linear-gradient(to_bottom,black_75%,transparent_100%)] lg:[mask-composite:intersect]"
+            >
+              <Image src={photos.veuve.src} alt={photos.veuve.alt[lang]} fill sizes="(min-width: 1024px) 28rem, 100vw" className="object-cover" style={{ objectPosition: photos.veuve.pos }} />
             </Reveal>
           </div>
           <SubmissionForm

@@ -4,7 +4,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { alternates } from "@/lib/seo";
 import { SplitTitle } from "@/components/motion/SplitTitle";
-import { VideoLoop } from "@/components/VideoLoop";
+import { PastEvents } from "@/components/PastEvents";
+import { site } from "@/lib/site";
 import { getStore } from "@/lib/data";
 import { listPublicEvents } from "@/lib/data/catalog";
 import type { SaydEvent } from "@/lib/domain/types";
@@ -52,7 +53,7 @@ export default async function EventsPage({ params }: PageProps<"/[lang]/evenemen
   const { upcoming, past } = await listPublicEvents(getStore());
 
   return (
-    <div className="mx-auto max-w-5xl px-5 pt-28 sm:px-6 md:pt-36 lg:px-10">
+    <div className="mx-auto max-w-6xl px-5 pt-28 sm:px-6 md:pt-36 lg:px-10">
       <h1 className="t-h1"><SplitTitle text={dict.events.title} /></h1>
       <p className="mt-5 max-w-xl text-lg text-ink/80">{dict.events.intro}</p>
 
@@ -66,10 +67,11 @@ export default async function EventsPage({ params }: PageProps<"/[lang]/evenemen
         </section>
       )}
 
-      <section className="mt-24 md:mt-32" aria-labelledby="passes">
-          <h2 id="passes" className="t-h2">{dict.events.past}</h2>
+      <section className="mt-24 md:mt-32" aria-label={dict.events.past}>
           {past.length === 0 ? (
-            <div className="mt-10 grid max-w-4xl gap-5 sm:grid-cols-3">
+            <>
+            <h2 className="t-h2 mb-10">{dict.events.past}</h2>
+            <div className="grid max-w-4xl gap-5 sm:grid-cols-3">
               {[0, 1, 2].map((i) => (
                 <div key={i} className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-night-2">
                   <div aria-hidden className="absolute inset-0 animate-pulse bg-[radial-gradient(circle_at_30%_20%,rgba(193,18,31,0.14),transparent_60%)]" />
@@ -77,39 +79,23 @@ export default async function EventsPage({ params }: PageProps<"/[lang]/evenemen
                 </div>
               ))}
             </div>
+            </>
           ) : (
-          <ul className="mt-10 grid gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-            {past.map((e) => {
-              const img = e.heroImage ?? e.coverImage;
-              return (
-                <li key={e.id}>
-                  <Link href={`/${lang}/evenements/${e.slug}`} className="group block">
-                    <span className="relative block aspect-[4/5] overflow-hidden rounded-2xl bg-night-2">
-                      {e.videoLoop ? (
-                        <VideoLoop src={e.videoLoop} poster={img} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
-                      ) : img && (
-                        <Image
-                          src={img}
-                          alt={e.name}
-                          fill
-                          sizes="(min-width: 1024px) 22rem, (min-width: 640px) 45vw, 100vw"
-                          className="object-cover transition duration-700 group-hover:scale-105"
-                        />
-                      )}
-                      <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-night/80 via-transparent to-transparent" />
-                      {!e.dateHidden && (
-                        <span className="absolute bottom-4 left-4 text-sm text-ink/85 first-letter:uppercase">
-                          {formatDate(e.startsAt, lang, { weekday: undefined, day: undefined, year: "numeric" })}
-                        </span>
-                      )}
-                    </span>
-                    <span className="mt-4 block font-display text-2xl leading-tight transition-colors group-hover:text-ink">{e.name}</span>
-                    <span className="block text-sm text-muted">{[e.venueName, e.city].filter(Boolean).join(", ")}</span>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+            <div>
+              <PastEvents
+                heading={<h2 className="t-h2">{dict.events.past}</h2>}
+                items={past.map((e) => ({
+                  id: e.id,
+                  href: `/${lang}/evenements/${e.slug}`,
+                  name: e.name,
+                  place: [e.venueName, e.city].filter(Boolean).join(", "),
+                  date: e.dateHidden ? undefined : formatDate(e.startsAt, lang, { weekday: undefined, day: undefined, year: "numeric" }),
+                  video: e.videoLoop,
+                  image: e.heroImage ?? e.coverImage,
+                }))}
+                closing={{ title: dict.events.nextTitle, text: dict.events.nextText, cta: dict.events.nextCta, href: site.instagram }}
+              />
+            </div>
           )}
         </section>
     </div>

@@ -79,7 +79,10 @@
     "reservations": "Reservations",
     "all": "All events",
     "pastIntro": "A few nights that shaped Sayd's story.",
-    "pastEmpty": "Our past parties are coming here soon, in pictures."
+    "pastEmpty": "Our past parties are coming here soon, in pictures.",
+    "nextTitle": "The next chapter is coming.",
+    "nextText": "New dates are announced on Instagram first.",
+    "nextCta": "Follow Sayd"
   },
   "tickets": {
     "title": "Tickets",

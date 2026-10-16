@@ -79,7 +79,10 @@
     "reservations": "Réservations",
     "all": "Tous les événements",
     "pastIntro": "Quelques soirées qui ont fait l'histoire de Sayd.",
-    "pastEmpty": "Nos soirées passées arrivent ici très bientôt, en photos."
+    "pastEmpty": "Nos soirées passées arrivent ici très bientôt, en photos.",
+    "nextTitle": "La suite s'écrit bientôt.",
+    "nextText": "Les prochaines dates sont annoncées d'abord sur Instagram.",
+    "nextCta": "Suivre Sayd"
   },
   "tickets": {
     "title": "Billets",
