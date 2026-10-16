@@ -11,7 +11,7 @@ import { hasLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { galleryPage, photos } from "@/lib/media";
 
-const COVER = [photos.aerialDj, photos.aerialSplit, photos.balcony];
+const COVER = [photos.aerialSplit, photos.aerialDj, photos.aerialist, photos.balcony];
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/galerie">): Promise<Metadata> {
   const { lang } = await params;
@@ -28,20 +28,14 @@ export default async function GalleryPage({ params }: PageProps<"/[lang]/galerie
 
   return (
     <>
-    {/* Cover: the aerial show, full screen, cross-fading like the home page */}
-    <HeroBrand
-      className="h-[86svh] min-h-[30rem]"
-      slides={COVER.map((p) => ({ portrait: p.src, land: p.land!, alt: p.alt[lang] }))}
-      title={
-        <>
-          <LineReveal as="h1" text={dict.gallery.title} className="t-h1" />
-          <Reveal delay={0.2}>
-            <p className="mt-4 max-w-xl text-lg text-ink/90">{dict.gallery.intro}</p>
-          </Reveal>
-        </>
-      }
-    />
-    <div className="mx-auto max-w-7xl px-3 pt-10 sm:px-6 md:pt-16 lg:px-10">
+    {/* Opening: title and words beside a framed photo of the aerial show */}
+    <HeroBrand slides={COVER.map((p) => ({ src: p.src, alt: p.alt[lang] }))}>
+      <LineReveal as="h1" text={dict.gallery.title} className="t-hero" />
+      <Reveal delay={0.2}>
+        <p className="mt-6 max-w-md text-lg text-ink/85">{dict.gallery.intro}</p>
+      </Reveal>
+    </HeroBrand>
+    <div className="mx-auto max-w-7xl px-3 pt-4 sm:px-6 md:pt-8 lg:px-10">
       <div>
         <Gallery
           labels={dict.gallery.viewer}
