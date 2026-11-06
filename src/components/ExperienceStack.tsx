@@ -53,7 +53,7 @@ export function ExperienceStack({ items }: { items: ExperienceItem[] }) {
 
   return (
     // Scroll length of the pin: one screen per extra card, on top of the block's own height.
-    <div ref={ref} className="relative mt-10 md:mt-14" style={{ height: h ? `calc(${(n - 1) * 100}svh + ${h}px)` : `${n * 100}svh` }}>
+    <div ref={ref} className="relative mt-6 md:mt-8" style={{ height: h ? `calc(${(n - 1) * 100}svh + ${h}px)` : `${n * 100}svh` }}>
       <div
         ref={pin}
         className="sticky flex flex-col overflow-hidden"

@@ -37,7 +37,6 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       <HeroBrand image={HERO.image} imageMobile={HERO.mobile} alt={HERO.alt[lang]}>
         <h1 className="sr-only">Sayd Social Club</h1>
         <p className="rise max-w-2xl font-display text-[clamp(2.3rem,5.6vw,4.6rem)] leading-[1] tracking-[-0.02em] [animation-delay:0.1s]">{dict.home.heroLine}</p>
-        <p className="rise mt-5 max-w-md text-lg text-ink/85 [animation-delay:0.25s]">{dict.footer.desc}</p>
         <div className="rise mt-8 flex flex-wrap items-center gap-x-6 gap-y-4 [animation-delay:0.4s]">
           <Magnetic>
             <Link
@@ -51,12 +50,14 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         </div>
       </HeroBrand>
 
-      {/* ── 2. Experience: title and manifesto, then the three cards slide sideways as you scroll ── */}
-      <section aria-labelledby="experience" className="pt-16 md:pt-24">
+      {/* ── 2. Experience: a discreet label, then the three cards slide sideways as you scroll ── */}
+      <section aria-labelledby="experience" className="pt-14 md:pt-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-10">
-          <LineReveal id="experience" text={dict.home.pillarsTitle} className="t-h2" />
-          <Reveal delay={0.1}>
-            <p className="mt-5 max-w-3xl font-display text-[clamp(1.5rem,2.4vw,2.1rem)] leading-[1.25] text-ink/90">{dict.home.manifesto}</p>
+          <Reveal>
+            <h2 id="experience" className="flex items-center gap-4 text-sm font-medium uppercase tracking-[0.3em] text-ink/65">
+              <span aria-hidden className="h-px w-10 bg-sable" />
+              {dict.home.pillarsTitle}
+            </h2>
           </Reveal>
         </div>
         <ExperienceStack
