@@ -24,10 +24,26 @@ function memoryStore(): MemoryStore {
   return g.__saydMemoryStore;
 }
 
+/** Media fields that seed.json may add later to an event already in the database. */
+const BACKFILL_FIELDS = ["video", "videoLoop"] as const;
+
+/**
+ * Fields of `seedDoc` among BACKFILL_FIELDS that `current` does not have yet.
+ * Never overwrites a value already there (an admin edit always wins).
+ */
+export function missingMedia(current: Doc, seedDoc: Doc): Doc {
+  const patch: Doc = {};
+  for (const k of BACKFILL_FIELDS) {
+    if (seedDoc[k] && (current[k] === undefined || current[k] === null || current[k] === "")) patch[k] = seedDoc[k];
+  }
+  return patch;
+}
+
 /**
  * First start against an empty Firestore: create the events and ticket types from
  * data/seed.json. Only missing documents are created, inside a transaction, so stock
- * counters of an event already on sale are never reset.
+ * counters of an event already on sale are never reset. For events already there, only
+ * a recap video added to seed.json since is filled in (see missingMedia).
  */
 async function ensureSeeded(store: Store): Promise<void> {
   const eventIds = Object.keys(seedEvents);
@@ -37,7 +53,12 @@ async function ensureSeeded(store: Store): Promise<void> {
     const types = await tx.getMany("ticketTypes", typeIds);
     const now = new Date().toISOString();
     events.forEach((e, i) => {
-      if (!e) tx.set("events", eventIds[i], { ...seedEvents[eventIds[i]], createdAt: now, updatedAt: now });
+      if (!e) {
+        tx.set("events", eventIds[i], { ...seedEvents[eventIds[i]], createdAt: now, updatedAt: now });
+        return;
+      }
+      const patch = missingMedia(e, seedEvents[eventIds[i]]);
+      if (Object.keys(patch).length) tx.update("events", eventIds[i], { ...patch, updatedAt: now });
     });
     types.forEach((t, i) => {
       if (!t) tx.set("ticketTypes", typeIds[i], seedTypes[typeIds[i]]);
