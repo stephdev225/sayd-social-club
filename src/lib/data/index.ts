@@ -6,13 +6,21 @@ import { FirestoreStore } from "./firestore-store";
 import { MemoryStore } from "./memory-store";
 import type { Doc, Store } from "./store";
 
-const g = globalThis as unknown as { __saydMemoryStore?: MemoryStore; __saydSeeded?: Promise<void> };
+const g = globalThis as unknown as { __saydMemoryStore?: MemoryStore; __saydSeeded?: Promise<void>; __saydSeedKey?: string };
 
 const seedEvents = seed.events as unknown as Record<string, Doc>;
 const seedTypes = seed.ticketTypes as unknown as Record<string, Doc>;
 
+/**
+ * The memory store survives hot reloads (so local test orders are kept), but is rebuilt
+ * as soon as data/seed.json changes: an edited event shows up without restarting the server.
+ */
+const seedKey = JSON.stringify(seed);
 function memoryStore(): MemoryStore {
-  g.__saydMemoryStore ??= new MemoryStore({ events: seedEvents, ticketTypes: seedTypes });
+  if (!g.__saydMemoryStore || g.__saydSeedKey !== seedKey) {
+    g.__saydMemoryStore = new MemoryStore({ events: seedEvents, ticketTypes: seedTypes });
+    g.__saydSeedKey = seedKey;
+  }
   return g.__saydMemoryStore;
 }
 
