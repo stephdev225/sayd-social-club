@@ -19,7 +19,8 @@ export const revalidate = 60;
 
 // Home opening: the DJ from above (08606), sharp high-resolution versions, no aerial show.
 const HERO = { image: "/photos/mora-08606-hero.webp", mobile: "/photos/mora-08296-hero.webp", alt: photos.decks.alt };
-const PILLAR_IMAGES = [photos.djDecks, photos.couple, photos.crowd] as const;
+// Music opens on the couple (the hero above is already the DJ); elegance on five guests dressed for the night.
+const PILLAR_IMAGES = [photos.couple, photos.group, photos.crowd] as const;
 const CAROUSEL = ["duo", "wine", "veuve", "decks", "glow", "bar", "bucket", "sparklers", "sign", "service"] as const;
 
 export default async function HomePage({ params }: PageProps<"/[lang]">) {

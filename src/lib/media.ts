@@ -16,7 +16,7 @@ export interface Photo {
   alt: { fr: string; en: string };
 }
 
-const LAND = new Set(["08684", "08715", "09183", "08800", "08371", "08581", "09167", "08275", "09005", "09135"]);
+const LAND = new Set(["08684", "08715", "09183", "08800", "08371", "08581", "09167", "08275", "09005", "09135", "08982"]);
 const M = (n: string, fr: string, en: string, pos?: string): Photo => ({
   src: `/photos/mora-${n}.webp`,
   w: 1200,
@@ -50,6 +50,7 @@ export const photos = {
   trio: M("09153", "Trois amis élégants", "Three elegant friends", "50% 40%"),
   yellow: M("09220", "Invitée en robe jaune qui danse", "A guest dancing in a yellow dress", "50% 35%"),
   smiles: M("09065", "Sourires entre amies", "Friends sharing a smile", "50% 35%"),
+  group: M("08982", "Cinq invitées élégantes devant le rideau rouge", "Five elegant guests in front of the red curtain", "50% 45%"),
   ben: M("08146", "Ben, de Sayd Social Club", "Ben, from Sayd Social Club", "50% 35%"),
   vip: { src: "/photos/mora-ambassadrice.webp", w: 1717, h: 2576, alt: { fr: "Invitée VIP en lunettes de soleil, bracelet au poignet", en: "A VIP guest in sunglasses, wristband on" } } as Photo,
   // Room, bar & bottles
