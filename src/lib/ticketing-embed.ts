@@ -29,9 +29,15 @@ export function ticketingEmbed(link: string | undefined, lang: Locale): Ticketin
   return { origin: u.origin, url: u.toString() };
 }
 
+/**
+ * Smallest frame height: the partner page reports its height before its ticket list is
+ * drawn (about 550 px), which leaves the prices hidden behind an inner scrollbar.
+ */
+export const MIN_FRAME_HEIGHT = 820;
+
 /** Frame height asked by the partner page, kept within sane bounds. Null when the value is unusable. */
 export function frameHeight(value: unknown): number | null {
   const n = typeof value === "number" ? value : typeof value === "string" ? Number(value) : NaN;
   if (!Number.isFinite(n) || n <= 0) return null;
-  return Math.min(6000, Math.max(320, Math.ceil(n)));
+  return Math.min(6000, Math.max(MIN_FRAME_HEIGHT, Math.ceil(n)));
 }

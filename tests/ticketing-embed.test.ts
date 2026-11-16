@@ -22,9 +22,9 @@ describe("ticketingEmbed", () => {
 
 describe("frameHeight", () => {
   it("rounds up and keeps the height within bounds", () => {
-    expect(frameHeight(452.547)).toBe(453);
-    expect(frameHeight("700")).toBe(700);
-    expect(frameHeight(10)).toBe(320);
+    expect(frameHeight(1452.547)).toBe(1453);
+    expect(frameHeight("900")).toBe(900);
+    expect(frameHeight(452.547)).toBe(820);
     expect(frameHeight(999999)).toBe(6000);
   });
   it("ignores unusable values", () => {

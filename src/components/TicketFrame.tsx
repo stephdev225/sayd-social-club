@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useSyncExternalStore } from "react";
-import { frameHeight } from "@/lib/ticketing-embed";
+import { frameHeight, MIN_FRAME_HEIGHT } from "@/lib/ticketing-embed";
 
 const FRAME_ID = "tpos_sayd";
 const noop = () => () => {};
@@ -25,7 +25,7 @@ export function TicketFrame({
 }) {
   // The frame address needs our own origin and path: known in the browser only.
   const here = useSyncExternalStore(noop, () => `${window.location.origin}|${window.location.pathname}`, () => null);
-  const [height, setHeight] = useState(560);
+  const [height, setHeight] = useState(MIN_FRAME_HEIGHT);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -63,7 +63,7 @@ export function TicketFrame({
 
   return (
     <div>
-      <div className="relative overflow-hidden rounded-3xl bg-white ring-1 ring-ink/10" style={{ minHeight: loaded ? undefined : 560 }}>
+      <div className="relative overflow-hidden rounded-3xl bg-white ring-1 ring-ink/10" style={{ minHeight: loaded ? undefined : MIN_FRAME_HEIGHT }}>
         {!loaded && (
           <p className="absolute inset-0 grid place-items-center text-base text-night/60" role="status">
             {labels.loading}
