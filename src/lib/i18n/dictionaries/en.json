@@ -132,6 +132,8 @@
     "taxesIncluded": "taxes included",
     "externalNote": "For this party, tickets are sold on Le Point de Vente, our ticketing partner. Secure payment, ticket sent by email.",
     "externalCta": "Buy my tickets",
+    "embedLoading": "Loading the ticket box…",
+    "embedOpen": "Open the ticket box in a new tab",
     "soonTitle": "Tickets on sale soon",
     "soonText": "Leave your email and we'll write as soon as tickets go on sale, before the public announcement.",
     "reserveTitle": "Reserve your spot",

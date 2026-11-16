@@ -1,6 +1,39 @@
 {
   "_note": "Sprezzatura (11 Oct 2026). Online 26.49$ taxes included = 23.04$ + GST + QST (confirmed by Stéphane 2026-10-06). Door ~30$ taxes included. DJ Waklexx. No refunds. Quantities are placeholders. Load with: npm run seed",
   "events": {
+    "la-finale-2026-12-20": {
+      "id": "la-finale-2026-12-20",
+      "slug": "la-finale",
+      "name": "La Finale",
+      "tagline": {
+        "fr": "Ben G Signature × Sayd Social Club, au Mora.",
+        "en": "Ben G Signature × Sayd Social Club, at Mora."
+      },
+      "description": {
+        "fr": "Sayd Social Club et Ben G Signature se retrouvent au Mora pour La Finale : ambiance club chic sous les lumières rouges, DJ Ben aux platines, performances live, service aux tables et bouteilles. Billets nominatifs, non remboursables. Pièce d'identité avec photo exigée à l'entrée.",
+        "en": "Sayd Social Club and Ben G Signature meet at Mora for La Finale: a chic club night under the red lights, DJ Ben on the decks, live performances, table and bottle service. Tickets are in your name and non-refundable. Photo ID required at the door."
+      },
+      "startsAt": "2026-12-21T04:00:00.000Z",
+      "endsAt": "2026-12-21T08:00:00.000Z",
+      "venueName": "Mora",
+      "address": "Grande Allée Est",
+      "city": "Québec",
+      "capacity": 250,
+      "status": "published",
+      "dressCode": {
+        "fr": "Chic. Tenue de soirée exigée.",
+        "en": "Chic. Evening wear required."
+      },
+      "lineup": [
+        "DJ Ben"
+      ],
+      "partners": [
+        "Ben G Signature",
+        "Sayd Social Club"
+      ],
+      "accent": "#5a1420",
+      "externalTicketUrl": "https://lepointdevente.com/billets/la-finale?lang=fr"
+    },
     "sprezzatura-2026-10-11": {
       "id": "sprezzatura-2026-10-11",
       "slug": "sprezzatura",

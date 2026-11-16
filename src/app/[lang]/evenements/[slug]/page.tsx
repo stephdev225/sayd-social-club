@@ -6,6 +6,7 @@ import { MobileBuyBar } from "@/components/MobileBuyBar";
 import { NotifyForm } from "@/components/NotifyForm";
 import { Reveal } from "@/components/motion/Reveal";
 import { SplitTitle } from "@/components/motion/SplitTitle";
+import { TicketFrame } from "@/components/TicketFrame";
 import { TicketPurchase } from "@/components/TicketPurchase";
 import { canSellOnline } from "@/lib/checkout-availability";
 import { getStore } from "@/lib/data";
@@ -17,6 +18,7 @@ import { getDictionary } from "@/lib/i18n/dictionaries";
 import { formatDate, formatTime, t } from "@/lib/i18n/format";
 import { alternates } from "@/lib/seo";
 import { site } from "@/lib/site";
+import { ticketingEmbed } from "@/lib/ticketing-embed";
 
 export const dynamic = "force-dynamic"; // stock changes minute to minute
 
@@ -51,16 +53,21 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
   const upcomingPublished = !isPast && event.status === "published";
   // One clear action per situation: sold here (ticket form), sold elsewhere (one button),
   // close to the date without ticketing (reserve by WhatsApp), or later (notify me).
-  const heroAction = external
-    ? { href: external, label: dict.funnel.cta, note: "" }
+  // Sold on the partner ticketing site: shown inside this page when the partner allows it.
+  const embed = ticketingEmbed(external, lang);
+  const heroAction = embed
+    ? { href: "#billets", label: dict.funnel.cta, note: "", samePage: true }
+    : external
+    ? { href: external, label: dict.funnel.cta, note: "", samePage: false }
     : upcomingPublished && !onSale && soon
       ? {
           href: `${site.whatsapp}?text=${encodeURIComponent(`${event.name} — ${formatDate(event.startsAt, lang)}`)}`,
           label: dict.tickets.reserveWhatsapp,
           note: t(dict.tickets.reserveOrCall, { phone: site.phone }),
+          samePage: false,
         }
       : null;
-  const showAside = onSale || (upcomingPublished && !external && !soon);
+  const showAside = onSale || Boolean(embed) || (upcomingPublished && !external && !soon);
   const hero = event.heroImage ?? event.coverImage;
   // Past nights: venue name and city only, never the street address.
   const place = (isPast ? [event.venueName, event.city] : [event.venueName, event.address, event.city]).filter(Boolean).join(", ");
@@ -194,8 +201,7 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
                 <div className="mt-9">
                   <a
                     href={heroAction.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    {...(heroAction.samePage ? {} : { target: "_blank", rel: "noopener noreferrer" })}
                     className="group inline-flex min-h-14 items-center gap-3 rounded-full bg-sable px-8 font-semibold text-ink transition hover:brightness-110"
                   >
                     {heroAction.label}
@@ -209,7 +215,7 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
         </div>
       </header>
 
-      <div className={`mx-auto grid max-w-7xl gap-14 px-4 py-14 sm:px-6 lg:px-10 ${showAside ? "lg:grid-cols-[1fr_27rem]" : ""}`}>
+      <div className={`mx-auto grid max-w-7xl gap-14 px-4 py-14 sm:px-6 lg:px-10 ${embed ? "lg:grid-cols-[1fr_31rem]" : showAside ? "lg:grid-cols-[1fr_27rem]" : ""}`}>
         <div className="order-2 max-w-2xl lg:order-1">
           <Reveal>
             <p className="text-lg leading-relaxed text-ink/90">{event.description[lang]}</p>
@@ -225,8 +231,19 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
         </div>
 
         {showAside && (
-          <aside id="billets" className="order-1 scroll-mt-24 lg:order-2 lg:sticky lg:top-28 lg:self-start">
-            {onSale ? (
+          <aside id="billets" className={`order-1 scroll-mt-24 lg:order-2 lg:self-start ${embed ? "" : "lg:sticky lg:top-28"}`}>
+            {embed ? (
+              <>
+                <h2 className="t-h3">{dict.tickets.title}</h2>
+                <p className="mb-6 mt-3 text-ink/75">{dict.tickets.externalNote}</p>
+                <TicketFrame
+                  url={embed.url}
+                  origin={embed.origin}
+                  title={`${dict.tickets.title} — ${event.name}`}
+                  labels={{ loading: dict.tickets.embedLoading, open: dict.tickets.embedOpen }}
+                />
+              </>
+            ) : onSale ? (
               <TicketPurchase
                 lang={lang}
                 eventId={event.id}
@@ -252,7 +269,7 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
         )}
       </div>
 
-      {onSale && <MobileBuyBar label={dict.funnel.buyBar} title={event.name} note={`${dateLabel} · ${event.venueName}`} />}
+      {(onSale || embed) && <MobileBuyBar label={dict.funnel.buyBar} title={event.name} note={`${dateLabel} · ${event.venueName}`} />}
     </article>
   );
 }
