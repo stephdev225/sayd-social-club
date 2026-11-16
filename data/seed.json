@@ -32,7 +32,9 @@
         "Sayd Social Club"
       ],
       "accent": "#5a1420",
-      "externalTicketUrl": "https://lepointdevente.com/billets/la-finale?lang=fr"
+      "externalTicketUrl": "https://lepointdevente.com/billets/la-finale?lang=fr",
+      "coverImage": "/events/la-finale-poster.jpg",
+      "heroImage": "/events/la-finale-visual.jpg"
     },
     "sprezzatura-2026-10-11": {
       "id": "sprezzatura-2026-10-11",
