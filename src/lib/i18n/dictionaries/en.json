@@ -134,6 +134,7 @@
     "externalCta": "Buy my tickets",
     "embedLoading": "Loading the ticket box…",
     "embedOpen": "Open the ticket box in a new tab",
+    "embedLocal": "Local preview: the embedded ticket box only shows on the live site.",
     "soonTitle": "Tickets on sale soon",
     "soonText": "Leave your email and we'll write as soon as tickets go on sale, before the public announcement.",
     "reserveTitle": "Reserve your spot",

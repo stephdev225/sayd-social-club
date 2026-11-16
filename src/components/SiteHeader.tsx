@@ -79,7 +79,7 @@ export function SiteHeader({ lang, nav, ticketsHref }: { lang: Locale; nav: Nav;
     <>
       <header
         className={`fixed inset-x-0 top-0 transition-[background-color] duration-500 ${
-          scrolled && !open ? "bg-gradient-to-b from-night/90 via-night/60 to-transparent" : "bg-transparent"
+          scrolled && !open ? "bg-gradient-to-b from-night via-night/85 to-transparent" : "bg-transparent"
         } ${open ? "z-[60]" : "z-50"}`}
       >
         <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between px-5 sm:px-6 md:h-24 lg:px-10">

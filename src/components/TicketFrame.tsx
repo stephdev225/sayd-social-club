@@ -21,7 +21,7 @@ export function TicketFrame({
   url: string;
   origin: string;
   title: string;
-  labels: { loading: string; open: string };
+  labels: { loading: string; open: string; local: string };
 }) {
   // The frame address needs our own origin and path: known in the browser only.
   const here = useSyncExternalStore(noop, () => `${window.location.origin}|${window.location.pathname}`, () => null);
@@ -49,8 +49,10 @@ export function TicketFrame({
     return () => window.removeEventListener("message", onMessage);
   }, [origin]);
 
+  // The partner refuses pages served from a local address (403): say so instead of an error page.
+  const local = Boolean(here) && !here!.startsWith("https://");
   let src: string | null = null;
-  if (here) {
+  if (here && !local) {
     const [ourOrigin, ourPath] = here.split("|");
     const u = new URL(url);
     u.searchParams.set("iframe", FRAME_ID);
@@ -65,8 +67,8 @@ export function TicketFrame({
     <div>
       <div className="relative overflow-hidden rounded-3xl bg-white ring-1 ring-ink/10" style={{ minHeight: loaded ? undefined : MIN_FRAME_HEIGHT }}>
         {!loaded && (
-          <p className="absolute inset-0 grid place-items-center text-base text-night/60" role="status">
-            {labels.loading}
+          <p className="absolute inset-0 grid place-items-center px-8 text-center text-base text-night/60" role="status">
+            {local ? labels.local : labels.loading}
           </p>
         )}
         {src && (

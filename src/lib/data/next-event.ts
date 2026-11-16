@@ -1,4 +1,5 @@
 import "server-only";
+import { ticketingEmbed } from "../ticketing-embed";
 import type { Locale } from "@/lib/i18n/config";
 import { formatDate, formatShortDate, formatTime } from "@/lib/i18n/format";
 import { canSellOnline } from "@/lib/checkout-availability";
@@ -19,11 +20,12 @@ export interface NextEventSummary {
 }
 
 /**
- * Where "Buy tickets" buttons lead: straight to the partner ticketing page when the
- * event is sold there (one click less), otherwise to the ticket box on the event page.
+ * Where "Buy tickets" buttons lead. Sold here, or on a partner ticketing site that can be
+ * shown inside the event page: the ticket box of the event page. Sold on a partner site
+ * that cannot be embedded: straight to that site.
  */
 export function ticketsHrefFor(e: Pick<SaydEvent, "slug" | "externalTicketUrl">, lang: Locale): string {
-  if (e.externalTicketUrl && !canSellOnline()) return e.externalTicketUrl;
+  if (e.externalTicketUrl && !canSellOnline() && !ticketingEmbed(e.externalTicketUrl, lang)) return e.externalTicketUrl;
   return `/${lang}/evenements/${e.slug}#billets`;
 }
 

@@ -240,7 +240,7 @@ export default async function EventPage({ params }: PageProps<"/[lang]/evenement
                   url={embed.url}
                   origin={embed.origin}
                   title={`${dict.tickets.title} — ${event.name}`}
-                  labels={{ loading: dict.tickets.embedLoading, open: dict.tickets.embedOpen }}
+                  labels={{ loading: dict.tickets.embedLoading, open: dict.tickets.embedOpen, local: dict.tickets.embedLocal }}
                 />
               </>
             ) : onSale ? (
